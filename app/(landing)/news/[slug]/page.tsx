@@ -50,7 +50,7 @@ export default async function NewsDetail({ params }: PageProps) {
   const news = transformNewsItem(newsItem);
 
   return (
-    <div className="">
+    <div>
       <div className="w-full bg-[#121212] relative min-h-[400px] flex items-end pb-12 pt-32">
         {news.image && (
           <div className="absolute inset-0 opacity-40">
@@ -91,26 +91,6 @@ export default async function NewsDetail({ params }: PageProps) {
                 {news.content}
               </div>
             </div>
-
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <Link href="/news">
-                <button className="text-[#1B0C25] font-semibold hover:text-[#1B0C25]/80 transition-colors flex items-center gap-2">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                  </svg>
-                  Back to News
-                </button>
-              </Link>
-            </div>
           </div>
 
           <div className="lg:block">
@@ -125,7 +105,7 @@ export default async function NewsDetail({ params }: PageProps) {
         </div>
       </Container>
 
-      <div className="w-full py-20">
+      <div className="w-full pb-20">
         <Container>
           <RelatedNews currentNewsId={news.id} category={news.category} />
         </Container>

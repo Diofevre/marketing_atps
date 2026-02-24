@@ -157,7 +157,7 @@ export default function Hero() {
   const titleWords = ["The", "AI-powered", "Customer", "Service", "Platform"];
 
   return (
-    <div className="w-full pb-0 px-4 sm:px-6 lg:px-4">
+    <div className="w-full pb-0 px-4">
       <div className="min-h-[800px] lg:h-[1236px] bg-[#1B0C25] rounded-2xl overflow-hidden relative">
         {/* Gradients - comme dans le Footer */}
         <div className="absolute z-0 left-[-246px] top-[-186px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_31.09%,#fcab83_70.46%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
