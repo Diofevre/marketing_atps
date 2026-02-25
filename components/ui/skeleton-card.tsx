@@ -89,15 +89,20 @@ export function NewsListSkeleton() {
 export function BlogDetailSkeleton() {
   return (
     <div className="pb-20">
-      <div className="max-w-[1240px] mx-auto px-4 pt-[140px] pb-[80px]">
+      <Container className="pt-[140px] pb-[80px]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
           <div className="min-w-0">
-            <div className="flex flex-col items-start gap-6 mb-10">
+            <div className="text-start flex flex-col items-start gap-6 mb-10">
+              {/* Category/Date pill */}
               <div className="h-6 w-40 bg-gray-200/60 rounded-full animate-pulse" />
+
+              {/* Title */}
               <div className="space-y-3 w-full">
-                <div className="h-10 w-full bg-gray-200/60 rounded animate-pulse" />
-                <div className="h-10 w-3/4 bg-gray-200/60 rounded animate-pulse" />
+                <div className="h-12 w-full bg-gray-200/60 rounded animate-pulse" />
+                <div className="h-12 w-3/4 bg-gray-200/60 rounded animate-pulse" />
               </div>
+
+              {/* Author */}
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gray-200/60 animate-pulse" />
                 <div className="space-y-1">
@@ -106,17 +111,35 @@ export function BlogDetailSkeleton() {
                 </div>
               </div>
             </div>
+
+            {/* Cover Image */}
             <div className="w-full aspect-video rounded-2xl bg-gray-200/60 animate-pulse mb-12" />
-            <div className="space-y-4">
-              <div className="h-4 w-full bg-gray-200/60 rounded animate-pulse" />
-              <div className="h-4 w-full bg-gray-200/60 rounded animate-pulse" />
-              <div className="h-4 w-3/4 bg-gray-200/60 rounded animate-pulse" />
-              <div className="h-4 w-full bg-gray-200/60 rounded animate-pulse" />
-              <div className="h-4 w-5/6 bg-gray-200/60 rounded animate-pulse" />
+
+            {/* Content Sections */}
+            <div className="space-y-10">
+              {[1, 2].map((i) => (
+                <div key={i} className="space-y-5">
+                  <div className="h-8 w-1/2 bg-gray-200/60 rounded animate-pulse" />
+                  <div className="space-y-3">
+                    <div className="h-4 w-full bg-gray-200/60 rounded animate-pulse" />
+                    <div className="h-4 w-full bg-gray-200/60 rounded animate-pulse" />
+                    <div className="h-4 w-3/4 bg-gray-200/60 rounded animate-pulse" />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <SidebarSkeleton />
+
+          <div className="lg:block">
+            <SidebarSkeleton />
+          </div>
         </div>
+      </Container>
+
+      <div className="w-full py-20">
+        <Container>
+          <RelatedPostsSkeleton />
+        </Container>
       </div>
     </div>
   );
@@ -160,6 +183,39 @@ export function NewsDetailSkeleton() {
         <Container>
           <RelatedNewsSkeleton />
         </Container>
+      </div>
+    </div>
+  );
+}
+
+export function RelatedPostsSkeleton() {
+  return (
+    <div className="w-full flex flex-col gap-[40px] mt-[80px]">
+      <div className="flex items-center gap-4">
+        <div className="h-8 w-48 bg-gray-200/60 rounded animate-pulse" />
+        <div className="h-px grow bg-gray-200/60"></div>
+      </div>
+      <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div
+            key={i}
+            className="rounded-[16px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)] overflow-hidden"
+          >
+            <div className="flex flex-col items-center py-2 gap-6 max-lg:gap-4">
+              <div className="w-[calc(100%-16px)] aspect-video rounded-xl bg-gray-200/60 animate-pulse" />
+              <div className="w-full flex flex-col gap-4 px-2 pb-4 max-lg:gap-3">
+                <div className="flex items-center justify-between px-4 max-lg:px-3">
+                  <div className="h-6 w-24 bg-gray-200/60 rounded animate-pulse" />
+                  <div className="h-4 w-20 bg-gray-200/60 rounded animate-pulse" />
+                </div>
+                <div className="px-4 max-lg:px-3 space-y-2">
+                  <div className="h-6 w-full bg-gray-200/60 rounded animate-pulse" />
+                  <div className="h-6 w-2/3 bg-gray-200/60 rounded animate-pulse" />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

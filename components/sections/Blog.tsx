@@ -61,7 +61,7 @@ export default function BlogSection() {
               <Link href="/blog">
                 <Button
                   variant="outline"
-                  className="group w-[140px] h-[50px] text-[15px] leading-[26px] font-medium rounded-[8px] max-lg:w-[120px] max-lg:h-10 bg-white hover:bg-white"
+                  className="group w-[120px] h-[45px] text-[15px] leading-[26px] font-medium rounded-[8px] max-lg:w-[120px] max-lg:h-10 bg-white hover:bg-white"
                 >
                   <span className="flex flex-col items-center h-[26px] overflow-hidden">
                     <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
@@ -110,13 +110,13 @@ export default function BlogSection() {
                       </div>
 
                       <div className="w-full flex flex-col gap-4 px-2 max-lg:gap-3">
-                        <div className="flex items-center justify-between px-4 max-lg:px-3">
+                        <div className="flex items-center justify-between">
                           <TitleSection title={blog.title} />
                           <p className="text-sm text-gray-500">{blog.date}</p>
                         </div>
 
-                        <div className="px-4 max-lg:px-3">
-                          <p className="font-medium text-xl lg:text-[23px] leading-7 text-[#1b0c25] line-clamp-2">
+                        <div className="max-lg:px-3">
+                          <p className="font-medium text-lg leading-[26px] text-[#1b0c25] line-clamp-2">
                             {blog.description}
                           </p>
                         </div>

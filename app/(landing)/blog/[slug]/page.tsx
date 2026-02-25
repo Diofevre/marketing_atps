@@ -69,7 +69,7 @@ export default async function BlogDetail({ params }: PageProps) {
           <div className="min-w-0">
             <div className="text-start flex flex-col items-start gap-6 mb-10">
               <FadeInUp>
-                <div className="inline-flex items-start gap-2 px-3 py-1 bg-gray-100 rounded-full text-xs font-semibold uppercase tracking-wider text-[#1B0C25]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-xs font-semibold uppercase tracking-wider text-[#1B0C25]">
                   <span>{blog.title}</span>
                   <span className="w-1 h-1 rounded-full bg-gray-400"></span>
                   <span>{blog.date}</span>
@@ -77,7 +77,7 @@ export default async function BlogDetail({ params }: PageProps) {
               </FadeInUp>
 
               <FadeInUp delay={0.1}>
-                <h1 className="text-3xl md:text-4xl lg:text-[46px] font-bold text-[#1B0C25] leading-tight">
+                <h1 className="text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#1B0C25] leading-[36px] md:leading-[36px] lg:leading-[46px]">
                   {blog.description}
                 </h1>
               </FadeInUp>
@@ -110,7 +110,7 @@ export default async function BlogDetail({ params }: PageProps) {
 
             <ScaleIn
               delay={0.3}
-              className="w-full rounded-2xl overflow-hidden shadow-2xl relative aspect-video mb-12"
+              className="w-full rounded-2xl overflow-hidden relative aspect-video mb-12"
             >
               <Image
                 src={displayImage}

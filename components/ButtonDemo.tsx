@@ -4,7 +4,7 @@ export function ButtonDemo() {
   return (
     <div className="flex flex-col sm:flex-row gap-3 sm:gap-[16px] w-full sm:w-auto">
       <Button
-        className="group w-full sm:w-[200px] h-12 sm:h-[50px] bg-[#1b0c25] hover:bg-[#1b0c25]
+        className="group w-full sm:w-[120px] h-12 sm:h-[45px] bg-[#1b0c25] hover:bg-[#1b0c25]
         rounded-[8px] text-sm sm:text-[15px] leading-normal sm:leading-[26px]
         shadow-[0_1px_2px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,0.4)]
         backdrop-blur-[6px]"
@@ -20,7 +20,7 @@ export function ButtonDemo() {
       </Button>
 
       <Button
-        className="group w-full sm:w-[200px] h-12 sm:h-[50px] border border-gray-100 bg-white hover:bg-white
+        className="group w-full sm:w-[120px] h-12 sm:h-[45px] border border-gray-100 bg-white hover:bg-white
         text-black text-sm sm:text-[15px] leading-normal sm:leading-[26px] rounded-[8px]"
       >
         <span className="flex flex-col items-center h-[26px] overflow-hidden">
@@ -40,7 +40,7 @@ export function ButtonDemoBlur() {
   return (
     <div className="flex flex-col sm:flex-row gap-3 sm:gap-[16px] w-full sm:w-auto">
       <Button
-        className="group w-full sm:w-[200px] h-12 sm:h-[50px] bg-[#1b0c25] hover:bg-[#1b0c25]
+        className="group w-full sm:w-[120px] h-12 sm:h-[45px] bg-[#1b0c25] hover:bg-[#1b0c25]
         rounded-[8px] text-sm sm:text-[15px] leading-normal sm:leading-[26px]
         shadow-[0_1px_2px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,0.4)]
         backdrop-blur-[6px]"
@@ -56,7 +56,7 @@ export function ButtonDemoBlur() {
       </Button>
 
       <Button
-        className="group w-full sm:w-[200px] h-12 sm:h-[50px] hover:bg-white/90 border border-white
+        className="group w-full sm:w-[120px] h-12 sm:h-[45px] hover:bg-white/90 border border-white
         text-black text-sm sm:text-[15px] leading-normal sm:leading-[26px]
         rounded-[8px] bg-white backdrop-blur-[6px] shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
       >
@@ -77,7 +77,7 @@ export function ButtonDemoVarient() {
   return (
     <div className="flex flex-col sm:flex-row gap-3 sm:gap-[16px] w-full sm:w-auto">
       <Button
-        className="group w-full sm:w-[200px] h-12 sm:h-[50px] bg-[#1b0c25] hover:bg-[#1b0c25]
+        className="group w-full sm:w-[120px] h-12 sm:h-[45px] bg-[#1b0c25] hover:bg-[#1b0c25]
         rounded-[8px] text-sm sm:text-[15px] leading-normal sm:leading-[26px]
         shadow-[0_1px_2px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,0.4)]
         backdrop-blur-[6px]"
@@ -94,7 +94,7 @@ export function ButtonDemoVarient() {
 
       <Button
         variant="outline"
-        className="group w-full bg-white hover:bg-white sm:w-[200px] h-12 sm:h-[50px]
+        className="group w-full bg-white hover:bg-white sm:w-[130px] h-12 sm:h-[45px]
         text-black text-sm sm:text-[15px] leading-normal sm:leading-[26px]
         rounded-[8px]"
       >

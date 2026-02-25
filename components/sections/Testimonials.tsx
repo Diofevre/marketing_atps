@@ -6,13 +6,47 @@ import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+  useInView,
+  animate,
+} from "framer-motion";
+import { useRef, useEffect } from "react";
 import {
   fadeInUpVariants,
   testimonialCardVariants,
   counterVariants,
   viewportSettings,
 } from "@/lib/motion";
+
+function AnimatedCounter({ value }: { value: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  const numericPart = parseInt(value.replace(/[^0-9]/g, "")) || 0;
+  const suffix = value.replace(/[0-9]/g, "");
+
+  const count = useMotionValue(0);
+  const displayValue = useTransform(
+    count,
+    (latest) => Math.round(latest) + suffix,
+  );
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, numericPart, {
+        duration: 2,
+        ease: "easeOut",
+      });
+      return controls.stop;
+    }
+  }, [isInView, numericPart, count]);
+
+  return <motion.span ref={ref}>{displayValue}</motion.span>;
+}
 
 const COUNTER_TEST = [
   {
@@ -212,7 +246,7 @@ export default function Testimonials() {
                         className="flex-1 min-w-[120px] sm:min-w-[150px] lg:w-[189.33px] flex flex-col gap-1 items-center"
                       >
                         <h1 className="text-2xl sm:text-3xl lg:text-[41px] font-medium text-[#1b0c25]">
-                          {counter.counter}
+                          <AnimatedCounter value={counter.counter} />
                         </h1>
                         <p className="text-xs sm:text-sm lg:text-[15px] leading-relaxed lg:leading-[26px] text-center text-[rgba(28,12,38,0.7)]">
                           {counter.title}

@@ -150,13 +150,13 @@ export default function BlogList() {
                   </div>
 
                   <div className="w-full flex flex-col gap-4 px-2 pb-4 max-lg:gap-3">
-                    <div className="flex items-center justify-between px-4 max-lg:px-3">
+                    <div className="flex items-center justify-between">
                       <TitleSection title={blog.title} />
                       <p className="text-sm text-gray-500">{blog.date}</p>
                     </div>
 
-                    <div className="px-4 max-lg:px-3">
-                      <p className="font-medium text-xl lg:text-[23px] leading-7 text-[#1b0c25] line-clamp-2">
+                    <div>
+                      <p className="font-medium text-lg leading-[26px] text-[#1b0c25] line-clamp-2">
                         {blog.description}
                       </p>
                     </div>
