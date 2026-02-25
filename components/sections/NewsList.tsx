@@ -150,7 +150,10 @@ export default function NewsList() {
 
                   <div className="w-full flex flex-col gap-4 px-2 pb-4 max-lg:gap-3">
                     <div className="flex items-center justify-between">
-                      <TitleSection title={item.category || "News"} />
+                      <TitleSection
+                        title={item.category || "News"}
+                        className="rounded-lg"
+                      />
                       <p className="text-sm text-gray-500">{item.date}</p>
                     </div>
 

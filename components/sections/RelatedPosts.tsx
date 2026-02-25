@@ -48,7 +48,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
 
                 <div className="w-full flex flex-col gap-4 px-2 pb-4 max-lg:gap-3">
                   <div className="flex items-center justify-between">
-                    <TitleSection title={blog.title} />
+                    <TitleSection title={blog.title} className="rounded-lg" />
                     <p className="text-sm text-gray-500">{blog.date}</p>
                   </div>
 

@@ -6,7 +6,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { scaleInVariants, viewportSettings } from "@/lib/motion";
 import { blogService } from "@/lib/api";
-import { transformBlogArticles, type TransformedBlogPost } from "@/lib/api/transformers";
+import {
+  transformBlogArticles,
+  type TransformedBlogPost,
+} from "@/lib/api/transformers";
 import { BlogListSkeleton } from "@/components/ui/skeleton-card";
 import TitleSection from "@/components/TitleSection";
 import type { BlogQueryParams, PaginationInfo } from "@/lib/types";
@@ -26,38 +29,41 @@ export default function BlogList() {
     hasPrev: false,
   });
 
-  const fetchPosts = useCallback(async (params: BlogQueryParams = {}) => {
-    setLoading(true);
-    setError(null);
+  const fetchPosts = useCallback(
+    async (params: BlogQueryParams = {}) => {
+      setLoading(true);
+      setError(null);
 
-    const queryParams: BlogQueryParams = {
-      page: params.page || 1,
-      limit: 12,
-      sortBy: "publishedAt",
-      sortOrder: "desc",
-      status: "published",
-    };
+      const queryParams: BlogQueryParams = {
+        page: params.page || 1,
+        limit: 12,
+        sortBy: "publishedAt",
+        sortOrder: "desc",
+        status: "published",
+      };
 
-    if (selectedCategory !== "All posts") {
-      queryParams.category = selectedCategory;
-    }
-
-    const response = await blogService.getArticles(queryParams);
-
-    if (response.error) {
-      setError(response.error.message);
-      setPosts([]);
-    } else if (response.data) {
-      const articlesData = response.data.articles || [];
-      const transformed = transformBlogArticles(articlesData);
-      setPosts(transformed);
-      if (response.data.pagination) {
-        setPagination(response.data.pagination);
+      if (selectedCategory !== "All posts") {
+        queryParams.category = selectedCategory;
       }
-    }
 
-    setLoading(false);
-  }, [selectedCategory]);
+      const response = await blogService.getArticles(queryParams);
+
+      if (response.error) {
+        setError(response.error.message);
+        setPosts([]);
+      } else if (response.data) {
+        const articlesData = response.data.articles || [];
+        const transformed = transformBlogArticles(articlesData);
+        setPosts(transformed);
+        if (response.data.pagination) {
+          setPagination(response.data.pagination);
+        }
+      }
+
+      setLoading(false);
+    },
+    [selectedCategory],
+  );
 
   const fetchCategories = useCallback(async () => {
     const response = await blogService.getCategories();
@@ -151,7 +157,7 @@ export default function BlogList() {
 
                   <div className="w-full flex flex-col gap-4 px-2 pb-4 max-lg:gap-3">
                     <div className="flex items-center justify-between">
-                      <TitleSection title={blog.title} />
+                      <TitleSection title={blog.title} className="rounded-lg" />
                       <p className="text-sm text-gray-500">{blog.date}</p>
                     </div>
 

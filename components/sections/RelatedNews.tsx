@@ -103,7 +103,10 @@ export default function RelatedNews({
 
                 <div className="w-full flex flex-col gap-4 px-2 pb-4 max-lg:gap-3">
                   <div className="flex items-center justify-between">
-                    <TitleSection title={news.category || "News"} />
+                    <TitleSection
+                      title={news.category || "News"}
+                      className="rounded-lg"
+                    />
                     <p className="text-sm text-gray-500">{news.date}</p>
                   </div>
 

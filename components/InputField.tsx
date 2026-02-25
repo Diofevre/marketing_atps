@@ -20,8 +20,8 @@ export default function InputField({
       <Input
         placeholder={placeholder}
         className={cn(
-          "bg-white w-full h-11 sm:h-12 rounded-[8px] text-sm sm:text-base",
-          className
+          "bg-[#F9F9F9] border-[#1B0C25]/10 focus-visible:ring-[#1B0C25]/20 focus-visible:border-[#1B0C25]/30 w-full h-11 sm:h-12 rounded-[10px] text-sm sm:text-base",
+          className,
         )}
       />
     </div>

@@ -77,55 +77,60 @@ export default function BlogSection() {
           </motion.div>
 
           <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
-            {loading ? (
-              Array.from({ length: 3 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-[437px] rounded-[16px] bg-gray-100 animate-pulse max-lg:h-[350px]"
-                />
-              ))
-            ) : (
-              posts.map((blog, index) => (
-                <Link href={`/blog/${blog.slug}`} key={blog.id} className="block">
-                  <motion.div
-                    variants={scaleInVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportSettings}
-                    transition={{
-                      duration: 0.6,
-                      delay: index * 0.15,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                    className="rounded-[16px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)] hover:shadow-lg transition-shadow"
+            {loading
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[437px] rounded-[16px] bg-gray-100 animate-pulse max-lg:h-[350px]"
+                  />
+                ))
+              : posts.map((blog, index) => (
+                  <Link
+                    href={`/blog/${blog.slug}`}
+                    key={blog.id}
+                    className="block"
                   >
-                    <div className="flex flex-col items-center py-2 gap-6 max-lg:gap-4">
-                      <div className="w-[calc(100%-16px)] aspect-video rounded-xl overflow-hidden relative">
-                        <Image
-                          src={blog.imageBlog || "/assets/placeholder.png"}
-                          alt={blog.description}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-
-                      <div className="w-full flex flex-col gap-4 px-2 max-lg:gap-3">
-                        <div className="flex items-center justify-between">
-                          <TitleSection title={blog.title} />
-                          <p className="text-sm text-gray-500">{blog.date}</p>
+                    <motion.div
+                      variants={scaleInVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={viewportSettings}
+                      transition={{
+                        duration: 0.6,
+                        delay: index * 0.15,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
+                      className="rounded-[16px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)] hover:shadow-lg transition-shadow"
+                    >
+                      <div className="flex flex-col items-center py-2 gap-6 max-lg:gap-4">
+                        <div className="w-[calc(100%-16px)] aspect-video rounded-xl overflow-hidden relative">
+                          <Image
+                            src={blog.imageBlog || "/assets/placeholder.png"}
+                            alt={blog.description}
+                            fill
+                            className="object-cover"
+                          />
                         </div>
 
-                        <div className="max-lg:px-3">
-                          <p className="font-medium text-lg leading-[26px] text-[#1b0c25] line-clamp-2">
-                            {blog.description}
-                          </p>
+                        <div className="w-full flex flex-col gap-4 px-2 max-lg:gap-3">
+                          <div className="flex items-center justify-between">
+                            <TitleSection
+                              title={blog.title}
+                              className="rounded-lg"
+                            />
+                            <p className="text-sm text-gray-500">{blog.date}</p>
+                          </div>
+
+                          <div className="max-lg:px-3">
+                            <p className="font-medium text-lg leading-[26px] text-[#1b0c25] line-clamp-2">
+                              {blog.description}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                </Link>
-              ))
-            )}
+                    </motion.div>
+                  </Link>
+                ))}
           </div>
         </div>
       </Container>

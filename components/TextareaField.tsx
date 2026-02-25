@@ -20,8 +20,8 @@ export default function TextareaField({
       <Textarea
         placeholder={placeholder}
         className={cn(
-          "bg-white w-full min-h-[120px] rounded-[8px] text-sm sm:text-base resize-y",
-          className
+          "bg-[#F9F9F9] border-[#1B0C25]/10 focus-visible:ring-[#1B0C25]/20 focus-visible:border-[#1B0C25]/30 w-full min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y",
+          className,
         )}
       />
     </div>
