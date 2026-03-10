@@ -10,29 +10,29 @@ import { fadeInUpVariants, faqContainerVariants, faqItemVariants, viewportSettin
 
 const QUESTION_FAQS = [
   {
-    question: "What is Fluence AI?",
+    question: "What is MyATPS?",
     answer:
-      "Fluence AI is a platform that helps businesses leverage artificial intelligence to enhance their operations and decision-making processes. It provides intelligent insights and automation capabilities through advanced machine learning algorithms.",
+      "MyATPS (Aviation Training and Preparation System) is a complete online platform designed to help student pilots prepare for their ATPL (Airline Transport Pilot License) exams. It combines an advanced quiz interface, an AI tutor chatbot, an ATC simulator, video courses, and a comprehensive question bank — all in one place.",
   },
   {
-    question: "How does Fluence AI work?",
+    question: "What is the difference between Standard and Premium?",
     answer:
-      "Fluence AI integrates seamlessly with existing business systems, analyzing your data to provide actionable insights. The platform uses machine learning to identify patterns, predict outcomes, and automate routine tasks, helping you make better decisions faster.",
+      "Standard gives you unlimited STUDY quizzes, 5 TEST quizzes per day, 10 hours of video per month, up to 50 bookmarks, and basic stats — ideal for getting started. Premium unlocks everything: unlimited TEST and EXAM quizzes, unlimited video, the ATC Simulator, the AI Tutor chatbot (100 messages/day), full forum access, advanced stats, and priority support.",
   },
   {
-    question: "Is Fluence AI suitable for small businesses?",
+    question: "What is the ATC Simulator?",
     answer:
-      "Yes, Fluence AI offers scalable solutions tailored for businesses of all sizes, including small and medium enterprises. Our pricing plans are designed to accommodate different budgets and needs, ensuring that even small businesses can benefit from AI technology.",
+      "The ATC Simulator is a realistic air traffic control training tool that lets you practice radio communications in various scenarios — departure, en-route, approach, and more. An AI evaluates your responses and gives you instant, detailed feedback to help you improve your phraseology and procedures.",
   },
   {
-    question: "What kind of support does Fluence AI provide?",
+    question: "What is the FlyComputer E6B?",
     answer:
-      "We offer comprehensive support including documentation, email support, and priority support for paid plans. Our team is dedicated to helping you succeed with Fluence AI and is always available to answer your questions.",
+      "The FlyComputer E6B is a fully interactive digital flight computer built directly into the quiz interface. You can use it to calculate true airspeed, wind corrections, fuel consumption, time/distance, and more — without leaving the quiz page.",
   },
   {
-    question: "Can I integrate Fluence AI with my existing tools?",
+    question: "Is there a free trial available?",
     answer:
-      "Yes, Fluence AI is built to integrate with a wide range of popular business tools and platforms. We offer APIs and pre-built connectors for common applications, making it easy to incorporate AI into your existing workflow.",
+      "Yes! The Premium plan includes a 48-hour free trial so you can explore all features before committing. You can also start with the Free plan to get a feel for the platform before upgrading to Standard or Premium.",
   },
 ];
 

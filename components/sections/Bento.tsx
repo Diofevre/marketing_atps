@@ -30,20 +30,20 @@ export default function Bento() {
             >
               <div className="flex items-center flex-col gap-3 lg:gap-[12px] w-full">
                 <TitleSection
-                  title="business & solution"
+                  title="Features & Modules"
                   className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
                 />
                 <div className="w-full px-4 lg:px-0">
                   <h1 className="text-3xl sm:text-4xl lg:text-[57px] font-medium leading-tight lg:leading-[60px] text-center text-[#1b0c25]">
-                    The AI-powered customer service platform
+                    The complete ATPL preparation platform
                   </h1>
                 </div>
               </div>
               <div className="w-full lg:w-[700px] px-4 lg:px-0">
                 <p className="text-sm sm:text-base lg:text-[17px] font-normal text-center text-[#1b0c25] leading-relaxed lg:leading-[28px]">
-                  Fluence AI helps you connect, manage, and optimize your AI
-                  tools effortlessly. Unlock powerful insights and automate
-                  complex processes with ease.
+                  From AI-powered quizzes to a realistic ATC simulator and an
+                  integrated flight computer, MyATPS gives student pilots every
+                  tool they need to ace their ATPL exams.
                 </p>
               </div>
             </motion.div>
@@ -71,11 +71,11 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Adaptive Learning
+                      Advanced Quiz Interface
                     </h1>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      AI that evolves with your data, continuously improving
-                      performance and adapting to new patterns
+                      Three quiz modes — STUDY, TEST, and EXAM — with instant
+                      feedback, detailed explanations, and smart progress tracking
                     </p>
                   </div>
                 </motion.div>
@@ -96,11 +96,11 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Smart Automation
+                      ATC Simulator
                     </h1>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      Empowering you with AI-driven workflows designed to
-                      simplify operations, enhance productivity
+                      Practice real air traffic control radio communications in
+                      realistic scenarios, with AI evaluation and instant feedback
                     </p>
                   </div>
                 </motion.div>
@@ -124,12 +124,12 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Data Mapping
+                      AI Tutor Chatbot
                     </h1>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      Visualize and organize complex datasets effortlessly,
-                      making data connections clearer for faster, informed
-                      decisions
+                      An intelligent aviation tutor integrated directly into the
+                      quiz interface — get contextual explanations, source-cited
+                      answers, and RAG-powered knowledge retrieval
                     </p>
                   </div>
                 </motion.div>
@@ -150,11 +150,11 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Predictive Analytics
+                      FlyComputer E6B
                     </h1>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      Harness advanced models to forecast trends, uncover
-                      insights
+                      A full interactive E6B flight computer built into the quiz
+                      — calculate TAS, wind corrections, fuel consumption and more
                     </p>
                   </div>
                 </motion.div>

@@ -34,16 +34,16 @@ export default function KeyBenfist() {
                 className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
               />
               <p className="text-3xl sm:text-4xl lg:text-[56px] leading-tight lg:leading-[60px] text-center font-medium text-[#1b0c25]">
-                Why Choose Fluence AI
+                Why Choose MyATPS
               </p>
             </div>
 
             {/* Description */}
             <div className="w-full">
               <p className="text-sm sm:text-base lg:text-[17px] leading-relaxed lg:leading-[28px] text-center text-[#1b0c25] max-w-2xl mx-auto">
-                Fluence AI offers powerful benefits that help you save time,
-                improve decision-making, and scale your data operations
-                effortlessly.
+                MyATPS gives student pilots every advantage to pass their ATPL
+                exams on the first try — with smarter tools, real exam conditions,
+                and an AI tutor always by their side.
               </p>
             </div>
           </motion.div>

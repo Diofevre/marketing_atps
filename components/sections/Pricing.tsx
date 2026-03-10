@@ -14,7 +14,7 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 
-const APP_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 const DURATIONS = [
   { months: 1, label: "1 month" },
@@ -30,19 +30,19 @@ const PLANS = {
     id: "FREE",
     name: "Free",
     badge: "Starter",
-    description: "Start your journey with essential features",
+    description: "Discover the platform with no commitment",
     price: 0,
     priceLabel: "forever",
     buttonText: "Get Started",
     buttonVariant: "outline" as const,
     popular: false,
     features: [
-      { text: "Up to 10 exams per month", included: true },
-      { text: "Basic exam templates", included: true },
-      { text: "Community support", included: true },
-      { text: "Progress tracking", included: true },
-      { text: "Mobile responsive", included: false },
-      { text: "Basic analytics", included: false },
+      { text: "Limited question bank access", included: true },
+      { text: "Quiz mode STUDY (limited)", included: true },
+      { text: "Aeronautical dictionary", included: true },
+      { text: "Community forum (read only)", included: true },
+      { text: "Video courses", included: false },
+      { text: "ATC Simulator", included: false },
     ],
   },
   STANDARD: {

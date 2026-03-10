@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   // Configuration des rewrites pour éviter les problèmes CORS
   // Les requêtes vers /api/* seront redirigées vers business_atps
   async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const apiUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     
     return [
       {

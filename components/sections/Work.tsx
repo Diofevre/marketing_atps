@@ -16,21 +16,21 @@ const LIST_WORK = [
   {
     id: 1,
     image: "/images/imageCon.png",
-    title: "Connect Your Data",
+    title: "Create Your Account",
     description:
-      "Effortlessly integrate data from various sources into a unified system.",
+      "Sign up in seconds, choose your plan, and access the full platform immediately.",
   },
   {
     id: 2,
     image: "/images/imageAn.png",
-    title: "Analyze and Optimize",
-    description: "Use AI to uncover valuable insights and improve performance.",
+    title: "Study & Practice",
+    description: "Train with the question bank, quiz modes, ATC simulator, and your AI tutor.",
   },
   {
     id: 3,
     image: "/images/imageLet.png",
-    title: "Let AI Work",
-    description: "Streamline tasks and enhance productivity with AI.",
+    title: "Pass Your ATPL",
+    description: "Track your progress, identify weak areas, and walk into your exam with confidence.",
   },
 ];
 
@@ -53,7 +53,7 @@ export default function Work() {
               <div className="flex flex-col p-10 gap-6 h-full rounded-[16px] bg-white shadow-sm max-lg:p-6">
                 <div className="flex flex-col items-start gap-3">
                   <TitleSection
-                    title="hot it works"
+                    title="How it works"
                     className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
                   />
                   <h1 className="font-medium text-5xl lg:text-[59px] leading-tight lg:leading-[60px] text-[#1b0c25]">
@@ -62,9 +62,9 @@ export default function Work() {
                 </div>
 
                 <p className="font-normal text-base lg:text-[17px] text-[#1b0c25] leading-7">
-                  Get started quickly and effortlessly with Fluence AI's
-                  streamlined 3-step process designed to optimize your data
-                  workflow.
+                  Get started in minutes with MyATPS's simple 3-step process
+                  — designed to get you studying and pass your ATPL as fast
+                  as possible.
                 </p>
                 <ButtonDemoVarient />
               </div>

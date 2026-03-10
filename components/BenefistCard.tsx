@@ -12,36 +12,36 @@ import {
 const LEFT_KEYS = [
   {
     id: 1,
-    title: "Increased Efficiency",
-    description: "Automate tasks and reduce manual workloads",
+    title: "AI-Powered Quiz",
+    description: "Adaptive quiz modes with instant feedback and detailed explanations for every question",
   },
   {
     id: 2,
-    title: "Scalable Solutions",
-    description: "Easily grow with the demands of your data",
+    title: "ATC Simulator",
+    description: "Practice realistic air traffic control scenarios with AI evaluation",
   },
   {
     id: 3,
-    title: "Faster Decision-Making",
-    description: "Leverage real-time insights for quicker choices",
+    title: "FlyComputer E6B",
+    description: "Integrated flight computer for speed, wind, fuel and navigation calculations",
   },
 ];
 
 const RIGHT_KEYS = [
   {
     id: 1,
-    title: "Enhanced Collaboration",
-    description: "Streamline workflows with team-friendly features",
+    title: "AI Tutor Chatbot",
+    description: "Get contextual explanations from an aviation AI tutor during your study sessions",
   },
   {
     id: 2,
-    title: "Data Security",
-    description: "Safeguard your data with top-tier encryption",
+    title: "Complete Question Bank",
+    description: "Thousands of official ATPL questions organized by subject, chapter and country",
   },
   {
     id: 3,
-    title: "Continuous Improvement",
-    description: "Let AI adapt and improve with evolving data",
+    title: "Progress Tracking",
+    description: "Monitor your performance with detailed statistics and identify weak areas",
   },
 ];
 

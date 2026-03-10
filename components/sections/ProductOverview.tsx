@@ -28,7 +28,7 @@ export default function ProductOverview() {
                 className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
               />
               <p className="text-3xl sm:text-4xl lg:text-[58px] px-4 sm:px-6 lg:px-[40px] font-medium text-center leading-tight lg:leading-[60px] text-[#1b0c25]">
-                Explore the Power of Fluence AI
+                Explore the Power of MyATPS
               </p>
             </div>
 
@@ -38,9 +38,9 @@ export default function ProductOverview() {
               className="px-4 sm:px-6 lg:px-[50px] w-full lg:w-[700px]"
             >
               <p className="text-sm sm:text-base lg:text-[17px] text-center leading-relaxed lg:leading-[28px] text-[#4c4c4c]">
-                Discover how Fluence AI transforms raw data into actionable
-                insights. Our advanced features are designed to optimize
-                workflows
+                Discover how MyATPS prepares student pilots for their ATPL
+                exams. Every feature is designed to maximize your chances of
+                passing on the first try.
               </p>
             </motion.div>
           </motion.div>

@@ -6,72 +6,72 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const FEATURE_LIST_CONTAINER = [
   {
     id: 1,
-    title: "Seamless Data Integration Process",
+    title: "Advanced Quiz Interface with AI Tutor",
     description:
-      "Effortlessly connect with diverse data sources, ensuring smooth data flow for real-time insights and accurate analysis.",
+      "Train with three quiz modes — STUDY, TEST, and EXAM — backed by an integrated AI tutor that explains every question in context, with a built-in FlyComputer E6B for in-quiz calculations.",
     image: "/images/data.png",
     feature_list: [
       {
         id: 1,
-        title: "Unified Data Connections",
+        title: "3 Quiz Modes: STUDY, TEST & EXAM",
         icon_feature: "/assets/icons/db.png",
       },
       {
         id: 2,
-        title: "Real-Time Data Syncing",
+        title: "AI Tutor Chatbot (RAG-powered)",
         icon_feature: "/assets/icons/topo.png",
       },
       {
         id: 3,
-        title: "Flexible API Integrations",
+        title: "FlyComputer E6B Integrated",
         icon_feature: "/assets/icons/swith.png",
       },
     ],
   },
   {
     id: 2,
-    title: "Advanced AI-Powered Analytics Tools",
+    title: "Realistic ATC Simulator with AI Evaluation",
     description:
-      "Leverage intelligent analytics to uncover hidden patterns, predict future trends, and make data-driven decisions with confidence.",
+      "Practice real air traffic control radio communications across multiple scenarios — departure, en-route, approach — and get instant AI feedback on your phraseology and procedures.",
     image: "/images/dash.png",
     feature_list: [
       {
         id: 1,
-        title: "Accurate Trend Forecasting",
+        title: "Realistic Scenario Library",
         icon_feature: "/assets/icons/trad.png",
       },
       {
         id: 2,
-        title: "Dynamic Insightful Dashboards",
+        title: "AI Evaluation & Instant Feedback",
         icon_feature: "/assets/icons/chart.png",
       },
       {
         id: 3,
-        title: "AI-Driven Data Metrics",
+        title: "Radio Phraseology Training",
         icon_feature: "/assets/icons/tvpro.png",
       },
     ],
   },
   {
     id: 3,
-    title: "Intelligent Automation Workflow Engine",
+    title: "Complete Question Bank & Course Library",
     description:
-      "Automate repetitive tasks, optimize workflows, and boost productivity with smart, AI-powered automation capabilities.",
+      "Access thousands of official ATPL questions organized by subject and chapter, alongside video courses, PDF manuals, an aeronautical dictionary, and detailed progress tracking.",
     image: "/images/feature3.png",
     feature_list: [
       {
         id: 1,
-        title: "Streamlined Workflow Automation",
+        title: "50,000+ Official ATPL Questions",
         icon_feature: "/assets/icons/union.png",
       },
       {
         id: 2,
-        title: "Efficient Task Optimization",
+        title: "Video & Text Courses",
         icon_feature: "/assets/icons/check.png",
       },
       {
         id: 3,
-        title: "Smart Trigger Functions",
+        title: "Advanced Progress Tracking",
         icon_feature: "/assets/icons/hands.png",
       },
     ],

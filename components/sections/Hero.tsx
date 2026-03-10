@@ -19,19 +19,19 @@ const CHAT_MESSAGES = [
   {
     id: 1,
     type: "user",
-    message: "Hey, I need help sending out a campaign to all new subscribers. Can you set that up?",
+    message: "Can you explain the principle of instrument landing systems (ILS) for my ATPL exam?",
     delay: 0.5,
   },
   {
     id: 2,
     type: "ai",
-    message: "Of course! I'll prepare a personalized campaign for your new subscribers. Would you like me to schedule it now or review it first?",
+    message: "Of course! An ILS uses two radio beams — the localizer for lateral guidance and the glide slope for vertical guidance — to guide the aircraft precisely to the runway threshold.",
     delay: 2,
   },
   {
     id: 3,
     type: "user",
-    message: "Yes, You can schedule it.",
+    message: "Perfect, can you give me a practice question on this?",
     delay: 4,
   },
 ];
@@ -154,7 +154,7 @@ function ChatMessage({ message, type, delay }: { message: string; type: string; 
 
 export default function Hero() {
   // Split title into words for animation
-  const titleWords = ["The", "AI-powered", "Customer", "Service", "Platform"];
+  const titleWords = ["The", "Complete", "ATPL", "Training", "Platform"];
 
   return (
     <div className="w-full pb-0 px-4">
@@ -202,9 +202,9 @@ export default function Hero() {
                   className="w-full lg:w-[700px]"
                 >
                   <p className="text-base sm:text-lg lg:text-[18px] leading-relaxed lg:leading-[28px] font-normal text-white/90">
-                    Fluence AI helps you connect, manage, and optimize your AI
-                    tools effortlessly. Unlock powerful insights and automate
-                    complex processes with ease.
+                    MyATPS helps you prepare for your ATPL exams with an
+                    AI-powered quiz interface, an ATC simulator, and a built-in
+                    AI tutor — all in one platform.
                   </p>
                 </motion.div>
               </div>
@@ -300,7 +300,7 @@ export default function Hero() {
                     {/* Form */}
                     <form className="w-full max-w-[612px] flex flex-col gap-3 sm:gap-4">
                       <Input
-                        placeholder="Ask anything ..."
+                        placeholder="Ask anything about aviation or ATPL..."
                         className="w-full border-none bg-transparent shadow-none text-sm sm:text-base lg:text-[16px] placeholder:text-sm sm:placeholder:text-base lg:placeholder:text-[16px] placeholder:text-[#1b0c25]/70"
                       />
 
@@ -310,30 +310,30 @@ export default function Hero() {
                           <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
                             <span className="flex flex-col items-center h-[14px] overflow-hidden">
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Create Workflow
+                                Start Quiz
                               </span>
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Create Workflow
-                              </span>
-                            </span>
-                          </Button>
-                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Setup Bot
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Setup Bot
+                                Start Quiz
                               </span>
                             </span>
                           </Button>
                           <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
                             <span className="flex flex-col items-center h-[14px] overflow-hidden">
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Schedule Message
+                                ATC Simulator
                               </span>
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Schedule Message
+                                ATC Simulator
+                              </span>
+                            </span>
+                          </Button>
+                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
+                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
+                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                                Practice Exam
+                              </span>
+                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                                Practice Exam
                               </span>
                             </span>
                           </Button>

@@ -171,7 +171,7 @@ const Navigation = () => {
                     lineHeight: logoSize.text,
                   }}
                 >
-                  Fluence AI
+                  MyATPS
                 </p>
               </motion.div>
             </Link>
@@ -330,7 +330,7 @@ const Navigation = () => {
                     </svg>
                   </div>
                   <p className="text-[20px] sm:text-[22px] font-medium text-[#1b0c25]">
-                    Fluence AI
+                    MyATPS
                   </p>
                 </div>
                 <button

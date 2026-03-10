@@ -46,13 +46,13 @@ const LIST_ITEMS = [
     id: 1,
     title: "User link",
     links: [
-      { name: "Feature", href: "#" },
-      { name: "About", href: "#" },
-      { name: "Testimonial", href: "#" },
-      { name: "Pricing", href: "#" },
-      { name: "Contact", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "404", href: "#" },
+      { name: "Features", href: "/#bento" },
+      { name: "About", href: "/#about" },
+      { name: "Testimonials", href: "/#testimonials" },
+      { name: "Pricing", href: "/#pricing" },
+      { name: "Contact", href: "/contact" },
+      { name: "Blog", href: "/blog" },
+      { name: "News", href: "/news" },
     ],
   },
 ];
@@ -80,9 +80,9 @@ const Footer = () => {
               className="flex flex-col gap-[32px] max-lg:gap-6 max-lg:text-center"
             >
               <div className="flex flex-col items-start gap-[12px] justify-start max-lg:items-center">
-                <TitleSection title="Join the AI Revolution" />
+                <TitleSection title="Start Your ATPL Journey" />
                 <h1 className="text-[72px] font-medium leading-[76px] text-white max-lg:text-4xl max-lg:leading-tight">
-                  Ready to start your AI journey with us?
+                  Ready to pass your ATPL on the first try?
                 </h1>
               </div>
               <ButtonDemo />
@@ -102,12 +102,12 @@ const Footer = () => {
                   <div className="flex gap-[12px] max-lg:justify-center">
                     <div className="bg-white h-[40px] w-[40px] rounded-md" />
                     <p className="font-medium text-[30px] leading-[40px] max-lg:text-2xl">
-                      Fluence Ai
+                      MyATPS
                     </p>
                   </div>
                   <div>
                     <p className="text-[15px] leading-[25px] font-normal max-lg:text-center">
-                      Manage Ai effortlessly
+                      The complete ATPL training platform
                     </p>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ const Footer = () => {
                       className="flex flex-col gap-[8px]"
                     >
                       <p className="text-[15px] font-medium w-[184px] leading-[26px] opacity-[0.6] max-lg:text-center max-lg:w-full">
-                        105 North 1st Street, #28, San Jose, CA 94748
+                        329 rue Papineau, Québec (Québec) G1L 4E2, Canada
                       </p>
                     </motion.div>
                   </div>
@@ -203,7 +203,7 @@ const Footer = () => {
             >
               <div className="flex items-center justify-between w-full mt-[24px] text-white max-lg:flex-col max-lg:gap-4 max-lg:text-center">
                 <p className="text-[15px] leading-[26px] max-lg:text-sm">
-                  © 2025 Design & Developed by Amani
+                  © 2026 MyATPS — DIOFEVRE TECHNOLOGIE
                 </p>
                 <p className="text-[15px] leading-[26px] opacity-[0.6] max-lg:text-sm">
                   Privacy Policy

@@ -6,7 +6,7 @@ import { Container } from "../ui/container";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const paragraph =
-  "Fluence AI is crafted to elevate how businesses showcase their AI solutions. With a focus on clean design, it helps brands engage and convert.";
+  "MyATPS is built for future pilots preparing for their ATPL exams. With an AI tutor, a realistic ATC simulator, and thousands of official questions, it gives you everything you need to pass on the first try.";
 
 export default function About() {
   const container = useRef(null);

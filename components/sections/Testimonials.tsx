@@ -51,42 +51,42 @@ function AnimatedCounter({ value }: { value: string }) {
 const COUNTER_TEST = [
   {
     id: 1,
-    counter: "90+",
-    title: "Businesses are Happy",
+    counter: "2000+",
+    title: "Student Pilots",
   },
   {
     id: 2,
-    counter: "4990+",
-    title: "Data-driven decisions",
+    counter: "50000+",
+    title: "Official ATPL Questions",
   },
   {
     id: 3,
-    counter: "100%",
-    title: "Customer Satisfied",
+    counter: "95%",
+    title: "First-Try Pass Rate",
   },
 ];
 
 const TESTIMONIALS_DATA = [
   {
     id: 1,
-    text: '"Fluence AI has revolutionized the way we process data. The seamless integration and advanced analytics tools have saved us countless hours and improved our decision-making"',
-    author: "Sarah J.",
-    role: "Data Analyst, TechCorp",
+    text: '"MyATPS completely transformed my ATPL preparation. The AI tutor explained concepts I had struggled with for months, and the quiz interface is unlike anything else out there."',
+    author: "Thomas L.",
+    role: "Commercial Pilot Student, France",
     image: "/images/saraJ.png",
   },
   {
     id: 2,
-    text: '"The automated insights provided by Marketing ATPs have given us a competitive edge. It is intuitive, powerful, and has significantly boosted our ROIs across all campaigns."',
-    author: "Michael R.",
-    role: "Marketing Director, GrowFast",
-    image: "/images/saraJ.png", // Reusing image as placeholder if no others specified
+    text: '"The ATC simulator alone is worth it. Practicing radio communications in realistic scenarios gave me confidence I never had before my practical exams."',
+    author: "Lucas M.",
+    role: "ATPL Candidate, Belgium",
+    image: "/images/saraJ.png",
   },
   {
     id: 3,
-    text: '"Managing global teams and complex data sets has never been easier. The platform is robust, secure, and scales perfectly with our rapid organizational growth."',
-    author: "Elena B.",
-    role: "COO, Globalize",
-    image: "/images/saraJ.png", // Reusing image as placeholder
+    text: '"I passed my ATPL written exams on the first attempt. The question bank is massive, the explanations are clear, and the FlyComputer saved me so much time during calculations."',
+    author: "Camille R.",
+    role: "Airline Transport Pilot, Switzerland",
+    image: "/images/saraJ.png",
   },
 ];
 
