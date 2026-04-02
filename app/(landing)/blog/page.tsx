@@ -1,23 +1,34 @@
 import BlogList from "@/components/sections/BlogList";
-import TitleSection from "@/components/TitleSection";
 import { Container } from "@/components/ui/container";
+import { FadeInUp, StaggerContainer } from "@/lib/motion";
 
 export default function BlogPage() {
   return (
     <div className="pt-32 pb-20">
-      <Container>
-        <div className="flex flex-col items-start text-start mb-16 gap-6">
-          <TitleSection
-            title="Our Blog"
-            className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-          />
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium text-[#1b0c25]">
-            Latest News & Insights
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl">
-            Discover the latest trends in EdTech, SaaS, and Security.
-          </p>
-        </div>
+      <Container className="px-8 lg:px-6">
+        <StaggerContainer className="flex flex-col items-start gap-4 mb-12">
+          <FadeInUp>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-[#1B0C25] rounded-sm shrink-0" />
+              <span className="text-sm font-semibold uppercase tracking-wider text-[#1B0C25]">
+                Our Blog
+              </span>
+            </div>
+          </FadeInUp>
+
+          <FadeInUp delay={0.1}>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B0C25] tracking-tight">
+              Latest News & Insights
+            </h1>
+          </FadeInUp>
+
+          <FadeInUp delay={0.2}>
+            <p className="text-base text-gray-500 max-w-xl leading-relaxed">
+              Discover the latest trends in aviation, safety procedures, and
+              pilot training resources.
+            </p>
+          </FadeInUp>
+        </StaggerContainer>
 
         <BlogList />
       </Container>

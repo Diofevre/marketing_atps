@@ -1,20 +1,18 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { scaleInVariants, viewportSettings } from "@/lib/motion";
 import { newsService } from "@/lib/api";
 import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
-import { NewsListSkeleton } from "@/components/ui/skeleton-card";
-import TitleSection from "@/components/TitleSection";
 import type { NewsQueryParams, PaginationInfo } from "@/lib/types";
+import NewsSidebarPanel from "@/components/news/NewsSidebarPanel";
+import NewsFeaturedPost, { NewsFeaturedSkeleton } from "@/components/news/NewsFeaturedPost";
+import NewsGrid from "@/components/news/NewsGrid";
 
 export default function NewsList() {
   const [news, setNews] = useState<TransformedNewsItem[]>([]);
-  const [categories, setCategories] = useState<string[]>(["All"]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [categories, setCategories] = useState<string[]>(["All Category"]);
+  const [selectedCategory, setSelectedCategory] = useState("All Category");
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [pagination, setPagination] = useState<PaginationInfo>({
@@ -37,7 +35,7 @@ export default function NewsList() {
       sortOrder: "desc",
     };
 
-    if (selectedCategory !== "All") {
+    if (selectedCategory !== "All Category") {
       queryParams.category = selectedCategory;
     }
 
@@ -47,8 +45,7 @@ export default function NewsList() {
       setError(response.error.message);
       setNews([]);
     } else if (response.data) {
-      const newsData = response.data.news || [];
-      const transformed = transformNewsItems(newsData);
+      const transformed = transformNewsItems(response.data.news || []);
       setNews(transformed);
       if (response.data.pagination) {
         setPagination(response.data.pagination);
@@ -60,32 +57,23 @@ export default function NewsList() {
 
   const fetchCategories = useCallback(async () => {
     const response = await newsService.getCategories();
-
     if (response.data) {
-      const cats = response.data.categories || [];
-      const categoryNames = [
-        "All",
-        ...cats.map((c: { name: string }) => c.name),
-      ];
-      setCategories(categoryNames);
+      const names = (response.data.categories || []).map(
+        (c: { name: string }) => c.name,
+      );
+      setCategories(["All Category", ...names]);
     }
   }, []);
 
-  useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+  useEffect(() => { fetchCategories(); }, [fetchCategories]);
+  useEffect(() => { fetchNews({ page: 1 }); }, [selectedCategory, fetchNews]);
 
-  useEffect(() => {
-    fetchNews({ page: 1 });
-  }, [selectedCategory, fetchNews]);
+  const filteredNews = searchQuery
+    ? news.filter((n) => n.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    : news;
 
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
-  };
-
-  if (loading && news.length === 0) {
-    return <NewsListSkeleton />;
-  }
+  const featuredItem = filteredNews[0];
+  const gridItems = filteredNews.slice(1);
 
   if (error) {
     return (
@@ -102,102 +90,29 @@ export default function NewsList() {
   }
 
   return (
-    <div className="w-full flex flex-col gap-12">
-      {/* Filters */}
-      <div className="flex flex-wrap gap-3 justify-start">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => handleCategorySelect(category)}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-              selectedCategory === category
-                ? "bg-[#1B0C25] text-white shadow-md"
-                : "bg-white text-[#1B0C25] border border-gray-200 hover:border-[#1B0C25]/30 hover:bg-gray-50"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+    <div className="flex flex-row gap-6 lg:gap-10 items-start">
+      <NewsSidebarPanel
+        categories={categories}
+        selectedCategory={selectedCategory}
+        searchQuery={searchQuery}
+        onCategorySelect={setSelectedCategory}
+        onSearchChange={setSearchQuery}
+      />
+
+      <div className="flex-1 min-w-0 flex flex-col gap-8">
+        {loading && !featuredItem ? (
+          <NewsFeaturedSkeleton />
+        ) : featuredItem ? (
+          <NewsFeaturedPost item={featuredItem} />
+        ) : null}
+
+        <NewsGrid
+          items={gridItems}
+          loading={loading}
+          pagination={pagination}
+          onPageChange={(page) => fetchNews({ page })}
+        />
       </div>
-
-      {/* Grid */}
-      <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
-        <AnimatePresence mode="popLayout">
-          {news.map((item, index) => (
-            <Link href={`/news/${item.slug}`} key={item.id} className="block">
-              <motion.div
-                layout
-                variants={scaleInVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportSettings}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                  ease: [0.25, 0.1, 0.25, 1],
-                }}
-                className="rounded-[16px] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.06)] hover:shadow-lg transition-shadow"
-              >
-                <div className="flex flex-col items-center py-2 gap-6 max-lg:gap-4">
-                  <div className="w-[calc(100%-16px)] aspect-video rounded-xl overflow-hidden relative">
-                    <Image
-                      src={item.image || "/assets/placeholder.png"}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="w-full flex flex-col gap-4 px-2 pb-4 max-lg:gap-3">
-                    <div className="flex items-center justify-between">
-                      <TitleSection
-                        title={item.category || "News"}
-                        className="rounded-lg"
-                      />
-                      <p className="text-sm text-gray-500">{item.date}</p>
-                    </div>
-
-                    <div>
-                      <p className="font-medium text-lg leading-[26px] text-[#1b0c25] line-clamp-2">
-                        {item.title}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </Link>
-          ))}
-        </AnimatePresence>
-      </div>
-
-      {news.length === 0 && !loading && (
-        <div className="text-center py-20 text-gray-500">
-          No news found for this category.
-        </div>
-      )}
-
-      {/* Pagination */}
-      {pagination.totalPages > 1 && (
-        <div className="flex justify-center items-center gap-4 mt-8">
-          <button
-            onClick={() => fetchNews({ page: pagination.page - 1 })}
-            disabled={!pagination.hasPrev || loading}
-            className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
-          >
-            Previous
-          </button>
-          <span className="text-sm text-gray-600">
-            Page {pagination.page} of {pagination.totalPages}
-          </span>
-          <button
-            onClick={() => fetchNews({ page: pagination.page + 1 })}
-            disabled={!pagination.hasNext || loading}
-            className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
-          >
-            Next
-          </button>
-        </div>
-      )}
     </div>
   );
 }

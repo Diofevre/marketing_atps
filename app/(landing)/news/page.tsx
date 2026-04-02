@@ -1,27 +1,31 @@
 import NewsList from "@/components/sections/NewsList";
-import TitleSection from "@/components/TitleSection";
-import { FadeInUp, StaggerContainer } from "@/lib/motion";
 import { Container } from "@/components/ui/container";
+import { FadeInUp, StaggerContainer } from "@/lib/motion";
 
 export default function NewsPage() {
   return (
-    <div className="bg-[#FAFAFA] pt-[120px] pb-[80px]">
-      <Container>
-        <StaggerContainer className="flex flex-col items-start text-start gap-6 mb-16">
+    <div className="pt-32 pb-20">
+      <Container className="px-8 lg:px-6">
+        <StaggerContainer className="flex flex-col items-start gap-4 mb-12">
           <FadeInUp>
-            <TitleSection title="LATEST UPDATES" />
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-[#1B0C25] rounded-sm shrink-0" />
+              <span className="text-sm font-semibold uppercase tracking-wider text-[#1B0C25]">
+                Our News
+              </span>
+            </div>
           </FadeInUp>
 
           <FadeInUp delay={0.1}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1B0C25] tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B0C25] tracking-tight">
               News & Insights
             </h1>
           </FadeInUp>
 
-          <FadeInUp delay={0.2} className="max-w-2xl">
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Stay informed with the latest trends in EdTech, security, and online
-              learning. Discover how we are shaping the future of education.
+          <FadeInUp delay={0.2}>
+            <p className="text-base text-gray-500 max-w-xl leading-relaxed">
+              Stay informed with the latest trends in EdTech, security, and
+              online learning.
             </p>
           </FadeInUp>
         </StaggerContainer>

@@ -7,25 +7,6 @@ interface SkeletonCardProps {
   className?: string;
 }
 
-export function BlogCardSkeleton({ className }: SkeletonCardProps) {
-  return (
-    <div className={cn("rounded-[16px]", className)}>
-      <div className="flex flex-col items-center gap-6">
-        <div className="w-full aspect-video rounded-xl bg-gray-200/60 animate-pulse" />
-        <div className="w-full flex flex-col gap-4">
-          <div className="flex items-center justify-between">
-            <div className="h-6 w-20 bg-gray-200/60 rounded-full animate-pulse" />
-            <div className="h-4 w-24 bg-gray-200/60 rounded animate-pulse" />
-          </div>
-          <div className="space-y-2">
-            <div className="h-6 w-full bg-gray-200/60 rounded animate-pulse" />
-            <div className="h-6 w-3/4 bg-gray-200/60 rounded animate-pulse" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function NewsCardSkeleton({ className }: SkeletonCardProps) {
   return (
@@ -60,18 +41,6 @@ export function CategoryFilterSkeleton() {
   );
 }
 
-export function BlogListSkeleton() {
-  return (
-    <div className="w-full flex flex-col gap-12">
-      <CategoryFilterSkeleton />
-      <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <BlogCardSkeleton key={i} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export function NewsListSkeleton() {
   return (
