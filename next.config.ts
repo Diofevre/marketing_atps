@@ -2,16 +2,25 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  
-  // Configuration des rewrites pour éviter les problèmes CORS
-  // Les requêtes vers /api/* seront redirigées vers business_atps
+  skipTrailingSlashRedirect: true,
+
+  // Rewrites to proxy blog/news API calls to the main app
   async rewrites() {
     const apiUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-    
+
     return [
+      // Match both /api/blog and /api/blog/anything
+      {
+        source: '/api/blog',
+        destination: `${apiUrl}/api/blog`,
+      },
       {
         source: '/api/blog/:path*',
         destination: `${apiUrl}/api/blog/:path*`,
+      },
+      {
+        source: '/api/news',
+        destination: `${apiUrl}/api/news`,
       },
       {
         source: '/api/news/:path*',
