@@ -98,7 +98,7 @@ export default function BlogSidebar({
             )}
           </div>
           <div className="min-w-0">
-            <p className="text-[#1B0C25] text-sm font-bold truncate">
+            <p className="text-[#1b0c25] text-sm font-bold truncate">
               {author?.name || "Anonymous"}
             </p>
             <p className="text-black/55 text-xs truncate">Author</p>
@@ -139,7 +139,7 @@ export default function BlogSidebar({
                 className="group flex gap-3 items-center"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="text-[#1B0C25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1B0C25]/70 transition-colors">
+                  <p className="text-[#1b0c25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1b0c25]/70 transition-colors">
                     {post.description}
                   </p>
                   <p className="text-black/55 text-xs mt-1 truncate">
@@ -174,7 +174,7 @@ export default function BlogSidebar({
                 className="group flex gap-3 items-center"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="text-[#1B0C25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1B0C25]/70 transition-colors">
+                  <p className="text-[#1b0c25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1b0c25]/70 transition-colors">
                     {post.description}
                   </p>
                   <p className="text-black/55 text-xs mt-1 truncate">

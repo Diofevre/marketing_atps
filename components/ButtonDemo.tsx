@@ -1,7 +1,6 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+import { APP_URL } from "@/lib/constants";
 
 export function ButtonDemo() {
   return (

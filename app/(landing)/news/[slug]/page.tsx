@@ -86,7 +86,7 @@ export default async function NewsDetail({ params }: PageProps) {
       <Container className="py-12">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
           <div className="min-w-0">
-            <div className="prose prose-lg max-w-none text-[#1B0C25]/80">
+            <div className="prose prose-lg max-w-none text-[#1b0c25]/80">
               <div className="whitespace-pre-wrap leading-8">
                 {news.content}
               </div>

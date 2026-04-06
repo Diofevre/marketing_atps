@@ -38,9 +38,9 @@ export default function ProductOverview() {
               className="px-4 sm:px-6 lg:px-[50px] w-full lg:w-[700px]"
             >
               <p className="text-sm sm:text-base lg:text-[17px] text-center leading-relaxed lg:leading-[28px] text-[#4c4c4c]">
-                Discover how MyATPS prepares student pilots for their ATPL
-                exams. Every feature is designed to maximize your chances of
-                passing on the first try.
+                While other platforms offer just a question bank, MyATPS
+                integrates quizzes, dictionary, library, collaboration,
+                and AI assistance into one seamless workflow.
               </p>
             </motion.div>
           </motion.div>

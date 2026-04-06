@@ -51,7 +51,7 @@ export default function BlogSection() {
                 className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
               />
               <div className="w-[620px] max-lg:w-full">
-                <p className="text-[58px] leading-[60px] font-medium max-lg:text-4xl max-lg:leading-tight">
+                <p className="text-[58px] leading-[60px] font-medium text-[#1b0c25] max-lg:text-4xl max-lg:leading-tight">
                   Explore Our Blog And Stay Updated
                 </p>
               </div>

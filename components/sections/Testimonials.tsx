@@ -52,41 +52,41 @@ const COUNTER_TEST = [
   {
     id: 1,
     counter: "2000+",
-    title: "Student Pilots",
+    title: "Student Pilots Worldwide",
   },
   {
     id: 2,
-    counter: "50000+",
-    title: "Official ATPL Questions",
+    counter: "20000+",
+    title: "EASA ATPL Questions",
   },
   {
     id: 3,
-    counter: "95%",
-    title: "First-Try Pass Rate",
+    counter: "14",
+    title: "Subjects Fully Covered",
   },
 ];
 
 const TESTIMONIALS_DATA = [
   {
     id: 1,
-    text: '"MyATPS completely transformed my ATPL preparation. The AI tutor explained concepts I had struggled with for months, and the quiz interface is unlike anything else out there."',
+    text: '"MyATPS completely transformed my ATPL preparation. The explanations are incredibly detailed and well-researched — concepts I had struggled with for months finally clicked. The quiz interface is unlike anything else out there."',
     author: "Thomas L.",
-    role: "Commercial Pilot Student, France",
-    image: "/images/saraJ.png",
+    role: "Commercial Pilot Student — France",
+    image: "/images/avatar_thomas.png",
   },
   {
     id: 2,
-    text: '"The ATC simulator alone is worth it. Practicing radio communications in realistic scenarios gave me confidence I never had before my practical exams."',
+    text: '"The live quiz feature is amazing for group study. My instructor uses it to run sessions with the whole class, and the dictionary with 3D models and audio helped me understand instruments I could only read about before."',
     author: "Lucas M.",
-    role: "ATPL Candidate, Belgium",
-    image: "/images/saraJ.png",
+    role: "ATPL Candidate — Belgium",
+    image: "/images/avatar_lucas.png",
   },
   {
     id: 3,
-    text: '"I passed my ATPL written exams on the first attempt. The question bank is massive, the explanations are clear, and the FlyComputer saved me so much time during calculations."',
+    text: '"I passed all 14 ATPL written exams on the first attempt. The question bank is massive, the explanations are clear and research-backed, and the built-in tools meant I never had to switch between apps."',
     author: "Camille R.",
-    role: "Airline Transport Pilot, Switzerland",
-    image: "/images/saraJ.png",
+    role: "Airline Transport Pilot — Switzerland",
+    image: "/images/avatar_camille.png",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function Testimonials() {
               className="flex items-center justify-center flex-col gap-3 sm:gap-4 lg:gap-[16px] w-full lg:w-[800px] px-4 lg:px-0"
             >
               <TitleSection
-                title="wall of love"
+                title="Wall of Love"
                 className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
               />
               <div className="w-full">
@@ -146,6 +146,7 @@ export default function Testimonials() {
                     <div className="hidden sm:block">
                       <Button
                         onClick={handlePrev}
+                        aria-label="Previous testimonial"
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronLeft className="w-4 h-4 text-black" />
@@ -205,6 +206,7 @@ export default function Testimonials() {
                     <div className="hidden sm:block">
                       <Button
                         onClick={handleNext}
+                        aria-label="Next testimonial"
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronRight className="w-4 h-4 text-black" />
@@ -215,12 +217,14 @@ export default function Testimonials() {
                     <div className="flex sm:hidden justify-center gap-4 w-full">
                       <Button
                         onClick={handlePrev}
+                        aria-label="Previous testimonial"
                         className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronLeft className="w-4 h-4 text-black" />
                       </Button>
                       <Button
                         onClick={handleNext}
+                        aria-label="Next testimonial"
                         className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronRight className="w-4 h-4 text-black" />

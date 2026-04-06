@@ -1,77 +1,91 @@
 "use client";
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+
+interface Feature {
+  id: number;
+  title: string;
+  icon_feature: string;
+}
+
+interface FeatureItem {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  feature_list: Feature[];
+}
 
 const FEATURE_LIST_CONTAINER = [
   {
     id: 1,
-    title: "Advanced Quiz Interface with AI Tutor",
+    title: "Advanced Quiz Interface",
     description:
-      "Train with three quiz modes — STUDY, TEST, and EXAM — backed by an integrated AI tutor that explains every question in context, with a built-in FlyComputer E6B for in-quiz calculations.",
+      "Three quiz modes — STUDY for learning, TEST for self-assessment, and EXAM to simulate real conditions — each with research-based explanations that go beyond simple memorization.",
     image: "/images/data.png",
     feature_list: [
       {
         id: 1,
-        title: "3 Quiz Modes: STUDY, TEST & EXAM",
+        title: "STUDY, TEST & EXAM Modes",
         icon_feature: "/assets/icons/db.png",
       },
       {
         id: 2,
-        title: "AI Tutor Chatbot (RAG-powered)",
+        title: "Research-Based Explanations",
         icon_feature: "/assets/icons/topo.png",
       },
       {
         id: 3,
-        title: "FlyComputer E6B Integrated",
+        title: "Built-in Annotator, Calculator & E6B",
         icon_feature: "/assets/icons/swith.png",
       },
     ],
   },
   {
     id: 2,
-    title: "Realistic ATC Simulator with AI Evaluation",
+    title: "Aviation Dictionary & Library",
     description:
-      "Practice real air traffic control radio communications across multiple scenarios — departure, en-route, approach — and get instant AI feedback on your phraseology and procedures.",
+      "The only ATPL dictionary with audio pronunciations, interactive 3D models, and real images — paired with a full resource library of e-books, PDFs, annexes, and aviation procedures.",
     image: "/images/dash.png",
     feature_list: [
       {
         id: 1,
-        title: "Realistic Scenario Library",
+        title: "Audio, 3D Models & Real Images",
         icon_feature: "/assets/icons/trad.png",
       },
       {
         id: 2,
-        title: "AI Evaluation & Instant Feedback",
+        title: "E-Books, PDFs & Aviation Annexes",
         icon_feature: "/assets/icons/chart.png",
       },
       {
         id: 3,
-        title: "Radio Phraseology Training",
+        title: "Cross-Referenced Terms Across Subjects",
         icon_feature: "/assets/icons/tvpro.png",
       },
     ],
   },
   {
     id: 3,
-    title: "Complete Question Bank & Course Library",
+    title: "Live Quizzes, Sharing & Progress",
     description:
-      "Access thousands of official ATPL questions organized by subject and chapter, alongside video courses, PDF manuals, an aeronautical dictionary, and detailed progress tracking.",
+      "The only ATPL platform where you can launch live group quizzes, share study sessions with classmates, and track your performance across all 14 EASA subjects.",
     image: "/images/feature3.png",
     feature_list: [
       {
         id: 1,
-        title: "50,000+ Official ATPL Questions",
+        title: "20,000+ Questions Across 14 Subjects",
         icon_feature: "/assets/icons/union.png",
       },
       {
         id: 2,
-        title: "Video & Text Courses",
+        title: "Live Kahoot-Style Group Quizzes",
         icon_feature: "/assets/icons/check.png",
       },
       {
         id: 3,
-        title: "Advanced Progress Tracking",
+        title: "Color-Coded Progress Analytics",
         icon_feature: "/assets/icons/hands.png",
       },
     ],
@@ -112,16 +126,16 @@ function Card({
   targetScale,
   progress,
 }: {
-  item: any;
+  item: FeatureItem;
   index: number;
   range: [number, number];
   targetScale: number;
-  progress: any;
+  progress: MotionValue<number>;
 }) {
   const container = useRef(null);
   const scale = useTransform(progress, range, [1, targetScale]);
 
-  // Déterminer si l'ordre doit être inversé (pour la card 2)
+  // Reverse layout for card 2
   const isReversed = item.id === 2;
 
   return (
@@ -157,7 +171,7 @@ function Card({
 
           {/* Feature List */}
           <div className="flex flex-col gap-2 sm:gap-3 lg:gap-[16px]">
-            {item.feature_list.map((feature: any) => (
+            {item.feature_list.map((feature: Feature) => (
               <div
                 key={feature.id}
                 className="flex gap-2 sm:gap-3 lg:gap-[16px] items-start sm:items-center"

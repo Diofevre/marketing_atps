@@ -1,9 +1,8 @@
 "use client";
 
-// KeyBenfist.tsx
 import React from "react";
 import TitleSection from "../TitleSection";
-import BenefistCard from "../BenefistCard";
+import BenefitCard from "../BenefitCard";
 import { Container } from "../ui/container";
 import { motion } from "framer-motion";
 import {
@@ -12,7 +11,7 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 
-export default function KeyBenfist() {
+export default function KeyBenefits() {
   return (
     <motion.div
       variants={benefitContainerVariants}
@@ -41,15 +40,15 @@ export default function KeyBenfist() {
             {/* Description */}
             <div className="w-full">
               <p className="text-sm sm:text-base lg:text-[17px] leading-relaxed lg:leading-[28px] text-center text-[#1b0c25] max-w-2xl mx-auto">
-                MyATPS gives student pilots every advantage to pass their ATPL
-                exams on the first try — with smarter tools, real exam conditions,
-                and an AI tutor always by their side.
+                Other platforms give you questions. MyATPS gives you an
+                entire study ecosystem — from research-backed explanations
+                and 3D models to live group quizzes and built-in flight tools.
               </p>
             </div>
           </motion.div>
 
         <div className="w-full">
-          <BenefistCard />
+          <BenefitCard />
         </div>
       </Container>
     </motion.div>

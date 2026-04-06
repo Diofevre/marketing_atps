@@ -3,10 +3,10 @@
 import React, { useRef } from "react";
 import TitleSection from "../TitleSection";
 import { Container } from "../ui/container";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 const paragraph =
-  "MyATPS is built for future pilots preparing for their ATPL exams. With an AI tutor, a realistic ATC simulator, and thousands of official questions, it gives you everything you need to pass on the first try.";
+  "MyATPS is built for future pilots preparing for their ATPL exams. With 20,000+ questions, research-based explanations, an aviation dictionary with audio and 3D models, a complete resource library, and powerful sharing tools, it gives you everything you need to pass on the first try.";
 
 export default function About() {
   const container = useRef(null);
@@ -57,7 +57,7 @@ export default function About() {
 interface WordProps {
   children: string;
   range: [number, number];
-  progress: any;
+  progress: MotionValue<number>;
 }
 
 const Word = ({ children, range, progress }: WordProps) => {

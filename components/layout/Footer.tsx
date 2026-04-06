@@ -41,18 +41,28 @@ const ICON_LINKS = [
   },
 ];
 
+import { APP_URL } from "@/lib/constants";
+
 const LIST_ITEMS = [
   {
     id: 1,
-    title: "User link",
+    title: "Platform",
     links: [
       { name: "Features", href: "/#bento" },
-      { name: "About", href: "/#about" },
-      { name: "Testimonials", href: "/#testimonials" },
       { name: "Pricing", href: "/#pricing" },
-      { name: "Contact", href: "/contact" },
+      { name: "Log In", href: `${APP_URL}/auth/login` },
+      { name: "Sign Up", href: `${APP_URL}/auth/signup` },
+    ],
+  },
+  {
+    id: 2,
+    title: "Resources",
+    links: [
       { name: "Blog", href: "/blog" },
       { name: "News", href: "/news" },
+      { name: "Contact", href: "/contact" },
+      { name: "FAQ", href: "/#faq" },
+      { name: "Privacy Policy", href: "/privacy" },
     ],
   },
 ];
@@ -60,7 +70,7 @@ const LIST_ITEMS = [
 const Footer = () => {
   return (
     <div className="pb-[16px] px-[16px]">
-      <div className="relative bg-[#1B0C25] rounded-[16px] px-4 lg:px-0 overflow-hidden">
+      <div className="relative bg-[#1b0c25] rounded-[16px] px-4 lg:px-0 overflow-hidden">
         {/* Gradients - cachés sur mobile/tablette */}
         <div className="absolute z-[-1px] left-[-246px] top-[-186px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_31.09%,#fcab83_70.46%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
         <div className="absolute z-[-1px] right-[-86px] top-[590px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(145deg,#efe8f6_0%,#d588fb_60.83%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
@@ -99,8 +109,16 @@ const Footer = () => {
               >
                 {/* Logo + nom */}
                 <div className="flex flex-col gap-[16px] max-lg:items-center">
-                  <div className="flex gap-[12px] max-lg:justify-center">
-                    <div className="bg-white h-[40px] w-[40px] rounded-md" />
+                  <div className="flex gap-[12px] max-lg:justify-center items-center">
+                    <div className="h-[40px] w-[40px] rounded-md flex items-center justify-center overflow-hidden">
+                      <Image
+                        src="/assets/logo-yellow.png"
+                        alt="MyATPS"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <p className="font-medium text-[30px] leading-[40px] max-lg:text-2xl">
                       MyATPS
                     </p>
@@ -136,63 +154,34 @@ const Footer = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Partie droite - devient colonne sur mobile */}
+              {/* Partie droite - colonnes de liens */}
               <motion.div
                 variants={footerLinksVariants}
-                className="flex gap-[60px] h-[266px] max-w-[397px] max-lg:flex-col max-lg:gap-8 max-lg:h-auto max-lg:max-w-full"
+                className="flex gap-[60px] max-lg:flex-col max-lg:gap-8"
               >
-                {/* User Links */}
-                <motion.div
-                  variants={footerLinksContainerVariants}
-                  className="flex flex-col gap-[16px] items-start lg:items-center"
-                >
-                  <div>
+                {LIST_ITEMS.map((item) => (
+                  <motion.div
+                    key={item.id}
+                    variants={footerLinksContainerVariants}
+                    className="flex flex-col gap-[16px] items-start lg:items-center"
+                  >
                     <p className="text-[15px] leading-[26px] font-medium">
-                      User Link
+                      {item.title}
                     </p>
-                  </div>
-                  <div>
-                    {LIST_ITEMS.map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex flex-col gap-[8px] items-start lg:items-center"
-                      >
-                        {item.links.map((link) => (
-                          <motion.a
-                            key={link.name}
-                            variants={footerLinkItemVariants}
-                            href={link.href}
-                            className="text-[15px] font-medium leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-center"
-                          >
-                            {link.name}
-                          </motion.a>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Company Address */}
-                <motion.div
-                  variants={footerLinksContainerVariants}
-                  className="flex flex-col gap-[16px] items-start lg:items-center"
-                >
-                  <div>
-                    <p className="text-[15px] leading-[26px] font-medium">
-                      Company
-                    </p>
-                  </div>
-                  <div>
-                    <motion.div
-                      variants={footerLinkItemVariants}
-                      className="flex flex-col gap-[8px]"
-                    >
-                      <p className="text-[15px] font-medium w-[184px] leading-[26px] opacity-[0.6] max-lg:text-center max-lg:w-full">
-                        329 rue Papineau, Québec (Québec) G1L 4E2, Canada
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
+                    <div className="flex flex-col gap-[8px] items-start lg:items-center">
+                      {item.links.map((link) => (
+                        <motion.a
+                          key={link.name}
+                          variants={footerLinkItemVariants}
+                          href={link.href}
+                          className="text-[15px] font-medium leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-center"
+                        >
+                          {link.name}
+                        </motion.a>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             </div>
 
@@ -203,11 +192,11 @@ const Footer = () => {
             >
               <div className="flex items-center justify-between w-full mt-[24px] text-white max-lg:flex-col max-lg:gap-4 max-lg:text-center">
                 <p className="text-[15px] leading-[26px] max-lg:text-sm">
-                  © 2026 MyATPS — DIOFEVRE TECHNOLOGIE
+                  © 2026 MyATPS. All rights reserved.
                 </p>
-                <p className="text-[15px] leading-[26px] opacity-[0.6] max-lg:text-sm">
+                <a href="/privacy" className="text-[15px] leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-sm">
                   Privacy Policy
-                </p>
+                </a>
               </div>
             </motion.div>
           </motion.div>

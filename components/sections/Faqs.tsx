@@ -12,22 +12,27 @@ const QUESTION_FAQS = [
   {
     question: "What is MyATPS?",
     answer:
-      "MyATPS (Aviation Training and Preparation System) is a complete online platform designed to help student pilots prepare for their ATPL (Airline Transport Pilot License) exams. It combines an advanced quiz interface, an AI tutor chatbot, an ATC simulator, video courses, and a comprehensive question bank — all in one place.",
+      "MyATPS (Aviation Training and Preparation System) is a complete online platform designed to help student pilots prepare for their ATPL exams. It combines an advanced quiz interface with 20,000+ questions, research-based explanations, an aviation dictionary with audio and 3D models, a resource library, live quiz sharing, and powerful progress tracking — all in one place.",
+  },
+  {
+    question: "What makes your explanations different?",
+    answer:
+      "Our explanations are crafted from extensive research in aviation education and teaching methodology. We developed a unique explanation format based on our in-depth study of how pilots learn best — structured to help you truly understand the concept, not just memorize the answer. Each explanation is thorough, accurate, and designed to build lasting knowledge.",
   },
   {
     question: "What is the difference between Standard and Premium?",
     answer:
-      "Standard gives you unlimited STUDY quizzes, 5 TEST quizzes per day, 10 hours of video per month, up to 50 bookmarks, and basic stats — ideal for getting started. Premium unlocks everything: unlimited TEST and EXAM quizzes, unlimited video, the ATC Simulator, the AI Tutor chatbot (100 messages/day), full forum access, advanced stats, and priority support.",
+      "Standard gives you the complete question bank, unlimited STUDY quizzes, 5 TEST quizzes per day, the aviation dictionary, the library, up to 50 bookmarks, and basic stats — ideal for getting started. Premium unlocks everything: unlimited TEST and EXAM quizzes, live quiz sharing, the study assistant, full forum access, advanced stats, unlimited bookmarks, and priority support.",
   },
   {
-    question: "What is the ATC Simulator?",
+    question: "What is the aviation dictionary?",
     answer:
-      "The ATC Simulator is a realistic air traffic control training tool that lets you practice radio communications in various scenarios — departure, en-route, approach, and more. An AI evaluates your responses and gives you instant, detailed feedback to help you improve your phraseology and procedures.",
+      "The aviation dictionary is a comprehensive online glossary covering all ATPL-related terminology. Each term comes with audio pronunciations, 3D interactive models of instruments and components, real images, and cross-references to related terms — from VORs to navigation instruments and beyond.",
   },
   {
-    question: "What is the FlyComputer E6B?",
+    question: "Can I study with friends or share quizzes?",
     answer:
-      "The FlyComputer E6B is a fully interactive digital flight computer built directly into the quiz interface. You can use it to calculate true airspeed, wind corrections, fuel consumption, time/distance, and more — without leaving the quiz page.",
+      "Absolutely! MyATPS lets you share study sessions with specific users or make them public. You can also launch live Kahoot-style quizzes where participants join with a simple code — no account needed. It's perfect for instructors running group sessions or students organizing study groups.",
   },
   {
     question: "Is there a free trial available?",

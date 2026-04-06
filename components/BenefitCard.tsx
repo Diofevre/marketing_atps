@@ -12,40 +12,40 @@ import {
 const LEFT_KEYS = [
   {
     id: 1,
-    title: "AI-Powered Quiz",
-    description: "Adaptive quiz modes with instant feedback and detailed explanations for every question",
+    title: "20,000+ ATPL Questions",
+    description: "Every question comes with a research-based explanation — not generic AI answers, but expert-crafted content designed to build real understanding",
   },
   {
     id: 2,
-    title: "ATC Simulator",
-    description: "Practice realistic air traffic control scenarios with AI evaluation",
+    title: "Aviation Dictionary",
+    description: "The only ATPL dictionary with audio pronunciations, interactive 3D models, and real images — no competitor offers this",
   },
   {
     id: 3,
-    title: "FlyComputer E6B",
-    description: "Integrated flight computer for speed, wind, fuel and navigation calculations",
+    title: "Built-in Study Assistant",
+    description: "Get instant help with diagrams, resource links, and contextual explanations — without leaving your study session",
   },
 ];
 
 const RIGHT_KEYS = [
   {
     id: 1,
-    title: "AI Tutor Chatbot",
-    description: "Get contextual explanations from an aviation AI tutor during your study sessions",
+    title: "Live Quizzes & Sharing",
+    description: "Launch Kahoot-style group quizzes or share sessions with classmates — a feature unique to MyATPS in the ATPL space",
   },
   {
     id: 2,
-    title: "Complete Question Bank",
-    description: "Thousands of official ATPL questions organized by subject, chapter and country",
+    title: "Complete Resource Library",
+    description: "E-books, PDFs, aviation annexes, and procedures — all accessible directly alongside your quizzes, no switching between apps",
   },
   {
     id: 3,
-    title: "Progress Tracking",
-    description: "Monitor your performance with detailed statistics and identify weak areas",
+    title: "Smart Progress Tracking",
+    description: "Color-coded tags, detailed statistics, and weak-area detection so you know exactly where to focus before exam day",
   },
 ];
 
-export default function BenefistCard() {
+export default function BenefitCard() {
   return (
     <div className="flex flex-col gap-6 sm:gap-8 lg:gap-[40px] w-full">
       

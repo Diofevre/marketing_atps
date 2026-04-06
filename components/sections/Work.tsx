@@ -18,19 +18,21 @@ const LIST_WORK = [
     image: "/images/imageCon.png",
     title: "Create Your Account",
     description:
-      "Sign up in seconds, choose your plan, and access the full platform immediately.",
+      "Sign up in seconds — start with the Free plan or unlock everything with a 48-hour Premium trial. No credit card required.",
   },
   {
     id: 2,
     image: "/images/imageAn.png",
     title: "Study & Practice",
-    description: "Train with the question bank, quiz modes, ATC simulator, and your AI tutor.",
+    description:
+      "Train across three quiz modes, look up terms in the 3D dictionary, access the resource library, and invite classmates to live sessions.",
   },
   {
     id: 3,
     image: "/images/imageLet.png",
     title: "Pass Your ATPL",
-    description: "Track your progress, identify weak areas, and walk into your exam with confidence.",
+    description:
+      "Track your progress across all 14 subjects, spot your weak areas with color-coded analytics, and sit your exam with confidence.",
   },
 ];
 
@@ -62,9 +64,9 @@ export default function Work() {
                 </div>
 
                 <p className="font-normal text-base lg:text-[17px] text-[#1b0c25] leading-7">
-                  Get started in minutes with MyATPS's simple 3-step process
-                  — designed to get you studying and pass your ATPL as fast
-                  as possible.
+                  From sign-up to your first quiz in under two minutes.
+                  No complex setup, no separate apps to install — just
+                  open MyATPS and start studying.
                 </p>
                 <ButtonDemoVarient />
               </div>

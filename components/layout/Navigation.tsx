@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   navigationVariants,
@@ -14,14 +15,12 @@ import {
   mobileMenuItemVariants,
 } from "@/lib/motion";
 
+import { APP_URL } from "@/lib/constants";
+
 const NAV_LIST = [
-  { id: 1, name: "Features", link: "/#bento" },
-  { id: 2, name: "About", link: "/#about" },
-  { id: 3, name: "Testimonial", link: "/#testimonials" },
-  { id: 4, name: "Pricing", link: "/#pricing" },
-  { id: 5, name: "Faq", link: "/#faq" },
-  { id: 6, name: "Blog", link: "/blog" },
-  { id: 7, name: "News", link: "/news" },
+  { id: 1, name: "Pricing", link: "/#pricing" },
+  { id: 2, name: "Blog", link: "/blog" },
+  { id: 3, name: "News", link: "/news" },
 ];
 
 const Navigation = () => {
@@ -147,22 +146,19 @@ const Navigation = () => {
                 }}
               >
                 <div
-                  className="rounded-[6px] bg-[#1B0C25] flex items-center justify-center transition-all duration-300 shrink-0"
+                  className="rounded-[6px] flex items-center justify-center transition-all duration-300 shrink-0 overflow-hidden"
                   style={{
                     height: logoSize.box,
                     width: logoSize.box,
                   }}
                 >
-                  {isMobile && (
-                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                      <path
-                        d="M4 4L16 16M16 4L4 16"
-                        stroke="white"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  )}
+                  <Image
+                    src="/assets/logo-navy.png"
+                    alt="MyATPS"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <p
                   className="font-medium text-[#1b0c25] transition-all duration-300 whitespace-nowrap"
@@ -212,7 +208,7 @@ const Navigation = () => {
                     <motion.div key={item.id} variants={navigationLinkVariants}>
                       <Link
                         href={item.link}
-                        className="font-medium text-[#1B0C25] opacity-[0.5] hover:opacity-80 transition-all duration-300 whitespace-nowrap"
+                        className="font-medium text-[#1b0c25] opacity-[0.5] hover:opacity-80 transition-all duration-300 whitespace-nowrap"
                         style={{
                           fontSize: isScrolled
                             ? isTablet
@@ -228,10 +224,11 @@ const Navigation = () => {
                     </motion.div>
                   ))}
                 </motion.div>
-                <motion.div variants={navigationButtonVariants}>
+                <motion.div variants={navigationButtonVariants} className="flex items-center gap-2">
                   <Link href="/contact">
                     <Button
-                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] bg-[#1B0C25] hover:bg-[#1B0C25] shadow-[0_1px_2px_0_rgba(0,0,0,0.1),inset_0_1px_2px_0_rgba(255,255,255,0.4)] transition-all duration-300"
+                      variant="outline"
+                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] border-[#1b0c25] text-[#1b0c25] hover:bg-[#1b0c25] hover:text-white transition-all duration-300"
                       style={{
                         fontSize: isScrolled
                           ? isTablet
@@ -256,14 +253,37 @@ const Navigation = () => {
                             : "36px",
                       }}
                     >
-                      <span className="flex flex-col items-center h-[22px] overflow-hidden">
-                        <span className="block h-[22px] leading-[22px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                          Contact
-                        </span>
-                        <span className="block h-[22px] leading-[22px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                          Contact
-                        </span>
-                      </span>
+                      Contact
+                    </Button>
+                  </Link>
+                  <Link href={`${APP_URL}/auth/login`} target="_blank">
+                    <Button
+                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.1),inset_0_1px_2px_0_rgba(255,255,255,0.4)] transition-all duration-300"
+                      style={{
+                        fontSize: isScrolled
+                          ? isTablet
+                            ? "11px"
+                            : "12px"
+                          : isTablet
+                            ? "12px"
+                            : "14px",
+                        width: isScrolled
+                          ? isTablet
+                            ? "70px"
+                            : "85px"
+                          : isTablet
+                            ? "80px"
+                            : "100px",
+                        height: isScrolled
+                          ? isTablet
+                            ? "28px"
+                            : "32px"
+                          : isTablet
+                            ? "30px"
+                            : "36px",
+                      }}
+                    >
+                      Log In
                     </Button>
                   </Link>
                 </motion.div>
@@ -278,9 +298,9 @@ const Navigation = () => {
                 aria-label="Open menu"
               >
                 <div className="flex flex-col justify-center items-center gap-[5px]">
-                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1B0C25] rounded-full block transition-all duration-300" />
-                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1B0C25] rounded-full block transition-all duration-300" />
-                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1B0C25] rounded-full block transition-all duration-300" />
+                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1b0c25] rounded-full block transition-all duration-300" />
+                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1b0c25] rounded-full block transition-all duration-300" />
+                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1b0c25] rounded-full block transition-all duration-300" />
                 </div>
               </button>
             )}
@@ -319,15 +339,14 @@ const Navigation = () => {
               {/* Header */}
               <div className="flex items-center justify-between mb-[28px]">
                 <div className="flex items-center gap-[12px]">
-                  <div className="h-[40px] w-[40px] rounded-[6px] bg-[#1B0C25] flex items-center justify-center">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path
-                        d="M4 4L16 16M16 4L4 16"
-                        stroke="white"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
+                  <div className="h-[40px] w-[40px] rounded-[6px] flex items-center justify-center overflow-hidden">
+                    <Image
+                      src="/assets/logo-navy.png"
+                      alt="MyATPS"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <p className="text-[20px] sm:text-[22px] font-medium text-[#1b0c25]">
                     MyATPS
@@ -335,7 +354,7 @@ const Navigation = () => {
                 </div>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[#1B0C25] opacity-40 hover:opacity-70 text-[20px] leading-none w-[32px] h-[32px] flex items-center justify-center"
+                  className="text-[#1b0c25] opacity-40 hover:opacity-70 text-[20px] leading-none w-[32px] h-[32px] flex items-center justify-center"
                   aria-label="Close menu"
                 >
                   ✕
@@ -353,7 +372,7 @@ const Navigation = () => {
                   <motion.div key={item.id} variants={mobileMenuItemVariants}>
                     <Link
                       href={item.link}
-                      className="text-[16px] sm:text-[17px] font-medium text-[#1B0C25] opacity-50 hover:opacity-80 py-[10px] transition-opacity block"
+                      className="text-[16px] sm:text-[17px] font-medium text-[#1b0c25] opacity-50 hover:opacity-80 py-[10px] transition-opacity block"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -362,18 +381,16 @@ const Navigation = () => {
                 ))}
               </motion.div>
 
-              {/* Contact Button */}
-              <motion.div variants={mobileMenuItemVariants}>
+              {/* Buttons */}
+              <motion.div variants={mobileMenuItemVariants} className="flex gap-3">
                 <Link href="/contact">
-                  <Button className="group text-[15px] sm:text-[16px] font-medium w-[130px] sm:w-[140px] h-[42px] sm:h-[44px] rounded-[10px] bg-[#1B0C25] hover:bg-[#1B0C25] shadow-[0_1px_2px_0_rgba(0,0,0,0.1),inset_0_1px_2px_0_rgba(255,255,255,0.4)]">
-                    <span className="flex flex-col items-center h-[26px] overflow-hidden">
-                      <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                        Contact
-                      </span>
-                      <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                        Contact
-                      </span>
-                    </span>
+                  <Button variant="outline" className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] border-[#1b0c25] text-[#1b0c25] px-6">
+                    Contact
+                  </Button>
+                </Link>
+                <Link href={`${APP_URL}/auth/login`} target="_blank">
+                  <Button className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 px-6">
+                    Log In
                   </Button>
                 </Link>
               </motion.div>

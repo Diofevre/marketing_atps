@@ -69,7 +69,7 @@ export default async function BlogDetail({ params }: PageProps) {
           <div className="min-w-0">
             <div className="text-start flex flex-col items-start gap-6 mb-10">
               <FadeInUp>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-xs font-semibold uppercase tracking-wider text-[#1B0C25]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-xs font-semibold uppercase tracking-wider text-[#1b0c25]">
                   <span>{blog.title}</span>
                   <span className="w-1 h-1 rounded-full bg-gray-400"></span>
                   <span>{blog.date}</span>
@@ -77,7 +77,7 @@ export default async function BlogDetail({ params }: PageProps) {
               </FadeInUp>
 
               <FadeInUp delay={0.1}>
-                <h1 className="text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#1B0C25] leading-[36px] md:leading-[36px] lg:leading-[46px]">
+                <h1 className="text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#1b0c25] leading-[36px] md:leading-[36px] lg:leading-[46px]">
                   {blog.description}
                 </h1>
               </FadeInUp>
@@ -99,7 +99,7 @@ export default async function BlogDetail({ params }: PageProps) {
                     )}
                   </div>
                   <div className="text-left">
-                    <p className="text-sm font-bold text-[#1B0C25]">
+                    <p className="text-sm font-bold text-[#1b0c25]">
                       {blog.author.name}
                     </p>
                     <p className="text-xs text-gray-500">Author</p>
@@ -125,7 +125,7 @@ export default async function BlogDetail({ params }: PageProps) {
                 {blog.sections.map((section, index) => (
                   <div key={section.id} className="space-y-5">
                     {section.title && (
-                      <h2 className="text-[#1B0C25] text-[28px] leading-[34px] sm:text-[32px] sm:leading-[38px] font-semibold tracking-tight">
+                      <h2 className="text-[#1b0c25] text-[28px] leading-[34px] sm:text-[32px] sm:leading-[38px] font-semibold tracking-tight">
                         {section.title}
                       </h2>
                     )}
@@ -143,14 +143,14 @@ export default async function BlogDetail({ params }: PageProps) {
                     )}
 
                     <div
-                      className="text-[#1B0C25]/70 text-[14px] leading-[22px] prose prose-lg max-w-none"
+                      className="text-[#1b0c25]/70 text-[14px] leading-[22px] prose prose-lg max-w-none"
                       dangerouslySetInnerHTML={{ __html: section.content }}
                     />
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="prose prose-lg max-w-none text-[#1B0C25]/80">
+              <div className="prose prose-lg max-w-none text-[#1b0c25]/80">
                 {blog.content ? (
                   <div dangerouslySetInnerHTML={{ __html: blog.content }} />
                 ) : (

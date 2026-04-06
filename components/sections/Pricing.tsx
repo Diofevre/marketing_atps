@@ -14,7 +14,7 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+import { APP_URL } from "@/lib/constants";
 
 const DURATIONS = [
   { months: 1, label: "1 month" },
@@ -39,16 +39,16 @@ const PLANS = {
     features: [
       { text: "Limited question bank access", included: true },
       { text: "Quiz mode STUDY (limited)", included: true },
-      { text: "Aeronautical dictionary", included: true },
+      { text: "Aviation dictionary", included: true },
       { text: "Community forum (read only)", included: true },
-      { text: "Video courses", included: false },
-      { text: "ATC Simulator", included: false },
+      { text: "Basic study tools", included: true },
+      { text: "Library & resources", included: false },
     ],
   },
   STANDARD: {
     id: "STANDARD",
     name: "Standard",
-    description: "L'essentiel pour réussir votre ATPL",
+    description: "The essentials to pass your ATPL",
     prices: {
       1: { total: 29, perMonth: 29, savings: 0 },
       2: { total: 49, perMonth: 24.5, savings: 16 },
@@ -61,13 +61,13 @@ const PLANS = {
     buttonVariant: "outline" as const,
     popular: false,
     features: [
-      { text: "Question Bank complète", included: true },
-      { text: "Quiz mode STUDY illimité", included: true },
-      { text: "Quiz mode TEST (5/jour)", included: true },
-      { text: "Cours théoriques (TEXT)", included: true },
-      { text: "Vidéos (10h/mois)", included: true },
-      { text: "Progression & Stats basiques", included: true },
-      { text: "Dictionnaire aviation", included: true },
+      { text: "Complete Question Bank (20,000+)", included: true },
+      { text: "Quiz mode STUDY unlimited", included: true },
+      { text: "Quiz mode TEST (5/day)", included: true },
+      { text: "Aviation dictionary (audio & 3D)", included: true },
+      { text: "Library (e-books, PDFs, annexes)", included: true },
+      { text: "Progress tracking & basic stats", included: true },
+      { text: "Community forum (read only)", included: true },
       { text: "Bookmarks (50 max)", included: true },
     ],
   },
@@ -88,14 +88,14 @@ const PLANS = {
     popular: true,
     trial: "48h of free trial included",
     features: [
-      { text: "Complete Question Bank", included: true },
-      { text: "Quiz mode STUDY Unlimited", included: true },
-      { text: "Quiz mode TEST Unlimited", included: true },
-      { text: "Quiz mode EXAM Unlimited", included: true },
-      { text: "Theoretical Courses (All formats)", included: true },
-      { text: "Videos Unlimited", included: true },
-      { text: "Advanced Progression & Stats", included: true },
-      { text: "ATC Simulator Unlimited", included: true },
+      { text: "Complete Question Bank (20,000+)", included: true },
+      { text: "All quiz modes unlimited (STUDY, TEST, EXAM)", included: true },
+      { text: "Live quizzes & session sharing", included: true },
+      { text: "Full aviation dictionary (audio, 3D, images)", included: true },
+      { text: "Complete library (all formats)", included: true },
+      { text: "Advanced progression & detailed stats", included: true },
+      { text: "Study assistant chat", included: true },
+      { text: "Unlimited bookmarks", included: true },
     ],
   },
 };
@@ -132,11 +132,12 @@ export default function Pricing() {
           </div>
 
           {/* Duration Selector */}
-          <div className="flex flex-wrap items-center gap-2 p-1 bg-gray-100 rounded-lg">
+          <div className="flex flex-wrap items-center gap-2 p-1 bg-gray-100 rounded-lg" role="group" aria-label="Subscription duration">
             {DURATIONS.map((duration) => (
               <button
                 key={duration.months}
                 onClick={() => setSelectedDuration(duration.months)}
+                aria-pressed={selectedDuration === duration.months}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
                   selectedDuration === duration.months
                     ? "bg-white text-[#1b0c25] shadow-sm"
@@ -209,7 +210,7 @@ export default function Pricing() {
                     <div className="w-5 h-5 rounded-full border-2 border-[#1b0c25]/20" />
                   )}
                   <span
-                    className={`text-sm ${feature.included ? "text-[#1b0c25]" : "text-[#1b0c25]/40"}`}
+                    className={`text-sm ${feature.included ? "text-[#1b0c25]" : "text-[#1b0c25]/60"}`}
                   >
                     {feature.text}
                   </span>

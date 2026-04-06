@@ -38,7 +38,7 @@ export default function NewsCard({ item, index }: NewsCardProps) {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-xs font-medium text-[#1B0C25]">
+          <span className="text-xs font-medium text-[#1b0c25]">
             {item.category || "News"}
           </span>
           <h3 className="font-bold text-[#1b0c25] leading-snug line-clamp-2">

@@ -55,7 +55,7 @@ export default function NewsFeaturedPost({ item }: NewsFeaturedPostProps) {
           />
         </div>
         <div className="flex-1 flex flex-col gap-3 lg:pt-2">
-          <span className="inline-flex w-fit text-xs font-medium px-2.5 py-1 rounded-full bg-[#1B0C25]/8 text-[#1B0C25] border border-[#1B0C25]/15">
+          <span className="inline-flex w-fit text-xs font-medium px-2.5 py-1 rounded-full bg-[#1b0c25]/8 text-[#1b0c25] border border-[#1b0c25]/15">
             Featured
           </span>
           <h2 className="text-lg lg:text-2xl font-bold text-[#1b0c25] leading-tight line-clamp-3">

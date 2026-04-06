@@ -5,7 +5,7 @@ import Bento from "@/components/sections/Bento";
 import BlogSection from "@/components/sections/Blog";
 import Faqs from "@/components/sections/Faqs";
 import Hero from "@/components/sections/Hero";
-import KeyBenfist from "@/components/sections/KeyBenfist";
+import KeyBenefits from "@/components/sections/KeyBenefits";
 import Pricing from "@/components/sections/Pricing";
 import ProductOverview from "@/components/sections/ProductOverview";
 import Testimonials from "@/components/sections/Testimonials";
@@ -19,7 +19,7 @@ const HomePage = () => {
       <Bento />
       <ProductOverview />
       <About />
-      <KeyBenfist />
+      <KeyBenefits />
       <Testimonials />
       <Work />
       <Pricing />

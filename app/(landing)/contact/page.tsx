@@ -84,7 +84,7 @@ export default function Contact() {
   };
 
   const inputClass =
-    "bg-[#F9F9F9] border-[#1B0C25]/10 focus-visible:ring-[#1B0C25]/20 focus-visible:border-[#1B0C25]/30 h-11 sm:h-12 rounded-[10px] text-sm sm:text-base";
+    "bg-[#F9F9F9] border-[#1b0c25]/10 focus-visible:ring-brand/20 focus-visible:border-[#1b0c25]/30 h-11 sm:h-12 rounded-[10px] text-sm sm:text-base";
 
   return (
     <div className="py-[120px] pb-20 max-lg:py-12 relative overflow-hidden">
@@ -102,7 +102,7 @@ export default function Contact() {
           className="flex flex-col items-center text-center w-full max-w-[800px]"
         >
           <TitleSection title="Contact" />
-          <h1 className="font-medium text-4xl sm:text-5xl lg:text-[60px] lg:leading-[60px] text-[#1B0C25]">
+          <h1 className="font-medium text-4xl sm:text-5xl lg:text-[60px] lg:leading-[60px] text-[#1b0c25]">
             Get in touch with our team
           </h1>
         </motion.div>
@@ -113,33 +113,33 @@ export default function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 w-full bg-white rounded-[24px] p-4 sm:p-6 lg:p-10 border border-[#1B0C25]/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+          className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 w-full bg-white rounded-[24px] p-4 sm:p-6 lg:p-10 border border-[#1b0c25]/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         >
           {/* Left Column */}
           <div className="flex flex-col justify-between gap-8 lg:gap-12 lg:min-w-0 lg:flex-1 lg:max-w-[420px]">
             <div className="flex flex-col gap-6">
-              <p className="font-medium text-base lg:text-[17px] leading-[28px] text-[#1B0C25]/80">
+              <p className="font-medium text-base lg:text-[17px] leading-[28px] text-[#1b0c25]/80">
                 Feel free to reach out - we'd love to connect.
               </p>
               <div className="flex flex-wrap gap-6 lg:gap-8">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#1B0C25]/5 flex items-center justify-center shrink-0">
-                    <Mail className="text-[#1B0C25]" size={20} />
+                  <div className="w-10 h-10 rounded-full bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
+                    <Mail className="text-[#1b0c25]" size={20} />
                   </div>
                   <div className="flex flex-col gap-1 min-w-0">
-                    <p className="font-medium text-[15px] leading-[26px] text-[#1B0C25]">Email us</p>
-                    <p className="font-normal text-[15px] leading-[26px] text-[#1B0C25]/60">
+                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">Email us</p>
+                    <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
                       contact@myatps.com
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#1B0C25]/5 flex items-center justify-center shrink-0">
-                    <LifeBuoy className="text-[#1B0C25]" size={20} />
+                  <div className="w-10 h-10 rounded-full bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
+                    <LifeBuoy className="text-[#1b0c25]" size={20} />
                   </div>
                   <div className="flex flex-col gap-1 min-w-0">
-                    <p className="font-medium text-[15px] leading-[26px] text-[#1B0C25]">Get support</p>
-                    <p className="font-normal text-[15px] leading-[26px] text-[#1B0C25]/60">
+                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">Get support</p>
+                    <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
                       Chat with us
                     </p>
                   </div>
@@ -149,7 +149,7 @@ export default function Contact() {
 
             {/* Testimonial */}
             <div className="flex flex-col gap-6 p-6 bg-[#F9F9F9] rounded-2xl">
-              <blockquote className="text-lg lg:text-[20px] font-medium leading-[28px] text-[#1B0C25]">
+              <blockquote className="text-lg lg:text-[20px] font-medium leading-[28px] text-[#1b0c25]">
                 "MyATPS gave me the confidence to sit my ATPL exams. The AI
                 tutor answered every question I had, and the ATC simulator
                 is simply unmatched."
@@ -163,8 +163,8 @@ export default function Contact() {
                   className="rounded-full shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
                 />
                 <div className="flex flex-col gap-0 min-w-0">
-                  <p className="text-[14px] font-medium text-[#1B0C25] leading-tight">Thomas L.</p>
-                  <p className="text-[13px] font-normal text-[#1B0C25]/60">
+                  <p className="text-[14px] font-medium text-[#1b0c25] leading-tight">Thomas L.</p>
+                  <p className="text-[13px] font-normal text-[#1b0c25]/60">
                     Commercial Pilot Student, France
                   </p>
                 </div>
@@ -180,12 +180,12 @@ export default function Contact() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex flex-col items-center justify-center gap-6 h-full min-h-[400px] text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-[#1B0C25]/5 flex items-center justify-center">
-                  <CheckCircle2 className="w-8 h-8 text-[#1B0C25]" />
+                <div className="w-16 h-16 rounded-full bg-[#1b0c25]/5 flex items-center justify-center">
+                  <CheckCircle2 className="w-8 h-8 text-[#1b0c25]" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-2xl font-semibold text-[#1B0C25]">Message sent!</h2>
-                  <p className="text-[15px] text-[#1B0C25]/60 max-w-[320px]">
+                  <h2 className="text-2xl font-semibold text-[#1b0c25]">Message sent!</h2>
+                  <p className="text-[15px] text-[#1b0c25]/60 max-w-[320px]">
                     Thank you for reaching out. We'll get back to you as soon as possible.
                     Check your inbox for a confirmation email.
                   </p>
@@ -193,7 +193,7 @@ export default function Contact() {
                 <Button
                   onClick={() => setSuccess(false)}
                   variant="outline"
-                  className="h-11 px-6 rounded-[10px] text-[#1B0C25] border-[#1B0C25]/20 hover:bg-[#1B0C25] hover:text-white"
+                  className="h-11 px-6 rounded-[10px] text-[#1b0c25] border-[#1b0c25]/20 hover:bg-[#1b0c25] hover:text-white"
                 >
                   Send another message
                 </Button>
@@ -211,7 +211,7 @@ export default function Contact() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1B0C25]">
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
                             First Name <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
@@ -226,7 +226,7 @@ export default function Contact() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1B0C25]">
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
                             Last Name <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
@@ -245,7 +245,7 @@ export default function Contact() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1B0C25]">
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
                             Email <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
@@ -265,7 +265,7 @@ export default function Contact() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1B0C25]">
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
                             Phone Number
                           </FormLabel>
                           <FormControl>
@@ -289,7 +289,7 @@ export default function Contact() {
                       name="profile"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1B0C25]">
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
                             I am a
                           </FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
@@ -314,7 +314,7 @@ export default function Contact() {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1B0C25]">
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
                             Subject
                           </FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
@@ -344,13 +344,13 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1B0C25]">
+                        <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
                           Message <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="Tell us how we can help you..."
-                            className="bg-[#F9F9F9] border-[#1B0C25]/10 focus-visible:ring-[#1B0C25]/20 focus-visible:border-[#1B0C25]/30 min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y"
+                            className="bg-[#F9F9F9] border-[#1b0c25]/10 focus-visible:ring-brand/20 focus-visible:border-[#1b0c25]/30 min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y"
                             {...field}
                           />
                         </FormControl>
@@ -364,7 +364,7 @@ export default function Contact() {
                     <Button
                       type="submit"
                       disabled={form.formState.isSubmitting}
-                      className="group w-full h-12 text-[16px] font-medium text-white bg-[#1B0C25] hover:bg-[#1B0C25]/90 rounded-[10px] overflow-hidden disabled:opacity-60"
+                      className="group w-full h-12 text-[16px] font-medium text-white bg-[#1b0c25] hover:bg-[#1b0c25]/90 rounded-[10px] overflow-hidden disabled:opacity-60"
                     >
                       {form.formState.isSubmitting ? (
                         <Loader2 className="w-5 h-5 animate-spin" />
@@ -379,7 +379,7 @@ export default function Contact() {
                         </span>
                       )}
                     </Button>
-                    <p className="text-[13px] font-normal text-[#1B0C25]/50 leading-[20px] text-center max-w-[320px]">
+                    <p className="text-[13px] font-normal text-[#1b0c25]/50 leading-[20px] text-center max-w-[320px]">
                       By submitting this form you agree to our friendly Privacy Policy
                     </p>
                   </div>

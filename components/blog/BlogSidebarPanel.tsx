@@ -36,7 +36,7 @@ export default function BlogSidebarPanel({
 
       {/* Categories */}
       <div className="flex flex-col gap-1 lg:gap-2">
-        <p className="text-[9px] lg:text-xs font-semibold text-[#1B0C25] uppercase tracking-wide mb-0.5">
+        <p className="text-[9px] lg:text-xs font-semibold text-[#1b0c25] uppercase tracking-wide mb-0.5">
           Browse By Categories
         </p>
         <ul className="flex flex-col">
@@ -46,7 +46,7 @@ export default function BlogSidebarPanel({
                 onClick={() => onCategorySelect(cat)}
                 className={`w-full text-left px-2 lg:px-3 py-[3px] lg:py-2 text-[10px] lg:text-sm transition-colors border-l-2 ${
                   selectedCategory === cat
-                    ? "border-[#1B0C25] text-[#1B0C25] font-semibold"
+                    ? "border-[#1b0c25] text-[#1b0c25] font-semibold"
                     : "border-transparent text-gray-500 hover:text-gray-800"
                 }`}
               >

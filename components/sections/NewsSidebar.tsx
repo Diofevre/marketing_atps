@@ -62,12 +62,12 @@ export default function NewsSidebar({
               href={sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-[13px] font-bold text-[#1B0C25] hover:text-[#1B0C25]/70 transition-colors"
+              className="flex items-center gap-1 text-[13px] font-bold text-[#1b0c25] hover:text-[#1b0c25]/70 transition-colors"
             >
               {source} <Link2 className="w-3 h-3" />
             </Link>
           ) : (
-            <span className="text-[13px] font-bold text-[#1B0C25]">
+            <span className="text-[13px] font-bold text-[#1b0c25]">
               {source}
             </span>
           )}
@@ -80,7 +80,7 @@ export default function NewsSidebar({
           <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">
             Category:
           </p>
-          <span className="text-[13px] font-normal text-[#1B0C25]">
+          <span className="text-[13px] font-normal text-[#1b0c25]">
             {category}
           </span>
         </div>
@@ -119,7 +119,7 @@ export default function NewsSidebar({
                 className="group flex gap-3 items-center"
               >
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-[13px] font-bold text-[#1B0C25] leading-tight group-hover:text-[#1B0C25]/70 transition-colors line-clamp-2">
+                  <h4 className="text-[13px] font-bold text-[#1b0c25] leading-tight group-hover:text-[#1b0c25]/70 transition-colors line-clamp-2">
                     {item.title}
                   </h4>
                   <p className="text-[12px] text-gray-400 mt-1 truncate">

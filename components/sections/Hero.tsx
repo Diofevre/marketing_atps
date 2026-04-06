@@ -19,19 +19,19 @@ const CHAT_MESSAGES = [
   {
     id: 1,
     type: "user",
-    message: "Can you explain the principle of instrument landing systems (ILS) for my ATPL exam?",
+    message: "I'm struggling with ILS approach questions — can you help me understand the key concepts?",
     delay: 0.5,
   },
   {
     id: 2,
     type: "ai",
-    message: "Of course! An ILS uses two radio beams — the localizer for lateral guidance and the glide slope for vertical guidance — to guide the aircraft precisely to the runway threshold.",
+    message: "Absolutely! Our research-backed explanations break it down clearly: the localizer provides lateral guidance, while the glide slope handles vertical guidance — both using radio beams to guide you to the runway threshold.",
     delay: 2,
   },
   {
     id: 3,
     type: "user",
-    message: "Perfect, can you give me a practice question on this?",
+    message: "Great, let me start a quiz on Radio Navigation!",
     delay: 4,
   },
 ];
@@ -154,14 +154,11 @@ function ChatMessage({ message, type, delay }: { message: string; type: string; 
 
 export default function Hero() {
   // Split title into words for animation
-  const titleWords = ["The", "Complete", "ATPL", "Training", "Platform"];
+  const titleWords = ["Pass", "Your", "ATPL", "on", "the", "First", "Try"];
 
   return (
     <div className="w-full pb-0 px-4">
-      <div className="min-h-[800px] lg:h-[1236px] bg-[#1B0C25] rounded-2xl overflow-hidden relative">
-        {/* Gradients - comme dans le Footer */}
-        <div className="absolute z-0 left-[-246px] top-[-186px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_31.09%,#fcab83_70.46%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
-        <div className="absolute z-0 right-[-86px] bottom-[100px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(145deg,#efe8f6_0%,#d588fb_60.83%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
+      <div className="min-h-[800px] lg:h-[1236px] bg-[url('/images/bgHero.png')] bg-cover bg-center rounded-2xl overflow-hidden relative">
         
         <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-16 lg:pt-[160px] h-full">
           <Container className="flex flex-col gap-6 lg:gap-[40px]">
@@ -173,7 +170,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-4xl sm:text-5xl lg:text-[60px] leading-tight lg:leading-[60px] text-white font-medium"
+                    className="text-4xl sm:text-5xl lg:text-[60px] leading-tight lg:leading-[60px] text-[#1b0c25] font-medium"
                   >
                     {titleWords.map((word, index) => (
                       <motion.span
@@ -201,10 +198,11 @@ export default function Hero() {
                   animate="visible"
                   className="w-full lg:w-[700px]"
                 >
-                  <p className="text-base sm:text-lg lg:text-[18px] leading-relaxed lg:leading-[28px] font-normal text-white/90">
-                    MyATPS helps you prepare for your ATPL exams with an
-                    AI-powered quiz interface, an ATC simulator, and a built-in
-                    AI tutor — all in one platform.
+                  <p className="text-base sm:text-lg lg:text-[18px] leading-relaxed lg:leading-[28px] font-normal text-[#1b0c25]">
+                    20,000+ questions with research-based explanations, an
+                    aviation dictionary with audio &amp; 3D models, live quizzes,
+                    and a complete study ecosystem — the only ATPL platform
+                    that gives you everything in one place.
                   </p>
                 </motion.div>
               </div>
@@ -225,7 +223,7 @@ export default function Hero() {
               variants={heroCardVariants}
               initial="hidden"
               animate="visible"
-              className="flex-1 flex items-end justify-center w-full border border-white/20 border-b-0 relative rounded-tl-[20px] sm:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[30px] lg:rounded-tr-[40px] rounded-b-none backdrop-blur-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.15)_100%)] overflow-hidden"
+              className="flex-1 flex items-end justify-center w-full border border-[#1b0c25]/10 border-b-0 relative rounded-tl-[20px] sm:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[30px] lg:rounded-tr-[40px] rounded-b-none backdrop-blur-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.6)_100%)] overflow-hidden"
             >
               {/* Decorative Elements - Hidden on mobile/tablet */}
               <motion.div
@@ -265,7 +263,7 @@ export default function Hero() {
                 {/* Main Content */}
                 <div className="relative z-10 flex flex-col items-center gap-4 sm:gap-6 lg:gap-[30px] px-4 sm:px-8 lg:px-[300px] w-full pb-0">
                   {/* Chat Card */}
-                  <div className="w-full sm:w-[540px] lg:w-[640px] min-h-[200px] sm:min-h-[250px] lg:min-h-[310px] rounded-2xl p-4 sm:p-5 lg:p-6 backdrop-blur-[10px] bg-white/10 border border-white/20 flex flex-col gap-4 justify-end">
+                  <div className="w-full sm:w-[540px] lg:w-[640px] min-h-[200px] sm:min-h-[250px] lg:min-h-[310px] rounded-2xl p-4 sm:p-5 lg:p-6 backdrop-blur-[10px] bg-white/50 border border-[#1b0c25]/10 flex flex-col gap-4 justify-end">
                     {CHAT_MESSAGES.map((msg) => (
                       <ChatMessage
                         key={msg.id}
@@ -277,22 +275,22 @@ export default function Hero() {
                   </div>
 
                   {/* Bottom Form Card */}
-                  <div className="w-full sm:w-[540px] lg:w-[640px] px-3 sm:px-4 lg:px-[14px] pt-3 sm:pt-4 lg:pt-[14px] pb-6 sm:pb-8 lg:pb-10 flex flex-col gap-3 sm:gap-4 lg:gap-[14px] border border-white/30 border-b-0 rounded-t-xl lg:rounded-t-[13px] rounded-b-none backdrop-blur-[25px] bg-white/90 shadow-[0_0_40px_rgba(195,79,150,0.4)]">
+                  <div className="w-full sm:w-[540px] lg:w-[640px] px-3 sm:px-4 lg:px-[14px] pt-3 sm:pt-4 lg:pt-[14px] pb-6 sm:pb-8 lg:pb-10 flex flex-col gap-3 sm:gap-4 lg:gap-[14px] border border-[#1b0c25]/10 border-b-0 rounded-t-xl lg:rounded-t-[13px] rounded-b-none backdrop-blur-[25px] bg-white/90 shadow-[0_0_40px_rgba(195,79,150,0.15)]">
                     {/* Button Group */}
                     <div className="flex flex-wrap gap-2 sm:gap-[8px]">
-                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c26] hover:bg-transparent">
+                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c25] hover:bg-transparent">
                         <Image
                           src="/assets/icons/gptIcon.png"
-                          alt="Hero Button"
+                          alt="AI Assistant"
                           height={16}
                           width={16}
                           className="mr-1"
                         />
-                        GPT 4.5
-                        <ChevronDown className="ml-1 text-[#1b0c27] h-3 w-3 sm:h-4 sm:w-4" />
+                        Assistant
+                        <ChevronDown className="ml-1 text-[#1b0c25] h-3 w-3 sm:h-4 sm:w-4" />
                       </Button>
 
-                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c26] hover:bg-transparent">
+                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c25] hover:bg-transparent">
                         <Globe className="mr-1 h-3 w-3 sm:h-4 sm:w-4" /> Search
                       </Button>
                     </div>
@@ -300,14 +298,14 @@ export default function Hero() {
                     {/* Form */}
                     <form className="w-full max-w-[612px] flex flex-col gap-3 sm:gap-4">
                       <Input
-                        placeholder="Ask anything about aviation or ATPL..."
+                        placeholder="Search questions, topics, or ask your assistant..."
                         className="w-full border-none bg-transparent shadow-none text-sm sm:text-base lg:text-[16px] placeholder:text-sm sm:placeholder:text-base lg:placeholder:text-[16px] placeholder:text-[#1b0c25]/70"
                       />
 
                       {/* Action Buttons */}
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-3 sm:gap-4">
                         <div className="flex flex-wrap gap-2 sm:gap-[8px] items-center">
-                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
+                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
                             <span className="flex flex-col items-center h-[14px] overflow-hidden">
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
                                 Start Quiz
@@ -317,17 +315,17 @@ export default function Hero() {
                               </span>
                             </span>
                           </Button>
-                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
+                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
                             <span className="flex flex-col items-center h-[14px] overflow-hidden">
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                ATC Simulator
+                                Dictionary
                               </span>
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                ATC Simulator
+                                Dictionary
                               </span>
                             </span>
                           </Button>
-                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
+                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
                             <span className="flex flex-col items-center h-[14px] overflow-hidden">
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
                                 Practice Exam

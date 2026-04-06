@@ -97,7 +97,7 @@ export default function BlogList() {
         <p className="text-red-500 text-lg">{error}</p>
         <button
           onClick={() => fetchPosts()}
-          className="px-6 py-2 bg-[#1B0C25] text-white rounded-full hover:bg-[#1B0C25]/90 transition-colors"
+          className="px-6 py-2 bg-[#1b0c25] text-white rounded-full hover:bg-[#1b0c25]/90 transition-colors"
         >
           Réessayer
         </button>
