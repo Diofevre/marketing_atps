@@ -75,9 +75,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: SITE_URL,
-  },
+  // Canonical is set per-page via `alternates.canonical` (relative path) so
+  // that each route resolves to its own URL via `metadataBase`, not a global
+  // canonical pointing everything at `/`.
 };
 
 export default function RootLayout({
@@ -151,7 +151,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "MyATPS",
               url: SITE_URL,
-              logo: `${SITE_URL}/images/logo-myatps.png`,
+              logo: `${SITE_URL}/assets/logo-myatps.png`,
               sameAs: [],
               contactPoint: {
                 "@type": "ContactPoint",

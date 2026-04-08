@@ -7,6 +7,7 @@ import type {
   NewsQueryParams,
   ApiResponse,
 } from '@/lib/types';
+import type { NewsItemListPayload } from './transformers';
 
 const NEWS_ENDPOINT = '/api/news';
 
@@ -40,16 +41,16 @@ export const newsService = {
     return apiClient.get<NewsTagsResponse>(`${NEWS_ENDPOINT}/tags`);
   },
 
-  async getRecentNews(limit: number = 5): Promise<ApiResponse<NewsItem[]>> {
-    return apiClient.get<NewsItem[]>(`${NEWS_ENDPOINT}/recent`, { limit });
+  async getRecentNews(limit: number = 5): Promise<ApiResponse<NewsItemListPayload>> {
+    return apiClient.get<NewsItemListPayload>(`${NEWS_ENDPOINT}/recent`, { limit });
   },
 
-  async getFeaturedNews(limit: number = 5): Promise<ApiResponse<NewsItem[]>> {
-    return apiClient.get<NewsItem[]>(`${NEWS_ENDPOINT}/featured`, { limit });
+  async getFeaturedNews(limit: number = 5): Promise<ApiResponse<NewsItemListPayload>> {
+    return apiClient.get<NewsItemListPayload>(`${NEWS_ENDPOINT}/featured`, { limit });
   },
 
-  async getRelatedNews(newsId: string, limit: number = 3): Promise<ApiResponse<NewsItem[]>> {
-    return apiClient.get<NewsItem[]>(`${NEWS_ENDPOINT}/${newsId}/related`, { limit });
+  async getRelatedNews(newsId: string, limit: number = 3): Promise<ApiResponse<NewsItemListPayload>> {
+    return apiClient.get<NewsItemListPayload>(`${NEWS_ENDPOINT}/${newsId}/related`, { limit });
   },
 
   async getNewsByCategory(category: string, params: Omit<NewsQueryParams, 'category'> = {}): Promise<ApiResponse<NewsListResponse>> {

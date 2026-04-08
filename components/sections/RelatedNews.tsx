@@ -7,7 +7,11 @@ import { motion } from "framer-motion";
 import { scaleInVariants, viewportSettings } from "@/lib/motion";
 import TitleSection from "../TitleSection";
 import { newsService } from "@/lib/api";
-import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
+import {
+  transformNewsItems,
+  unwrapNewsItems,
+  type TransformedNewsItem,
+} from "@/lib/api/transformers";
 
 interface RelatedNewsProps {
   currentNewsId: string;
@@ -28,16 +32,14 @@ export default function RelatedNews({
       const response = await newsService.getRelatedNews(currentNewsId, 4);
 
       if (response.data) {
-        const data = response.data as any;
-        const newsArray = Array.isArray(data) ? data : (data.news || []);
-        const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
+        const newsArray = unwrapNewsItems(response.data);
+        const filtered = newsArray.filter((n) => n.id !== currentNewsId);
         setRelatedNews(transformNewsItems(filtered).slice(0, 3));
       } else {
         const fallbackResponse = await newsService.getRecentNews(4);
         if (fallbackResponse.data) {
-          const data = fallbackResponse.data as any;
-          const newsArray = Array.isArray(data) ? data : (data.news || []);
-          const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
+          const newsArray = unwrapNewsItems(fallbackResponse.data);
+          const filtered = newsArray.filter((n) => n.id !== currentNewsId);
           setRelatedNews(transformNewsItems(filtered).slice(0, 3));
         }
       }

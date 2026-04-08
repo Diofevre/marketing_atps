@@ -5,7 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Linkedin, X } from "lucide-react";
 import { blogService } from "@/lib/api";
-import { transformBlogArticles, type TransformedBlogPost } from "@/lib/api/transformers";
+import {
+  transformBlogArticles,
+  unwrapBlogArticles,
+  type TransformedBlogPost,
+} from "@/lib/api/transformers";
 import { SidebarSkeleton } from "@/components/ui/skeleton-card";
 
 interface BlogSidebarProps {
@@ -41,16 +45,14 @@ export default function BlogSidebar({
       ]);
 
       if (recentResponse.data) {
-        const data = recentResponse.data as any;
-        const articlesArray = Array.isArray(data) ? data : (data.articles || []);
-        const filtered = articlesArray.filter((a: any) => a.id !== currentPostId);
+        const articlesArray = unwrapBlogArticles(recentResponse.data);
+        const filtered = articlesArray.filter((a) => a.id !== currentPostId);
         setMoreArticles(transformBlogArticles(filtered).slice(0, 3));
       }
 
       if (popularResponse.data) {
-        const data = popularResponse.data as any;
-        const articlesArray = Array.isArray(data) ? data : (data.articles || []);
-        const filtered = articlesArray.filter((a: any) => a.id !== currentPostId);
+        const articlesArray = unwrapBlogArticles(popularResponse.data);
+        const filtered = articlesArray.filter((a) => a.id !== currentPostId);
         setPopularArticles(transformBlogArticles(filtered).slice(0, 3));
       }
 

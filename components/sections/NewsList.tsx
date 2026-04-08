@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { newsService } from "@/lib/api";
 import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
 import type { NewsQueryParams, PaginationInfo } from "@/lib/types";
@@ -8,21 +8,41 @@ import NewsSidebarPanel from "@/components/news/NewsSidebarPanel";
 import NewsFeaturedPost, { NewsFeaturedSkeleton } from "@/components/news/NewsFeaturedPost";
 import NewsGrid from "@/components/news/NewsGrid";
 
-export default function NewsList() {
-  const [news, setNews] = useState<TransformedNewsItem[]>([]);
-  const [categories, setCategories] = useState<string[]>(["All Category"]);
+const DEFAULT_PAGINATION: PaginationInfo = {
+  page: 1,
+  limit: 12,
+  total: 0,
+  totalPages: 1,
+  hasNext: false,
+  hasPrev: false,
+};
+
+interface NewsListProps {
+  initialNews?: TransformedNewsItem[];
+  initialPagination?: PaginationInfo;
+  initialCategories?: string[];
+}
+
+export default function NewsList({
+  initialNews,
+  initialPagination,
+  initialCategories,
+}: NewsListProps = {}) {
+  const hasInitialData = initialNews !== undefined;
+  const [news, setNews] = useState<TransformedNewsItem[]>(initialNews ?? []);
+  const [categories, setCategories] = useState<string[]>(
+    initialCategories ?? ["All Category"],
+  );
   const [selectedCategory, setSelectedCategory] = useState("All Category");
   const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasInitialData);
   const [error, setError] = useState<string | null>(null);
-  const [pagination, setPagination] = useState<PaginationInfo>({
-    page: 1,
-    limit: 12,
-    total: 0,
-    totalPages: 1,
-    hasNext: false,
-    hasPrev: false,
-  });
+  const [pagination, setPagination] = useState<PaginationInfo>(
+    initialPagination ?? DEFAULT_PAGINATION,
+  );
+  // Skip the auto-fetch on mount when the server already provided initial data,
+  // otherwise we'd refetch and waste a roundtrip on every page load.
+  const skipNextFetch = useRef(hasInitialData);
 
   const fetchNews = useCallback(async (params: NewsQueryParams = {}) => {
     setLoading(true);
@@ -65,8 +85,18 @@ export default function NewsList() {
     }
   }, []);
 
-  useEffect(() => { fetchCategories(); }, [fetchCategories]);
-  useEffect(() => { fetchNews({ page: 1 }); }, [selectedCategory, fetchNews]);
+  useEffect(() => {
+    // Categories aren't part of the SSR payload — fetch them client-side once.
+    if (!initialCategories) fetchCategories();
+  }, [fetchCategories, initialCategories]);
+
+  useEffect(() => {
+    if (skipNextFetch.current) {
+      skipNextFetch.current = false;
+      return;
+    }
+    fetchNews({ page: 1 });
+  }, [selectedCategory, fetchNews]);
 
   const filteredNews = searchQuery
     ? news.filter((n) => n.title.toLowerCase().includes(searchQuery.toLowerCase()))

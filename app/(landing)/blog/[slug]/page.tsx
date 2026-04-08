@@ -7,9 +7,12 @@ import { blogService } from "@/lib/api";
 import {
   transformBlogArticle,
   transformBlogArticles,
+  unwrapBlogArticles,
 } from "@/lib/api/transformers";
 import { Container } from "@/components/ui/container";
 import type { Metadata } from "next";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -22,7 +25,10 @@ export async function generateMetadata({
   const response = await blogService.getArticleBySlug(slug);
 
   if (response.error || !response.data) {
-    return { title: "Article not found" };
+    return {
+      title: "Article not found",
+      robots: { index: false, follow: false },
+    };
   }
 
   const article = response.data;
@@ -31,9 +37,13 @@ export async function generateMetadata({
     title: article.seoTitle || article.title,
     description: article.seoDescription || article.excerpt || "",
     keywords: article.seoKeywords?.join(", "),
+    alternates: {
+      canonical: `/blog/${article.slug}`,
+    },
     openGraph: {
       title: article.seoTitle || article.title,
       description: article.seoDescription || article.excerpt || "",
+      url: `/blog/${article.slug}`,
       images: article.coverImage ? [article.coverImage] : [],
       type: "article",
       publishedTime: article.publishedAt || undefined,
@@ -53,8 +63,9 @@ export default async function BlogDetail({ params }: PageProps) {
   const blog = transformBlogArticle(article);
 
   const relatedResponse = await blogService.getRelatedArticles(article.id, 3);
-  const relatedData = relatedResponse.data as any;
-  const relatedArticles = relatedData?.articles || [];
+  const relatedArticles = relatedResponse.data
+    ? unwrapBlogArticles(relatedResponse.data)
+    : [];
   const relatedPosts = transformBlogArticles(relatedArticles);
 
   const displayImage =
@@ -62,8 +73,69 @@ export default async function BlogDetail({ params }: PageProps) {
 
   blogService.incrementViewCount(article.id);
 
+  // JSON-LD Article schema for rich snippets in search results. Also emit a
+  // BreadcrumbList so Google can render the hierarchy (Home > Blog > Article).
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.seoTitle || article.title,
+    description: article.seoDescription || article.excerpt || "",
+    image: article.coverImage ? [article.coverImage] : undefined,
+    datePublished: article.publishedAt || article.createdAt,
+    dateModified: article.updatedAt || article.publishedAt || article.createdAt,
+    author: article.author
+      ? {
+          "@type": "Person",
+          name: `${article.author.firstName} ${article.author.lastName}`.trim(),
+        }
+      : { "@type": "Organization", name: "MyATPS" },
+    publisher: {
+      "@type": "Organization",
+      name: "MyATPS",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/assets/logo-myatps.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${article.slug}`,
+    },
+    keywords: article.seoKeywords?.join(", ") || article.tags?.join(", "),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: article.title,
+        item: `${SITE_URL}/blog/${article.slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="pb-20">
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Container className="pt-[140px] pb-[80px]">
         <StaggerContainer className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12">
           <div className="min-w-0">

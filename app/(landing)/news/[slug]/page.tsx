@@ -9,6 +9,8 @@ import { transformNewsItem } from "@/lib/api/transformers";
 import { Container } from "@/components/ui/container";
 import type { Metadata } from "next";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -20,7 +22,10 @@ export async function generateMetadata({
   const response = await newsService.getNewsBySlug(slug);
 
   if (response.error || !response.data) {
-    return { title: "News not found" };
+    return {
+      title: "News not found",
+      robots: { index: false, follow: false },
+    };
   }
 
   const item = response.data;
@@ -28,9 +33,13 @@ export async function generateMetadata({
   return {
     title: item.title,
     description: item.excerpt || "",
+    alternates: {
+      canonical: `/news/${item.slug}`,
+    },
     openGraph: {
       title: item.title,
       description: item.excerpt || "",
+      url: `/news/${item.slug}`,
       images: item.coverImage ? [item.coverImage] : [],
       type: "article",
       publishedTime: item.publishedAt,
@@ -49,8 +58,65 @@ export default async function NewsDetail({ params }: PageProps) {
   const newsItem = response.data;
   const news = transformNewsItem(newsItem);
 
+  // JSON-LD NewsArticle schema for rich snippets in Google News and search
+  // results. Also emit a BreadcrumbList so Google can render the hierarchy
+  // (Home > News > Article).
+  const newsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: newsItem.title,
+    description: newsItem.excerpt || "",
+    image: newsItem.coverImage ? [newsItem.coverImage] : undefined,
+    datePublished: newsItem.publishedAt,
+    dateModified: newsItem.updatedAt || newsItem.publishedAt,
+    author: { "@type": "Organization", name: newsItem.source || "MyATPS" },
+    publisher: {
+      "@type": "Organization",
+      name: "MyATPS",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/assets/logo-myatps.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/news/${newsItem.slug}`,
+    },
+    keywords: newsItem.tags?.join(", "),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "News",
+        item: `${SITE_URL}/news`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: newsItem.title,
+        item: `${SITE_URL}/news/${newsItem.slug}`,
+      },
+    ],
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(newsJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="w-full bg-[#121212] relative min-h-[400px] flex items-end pb-12 pt-32">
         {news.image && (
           <div className="absolute inset-0 opacity-40">

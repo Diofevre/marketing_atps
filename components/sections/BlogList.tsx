@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { blogService } from "@/lib/api";
 import {
   transformBlogArticles,
@@ -13,21 +13,43 @@ import BlogFeaturedPost, {
 } from "@/components/blog/BlogFeaturedPost";
 import BlogGrid from "@/components/blog/BlogGrid";
 
-export default function BlogList() {
-  const [posts, setPosts] = useState<TransformedBlogPost[]>([]);
-  const [categories, setCategories] = useState<string[]>(["All Category"]);
+const DEFAULT_PAGINATION: PaginationInfo = {
+  page: 1,
+  limit: 12,
+  total: 0,
+  totalPages: 1,
+  hasNext: false,
+  hasPrev: false,
+};
+
+interface BlogListProps {
+  initialPosts?: TransformedBlogPost[];
+  initialPagination?: PaginationInfo;
+  initialCategories?: string[];
+}
+
+export default function BlogList({
+  initialPosts,
+  initialPagination,
+  initialCategories,
+}: BlogListProps = {}) {
+  const hasInitialData = initialPosts !== undefined;
+  const [posts, setPosts] = useState<TransformedBlogPost[]>(
+    initialPosts ?? [],
+  );
+  const [categories, setCategories] = useState<string[]>(
+    initialCategories ?? ["All Category"],
+  );
   const [selectedCategory, setSelectedCategory] = useState("All Category");
   const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasInitialData);
   const [error, setError] = useState<string | null>(null);
-  const [pagination, setPagination] = useState<PaginationInfo>({
-    page: 1,
-    limit: 12,
-    total: 0,
-    totalPages: 1,
-    hasNext: false,
-    hasPrev: false,
-  });
+  const [pagination, setPagination] = useState<PaginationInfo>(
+    initialPagination ?? DEFAULT_PAGINATION,
+  );
+  // Skip the auto-fetch on mount when the server already provided initial data,
+  // otherwise we'd refetch and waste a roundtrip on every page load.
+  const skipNextFetch = useRef(hasInitialData);
 
   const fetchPosts = useCallback(
     async (params: BlogQueryParams = {}) => {
@@ -75,10 +97,15 @@ export default function BlogList() {
   }, []);
 
   useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    // Categories aren't part of the SSR payload — fetch them client-side once.
+    if (!initialCategories) fetchCategories();
+  }, [fetchCategories, initialCategories]);
 
   useEffect(() => {
+    if (skipNextFetch.current) {
+      skipNextFetch.current = false;
+      return;
+    }
     fetchPosts({ page: 1 });
   }, [selectedCategory, fetchPosts]);
 
