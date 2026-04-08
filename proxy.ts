@@ -8,6 +8,11 @@ import { NextResponse, type NextRequest } from "next/server";
  *
  * Add new entries here as Google Search Console reports more legacy 404s under
  * "Pages > Not indexed > Not found (404)".
+ *
+ * Note: the www.myatps.com → myatps.com redirect is handled at the Vercel
+ * edge (domain added to the project with `redirectStatusCode: 308`). Doing it
+ * in this proxy would be dead code because Vercel intercepts the request
+ * before the function is invoked.
  */
 const LEGACY_REDIRECTS: Record<string, string> = {
   "/about-us": "/",
@@ -23,21 +28,9 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/pricing": "/",
 };
 
-const PRIMARY_HOST = "myatps.com";
-
 export function proxy(request: NextRequest): NextResponse {
   const url = request.nextUrl;
-  const host = request.headers.get("host") ?? "";
 
-  // 1. Force 301 from www.myatps.com to apex. Vercel's built-in redirect for
-  //    secondary domains uses 307, which does not transfer SEO authority.
-  //    A permanent redirect at the application layer fixes that.
-  if (host === `www.${PRIMARY_HOST}`) {
-    const target = new URL(url.pathname + url.search, `https://${PRIMARY_HOST}`);
-    return NextResponse.redirect(target, 301);
-  }
-
-  // 2. Permanent redirects for legacy paths from previous owners of the domain.
   const legacyTarget = LEGACY_REDIRECTS[url.pathname];
   if (legacyTarget) {
     const target = new URL(legacyTarget + url.search, url);
