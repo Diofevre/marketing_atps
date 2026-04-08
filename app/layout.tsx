@@ -61,21 +61,17 @@ export const metadata: Metadata = {
     title: "MyATPS — The Complete ATPL Exam Preparation Platform",
     description:
       "20,000+ questions, research-based explanations, aviation dictionary with 3D models, live quizzes & sharing — everything to pass your ATPL on the first try.",
-    images: [
-      {
-        url: "/images/bgHero.png",
-        width: 1200,
-        height: 630,
-        alt: "MyATPS — ATPL Exam Preparation Platform",
-      },
-    ],
+    // `images` intentionally omitted: Next.js auto-injects the rendered
+    // output of `app/opengraph-image.tsx` (1200×630 branded card) via
+    // the file-based metadata convention, so we don't hard-code a URL here.
   },
   twitter: {
     card: "summary_large_image",
     title: "MyATPS — The Complete ATPL Exam Preparation Platform",
     description:
       "20,000+ questions, research-based explanations, aviation dictionary with 3D models, live quizzes — pass your ATPL on the first try.",
-    images: ["/images/bgHero.png"],
+    // `images` intentionally omitted for the same reason: Next.js falls
+    // back to the opengraph-image.tsx output for Twitter Card previews.
   },
   robots: {
     index: true,
@@ -173,7 +169,12 @@ export default function RootLayout({
               name: "MyATPS",
               alternateName: "My ATPS",
               url: SITE_URL,
-              logo: `${SITE_URL}/assets/logo-myatps.png`,
+              // The branded yellow logo is the canonical brand asset used
+              // on the favicon, manifest, Apple touch icon, and OG image —
+              // we reference the same file here so third-party knowledge
+              // graph scrapers (Google, ZoomInfo, Crunchbase, Clearbit...)
+              // resolve a consistent visual identity.
+              logo: `${SITE_URL}/assets/logo-yellow.png`,
               description:
                 "Complete ATPL exam preparation platform with 20,000+ questions, research-based explanations, aviation dictionary, live quizzes, and study tools.",
               sameAs: [],
