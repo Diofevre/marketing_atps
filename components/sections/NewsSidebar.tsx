@@ -5,7 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Link2 } from "lucide-react";
 import { newsService } from "@/lib/api";
-import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
+import {
+  transformNewsItems,
+  unwrapNewsItems,
+  type TransformedNewsItem,
+} from "@/lib/api/transformers";
 import { SidebarSkeleton } from "@/components/ui/skeleton-card";
 
 interface NewsSidebarProps {
@@ -33,9 +37,8 @@ export default function NewsSidebar({
       const response = await newsService.getRecentNews(5);
 
       if (response.data) {
-        const data = response.data as any;
-        const newsArray = Array.isArray(data) ? data : (data.news || []);
-        const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
+        const newsArray = unwrapNewsItems(response.data);
+        const filtered = newsArray.filter((n) => n.id !== currentNewsId);
         setMoreInsights(transformNewsItems(filtered).slice(0, 4));
       }
 

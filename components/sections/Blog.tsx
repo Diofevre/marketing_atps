@@ -14,25 +14,36 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 import { blogService } from "@/lib/api";
-import { transformBlogArticles, type TransformedBlogPost } from "@/lib/api/transformers";
+import {
+  transformBlogArticles,
+  unwrapBlogArticles,
+  type TransformedBlogPost,
+} from "@/lib/api/transformers";
 
-export default function BlogSection() {
-  const [posts, setPosts] = useState<TransformedBlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+interface BlogSectionProps {
+  initialPosts?: TransformedBlogPost[];
+}
+
+export default function BlogSection({ initialPosts }: BlogSectionProps = {}) {
+  const hasInitial = initialPosts !== undefined;
+  const [posts, setPosts] = useState<TransformedBlogPost[]>(initialPosts ?? []);
+  const [loading, setLoading] = useState(!hasInitial);
 
   useEffect(() => {
+    // If the server already prerendered recent posts, don't refetch on mount.
+    if (hasInitial) return;
+
     const fetchRecentPosts = async () => {
       const response = await blogService.getRecentArticles(3);
       if (response.data) {
-        const data = response.data as any;
-        const articles = Array.isArray(data) ? data : (data.articles || []);
+        const articles = unwrapBlogArticles(response.data);
         setPosts(transformBlogArticles(articles));
       }
       setLoading(false);
     };
 
     fetchRecentPosts();
-  }, []);
+  }, [hasInitial]);
 
   return (
     <section className="py-16 max-lg:py-12 max-md:py-8">

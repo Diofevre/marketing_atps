@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Navigation from "@/components/layout/Navigation";
 import About from "@/components/sections/About";
@@ -10,8 +11,37 @@ import Pricing from "@/components/sections/Pricing";
 import ProductOverview from "@/components/sections/ProductOverview";
 import Testimonials from "@/components/sections/Testimonials";
 import Work from "@/components/sections/Work";
+import { blogService } from "@/lib/api";
+import {
+  transformBlogArticles,
+  unwrapBlogArticles,
+} from "@/lib/api/transformers";
 
-const HomePage = () => {
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
+// Render on every request so the home page HTML always contains the 3 most
+// recent blog article links for Googlebot, regardless of whether the API was
+// reachable at build. Vercel still edge-caches the response.
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  // SSR-fetch the 3 most recent blog articles so the home page HTML contains
+  // crawlable `/blog/<slug>` links for search engines.
+  const recentRes = await blogService.getRecentArticles(3);
+  if (recentRes.error) {
+    console.error(
+      "[home] blogService.getRecentArticles failed:",
+      recentRes.error,
+    );
+  }
+  const initialPosts = recentRes.data
+    ? transformBlogArticles(unwrapBlogArticles(recentRes.data))
+    : [];
+
   return (
     <>
       <Navigation />
@@ -23,11 +53,9 @@ const HomePage = () => {
       <Testimonials />
       <Work />
       <Pricing />
-      <Faqs/>
-      <BlogSection />
+      <Faqs />
+      <BlogSection initialPosts={initialPosts} />
       <Footer />
     </>
   );
-};
-
-export default HomePage;
+}

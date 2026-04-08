@@ -1,12 +1,17 @@
 import NewsList from "@/components/sections/NewsList";
 import { Container } from "@/components/ui/container";
 import { FadeInUp, StaggerContainer } from "@/lib/motion";
+import { newsService } from "@/lib/api";
+import { transformNewsItems } from "@/lib/api/transformers";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "News — Latest Updates from MyATPS",
   description:
     "Stay up to date with the latest MyATPS platform updates, new features, aviation industry news, and EASA exam regulation changes.",
+  alternates: {
+    canonical: "/news",
+  },
   openGraph: {
     title: "MyATPS News — Platform Updates & Aviation News",
     description:
@@ -14,7 +19,42 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NewsPage() {
+// Render on every request so Googlebot always receives an HTML payload with
+// actual article links, regardless of whether the API was reachable at build.
+// Vercel still edge-caches the response via default Cache-Control headers.
+export const dynamic = "force-dynamic";
+
+export default async function NewsPage() {
+  // SSR-fetch the first page so search engines see article links in the HTML
+  // payload. Filters and pagination remain client-side inside <NewsList />.
+  const [listRes, categoriesRes] = await Promise.all([
+    newsService.getNews({
+      page: 1,
+      limit: 12,
+      sortBy: "publishedAt",
+      sortOrder: "desc",
+    }),
+    newsService.getCategories(),
+  ]);
+
+  const initialNews = listRes.data
+    ? transformNewsItems(listRes.data.news)
+    : [];
+  const initialPagination = listRes.data?.pagination;
+  const initialCategories = categoriesRes.data
+    ? ["All Category", ...categoriesRes.data.categories.map((c) => c.name)]
+    : undefined;
+
+  if (listRes.error) {
+    console.error("[news/page] newsService.getNews failed:", listRes.error);
+  }
+  if (categoriesRes.error) {
+    console.error(
+      "[news/page] newsService.getCategories failed:",
+      categoriesRes.error,
+    );
+  }
+
   return (
     <div className="pt-32 pb-20">
       <Container className="px-8 lg:px-6">
@@ -42,7 +82,11 @@ export default function NewsPage() {
           </FadeInUp>
         </StaggerContainer>
 
-        <NewsList />
+        <NewsList
+          initialNews={initialNews}
+          initialPagination={initialPagination}
+          initialCategories={initialCategories}
+        />
       </Container>
     </div>
   );

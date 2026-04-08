@@ -58,9 +58,9 @@ export default function Work() {
                     title="How it works"
                     className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
                   />
-                  <h1 className="font-medium text-5xl lg:text-[59px] leading-tight lg:leading-[60px] text-[#1b0c25]">
+                  <h2 className="font-medium text-5xl lg:text-[59px] leading-tight lg:leading-[60px] text-[#1b0c25]">
                     A Simple 3-Step Process
-                  </h1>
+                  </h2>
                 </div>
 
                 <p className="font-normal text-base lg:text-[17px] text-[#1b0c25] leading-7">
@@ -103,9 +103,9 @@ export default function Work() {
                   />
                 </div>
                 <div className="flex flex-col gap-4 px-5 pb-5 w-full">
-                  <h1 className="text-xl lg:text-[23px] font-medium leading-7 text-[#1b0c25]">
+                  <h3 className="text-xl lg:text-[23px] font-medium leading-7 text-[#1b0c25]">
                     {item.title}
-                  </h1>
+                  </h3>
                   <p className="text-sm lg:text-[15px] leading-6 font-normal text-[#1b0c25]">
                     {item.description}
                   </p>

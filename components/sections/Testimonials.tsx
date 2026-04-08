@@ -249,9 +249,9 @@ export default function Testimonials() {
                         variants={counterVariants}
                         className="flex-1 min-w-[120px] sm:min-w-[150px] lg:w-[189.33px] flex flex-col gap-1 items-center"
                       >
-                        <h1 className="text-2xl sm:text-3xl lg:text-[41px] font-medium text-[#1b0c25]">
+                        <h3 className="text-2xl sm:text-3xl lg:text-[41px] font-medium text-[#1b0c25]">
                           <AnimatedCounter value={counter.counter} />
-                        </h1>
+                        </h3>
                         <p className="text-xs sm:text-sm lg:text-[15px] leading-relaxed lg:leading-[26px] text-center text-[rgba(28,12,38,0.7)]">
                           {counter.title}
                         </p>
