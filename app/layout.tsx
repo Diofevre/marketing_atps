@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
@@ -9,6 +9,19 @@ const dmSans = DM_Sans({
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
+
+// Viewport tells the browser how to render the page on mobile and provides
+// the theme color shown in the OS chrome (status bar, PWA shell, etc.). Both
+// the light and dark variants use the brand palette.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F7F6F7" },
+    { media: "(prefers-color-scheme: dark)", color: "#1b0c25" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

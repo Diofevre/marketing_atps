@@ -122,9 +122,9 @@ export default function Pricing() {
           className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
         >
           <div className="flex flex-col gap-3">
-            <h1 className="text-4xl lg:text-5xl font-semibold text-[#1b0c25]">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-[#1b0c25]">
               Choose your plan
-            </h1>
+            </h2>
             <p className="text-[#1b0c25]/60">
               Access to all tools to successfully pass your ATPL on the first
               try

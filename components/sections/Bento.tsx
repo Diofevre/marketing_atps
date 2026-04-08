@@ -34,9 +34,9 @@ export default function Bento() {
                   className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
                 />
                 <div className="w-full px-4 lg:px-0">
-                  <h1 className="text-3xl sm:text-4xl lg:text-[57px] font-medium leading-tight lg:leading-[60px] text-center text-[#1b0c25]">
+                  <h2 className="text-3xl sm:text-4xl lg:text-[57px] font-medium leading-tight lg:leading-[60px] text-center text-[#1b0c25]">
                     The complete ATPL preparation platform
-                  </h1>
+                  </h2>
                 </div>
               </div>
               <div className="w-full lg:w-[700px] px-4 lg:px-0">
@@ -70,9 +70,9 @@ export default function Bento() {
                     />
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
-                    <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
+                    <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
                       Advanced Quiz Interface
-                    </h1>
+                    </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
                       An all-in-one study environment with built-in plugins —
                       annotator, calculator, integrated assistant, library access,
@@ -96,9 +96,9 @@ export default function Bento() {
                     />
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
-                    <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
+                    <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
                       Aviation Dictionary
-                    </h1>
+                    </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
                       A comprehensive aviation glossary with audio pronunciations,
                       3D interactive models, real images, and cross-referenced
@@ -125,9 +125,9 @@ export default function Bento() {
                     />
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
-                    <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
+                    <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
                       Sharing & Live Quizzes
-                    </h1>
+                    </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
                       Share your study sessions with classmates, invite
                       collaborators, or launch live Kahoot-style quizzes with
@@ -151,9 +151,9 @@ export default function Bento() {
                     />
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
-                    <h1 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
+                    <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
                       Library & Resources
-                    </h1>
+                    </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
                       Access e-books, PDFs, aviation annexes, and procedures
                       — a complete resource library to support your study
