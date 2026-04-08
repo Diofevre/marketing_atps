@@ -22,17 +22,27 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#1b0c25",
     categories: ["education", "productivity", "reference"],
     icons: [
+      // Branded yellow logo — same asset used by the favicon, Apple touch
+      // icon, OpenGraph card, and JSON-LD Organization logo so every
+      // surface (browser tab, home screen, social preview, knowledge
+      // graph) shows the exact same brand mark.
       {
-        src: "/assets/logo-myatps.png",
+        src: "/assets/logo-yellow.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/assets/logo-favicon.png",
+        src: "/assets/logo-yellow.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
+      },
+      {
+        src: "/assets/logo-yellow.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
       },
     ],
   };
