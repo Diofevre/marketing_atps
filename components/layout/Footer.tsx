@@ -91,9 +91,13 @@ const Footer = () => {
             >
               <div className="flex flex-col items-start gap-[12px] justify-start max-lg:items-center">
                 <TitleSection title="Start Your ATPL Journey" />
-                <h1 className="text-[72px] font-medium leading-[76px] text-white max-lg:text-4xl max-lg:leading-tight">
+                {/*
+                  h2 (not h1): the Footer is rendered on every page, so using
+                  h1 here would duplicate the page's main heading and hurt SEO.
+                */}
+                <h2 className="text-[72px] font-medium leading-[76px] text-white max-lg:text-4xl max-lg:leading-tight">
                   Ready to pass your ATPL on the first try?
-                </h1>
+                </h2>
               </div>
               <ButtonDemo />
             </motion.div>

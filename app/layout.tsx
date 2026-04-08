@@ -75,6 +75,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  // Fill with the token from Google Search Console → Settings → Ownership
+  // verification → HTML tag. Leave empty until the property is claimed.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   // Canonical is set per-page via `alternates.canonical` (relative path) so
   // that each route resolves to its own URL via `metadataBase`, not a global
   // canonical pointing everything at `/`.
@@ -148,15 +153,51 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              // EducationalOrganization is a more specific subtype of
+              // Organization and signals to Google that this is a training
+              // provider, which unlocks education-specific rich results.
+              "@type": "EducationalOrganization",
               name: "MyATPS",
+              alternateName: "My ATPS",
               url: SITE_URL,
               logo: `${SITE_URL}/assets/logo-myatps.png`,
+              description:
+                "Complete ATPL exam preparation platform with 20,000+ questions, research-based explanations, aviation dictionary, live quizzes, and study tools.",
               sameAs: [],
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer support",
                 url: `${SITE_URL}/contact`,
+              },
+            }),
+          }}
+        />
+        {/*
+          WebSite + SearchAction enables the "sitelinks search box" feature in
+          Google SERPs, letting users search myatps.com directly from Google.
+          The target URL pattern points at the blog search for now; once a
+          global search endpoint exists we can change it to /search?q=.
+        */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "MyATPS",
+              alternateName: "My ATPS",
+              url: SITE_URL,
+              publisher: {
+                "@type": "EducationalOrganization",
+                name: "MyATPS",
+              },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: `${SITE_URL}/blog?search={search_term_string}`,
+                },
+                "query-input": "required name=search_term_string",
               },
             }),
           }}

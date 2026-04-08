@@ -2,7 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  skipTrailingSlashRedirect: true,
+  // Note: `skipTrailingSlashRedirect` was removed — keeping it meant `/news`
+  // and `/news/` coexist as two distinct URLs in search engines, which causes
+  // duplicate-content dilution. Next.js now 308-redirects the trailing-slash
+  // variants to the canonical form, matching per-page `alternates.canonical`.
 
   // Rewrites to proxy blog/news API calls to the main app
   async rewrites() {
