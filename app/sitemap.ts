@@ -37,9 +37,13 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
 ];
 
 // Hard cap on pages we walk per resource so a misbehaving API can never
-// turn the sitemap build into an infinite loop.
+// turn the sitemap build into an infinite loop. At 50 × 50 = 2500 entries
+// per resource we have plenty of headroom before hitting Google's 50k
+// per-sitemap limit.
 const MAX_PAGES_PER_RESOURCE = 50;
-const PAGE_SIZE = 100;
+// The backend rejects limit values above 50 with "Paramètres de requête
+// invalides", so we cap at 50 (the server-side max).
+const PAGE_SIZE = 50;
 
 async function fetchAllBlogEntries(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
