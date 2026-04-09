@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -17,13 +18,13 @@ import {
 
 import { APP_URL } from "@/lib/constants";
 
-const NAV_LIST = [
-  { id: 1, name: "Pricing", link: "/#pricing" },
-  { id: 2, name: "Blog", link: "/blog" },
-  { id: 3, name: "News", link: "/news" },
-];
-
 const Navigation = () => {
+  const t = useTranslations("nav");
+  const NAV_LIST = [
+    { id: 1, name: t("pricing"), link: "/#pricing" },
+    { id: 2, name: t("blog"), link: "/blog" },
+    { id: 3, name: t("news"), link: "/news" },
+  ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -253,7 +254,7 @@ const Navigation = () => {
                             : "36px",
                       }}
                     >
-                      Contact
+                      {t("contact")}
                     </Button>
                   </Link>
                   <Link href={`${APP_URL}/auth/login`} target="_blank">
@@ -283,7 +284,7 @@ const Navigation = () => {
                             : "36px",
                       }}
                     >
-                      Log In
+                      {t("logIn")}
                     </Button>
                   </Link>
                 </motion.div>
@@ -295,7 +296,7 @@ const Navigation = () => {
               <button
                 className="flex items-center justify-center w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] gap-[5px] focus:outline-none"
                 onClick={() => setIsMenuOpen(true)}
-                aria-label="Open menu"
+                aria-label={t("openMenu")}
               >
                 <div className="flex flex-col justify-center items-center gap-[5px]">
                   <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1b0c25] rounded-full block transition-all duration-300" />
@@ -355,7 +356,7 @@ const Navigation = () => {
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className="text-[#1b0c25] opacity-40 hover:opacity-70 text-[20px] leading-none w-[32px] h-[32px] flex items-center justify-center"
-                  aria-label="Close menu"
+                  aria-label={t("closeMenu")}
                 >
                   ✕
                 </button>
@@ -385,12 +386,12 @@ const Navigation = () => {
               <motion.div variants={mobileMenuItemVariants} className="flex gap-3">
                 <Link href="/contact">
                   <Button variant="outline" className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] border-[#1b0c25] text-[#1b0c25] px-6">
-                    Contact
+                    {t("contact")}
                   </Button>
                 </Link>
                 <Link href={`${APP_URL}/auth/login`} target="_blank">
                   <Button className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 px-6">
-                    Log In
+                    {t("logIn")}
                   </Button>
                 </Link>
               </motion.div>

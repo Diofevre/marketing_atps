@@ -1,4 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 
 /**
  * Permanent (301) redirects for legacy URLs that were indexed by search engines
@@ -28,19 +30,33 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/pricing": "/",
 };
 
+// next-intl middleware handles:
+//   - detecting the user's preferred locale from the Accept-Language header
+//     on the first visit and redirecting to the matching locale
+//   - rewriting `/fr/<path>` URLs to the internal `/[locale]/<path>` segment
+//   - setting the `NEXT_LOCALE` cookie so subsequent visits remember the choice
+// With `localePrefix: 'as-needed'`, English URLs stay at the root (preserving
+// the existing SEO authority) and French URLs get a `/fr` prefix.
+const intlMiddleware = createIntlMiddleware(routing);
+
 export function proxy(request: NextRequest): NextResponse {
   const url = request.nextUrl;
 
+  // 1. Legacy redirects run FIRST so old indexed URLs resolve before the
+  //    locale layer touches them. This keeps the 301 contract intact.
   const legacyTarget = LEGACY_REDIRECTS[url.pathname];
   if (legacyTarget) {
     const target = new URL(legacyTarget + url.search, url);
     return NextResponse.redirect(target, 301);
   }
 
-  return NextResponse.next();
+  // 2. Everything else flows through next-intl for locale handling.
+  return intlMiddleware(request);
 }
 
 export const proxyConfig = {
-  // Run on all paths except Next.js internals, the API proxy, and static assets.
+  // Run on all paths except Next.js internals, the API proxy, and static
+  // assets. The IndexNow verification .txt file lives at the root and is
+  // excluded by the file-extension rule, so it stays reachable.
   matcher: ["/((?!_next/|api/|.*\\.[a-zA-Z0-9]+$).*)"],
 };

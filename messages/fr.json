@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "titleDefault": "MyATPS — La plateforme complète de préparation aux examens ATPL",
+    "titleTemplate": "%s | MyATPS",
+    "description": "Réussissez vos examens ATPL du premier coup avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et un écosystème d'étude complet conçu par des pilotes, pour des pilotes.",
+    "ogDescription": "Plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et du partage — tout pour réussir votre ATPL du premier coup.",
+    "twitterDescription": "Plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct — réussissez votre ATPL du premier coup.",
+    "ogLocale": "fr_FR"
+  },
+  "schema": {
+    "description": "La plateforme complète de préparation aux examens ATPL avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique, des quiz en direct et des outils d'étude.",
+    "offerFreeName": "Gratuit",
+    "offerFreeDescription": "Découvrez la plateforme sans engagement",
+    "offerStandardName": "Standard",
+    "offerStandardDescription": "Banque de questions complète, quiz STUDY illimités, dictionnaire aéronautique, accès à la bibliothèque",
+    "offerPremiumName": "Premium",
+    "offerPremiumDescription": "Tous les modes de quiz, quiz en direct, assistant d'étude, statistiques avancées, favoris illimités",
+    "featureQuestions": "Plus de 20 000 questions ATPL",
+    "featureExplanations": "Explications basées sur la recherche",
+    "featureDictionary": "Dictionnaire aéronautique avec audio et modèles 3D",
+    "featureLiveQuizzes": "Quiz en direct style Kahoot",
+    "featureSharing": "Partage et collaboration en session",
+    "featureLibrary": "Bibliothèque de ressources complète",
+    "featureAssistant": "Assistant d'étude intégré",
+    "featureAnalytics": "Suivi de progression et analyses",
+    "contactType": "support client"
+  },
+  "faq": {
+    "q1": "Qu'est-ce que MyATPS ?",
+    "a1": "MyATPS est une plateforme en ligne complète conçue pour aider les élèves pilotes à préparer leurs examens ATPL. Elle combine une interface de quiz avancée avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec audio et modèles 3D, une bibliothèque de ressources, le partage de quiz en direct et un suivi de progression puissant.",
+    "q2": "Qu'est-ce qui rend vos explications différentes ?",
+    "a2": "Nos explications sont élaborées à partir de recherches approfondies en éducation aéronautique et en méthodologie d'enseignement. Chaque explication est structurée pour vous aider à vraiment comprendre le concept, pas seulement à mémoriser la réponse.",
+    "q3": "Quelle est la différence entre Standard et Premium ?",
+    "a3": "Standard vous donne la banque de questions complète, les quiz STUDY illimités, 5 quiz TEST par jour, le dictionnaire aéronautique, la bibliothèque et les statistiques de base. Premium débloque tout : quiz TEST et EXAM illimités, partage de quiz en direct, assistant d'étude, statistiques avancées, favoris illimités et support prioritaire.",
+    "q4": "Puis-je étudier avec des amis ou partager des quiz ?",
+    "a4": "Oui ! MyATPS vous permet de partager vos sessions d'étude et de lancer des quiz en direct style Kahoot où les participants rejoignent avec un simple code — aucun compte requis.",
+    "q5": "Y a-t-il un essai gratuit ?",
+    "a5": "Oui ! Le plan Premium inclut un essai gratuit de 48 heures pour vous permettre d'explorer toutes les fonctionnalités avant de vous engager. Vous pouvez également commencer avec le plan Gratuit."
+  },
+  "nav": {
+    "pricing": "Tarifs",
+    "blog": "Blog",
+    "news": "Actualités",
+    "contact": "Contact",
+    "logIn": "Connexion",
+    "signIn": "Se connecter",
+    "signUp": "Commencer",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "footer": {
+    "tagline": "Commencez votre parcours ATPL",
+    "description": "La plateforme complète de préparation aux examens ATPL, conçue par des pilotes pour des pilotes. Réussissez vos examens du premier coup avec du contenu basé sur la recherche et une expérience d'étude moderne.",
+    "sectionPlatform": "Plateforme",
+    "sectionResources": "Ressources",
+    "sectionCompany": "Entreprise",
+    "linkFeatures": "Fonctionnalités",
+    "linkPricing": "Tarifs",
+    "linkLogIn": "Connexion",
+    "linkSignUp": "Inscription",
+    "linkBlog": "Blog",
+    "linkNews": "Actualités",
+    "linkContact": "Contact",
+    "linkPrivacy": "Politique de confidentialité",
+    "rightsReserved": "Tous droits réservés."
+  },
+  "hero": {
+    "badge": "Conçu par des pilotes, pour des pilotes",
+    "title1": "Réussissez votre ATPL",
+    "titleHighlight": "du premier coup",
+    "subtitle": "Plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et un écosystème d'étude complet.",
+    "ctaPrimary": "Commencer gratuitement",
+    "ctaSecondary": "Voir comment ça marche",
+    "trustLine": "Utilisé par des élèves pilotes dans toute l'Europe"
+  },
+  "contactPage": {
+    "title": "Contactez-nous",
+    "description": "Prenez contact — notre équipe répond généralement sous un jour ouvré.",
+    "metaTitle": "Contact",
+    "metaDescription": "Contactez l'équipe MyATPS — nous répondons à chaque message sous un jour ouvré."
+  },
+  "privacyPage": {
+    "title": "Politique de confidentialité",
+    "metaTitle": "Politique de confidentialité",
+    "metaDescription": "Comment MyATPS collecte, utilise et protège vos données personnelles."
+  },
+  "blogPage": {
+    "metaTitle": "Blog",
+    "metaDescription": "Conseils d'étude ATPL, guides de préparation aux examens, actualités aéronautiques et retours d'instructeurs pilotes."
+  },
+  "newsPage": {
+    "metaTitle": "Actualités",
+    "metaDescription": "Dernières mises à jour produit, actualités de l'industrie aéronautique et annonces MyATPS."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
+  },
+  "common": {
+    "loading": "Chargement…"
+  }
+}

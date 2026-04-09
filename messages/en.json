@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "titleDefault": "MyATPS — The Complete ATPL Exam Preparation Platform",
+    "titleTemplate": "%s | MyATPS",
+    "description": "Pass your ATPL exams on the first try with 20,000+ questions, research-based explanations, an aviation dictionary with 3D models, live quizzes, and a complete study ecosystem built by pilots, for pilots.",
+    "ogDescription": "20,000+ questions, research-based explanations, aviation dictionary with 3D models, live quizzes & sharing — everything to pass your ATPL on the first try.",
+    "twitterDescription": "20,000+ questions, research-based explanations, aviation dictionary with 3D models, live quizzes — pass your ATPL on the first try.",
+    "ogLocale": "en_US"
+  },
+  "schema": {
+    "description": "The complete ATPL exam preparation platform with 20,000+ questions, research-based explanations, aviation dictionary, live quizzes, and study tools.",
+    "offerFreeName": "Free",
+    "offerFreeDescription": "Discover the platform with no commitment",
+    "offerStandardName": "Standard",
+    "offerStandardDescription": "Complete question bank, unlimited STUDY quizzes, aviation dictionary, library access",
+    "offerPremiumName": "Premium",
+    "offerPremiumDescription": "All quiz modes, live quizzes, study assistant, advanced stats, unlimited bookmarks",
+    "featureQuestions": "20,000+ ATPL questions",
+    "featureExplanations": "Research-based explanations",
+    "featureDictionary": "Aviation dictionary with audio and 3D models",
+    "featureLiveQuizzes": "Live Kahoot-style quizzes",
+    "featureSharing": "Session sharing and collaboration",
+    "featureLibrary": "Complete resource library",
+    "featureAssistant": "Built-in study assistant",
+    "featureAnalytics": "Progress tracking and analytics",
+    "contactType": "customer support"
+  },
+  "faq": {
+    "q1": "What is MyATPS?",
+    "a1": "MyATPS is a complete online platform designed to help student pilots prepare for their ATPL exams. It combines an advanced quiz interface with 20,000+ questions, research-based explanations, an aviation dictionary with audio and 3D models, a resource library, live quiz sharing, and powerful progress tracking.",
+    "q2": "What makes your explanations different?",
+    "a2": "Our explanations are crafted from extensive research in aviation education and teaching methodology. Each explanation is structured to help you truly understand the concept, not just memorize the answer.",
+    "q3": "What is the difference between Standard and Premium?",
+    "a3": "Standard gives you the complete question bank, unlimited STUDY quizzes, 5 TEST quizzes per day, the aviation dictionary, the library, and basic stats. Premium unlocks everything: unlimited TEST and EXAM quizzes, live quiz sharing, the study assistant, advanced stats, unlimited bookmarks, and priority support.",
+    "q4": "Can I study with friends or share quizzes?",
+    "a4": "Yes! MyATPS lets you share study sessions and launch live Kahoot-style quizzes where participants join with a simple code — no account needed.",
+    "q5": "Is there a free trial available?",
+    "a5": "Yes! The Premium plan includes a 48-hour free trial so you can explore all features before committing. You can also start with the Free plan."
+  },
+  "nav": {
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "news": "News",
+    "contact": "Contact",
+    "logIn": "Log In",
+    "signIn": "Sign in",
+    "signUp": "Get started",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "tagline": "Start Your ATPL Journey",
+    "description": "The complete ATPL exam preparation platform, built by pilots for pilots. Pass your exams on the first try with research-based content and a modern study experience.",
+    "sectionPlatform": "Platform",
+    "sectionResources": "Resources",
+    "sectionCompany": "Company",
+    "linkFeatures": "Features",
+    "linkPricing": "Pricing",
+    "linkLogIn": "Log in",
+    "linkSignUp": "Sign up",
+    "linkBlog": "Blog",
+    "linkNews": "News",
+    "linkContact": "Contact",
+    "linkPrivacy": "Privacy Policy",
+    "rightsReserved": "All rights reserved."
+  },
+  "hero": {
+    "badge": "Built by pilots, for pilots",
+    "title1": "Pass your ATPL",
+    "titleHighlight": "on the first try",
+    "subtitle": "20,000+ questions, research-based explanations, aviation dictionary with 3D models, live quizzes, and a complete study ecosystem.",
+    "ctaPrimary": "Start learning for free",
+    "ctaSecondary": "See how it works",
+    "trustLine": "Trusted by student pilots across Europe"
+  },
+  "contactPage": {
+    "title": "Contact us",
+    "description": "Get in touch — our team usually replies within one business day.",
+    "metaTitle": "Contact",
+    "metaDescription": "Contact the MyATPS team — we reply to every message within one business day."
+  },
+  "privacyPage": {
+    "title": "Privacy Policy",
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "How MyATPS collects, uses, and protects your personal data."
+  },
+  "blogPage": {
+    "metaTitle": "Blog",
+    "metaDescription": "ATPL study tips, exam preparation guides, aviation news, and insights from pilot instructors."
+  },
+  "newsPage": {
+    "metaTitle": "News",
+    "metaDescription": "Latest product updates, aviation industry news, and MyATPS announcements."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to home"
+  },
+  "common": {
+    "loading": "Loading…"
+  }
+}
