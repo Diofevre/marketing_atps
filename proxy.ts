@@ -114,19 +114,32 @@ export function proxy(request: NextRequest): NextResponse {
   return intlMiddleware(request);
 }
 
-export const proxyConfig = {
-  // Run on all paths EXCEPT:
-  //   - /_next/…           (Next.js internals: chunks, image optimizer, HMR)
-  //   - /api/…             (Route Handlers like /api/indexnow)
-  //   - /icon.png, /apple-icon.png, /manifest.webmanifest, /robots.txt,
-  //     /sitemap.xml       (file-based metadata served at the root)
-  //   - /opengraph-image   (next/og generated route, no extension)
-  //   - anything with a file extension (images, fonts, static assets)
-  //
-  // The inline METADATA_PATHS guard in proxy() is the authoritative defence
-  // — this regex is belt-and-braces so the i18n middleware is simply never
-  // invoked on these URLs in the first place.
+/**
+ * Next.js 16 requires the matcher config to be exported under the name
+ * `config`, not `proxyConfig`. Earlier drafts of this file used
+ * `proxyConfig` which Next.js silently ignored — the compiled
+ * middleware-manifest.json had an empty `middleware: {}` entry, meaning
+ * the proxy ran on EVERY request regardless of the intended matcher.
+ * That's why legacy redirects, metadata files, static assets in
+ * /images, /assets, /fonts, and /api/* were all being funneled through
+ * next-intl's locale rewriter and returning 404 with hreflang pollution.
+ *
+ * The matcher below is the AUTHORITATIVE filter — it restricts the
+ * proxy to page paths only. The inline guards at the top of proxy()
+ * remain as belt-and-braces defence in case this matcher is ever
+ * accidentally loosened.
+ *
+ * Excluded from the proxy:
+ *   - /_next/…           (Next.js internals: chunks, image optimizer, HMR)
+ *   - /api/…             (Route Handlers like /api/indexnow)
+ *   - /icon.png, /apple-icon.png, /manifest.webmanifest, /robots.txt,
+ *     /sitemap.xml       (file-based metadata served at the root)
+ *   - /opengraph-image   (next/og generated route, no extension)
+ *   - anything whose pathname contains a dot followed by a 1–6 char
+ *     extension (images, fonts, css, js, maps, videos, pdfs…)
+ */
+export const config = {
   matcher: [
-    "/((?!_next/|api/|icon\\.png|apple-icon\\.png|opengraph-image|manifest\\.webmanifest|robots\\.txt|sitemap\\.xml|.*\\.[a-zA-Z0-9]+$).*)",
+    "/((?!_next/|api/|icon\\.png|apple-icon\\.png|opengraph-image|manifest\\.webmanifest|robots\\.txt|sitemap\\.xml|.*\\.[a-zA-Z0-9]{1,6}$).*)",
   ],
 };
