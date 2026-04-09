@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { ButtonDemoVarient } from "../ButtonDemo";
 import TitleSection from "../TitleSection";
 import { Container } from "../ui/container";
@@ -12,31 +13,28 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 
-const LIST_WORK = [
-  {
-    id: 1,
-    image: "/images/imageCon.png",
-    title: "Create Your Account",
-    description:
-      "Sign up in seconds — start with the Free plan or unlock everything with a 48-hour Premium trial. No credit card required.",
-  },
-  {
-    id: 2,
-    image: "/images/imageAn.png",
-    title: "Study & Practice",
-    description:
-      "Train across three quiz modes, look up terms in the 3D dictionary, access the resource library, and invite classmates to live sessions.",
-  },
-  {
-    id: 3,
-    image: "/images/imageLet.png",
-    title: "Pass Your ATPL",
-    description:
-      "Track your progress across all 14 subjects, spot your weak areas with color-coded analytics, and sit your exam with confidence.",
-  },
-];
-
 export default function Work() {
+  const t = useTranslations("work");
+  const LIST_WORK = [
+    {
+      id: 1,
+      image: "/images/imageCon.png",
+      title: t("step1Title"),
+      description: t("step1Description"),
+    },
+    {
+      id: 2,
+      image: "/images/imageAn.png",
+      title: t("step2Title"),
+      description: t("step2Description"),
+    },
+    {
+      id: 3,
+      image: "/images/imageLet.png",
+      title: t("step3Title"),
+      description: t("step3Description"),
+    },
+  ];
   return (
     <div className="py-12 lg:py-[200px]">
       <Container>
@@ -55,18 +53,16 @@ export default function Work() {
               <div className="flex flex-col p-10 gap-6 h-full rounded-[16px] bg-white shadow-sm max-lg:p-6">
                 <div className="flex flex-col items-start gap-3">
                   <TitleSection
-                    title="How it works"
+                    title={t("badge")}
                     className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
                   />
                   <h2 className="font-medium text-5xl lg:text-[59px] leading-tight lg:leading-[60px] text-[#1b0c25]">
-                    A Simple 3-Step Process
+                    {t("heading")}
                   </h2>
                 </div>
 
                 <p className="font-normal text-base lg:text-[17px] text-[#1b0c25] leading-7">
-                  From sign-up to your first quiz in under two minutes.
-                  No complex setup, no separate apps to install — just
-                  open MyATPS and start studying.
+                  {t("description")}
                 </p>
                 <ButtonDemoVarient />
               </div>
@@ -78,7 +74,7 @@ export default function Work() {
             >
               <Image
                 src="/images/imageAI.png"
-                alt="Work illustration"
+                alt={t("illustrationAlt")}
                 width={448}
                 height={516}
                 className="w-full h-auto object-cover rounded-lg"
