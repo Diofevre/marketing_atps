@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 interface Feature {
@@ -17,87 +18,49 @@ interface FeatureItem {
   feature_list: Feature[];
 }
 
-const FEATURE_LIST_CONTAINER = [
-  {
-    id: 1,
-    title: "Advanced Quiz Interface",
-    description:
-      "Three quiz modes — STUDY for learning, TEST for self-assessment, and EXAM to simulate real conditions — each with research-based explanations that go beyond simple memorization.",
-    image: "/images/data.png",
-    feature_list: [
-      {
-        id: 1,
-        title: "STUDY, TEST & EXAM Modes",
-        icon_feature: "/assets/icons/db.png",
-      },
-      {
-        id: 2,
-        title: "Research-Based Explanations",
-        icon_feature: "/assets/icons/topo.png",
-      },
-      {
-        id: 3,
-        title: "Built-in Annotator, Calculator & E6B",
-        icon_feature: "/assets/icons/swith.png",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Aviation Dictionary & Library",
-    description:
-      "The only ATPL dictionary with audio pronunciations, interactive 3D models, and real images — paired with a full resource library of e-books, PDFs, annexes, and aviation procedures.",
-    image: "/images/dash.png",
-    feature_list: [
-      {
-        id: 1,
-        title: "Audio, 3D Models & Real Images",
-        icon_feature: "/assets/icons/trad.png",
-      },
-      {
-        id: 2,
-        title: "E-Books, PDFs & Aviation Annexes",
-        icon_feature: "/assets/icons/chart.png",
-      },
-      {
-        id: 3,
-        title: "Cross-Referenced Terms Across Subjects",
-        icon_feature: "/assets/icons/tvpro.png",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Live Quizzes, Sharing & Progress",
-    description:
-      "The only ATPL platform where you can launch live group quizzes, share study sessions with classmates, and track your performance across all 14 EASA subjects.",
-    image: "/images/feature3.png",
-    feature_list: [
-      {
-        id: 1,
-        title: "20,000+ Questions Across 14 Subjects",
-        icon_feature: "/assets/icons/union.png",
-      },
-      {
-        id: 2,
-        title: "Live Kahoot-Style Group Quizzes",
-        icon_feature: "/assets/icons/check.png",
-      },
-      {
-        id: 3,
-        title: "Color-Coded Progress Analytics",
-        icon_feature: "/assets/icons/hands.png",
-      },
-    ],
-  },
-];
-
 export default function ProductCard() {
+  const t = useTranslations("productOverview");
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
   });
+
+  const FEATURE_LIST_CONTAINER: FeatureItem[] = [
+    {
+      id: 1,
+      title: t("card1Title"),
+      description: t("card1Description"),
+      image: "/images/data.png",
+      feature_list: [
+        { id: 1, title: t("card1Feature1"), icon_feature: "/assets/icons/db.png" },
+        { id: 2, title: t("card1Feature2"), icon_feature: "/assets/icons/topo.png" },
+        { id: 3, title: t("card1Feature3"), icon_feature: "/assets/icons/swith.png" },
+      ],
+    },
+    {
+      id: 2,
+      title: t("card2Title"),
+      description: t("card2Description"),
+      image: "/images/dash.png",
+      feature_list: [
+        { id: 1, title: t("card2Feature1"), icon_feature: "/assets/icons/trad.png" },
+        { id: 2, title: t("card2Feature2"), icon_feature: "/assets/icons/chart.png" },
+        { id: 3, title: t("card2Feature3"), icon_feature: "/assets/icons/tvpro.png" },
+      ],
+    },
+    {
+      id: 3,
+      title: t("card3Title"),
+      description: t("card3Description"),
+      image: "/images/feature3.png",
+      feature_list: [
+        { id: 1, title: t("card3Feature1"), icon_feature: "/assets/icons/union.png" },
+        { id: 2, title: t("card3Feature2"), icon_feature: "/assets/icons/check.png" },
+        { id: 3, title: t("card3Feature3"), icon_feature: "/assets/icons/hands.png" },
+      ],
+    },
+  ];
 
   return (
     <div ref={container} className="relative w-full">

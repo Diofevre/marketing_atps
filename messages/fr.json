@@ -163,12 +163,41 @@
   "keyBenefits": {
     "badge": "Avantages clés",
     "heading": "Pourquoi choisir MyATPS",
-    "description": "Les autres plateformes vous donnent des questions. MyATPS vous donne tout un écosystème d'étude — des explications basées sur la recherche et des modèles 3D aux quiz de groupe en direct et aux outils de vol intégrés."
+    "description": "Les autres plateformes vous donnent des questions. MyATPS vous donne tout un écosystème d'étude — des explications basées sur la recherche et des modèles 3D aux quiz de groupe en direct et aux outils de vol intégrés.",
+    "iconAlt": "Icône avantage",
+    "illustrationAlt": "Illustration des avantages clés",
+    "left1Title": "Plus de 20 000 questions ATPL",
+    "left1Description": "Chaque question est accompagnée d'une explication basée sur la recherche — pas de réponses génériques d'IA, mais du contenu conçu par des experts pour construire une vraie compréhension",
+    "left2Title": "Dictionnaire aéronautique",
+    "left2Description": "Le seul dictionnaire ATPL avec prononciations audio, modèles 3D interactifs et images réelles — aucun concurrent ne propose cela",
+    "left3Title": "Assistant d'étude intégré",
+    "left3Description": "Obtenez une aide instantanée avec diagrammes, liens de ressources et explications contextuelles — sans quitter votre session d'étude",
+    "right1Title": "Quiz en direct & partage",
+    "right1Description": "Lancez des quiz de groupe style Kahoot ou partagez vos sessions avec des camarades — une fonctionnalité unique à MyATPS dans le domaine ATPL",
+    "right2Title": "Bibliothèque de ressources complète",
+    "right2Description": "E-books, PDFs, annexes aéronautiques et procédures — tout accessible directement à côté de vos quiz, sans changer d'application",
+    "right3Title": "Suivi de progression intelligent",
+    "right3Description": "Tags colorés, statistiques détaillées et détection des points faibles pour savoir exactement où vous concentrer avant le jour J"
   },
   "productOverview": {
     "badge": "Aperçu du produit",
     "heading": "Explorez la puissance de MyATPS",
-    "description": "Alors que d'autres plateformes ne proposent qu'une banque de questions, MyATPS intègre quiz, dictionnaire, bibliothèque, collaboration et assistance IA dans un seul workflow fluide."
+    "description": "Alors que d'autres plateformes ne proposent qu'une banque de questions, MyATPS intègre quiz, dictionnaire, bibliothèque, collaboration et assistance IA dans un seul workflow fluide.",
+    "card1Title": "Interface de quiz avancée",
+    "card1Description": "Trois modes de quiz — STUDY pour apprendre, TEST pour l'auto-évaluation et EXAM pour simuler les conditions réelles — chacun avec des explications basées sur la recherche qui vont au-delà de la simple mémorisation.",
+    "card1Feature1": "Modes STUDY, TEST & EXAM",
+    "card1Feature2": "Explications basées sur la recherche",
+    "card1Feature3": "Annotateur, calculatrice & E6B intégrés",
+    "card2Title": "Dictionnaire aéronautique & bibliothèque",
+    "card2Description": "Le seul dictionnaire ATPL avec prononciations audio, modèles 3D interactifs et images réelles — couplé à une bibliothèque de ressources complète avec e-books, PDFs, annexes et procédures aéronautiques.",
+    "card2Feature1": "Audio, modèles 3D & images réelles",
+    "card2Feature2": "E-books, PDFs & annexes aéronautiques",
+    "card2Feature3": "Termes croisés entre les matières",
+    "card3Title": "Quiz en direct, partage & progression",
+    "card3Description": "La seule plateforme ATPL où vous pouvez lancer des quiz de groupe en direct, partager vos sessions d'étude avec vos camarades et suivre vos performances sur les 14 matières EASA.",
+    "card3Feature1": "Plus de 20 000 questions sur 14 matières",
+    "card3Feature2": "Quiz de groupe en direct style Kahoot",
+    "card3Feature3": "Analyses de progression par code couleur"
   },
   "pricing": {
     "title": "Choisissez votre plan",

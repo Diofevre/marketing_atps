@@ -163,12 +163,41 @@
   "keyBenefits": {
     "badge": "Key Benefits",
     "heading": "Why Choose MyATPS",
-    "description": "Other platforms give you questions. MyATPS gives you an entire study ecosystem — from research-backed explanations and 3D models to live group quizzes and built-in flight tools."
+    "description": "Other platforms give you questions. MyATPS gives you an entire study ecosystem — from research-backed explanations and 3D models to live group quizzes and built-in flight tools.",
+    "iconAlt": "Benefit Icon",
+    "illustrationAlt": "Key Benefits Illustration",
+    "left1Title": "20,000+ ATPL Questions",
+    "left1Description": "Every question comes with a research-based explanation — not generic AI answers, but expert-crafted content designed to build real understanding",
+    "left2Title": "Aviation Dictionary",
+    "left2Description": "The only ATPL dictionary with audio pronunciations, interactive 3D models, and real images — no competitor offers this",
+    "left3Title": "Built-in Study Assistant",
+    "left3Description": "Get instant help with diagrams, resource links, and contextual explanations — without leaving your study session",
+    "right1Title": "Live Quizzes & Sharing",
+    "right1Description": "Launch Kahoot-style group quizzes or share sessions with classmates — a feature unique to MyATPS in the ATPL space",
+    "right2Title": "Complete Resource Library",
+    "right2Description": "E-books, PDFs, aviation annexes, and procedures — all accessible directly alongside your quizzes, no switching between apps",
+    "right3Title": "Smart Progress Tracking",
+    "right3Description": "Color-coded tags, detailed statistics, and weak-area detection so you know exactly where to focus before exam day"
   },
   "productOverview": {
     "badge": "Product Overview",
     "heading": "Explore the Power of MyATPS",
-    "description": "While other platforms offer just a question bank, MyATPS integrates quizzes, dictionary, library, collaboration, and AI assistance into one seamless workflow."
+    "description": "While other platforms offer just a question bank, MyATPS integrates quizzes, dictionary, library, collaboration, and AI assistance into one seamless workflow.",
+    "card1Title": "Advanced Quiz Interface",
+    "card1Description": "Three quiz modes — STUDY for learning, TEST for self-assessment, and EXAM to simulate real conditions — each with research-based explanations that go beyond simple memorization.",
+    "card1Feature1": "STUDY, TEST & EXAM Modes",
+    "card1Feature2": "Research-Based Explanations",
+    "card1Feature3": "Built-in Annotator, Calculator & E6B",
+    "card2Title": "Aviation Dictionary & Library",
+    "card2Description": "The only ATPL dictionary with audio pronunciations, interactive 3D models, and real images — paired with a full resource library of e-books, PDFs, annexes, and aviation procedures.",
+    "card2Feature1": "Audio, 3D Models & Real Images",
+    "card2Feature2": "E-Books, PDFs & Aviation Annexes",
+    "card2Feature3": "Cross-Referenced Terms Across Subjects",
+    "card3Title": "Live Quizzes, Sharing & Progress",
+    "card3Description": "The only ATPL platform where you can launch live group quizzes, share study sessions with classmates, and track your performance across all 14 EASA subjects.",
+    "card3Feature1": "20,000+ Questions Across 14 Subjects",
+    "card3Feature2": "Live Kahoot-Style Group Quizzes",
+    "card3Feature3": "Color-Coded Progress Analytics"
   },
   "pricing": {
     "title": "Choose your plan",
