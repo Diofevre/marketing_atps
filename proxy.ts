@@ -66,34 +66,51 @@ export function proxy(request: NextRequest): NextResponse {
   const url = request.nextUrl;
   const pathname = url.pathname;
 
-  // 1. Legacy redirects run FIRST so old indexed URLs resolve before the
-  //    locale layer touches them. This keeps the 301 contract intact.
+  // 1. Short-circuit `/api/...` so Route Handlers never go through
+  //    next-intl's locale rewriting. The proxyConfig matcher tries to
+  //    exclude `api/` via a negative lookahead, but that regex form is
+  //    unreliable in Next.js 16 + next-intl: the middleware still runs
+  //    on `/api/indexnow` and gets rewritten to `/en/api/indexnow`
+  //    which then 404s with hreflang-polluted response headers. This
+  //    inline guard is the authoritative defence — it MUST come before
+  //    everything else because API routes must work even if a legacy
+  //    path collides with an API route name.
+  if (pathname.startsWith("/api/") || pathname === "/api") {
+    return NextResponse.next();
+  }
+
+  // 2. Same defence for Next.js internals. The matcher already excludes
+  //    `/_next/` but we keep the guard for symmetry and resilience.
+  if (pathname.startsWith("/_next/")) {
+    return NextResponse.next();
+  }
+
+  // 3. Legacy redirects for URLs indexed under previous versions of
+  //    the domain. These must run BEFORE the locale layer so the 301
+  //    contract is preserved (legacy URLs 301 to the current
+  //    equivalent, they don't first get wrapped in a locale rewrite).
   const legacyTarget = LEGACY_REDIRECTS[pathname];
   if (legacyTarget) {
     const target = new URL(legacyTarget + url.search, url);
     return NextResponse.redirect(target, 301);
   }
 
-  // 2. Short-circuit file-based metadata endpoints. The proxyConfig matcher
-  //    already excludes `/_next/`, `/api/`, and any path with a file
-  //    extension (`.png`, `.xml`, `.txt`, `.webmanifest`…), but the
-  //    generated `/opengraph-image` route has no extension, and we rely on
-  //    belt-and-braces here in case the matcher regex is ever loosened.
-  //    Without this guard, next-intl rewrites `/icon.png` to `/en/icon.png`
-  //    and Next.js serves a 404 page (with locale hreflang links) instead
-  //    of the actual icon binary.
+  // 4. Short-circuit file-based metadata endpoints. Without this guard,
+  //    next-intl rewrites `/icon.png` to `/en/icon.png` and Next.js
+  //    serves a 404 page (with locale hreflang links) instead of the
+  //    actual icon binary.
   if (METADATA_PATHS.has(pathname)) {
     return NextResponse.next();
   }
 
-  // 3. Short-circuit the IndexNow key verification file. It lives at the
-  //    web root per the IndexNow ownership-proof rules and must resolve
-  //    verbatim.
+  // 5. Short-circuit the IndexNow key verification file. It lives at
+  //    the web root per the IndexNow ownership-proof rules and must
+  //    resolve verbatim.
   if (/^\/[a-f0-9]{32}\.txt$/i.test(pathname)) {
     return NextResponse.next();
   }
 
-  // 4. Everything else flows through next-intl for locale handling.
+  // 6. Everything else flows through next-intl for locale handling.
   return intlMiddleware(request);
 }
 
