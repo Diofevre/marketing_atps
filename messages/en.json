@@ -105,6 +105,37 @@
     "btnPracticeExam": "Practice Exam",
     "aiAssistantAlt": "AI Assistant"
   },
+  "bento": {
+    "badge": "Features & Modules",
+    "heading": "The complete ATPL preparation platform",
+    "description": "No other platform combines a quiz engine, aviation dictionary, live sharing, resource library, and built-in study tools in a single environment — MyATPS does.",
+    "card1Title": "Advanced Quiz Interface",
+    "card1Description": "An all-in-one study environment with built-in plugins — annotator, calculator, integrated assistant, library access, comments, and annexes — all without leaving your session",
+    "card1Alt": "Advanced Quiz Interface",
+    "card2Title": "Aviation Dictionary",
+    "card2Description": "A comprehensive aviation glossary with audio pronunciations, 3D interactive models, real images, and cross-referenced terms — from VORs to flight instruments",
+    "card2Alt": "Aviation Dictionary",
+    "card3Title": "Sharing & Live Quizzes",
+    "card3Description": "Share your study sessions with classmates, invite collaborators, or launch live Kahoot-style quizzes with real-time leaderboards — no account required for participants",
+    "card3Alt": "Sharing & Live Quizzes",
+    "card4Title": "Library & Resources",
+    "card4Description": "Access e-books, PDFs, aviation annexes, and procedures — a complete resource library to support your study sessions and deepen your understanding",
+    "card4Alt": "Library & Resources"
+  },
+  "about": {
+    "badge": "About",
+    "paragraph": "MyATPS is built for future pilots preparing for their ATPL exams. With 20,000+ questions, research-based explanations, an aviation dictionary with audio and 3D models, a complete resource library, and powerful sharing tools, it gives you everything you need to pass on the first try."
+  },
+  "keyBenefits": {
+    "badge": "Key Benefits",
+    "heading": "Why Choose MyATPS",
+    "description": "Other platforms give you questions. MyATPS gives you an entire study ecosystem — from research-backed explanations and 3D models to live group quizzes and built-in flight tools."
+  },
+  "productOverview": {
+    "badge": "Product Overview",
+    "heading": "Explore the Power of MyATPS",
+    "description": "While other platforms offer just a question bank, MyATPS integrates quizzes, dictionary, library, collaboration, and AI assistance into one seamless workflow."
+  },
   "pricing": {
     "title": "Choose your plan",
     "subtitle": "Access to all tools to successfully pass your ATPL on the first try",
