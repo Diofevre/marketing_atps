@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -32,20 +33,31 @@ import { fadeInUpVariants, scaleInVariants, viewportSettings } from "@/lib/motio
 
 const API_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-const formSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().min(1, "Email is required").email("Invalid email address"),
-  phone: z.string().optional(),
-  profile: z.string().optional(),
-  subject: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export default function Contact() {
+  const t = useTranslations("contactPage");
   const [success, setSuccess] = useState(false);
+
+  // Validation messages come from the translations bundle so they match
+  // the current locale. Wrapped in `useMemo` so the schema isn't recreated
+  // on every render (react-hook-form would otherwise re-validate in a loop).
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        firstName: z.string().min(1, t("firstNameRequired")),
+        lastName: z.string().min(1, t("lastNameRequired")),
+        email: z
+          .string()
+          .min(1, t("emailRequired"))
+          .email(t("emailInvalid")),
+        phone: z.string().optional(),
+        profile: z.string().optional(),
+        subject: z.string().optional(),
+        message: z.string().min(10, t("messageTooShort")),
+      }),
+    [t],
+  );
+
+  type FormValues = z.infer<typeof formSchema>;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -71,15 +83,15 @@ export default function Contact() {
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.error || "Something went wrong. Please try again.");
+        toast.error(data.error || t("toastError"));
         return;
       }
 
-      toast.success("Message sent! Check your inbox for a confirmation.");
+      toast.success(t("toastSuccess"));
       setSuccess(true);
       form.reset();
     } catch {
-      toast.error("Network error. Please check your connection and try again.");
+      toast.error(t("toastNetworkError"));
     }
   };
 
@@ -101,9 +113,9 @@ export default function Contact() {
           viewport={viewportSettings}
           className="flex flex-col items-center text-center w-full max-w-[800px]"
         >
-          <TitleSection title="Contact" />
+          <TitleSection title={t("badge")} />
           <h1 className="font-medium text-4xl sm:text-5xl lg:text-[60px] lg:leading-[60px] text-[#1b0c25]">
-            Get in touch with our team
+            {t("heading")}
           </h1>
         </motion.div>
 
@@ -119,7 +131,7 @@ export default function Contact() {
           <div className="flex flex-col justify-between gap-8 lg:gap-12 lg:min-w-0 lg:flex-1 lg:max-w-[420px]">
             <div className="flex flex-col gap-6">
               <p className="font-medium text-base lg:text-[17px] leading-[28px] text-[#1b0c25]/80">
-                Feel free to reach out - we'd love to connect.
+                {t("intro")}
               </p>
               <div className="flex flex-wrap gap-6 lg:gap-8">
                 <div className="flex items-start gap-3">
@@ -127,9 +139,9 @@ export default function Contact() {
                     <Mail className="text-[#1b0c25]" size={20} />
                   </div>
                   <div className="flex flex-col gap-1 min-w-0">
-                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">Email us</p>
+                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">{t("emailUs")}</p>
                     <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
-                      contact@myatps.com
+                      {t("emailAddress")}
                     </p>
                   </div>
                 </div>
@@ -138,9 +150,9 @@ export default function Contact() {
                     <LifeBuoy className="text-[#1b0c25]" size={20} />
                   </div>
                   <div className="flex flex-col gap-1 min-w-0">
-                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">Get support</p>
+                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">{t("getSupport")}</p>
                     <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
-                      Chat with us
+                      {t("chatWithUs")}
                     </p>
                   </div>
                 </div>
@@ -150,22 +162,20 @@ export default function Contact() {
             {/* Testimonial */}
             <div className="flex flex-col gap-6 p-6 bg-[#F9F9F9] rounded-2xl">
               <blockquote className="text-lg lg:text-[20px] font-medium leading-[28px] text-[#1b0c25]">
-                "MyATPS gave me the confidence to sit my ATPL exams. The AI
-                tutor answered every question I had, and the ATC simulator
-                is simply unmatched."
+                {t("testimonialQuote")}
               </blockquote>
               <div className="flex items-center gap-4">
                 <Image
                   src="/images/imageCont.png"
-                  alt="Thomas L."
+                  alt={t("testimonialAuthor")}
                   height={48}
                   width={48}
                   className="rounded-full shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
                 />
                 <div className="flex flex-col gap-0 min-w-0">
-                  <p className="text-[14px] font-medium text-[#1b0c25] leading-tight">Thomas L.</p>
+                  <p className="text-[14px] font-medium text-[#1b0c25] leading-tight">{t("testimonialAuthor")}</p>
                   <p className="text-[13px] font-normal text-[#1b0c25]/60">
-                    Commercial Pilot Student, France
+                    {t("testimonialRole")}
                   </p>
                 </div>
               </div>
@@ -184,10 +194,9 @@ export default function Contact() {
                   <CheckCircle2 className="w-8 h-8 text-[#1b0c25]" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-2xl font-semibold text-[#1b0c25]">Message sent!</h2>
+                  <h2 className="text-2xl font-semibold text-[#1b0c25]">{t("successTitle")}</h2>
                   <p className="text-[15px] text-[#1b0c25]/60 max-w-[320px]">
-                    Thank you for reaching out. We'll get back to you as soon as possible.
-                    Check your inbox for a confirmation email.
+                    {t("successBody")}
                   </p>
                 </div>
                 <Button
@@ -195,7 +204,7 @@ export default function Contact() {
                   variant="outline"
                   className="h-11 px-6 rounded-[10px] text-[#1b0c25] border-[#1b0c25]/20 hover:bg-[#1b0c25] hover:text-white"
                 >
-                  Send another message
+                  {t("successCta")}
                 </Button>
               </motion.div>
             ) : (
@@ -212,10 +221,10 @@ export default function Contact() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            First Name <span className="text-red-500">*</span>
+                            {t("firstNameLabel")} <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
-                            <Input placeholder="First Name" className={inputClass} {...field} />
+                            <Input placeholder={t("firstNamePlaceholder")} className={inputClass} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -227,10 +236,10 @@ export default function Contact() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Last Name <span className="text-red-500">*</span>
+                            {t("lastNameLabel")} <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
-                            <Input placeholder="Last Name" className={inputClass} {...field} />
+                            <Input placeholder={t("lastNamePlaceholder")} className={inputClass} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -246,12 +255,12 @@ export default function Contact() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Email <span className="text-red-500">*</span>
+                            {t("emailLabel")} <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
                               type="email"
-                              placeholder="your@email.com"
+                              placeholder={t("emailPlaceholder")}
                               className={inputClass}
                               {...field}
                             />
@@ -266,12 +275,12 @@ export default function Contact() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Phone Number
+                            {t("phoneLabel")}
                           </FormLabel>
                           <FormControl>
                             <Input
                               type="tel"
-                              placeholder="+1 000 000 0000"
+                              placeholder={t("phonePlaceholder")}
                               className={inputClass}
                               {...field}
                             />
@@ -290,19 +299,19 @@ export default function Contact() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            I am a
+                            {t("profileLabel")}
                           </FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger className={`${inputClass} w-full`}>
-                                <SelectValue placeholder="Select your profile" />
+                                <SelectValue placeholder={t("profilePlaceholder")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="student">Student Pilot</SelectItem>
-                              <SelectItem value="school">Flight School / Aviation Academy</SelectItem>
-                              <SelectItem value="instructor">Flight Instructor</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
+                              <SelectItem value="student">{t("profileStudent")}</SelectItem>
+                              <SelectItem value="school">{t("profileSchool")}</SelectItem>
+                              <SelectItem value="instructor">{t("profileInstructor")}</SelectItem>
+                              <SelectItem value="other">{t("profileOther")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -315,21 +324,21 @@ export default function Contact() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Subject
+                            {t("subjectLabel")}
                           </FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger className={`${inputClass} w-full`}>
-                                <SelectValue placeholder="Select a subject" />
+                                <SelectValue placeholder={t("subjectPlaceholder")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="general">General Inquiry</SelectItem>
-                              <SelectItem value="support">Technical Support</SelectItem>
-                              <SelectItem value="billing">Subscription & Billing</SelectItem>
-                              <SelectItem value="school">Flight School Partnership (Pro)</SelectItem>
-                              <SelectItem value="demo">Demo Request</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
+                              <SelectItem value="general">{t("subjectGeneral")}</SelectItem>
+                              <SelectItem value="support">{t("subjectSupport")}</SelectItem>
+                              <SelectItem value="billing">{t("subjectBilling")}</SelectItem>
+                              <SelectItem value="school">{t("subjectSchool")}</SelectItem>
+                              <SelectItem value="demo">{t("subjectDemo")}</SelectItem>
+                              <SelectItem value="other">{t("subjectOther")}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -345,11 +354,11 @@ export default function Contact() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                          Message <span className="text-red-500">*</span>
+                          {t("messageLabel")} <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Tell us how we can help you..."
+                            placeholder={t("messagePlaceholder")}
                             className="bg-[#F9F9F9] border-[#1b0c25]/10 focus-visible:ring-brand/20 focus-visible:border-[#1b0c25]/30 min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y"
                             {...field}
                           />
@@ -371,16 +380,16 @@ export default function Contact() {
                       ) : (
                         <span className="flex flex-col items-center h-[26px] overflow-hidden">
                           <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                            Submit Message
+                            {t("submitButton")}
                           </span>
                           <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                            Submit Message
+                            {t("submitButton")}
                           </span>
                         </span>
                       )}
                     </Button>
                     <p className="text-[13px] font-normal text-[#1b0c25]/50 leading-[20px] text-center max-w-[320px]">
-                      By submitting this form you agree to our friendly Privacy Policy
+                      {t("privacyNotice")}
                     </p>
                   </div>
                 </form>

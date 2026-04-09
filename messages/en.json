@@ -253,16 +253,69 @@
     "title": "Contact us",
     "description": "Get in touch — our team usually replies within one business day.",
     "metaTitle": "Contact",
-    "metaDescription": "Contact the MyATPS team — we reply to every message within one business day."
+    "metaDescription": "Contact the MyATPS team — we reply to every message within one business day.",
+    "badge": "Contact",
+    "heading": "Get in touch with our team",
+    "intro": "Feel free to reach out - we'd love to connect.",
+    "emailUs": "Email us",
+    "emailAddress": "contact@myatps.com",
+    "getSupport": "Get support",
+    "chatWithUs": "Chat with us",
+    "testimonialQuote": "\"MyATPS gave me the confidence to sit my ATPL exams. The AI tutor answered every question I had, and the ATC simulator is simply unmatched.\"",
+    "testimonialAuthor": "Thomas L.",
+    "testimonialRole": "Commercial Pilot Student, France",
+    "successTitle": "Message sent!",
+    "successBody": "Thank you for reaching out. We'll get back to you as soon as possible. Check your inbox for a confirmation email.",
+    "successCta": "Send another message",
+    "firstNameLabel": "First Name",
+    "firstNamePlaceholder": "First Name",
+    "firstNameRequired": "First name is required",
+    "lastNameLabel": "Last Name",
+    "lastNamePlaceholder": "Last Name",
+    "lastNameRequired": "Last name is required",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email address",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "+1 000 000 0000",
+    "profileLabel": "I am a",
+    "profilePlaceholder": "Select your profile",
+    "profileStudent": "Student Pilot",
+    "profileSchool": "Flight School / Aviation Academy",
+    "profileInstructor": "Flight Instructor",
+    "profileOther": "Other",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "Select a subject",
+    "subjectGeneral": "General Inquiry",
+    "subjectSupport": "Technical Support",
+    "subjectBilling": "Subscription & Billing",
+    "subjectSchool": "Flight School Partnership (Pro)",
+    "subjectDemo": "Demo Request",
+    "subjectOther": "Other",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us how we can help you...",
+    "messageTooShort": "Message must be at least 10 characters",
+    "submitButton": "Submit Message",
+    "privacyNotice": "By submitting this form you agree to our friendly Privacy Policy",
+    "toastError": "Something went wrong. Please try again.",
+    "toastSuccess": "Message sent! Check your inbox for a confirmation.",
+    "toastNetworkError": "Network error. Please check your connection and try again."
   },
   "privacyPage": {
     "title": "Privacy Policy",
     "metaTitle": "Privacy Policy",
-    "metaDescription": "How MyATPS collects, uses, and protects your personal data."
+    "metaDescription": "How MyATPS collects, uses, and protects your personal data.",
+    "lastUpdated": "Last updated: April 6, 2026"
   },
   "blogPage": {
     "metaTitle": "Blog",
     "metaDescription": "ATPL study tips, exam preparation guides, aviation news, and insights from pilot instructors."
+  },
+  "blogSection": {
+    "badge": "Blog",
+    "heading": "Explore Our Blog And Stay Updated",
+    "exploreAll": "Explore All"
   },
   "newsPage": {
     "metaTitle": "News",
@@ -271,7 +324,14 @@
   "notFound": {
     "title": "Page not found",
     "description": "The page you're looking for doesn't exist or has been moved.",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "errorLabel": "Error 404",
+    "suggestedPagesLabel": "Suggested pages",
+    "home": "Home",
+    "homeDescription": "Discover the complete ATPL exam preparation platform — 20,000+ questions, aviation dictionary, live quizzes.",
+    "blogDescription": "Study tips, ATPL preparation strategies, and aviation insights for student pilots.",
+    "newsDescription": "Latest MyATPS platform updates, new features, and EASA exam regulation changes.",
+    "contactDescription": "Get in touch with the MyATPS team for support, feedback, or partnership inquiries."
   },
   "common": {
     "loading": "Loading…"

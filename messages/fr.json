@@ -253,16 +253,69 @@
     "title": "Contactez-nous",
     "description": "Prenez contact — notre équipe répond généralement sous un jour ouvré.",
     "metaTitle": "Contact",
-    "metaDescription": "Contactez l'équipe MyATPS — nous répondons à chaque message sous un jour ouvré."
+    "metaDescription": "Contactez l'équipe MyATPS — nous répondons à chaque message sous un jour ouvré.",
+    "badge": "Contact",
+    "heading": "Prenez contact avec notre équipe",
+    "intro": "N'hésitez pas à nous écrire — nous serons ravis d'échanger avec vous.",
+    "emailUs": "Écrivez-nous",
+    "emailAddress": "contact@myatps.com",
+    "getSupport": "Obtenir de l'aide",
+    "chatWithUs": "Discutez avec nous",
+    "testimonialQuote": "« MyATPS m'a donné la confiance nécessaire pour passer mes examens ATPL. Le tuteur IA a répondu à toutes mes questions, et le simulateur ATC est tout simplement inégalé. »",
+    "testimonialAuthor": "Thomas L.",
+    "testimonialRole": "Élève pilote de ligne, France",
+    "successTitle": "Message envoyé !",
+    "successBody": "Merci de nous avoir contactés. Nous vous répondrons dans les plus brefs délais. Vérifiez votre boîte de réception pour l'email de confirmation.",
+    "successCta": "Envoyer un autre message",
+    "firstNameLabel": "Prénom",
+    "firstNamePlaceholder": "Prénom",
+    "firstNameRequired": "Le prénom est obligatoire",
+    "lastNameLabel": "Nom",
+    "lastNamePlaceholder": "Nom",
+    "lastNameRequired": "Le nom est obligatoire",
+    "emailLabel": "Email",
+    "emailPlaceholder": "votre@email.com",
+    "emailRequired": "L'email est obligatoire",
+    "emailInvalid": "Adresse email invalide",
+    "phoneLabel": "Numéro de téléphone",
+    "phonePlaceholder": "+33 1 23 45 67 89",
+    "profileLabel": "Je suis",
+    "profilePlaceholder": "Sélectionnez votre profil",
+    "profileStudent": "Élève pilote",
+    "profileSchool": "École de pilotage / Académie aéronautique",
+    "profileInstructor": "Instructeur de vol",
+    "profileOther": "Autre",
+    "subjectLabel": "Sujet",
+    "subjectPlaceholder": "Sélectionnez un sujet",
+    "subjectGeneral": "Demande générale",
+    "subjectSupport": "Support technique",
+    "subjectBilling": "Abonnement & facturation",
+    "subjectSchool": "Partenariat école de pilotage (Pro)",
+    "subjectDemo": "Demande de démo",
+    "subjectOther": "Autre",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Dites-nous comment nous pouvons vous aider…",
+    "messageTooShort": "Le message doit contenir au moins 10 caractères",
+    "submitButton": "Envoyer le message",
+    "privacyNotice": "En soumettant ce formulaire, vous acceptez notre politique de confidentialité.",
+    "toastError": "Une erreur s'est produite. Veuillez réessayer.",
+    "toastSuccess": "Message envoyé ! Vérifiez votre boîte de réception pour la confirmation.",
+    "toastNetworkError": "Erreur réseau. Vérifiez votre connexion et réessayez."
   },
   "privacyPage": {
     "title": "Politique de confidentialité",
     "metaTitle": "Politique de confidentialité",
-    "metaDescription": "Comment MyATPS collecte, utilise et protège vos données personnelles."
+    "metaDescription": "Comment MyATPS collecte, utilise et protège vos données personnelles.",
+    "lastUpdated": "Dernière mise à jour : 6 avril 2026"
   },
   "blogPage": {
     "metaTitle": "Blog",
     "metaDescription": "Conseils d'étude ATPL, guides de préparation aux examens, actualités aéronautiques et retours d'instructeurs pilotes."
+  },
+  "blogSection": {
+    "badge": "Blog",
+    "heading": "Explorez notre blog et restez informé",
+    "exploreAll": "Tout voir"
   },
   "newsPage": {
     "metaTitle": "Actualités",
@@ -271,7 +324,14 @@
   "notFound": {
     "title": "Page introuvable",
     "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
-    "backHome": "Retour à l'accueil"
+    "backHome": "Retour à l'accueil",
+    "errorLabel": "Erreur 404",
+    "suggestedPagesLabel": "Pages suggérées",
+    "home": "Accueil",
+    "homeDescription": "Découvrez la plateforme complète de préparation aux examens ATPL — plus de 20 000 questions, dictionnaire aéronautique, quiz en direct.",
+    "blogDescription": "Conseils d'étude, stratégies de préparation ATPL et retours d'instructeurs pilotes.",
+    "newsDescription": "Dernières mises à jour MyATPS, nouvelles fonctionnalités et changements de réglementation EASA.",
+    "contactDescription": "Prenez contact avec l'équipe MyATPS pour du support, des retours ou des partenariats."
   },
   "common": {
     "loading": "Chargement…"
