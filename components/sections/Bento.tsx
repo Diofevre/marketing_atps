@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import TitleSection from "../TitleSection";
 import { Container } from "../ui/container";
 import { motion } from "framer-motion";
@@ -12,6 +13,7 @@ import {
 } from "@/lib/motion";
 
 export default function Bento() {
+  const t = useTranslations("bento");
   return (
     <div id="bento">
       <div className="w-full min-h-[1664px] py-12 lg:py-[200px] flex items-center justify-center">
@@ -30,20 +32,18 @@ export default function Bento() {
             >
               <div className="flex items-center flex-col gap-3 lg:gap-[12px] w-full">
                 <TitleSection
-                  title="Features & Modules"
+                  title={t("badge")}
                   className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
                 />
                 <div className="w-full px-4 lg:px-0">
                   <h2 className="text-3xl sm:text-4xl lg:text-[57px] font-medium leading-tight lg:leading-[60px] text-center text-[#1b0c25]">
-                    The complete ATPL preparation platform
+                    {t("heading")}
                   </h2>
                 </div>
               </div>
               <div className="w-full lg:w-[700px] px-4 lg:px-0">
                 <p className="text-sm sm:text-base lg:text-[17px] font-normal text-center text-[#1b0c25] leading-relaxed lg:leading-[28px]">
-                  No other platform combines a quiz engine, aviation dictionary,
-                  live sharing, resource library, and built-in study tools
-                  in a single environment — MyATPS does.
+                  {t("description")}
                 </p>
               </div>
             </motion.div>
@@ -63,7 +63,7 @@ export default function Bento() {
                   <div className="w-full aspect-480/354 rounded-xl overflow-hidden">
                     <Image
                       src="/images/imageAd.png"
-                      alt="Advanced Quiz Interface"
+                      alt={t("card1Alt")}
                       width={480}
                       height={354}
                       className="w-full h-full object-cover"
@@ -71,12 +71,10 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Advanced Quiz Interface
+                      {t("card1Title")}
                     </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      An all-in-one study environment with built-in plugins —
-                      annotator, calculator, integrated assistant, library access,
-                      comments, and annexes — all without leaving your session
+                      {t("card1Description")}
                     </p>
                   </div>
                 </motion.div>
@@ -89,7 +87,7 @@ export default function Bento() {
                   <div className="w-full aspect-703/353 rounded-xl overflow-hidden">
                     <Image
                       src="/images/imageSm.png"
-                      alt="Aviation Dictionary"
+                      alt={t("card2Alt")}
                       width={703}
                       height={353}
                       className="w-full h-full object-cover"
@@ -97,12 +95,10 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Aviation Dictionary
+                      {t("card2Title")}
                     </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      A comprehensive aviation glossary with audio pronunciations,
-                      3D interactive models, real images, and cross-referenced
-                      terms — from VORs to flight instruments
+                      {t("card2Description")}
                     </p>
                   </div>
                 </motion.div>
@@ -118,7 +114,7 @@ export default function Bento() {
                   <div className="w-full aspect-790/353 rounded-xl overflow-hidden">
                     <Image
                       src="/images/imageData.png"
-                      alt="Sharing & Live Quizzes"
+                      alt={t("card3Alt")}
                       width={790}
                       height={353}
                       className="w-full h-full object-cover"
@@ -126,12 +122,10 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Sharing & Live Quizzes
+                      {t("card3Title")}
                     </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      Share your study sessions with classmates, invite
-                      collaborators, or launch live Kahoot-style quizzes with
-                      real-time leaderboards — no account required for participants
+                      {t("card3Description")}
                     </p>
                   </div>
                 </motion.div>
@@ -144,7 +138,7 @@ export default function Bento() {
                   <div className="w-full aspect-394/355 rounded-xl overflow-hidden">
                     <Image
                       src="/images/imagePred.png"
-                      alt="Library & Resources"
+                      alt={t("card4Alt")}
                       width={394}
                       height={355}
                       className="w-full h-full object-cover"
@@ -152,12 +146,10 @@ export default function Bento() {
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
                     <h3 className="text-lg sm:text-xl lg:text-[22px] leading-snug lg:leading-[28px] font-medium text-[#1b0c25]">
-                      Library & Resources
+                      {t("card4Title")}
                     </h3>
                     <p className="text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[26px] font-normal text-[#1b0c25]">
-                      Access e-books, PDFs, aviation annexes, and procedures
-                      — a complete resource library to support your study
-                      sessions and deepen your understanding
+                      {t("card4Description")}
                     </p>
                   </div>
                 </motion.div>

@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import ButtonDemo from "./ButtonDemo";
 import { motion } from "framer-motion";
 import {
@@ -9,43 +10,18 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 
-const LEFT_KEYS = [
-  {
-    id: 1,
-    title: "20,000+ ATPL Questions",
-    description: "Every question comes with a research-based explanation — not generic AI answers, but expert-crafted content designed to build real understanding",
-  },
-  {
-    id: 2,
-    title: "Aviation Dictionary",
-    description: "The only ATPL dictionary with audio pronunciations, interactive 3D models, and real images — no competitor offers this",
-  },
-  {
-    id: 3,
-    title: "Built-in Study Assistant",
-    description: "Get instant help with diagrams, resource links, and contextual explanations — without leaving your study session",
-  },
-];
-
-const RIGHT_KEYS = [
-  {
-    id: 1,
-    title: "Live Quizzes & Sharing",
-    description: "Launch Kahoot-style group quizzes or share sessions with classmates — a feature unique to MyATPS in the ATPL space",
-  },
-  {
-    id: 2,
-    title: "Complete Resource Library",
-    description: "E-books, PDFs, aviation annexes, and procedures — all accessible directly alongside your quizzes, no switching between apps",
-  },
-  {
-    id: 3,
-    title: "Smart Progress Tracking",
-    description: "Color-coded tags, detailed statistics, and weak-area detection so you know exactly where to focus before exam day",
-  },
-];
-
 export default function BenefitCard() {
+  const t = useTranslations("keyBenefits");
+  const LEFT_KEYS = [
+    { id: 1, title: t("left1Title"), description: t("left1Description") },
+    { id: 2, title: t("left2Title"), description: t("left2Description") },
+    { id: 3, title: t("left3Title"), description: t("left3Description") },
+  ];
+  const RIGHT_KEYS = [
+    { id: 1, title: t("right1Title"), description: t("right1Description") },
+    { id: 2, title: t("right2Title"), description: t("right2Description") },
+    { id: 3, title: t("right3Title"), description: t("right3Description") },
+  ];
   return (
     <div className="flex flex-col gap-6 sm:gap-8 lg:gap-[40px] w-full">
       
@@ -81,7 +57,7 @@ export default function BenefitCard() {
                       width={14}
                       height={14}
                       className="sm:w-[15px] sm:h-[15px] lg:w-4 lg:h-4"
-                      alt="Benefit Icon"
+                      alt={t("iconAlt")}
                     />
                   </div>
                   
@@ -110,7 +86,7 @@ export default function BenefitCard() {
                 src="/images/keyben.png"
                 fill
                 className="object-cover"
-                alt="Key Benefits Illustration"
+                alt={t("illustrationAlt")}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 520px"
               />
             </div>
@@ -137,7 +113,7 @@ export default function BenefitCard() {
                       width={14}
                       height={14}
                       className="sm:w-[15px] sm:h-[15px] lg:w-4 lg:h-4"
-                      alt="Benefit Icon"
+                      alt={t("iconAlt")}
                     />
                   </div>
                   

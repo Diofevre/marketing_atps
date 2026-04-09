@@ -1,23 +1,43 @@
 import { Container } from "@/components/ui/container";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description:
-    "Privacy Policy for MyATPS — how we collect, use, and protect your personal data.",
-  alternates: {
-    canonical: "/privacy",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "privacyPage" });
+  const pathPrefix = locale === "en" ? "" : `/${locale}`;
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: {
+      canonical: `${pathPrefix}/privacy`,
+      languages: {
+        en: "/privacy",
+        fr: "/fr/privacy",
+        "x-default": "/privacy",
+      },
+    },
+  };
+}
 
-export default function PrivacyPage() {
+export default async function PrivacyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "privacyPage" });
   return (
     <div className="py-32 lg:py-40">
       <Container className="max-w-3xl">
         <h1 className="text-4xl lg:text-5xl font-semibold text-[#1b0c25] mb-4">
-          Privacy Policy
+          {t("title")}
         </h1>
-        <p className="text-[#1b0c25]/60 mb-12">Last updated: April 6, 2026</p>
+        <p className="text-[#1b0c25]/60 mb-12">{t("lastUpdated")}</p>
 
         <div className="flex flex-col gap-10 text-[#1b0c25] text-[16px] leading-[28px]">
           <section>

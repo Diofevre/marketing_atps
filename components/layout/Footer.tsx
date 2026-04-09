@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useTranslations } from "next-intl";
 import { ButtonDemo } from "../ButtonDemo";
 import { Separator } from "../ui/separator";
 import { Container } from "../ui/container";
@@ -43,31 +44,32 @@ const ICON_LINKS = [
 
 import { APP_URL } from "@/lib/constants";
 
-const LIST_ITEMS = [
-  {
-    id: 1,
-    title: "Platform",
-    links: [
-      { name: "Features", href: "/#bento" },
-      { name: "Pricing", href: "/#pricing" },
-      { name: "Log In", href: `${APP_URL}/auth/login` },
-      { name: "Sign Up", href: `${APP_URL}/auth/signup` },
-    ],
-  },
-  {
-    id: 2,
-    title: "Resources",
-    links: [
-      { name: "Blog", href: "/blog" },
-      { name: "News", href: "/news" },
-      { name: "Contact", href: "/contact" },
-      { name: "FAQ", href: "/#faq" },
-      { name: "Privacy Policy", href: "/privacy" },
-    ],
-  },
-];
-
 const Footer = () => {
+  const t = useTranslations("footer");
+  const tHero = useTranslations("hero");
+  const LIST_ITEMS = [
+    {
+      id: 1,
+      title: t("sectionPlatform"),
+      links: [
+        { name: t("linkFeatures"), href: "/#bento" },
+        { name: t("linkPricing"), href: "/#pricing" },
+        { name: t("linkLogIn"), href: `${APP_URL}/auth/login` },
+        { name: t("linkSignUp"), href: `${APP_URL}/auth/signup` },
+      ],
+    },
+    {
+      id: 2,
+      title: t("sectionResources"),
+      links: [
+        { name: t("linkBlog"), href: "/blog" },
+        { name: t("linkNews"), href: "/news" },
+        { name: t("linkContact"), href: "/contact" },
+        { name: "FAQ", href: "/#faq" },
+        { name: t("linkPrivacy"), href: "/privacy" },
+      ],
+    },
+  ];
   return (
     <div className="pb-[16px] px-[16px]">
       <div className="relative bg-[#1b0c25] rounded-[16px] px-4 lg:px-0 overflow-hidden">
@@ -90,13 +92,13 @@ const Footer = () => {
               className="flex flex-col gap-[32px] max-lg:gap-6 max-lg:text-center"
             >
               <div className="flex flex-col items-start gap-[12px] justify-start max-lg:items-center">
-                <TitleSection title="Start Your ATPL Journey" />
+                <TitleSection title={t("tagline")} />
                 {/*
                   h2 (not h1): the Footer is rendered on every page, so using
                   h1 here would duplicate the page's main heading and hurt SEO.
                 */}
                 <h2 className="text-[72px] font-medium leading-[76px] text-white max-lg:text-4xl max-lg:leading-tight">
-                  Ready to pass your ATPL on the first try?
+                  {tHero("title1")} {tHero("titleHighlight")}?
                 </h2>
               </div>
               <ButtonDemo />
@@ -129,7 +131,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="text-[15px] leading-[25px] font-normal max-lg:text-center">
-                      The complete ATPL training platform
+                      {t("description")}
                     </p>
                   </div>
                 </div>
@@ -196,10 +198,10 @@ const Footer = () => {
             >
               <div className="flex items-center justify-between w-full mt-[24px] text-white max-lg:flex-col max-lg:gap-4 max-lg:text-center">
                 <p className="text-[15px] leading-[26px] max-lg:text-sm">
-                  © 2026 MyATPS. All rights reserved.
+                  © 2026 MyATPS. {t("rightsReserved")}
                 </p>
                 <a href="/privacy" className="text-[15px] leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-sm">
-                  Privacy Policy
+                  {t("linkPrivacy")}
                 </a>
               </div>
             </motion.div>

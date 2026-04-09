@@ -1,21 +1,20 @@
 "use client";
 
 import React, { useRef } from "react";
+import { useTranslations } from "next-intl";
 import TitleSection from "../TitleSection";
 import { Container } from "../ui/container";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
-const paragraph =
-  "MyATPS is built for future pilots preparing for their ATPL exams. With 20,000+ questions, research-based explanations, an aviation dictionary with audio and 3D models, a complete resource library, and powerful sharing tools, it gives you everything you need to pass on the first try.";
-
 export default function About() {
+  const t = useTranslations("about");
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
   });
 
-  const words = paragraph.split(" ");
+  const words = t("paragraph").split(" ");
 
   return (
     <div id="about" className="px-4">
@@ -29,7 +28,7 @@ export default function About() {
 
           <Container className="relative z-10">
             <div className="flex flex-col items-center lg:items-start gap-4 sm:gap-5 lg:gap-[40px]">
-              <TitleSection title="About" />
+              <TitleSection title={t("badge")} />
 
               <h2 className="flex flex-wrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[57px] text-center lg:text-left leading-snug sm:leading-snug md:leading-tight lg:leading-tight xl:leading-[66px] font-medium text-white">
                 {words.map((word, i) => {

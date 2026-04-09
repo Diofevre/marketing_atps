@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
@@ -16,92 +17,100 @@ import {
 
 import { APP_URL } from "@/lib/constants";
 
-const DURATIONS = [
-  { months: 1, label: "1 month" },
-  { months: 2, label: "2 months" },
-  { months: 3, label: "3 months" },
-  { months: 6, label: "6 months" },
-  { months: 9, label: "9 months" },
-  { months: 12, label: "12 months" },
-];
+// Numeric price table — locale-independent so we keep a single source of
+// truth for every (plan, duration) combo. The user-visible text and labels
+// are resolved via t() at render time.
+const STANDARD_PRICES: Record<number, { total: number; perMonth: number; savings: number }> = {
+  1: { total: 29, perMonth: 29, savings: 0 },
+  2: { total: 49, perMonth: 24.5, savings: 16 },
+  3: { total: 69, perMonth: 23, savings: 21 },
+  6: { total: 109, perMonth: 18.17, savings: 37 },
+  9: { total: 139, perMonth: 15.44, savings: 47 },
+  12: { total: 159, perMonth: 13.25, savings: 54 },
+};
 
-const PLANS = {
-  FREE: {
-    id: "FREE",
-    name: "Free",
-    badge: "Starter",
-    description: "Discover the platform with no commitment",
-    price: 0,
-    priceLabel: "forever",
-    buttonText: "Get Started",
-    buttonVariant: "outline" as const,
-    popular: false,
-    features: [
-      { text: "Limited question bank access", included: true },
-      { text: "Quiz mode STUDY (limited)", included: true },
-      { text: "Aviation dictionary", included: true },
-      { text: "Community forum (read only)", included: true },
-      { text: "Basic study tools", included: true },
-      { text: "Library & resources", included: false },
-    ],
-  },
-  STANDARD: {
-    id: "STANDARD",
-    name: "Standard",
-    description: "The essentials to pass your ATPL",
-    prices: {
-      1: { total: 29, perMonth: 29, savings: 0 },
-      2: { total: 49, perMonth: 24.5, savings: 16 },
-      3: { total: 69, perMonth: 23, savings: 21 },
-      6: { total: 109, perMonth: 18.17, savings: 37 },
-      9: { total: 139, perMonth: 15.44, savings: 47 },
-      12: { total: 159, perMonth: 13.25, savings: 54 },
-    },
-    buttonText: "Subscribe",
-    buttonVariant: "outline" as const,
-    popular: false,
-    features: [
-      { text: "Complete Question Bank (20,000+)", included: true },
-      { text: "Quiz mode STUDY unlimited", included: true },
-      { text: "Quiz mode TEST (5/day)", included: true },
-      { text: "Aviation dictionary (audio & 3D)", included: true },
-      { text: "Library (e-books, PDFs, annexes)", included: true },
-      { text: "Progress tracking & basic stats", included: true },
-      { text: "Community forum (read only)", included: true },
-      { text: "Bookmarks (50 max)", included: true },
-    ],
-  },
-  PREMIUM: {
-    id: "PREMIUM",
-    name: "Premium",
-    description: "Everything you need to excel and succeed from the first try",
-    prices: {
-      1: { total: 39, perMonth: 39, savings: 0 },
-      2: { total: 69, perMonth: 34.5, savings: 12 },
-      3: { total: 89, perMonth: 29.67, savings: 24 },
-      6: { total: 139, perMonth: 23.17, savings: 41 },
-      9: { total: 169, perMonth: 18.78, savings: 52 },
-      12: { total: 189, perMonth: 15.75, savings: 60 },
-    },
-    buttonText: "Subscribe",
-    buttonVariant: "primary" as const,
-    popular: true,
-    trial: "48h of free trial included",
-    features: [
-      { text: "Complete Question Bank (20,000+)", included: true },
-      { text: "All quiz modes unlimited (STUDY, TEST, EXAM)", included: true },
-      { text: "Live quizzes & session sharing", included: true },
-      { text: "Full aviation dictionary (audio, 3D, images)", included: true },
-      { text: "Complete library (all formats)", included: true },
-      { text: "Advanced progression & detailed stats", included: true },
-      { text: "Study assistant chat", included: true },
-      { text: "Unlimited bookmarks", included: true },
-    ],
-  },
+const PREMIUM_PRICES: Record<number, { total: number; perMonth: number; savings: number }> = {
+  1: { total: 39, perMonth: 39, savings: 0 },
+  2: { total: 69, perMonth: 34.5, savings: 12 },
+  3: { total: 89, perMonth: 29.67, savings: 24 },
+  6: { total: 139, perMonth: 23.17, savings: 41 },
+  9: { total: 169, perMonth: 18.78, savings: 52 },
+  12: { total: 189, perMonth: 15.75, savings: 60 },
 };
 
 export default function Pricing() {
+  const t = useTranslations("pricing");
   const [selectedDuration, setSelectedDuration] = useState(1);
+
+  const DURATIONS = [
+    { months: 1, label: t("duration1") },
+    { months: 2, label: t("duration2") },
+    { months: 3, label: t("duration3") },
+    { months: 6, label: t("duration6") },
+    { months: 9, label: t("duration9") },
+    { months: 12, label: t("duration12") },
+  ];
+
+  const PLANS = {
+    FREE: {
+      id: "FREE",
+      name: t("freeName"),
+      badge: t("freeBadge"),
+      description: t("freeDescription"),
+      price: 0,
+      priceLabel: t("freePriceLabel"),
+      buttonText: t("freeButton"),
+      buttonVariant: "outline" as const,
+      popular: false,
+      features: [
+        { text: t("freeFeature1"), included: true },
+        { text: t("freeFeature2"), included: true },
+        { text: t("freeFeature3"), included: true },
+        { text: t("freeFeature4"), included: true },
+        { text: t("freeFeature5"), included: true },
+        { text: t("freeFeature6"), included: false },
+      ],
+    },
+    STANDARD: {
+      id: "STANDARD",
+      name: t("standardName"),
+      description: t("standardDescription"),
+      prices: STANDARD_PRICES,
+      buttonText: t("standardButton"),
+      buttonVariant: "outline" as const,
+      popular: false,
+      features: [
+        { text: t("standardFeature1"), included: true },
+        { text: t("standardFeature2"), included: true },
+        { text: t("standardFeature3"), included: true },
+        { text: t("standardFeature4"), included: true },
+        { text: t("standardFeature5"), included: true },
+        { text: t("standardFeature6"), included: true },
+        { text: t("standardFeature7"), included: true },
+        { text: t("standardFeature8"), included: true },
+      ],
+    },
+    PREMIUM: {
+      id: "PREMIUM",
+      name: t("premiumName"),
+      description: t("premiumDescription"),
+      prices: PREMIUM_PRICES,
+      buttonText: t("premiumButton"),
+      buttonVariant: "primary" as const,
+      popular: true,
+      trial: t("premiumTrial"),
+      features: [
+        { text: t("premiumFeature1"), included: true },
+        { text: t("premiumFeature2"), included: true },
+        { text: t("premiumFeature3"), included: true },
+        { text: t("premiumFeature4"), included: true },
+        { text: t("premiumFeature5"), included: true },
+        { text: t("premiumFeature6"), included: true },
+        { text: t("premiumFeature7"), included: true },
+        { text: t("premiumFeature8"), included: true },
+      ],
+    },
+  };
 
   const getPrice = (plan: typeof PLANS.STANDARD | typeof PLANS.PREMIUM) => {
     const priceData = plan.prices[selectedDuration as keyof typeof plan.prices];
@@ -123,16 +132,15 @@ export default function Pricing() {
         >
           <div className="flex flex-col gap-3">
             <h2 className="text-4xl lg:text-5xl font-semibold text-[#1b0c25]">
-              Choose your plan
+              {t("title")}
             </h2>
             <p className="text-[#1b0c25]/60">
-              Access to all tools to successfully pass your ATPL on the first
-              try
+              {t("subtitle")}
             </p>
           </div>
 
           {/* Duration Selector */}
-          <div className="flex flex-wrap items-center gap-2 p-1 bg-gray-100 rounded-lg" role="group" aria-label="Subscription duration">
+          <div className="flex flex-wrap items-center gap-2 p-1 bg-gray-100 rounded-lg" role="group" aria-label={t("durationAriaLabel")}>
             {DURATIONS.map((duration) => (
               <button
                 key={duration.months}
@@ -182,7 +190,7 @@ export default function Pricing() {
               </span>
             </div>
             <p className="text-sm text-gray-500 mb-6">
-              Perfect for getting started
+              {t("freeSubtitle")}
             </p>
 
             <Link href={`${APP_URL}/auth/signup`} className="w-full mb-8">
@@ -247,12 +255,16 @@ export default function Pricing() {
                 </AnimatePresence>
               </div>
               <span className="text-[#1b0c25]/50">
-                /{selectedDuration} month{selectedDuration > 1 ? "s" : ""}
+                {t(selectedDuration === 1 ? "perMonthOne" : "perMonthMany", {
+                  count: selectedDuration,
+                })}
               </span>
             </div>
             <p className="text-sm text-black mb-6">
-              {getPrice(PLANS.STANDARD).perMonth.toFixed(2)}€/month • Save{" "}
-              {getPrice(PLANS.STANDARD).savings}%
+              {t("perMonthSavings", {
+                perMonth: getPrice(PLANS.STANDARD).perMonth.toFixed(2),
+                savings: getPrice(PLANS.STANDARD).savings,
+              })}
             </p>
 
             <Link
@@ -293,7 +305,7 @@ export default function Pricing() {
             <div className="absolute -top-3 left-1/2 -translate-x-1/2">
               <span className="flex items-center gap-1 px-3 py-1 bg-black text-white text-xs font-medium rounded-full">
                 <Star className="w-3 h-3" fill="white" />
-                Recommended
+                {t("recommended")}
               </span>
             </div>
 
@@ -320,12 +332,16 @@ export default function Pricing() {
                 </AnimatePresence>
               </div>
               <span className="text-[#1b0c25]/50">
-                /{selectedDuration} month{selectedDuration > 1 ? "s" : ""}
+                {t(selectedDuration === 1 ? "perMonthOne" : "perMonthMany", {
+                  count: selectedDuration,
+                })}
               </span>
             </div>
             <p className="text-sm text-black mb-6">
-              {getPrice(PLANS.PREMIUM).perMonth.toFixed(2)}€/month • Save{" "}
-              {getPrice(PLANS.PREMIUM).savings}%
+              {t("perMonthSavings", {
+                perMonth: getPrice(PLANS.PREMIUM).perMonth.toFixed(2),
+                savings: getPrice(PLANS.PREMIUM).savings,
+              })}
             </p>
 
             <Link

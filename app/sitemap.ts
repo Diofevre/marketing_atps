@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogService, newsService } from "@/lib/api";
+import { routing } from "@/i18n/routing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 
@@ -8,32 +9,47 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 // unreachable at build time.
 export const dynamic = "force-dynamic";
 
-const STATIC_ROUTES: MetadataRoute.Sitemap = [
-  {
-    url: SITE_URL,
-    changeFrequency: "weekly",
-    priority: 1,
-  },
-  {
-    url: `${SITE_URL}/blog`,
-    changeFrequency: "daily",
-    priority: 0.8,
-  },
-  {
-    url: `${SITE_URL}/news`,
-    changeFrequency: "daily",
-    priority: 0.8,
-  },
-  {
-    url: `${SITE_URL}/contact`,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    url: `${SITE_URL}/privacy`,
-    changeFrequency: "yearly",
-    priority: 0.3,
-  },
+/**
+ * Build a sitemap entry with hreflang alternates so Google knows the
+ * English and French versions of the same page are equivalent. With
+ * `localePrefix: 'as-needed'`, the default locale (en) lives at the root
+ * path and the non-default locales (fr) get a `/<locale>` prefix.
+ */
+function localizedEntry(
+  path: string,
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"],
+  priority: number,
+  lastModified?: Date,
+): MetadataRoute.Sitemap[number] {
+  const languages: Record<string, string> = {};
+  for (const locale of routing.locales) {
+    const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+    languages[locale] = `${SITE_URL}${prefix}${path}`;
+  }
+  // `x-default` is the fallback Google uses when no explicit hreflang
+  // matches the user's language preference. Always point it at the
+  // default locale URL.
+  languages["x-default"] = `${SITE_URL}${path}`;
+
+  return {
+    url: `${SITE_URL}${path}`,
+    lastModified,
+    changeFrequency,
+    priority,
+    alternates: { languages },
+  };
+}
+
+const STATIC_PATHS: Array<{
+  path: string;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+  priority: number;
+}> = [
+  { path: "/", changeFrequency: "weekly", priority: 1 },
+  { path: "/blog", changeFrequency: "daily", priority: 0.8 },
+  { path: "/news", changeFrequency: "daily", priority: 0.8 },
+  { path: "/contact", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 // Hard cap on pages we walk per resource so a misbehaving API can never
@@ -66,14 +82,16 @@ async function fetchAllBlogEntries(): Promise<MetadataRoute.Sitemap> {
     }
 
     for (const article of res.data.articles) {
-      entries.push({
-        url: `${SITE_URL}/blog/${article.slug}`,
-        lastModified: new Date(
-          article.updatedAt || article.publishedAt || article.createdAt,
+      entries.push(
+        localizedEntry(
+          `/blog/${article.slug}`,
+          "weekly",
+          0.7,
+          new Date(
+            article.updatedAt || article.publishedAt || article.createdAt,
+          ),
         ),
-        changeFrequency: "weekly",
-        priority: 0.7,
-      });
+      );
     }
 
     if (!res.data.pagination.hasNext) break;
@@ -102,14 +120,14 @@ async function fetchAllNewsEntries(): Promise<MetadataRoute.Sitemap> {
     }
 
     for (const item of res.data.news) {
-      entries.push({
-        url: `${SITE_URL}/news/${item.slug}`,
-        lastModified: new Date(
-          item.updatedAt || item.publishedAt || item.createdAt,
+      entries.push(
+        localizedEntry(
+          `/news/${item.slug}`,
+          "weekly",
+          0.7,
+          new Date(item.updatedAt || item.publishedAt || item.createdAt),
         ),
-        changeFrequency: "weekly",
-        priority: 0.7,
-      });
+      );
     }
 
     if (!res.data.pagination.hasNext) break;
@@ -119,10 +137,14 @@ async function fetchAllNewsEntries(): Promise<MetadataRoute.Sitemap> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticEntries = STATIC_PATHS.map((entry) =>
+    localizedEntry(entry.path, entry.changeFrequency, entry.priority),
+  );
+
   const [blogEntries, newsEntries] = await Promise.all([
     fetchAllBlogEntries(),
     fetchAllNewsEntries(),
   ]);
 
-  return [...STATIC_ROUTES, ...blogEntries, ...newsEntries];
+  return [...staticEntries, ...blogEntries, ...newsEntries];
 }
