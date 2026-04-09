@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { FadeInUp } from "@/lib/motion";
 import RelatedNews from "@/components/sections/RelatedNews";
 import NewsSidebar from "@/components/sections/NewsSidebar";

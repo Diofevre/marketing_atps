@@ -1,6 +1,6 @@
 "use client";
 import ProductCard from "../ProductCard";
-import TitleSection from "../TitleSection";
+
 import { Container } from "../ui/container";
 import { motion } from "framer-motion";
 import {
@@ -11,7 +11,7 @@ import {
 
 export default function ProductOverview() {
   return (
-    <div className="py-6 sm:py-8 lg:py-10">
+    <div className="py-12 lg:py-[80px]">
       <Container className="flex flex-col items-center">
           {/* Header Section */}
           <motion.div
@@ -23,11 +23,13 @@ export default function ProductOverview() {
           >
             {/* Title with badge */}
             <div className="flex flex-col items-center gap-3 sm:gap-4 lg:gap-[12px] w-full lg:w-[800px] px-4 lg:px-0">
-              <TitleSection
-                title="Product Overview"
-                className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-              />
-              <p className="text-3xl sm:text-4xl lg:text-[58px] px-4 sm:px-6 lg:px-[40px] font-medium text-center leading-tight lg:leading-[60px] text-[#1b0c25]">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                  Product Overview
+                </span>
+              </div>
+              <p className="text-[30px] lg:text-[40px] px-4 sm:px-6 lg:px-[40px] font-medium text-center leading-[30px] lg:leading-[40px] text-[#1b0c25]">
                 Explore the Power of MyATPS
               </p>
             </div>

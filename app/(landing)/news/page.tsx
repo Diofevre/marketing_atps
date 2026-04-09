@@ -18,7 +18,7 @@ export default function NewsPage() {
   return (
     <div className="pt-32 pb-20">
       <Container className="px-8 lg:px-6">
-        <StaggerContainer className="flex flex-col items-start gap-4 mb-12">
+        <StaggerContainer className="flex flex-col items-start gap-2 mb-12">
           <FadeInUp>
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />

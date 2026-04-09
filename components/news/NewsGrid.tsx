@@ -52,8 +52,31 @@ export default function NewsGrid({
       </div>
 
       {items.length === 0 && !loading && (
-        <div className="text-center py-20 text-gray-500">
-          No news found for this category.
+        <div className="flex flex-col items-center justify-center gap-6 rounded-2xl border border-gray-100 bg-white px-8 py-16 text-center shadow-none">
+          <div className="flex size-14 items-center justify-center rounded-full bg-gray-50">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="size-7 text-gray-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+              />
+            </svg>
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="text-base font-semibold text-[#1b0c25]">
+              Aucune actualité trouvée
+            </p>
+            <p className="text-sm text-[#1b0c25]/50">
+              Aucune actualité ne correspond à cette catégorie.
+            </p>
+          </div>
         </div>
       )}
 

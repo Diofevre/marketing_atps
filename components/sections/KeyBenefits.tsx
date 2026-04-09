@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import TitleSection from "../TitleSection";
+
 import BenefitCard from "../BenefitCard";
 import { Container } from "../ui/container";
 import { motion } from "framer-motion";
@@ -18,7 +18,7 @@ export default function KeyBenefits() {
       initial="hidden"
       whileInView="visible"
       viewport={viewportSettings}
-      className="py-12 sm:py-16 lg:py-[200px]"
+      className="py-12 lg:py-[80px]"
     >
       <Container className="flex items-center flex-col gap-6 sm:gap-8 lg:gap-[60px]">
           {/* Header Section */}
@@ -28,11 +28,13 @@ export default function KeyBenefits() {
           >
             {/* Title with badge */}
             <div className="flex flex-col items-center gap-3 sm:gap-4 lg:gap-[12px] w-full">
-              <TitleSection
-                title="Key Benefits"
-                className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-              />
-              <p className="text-3xl sm:text-4xl lg:text-[56px] leading-tight lg:leading-[60px] text-center font-medium text-[#1b0c25]">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                  Key Benefits
+                </span>
+              </div>
+              <p className="text-[30px] lg:text-[40px] leading-[30px] lg:leading-[40px] text-center font-medium text-[#1b0c25]">
                 Why Choose MyATPS
               </p>
             </div>

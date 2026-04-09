@@ -41,15 +41,19 @@ export default function BlogSidebar({
       ]);
 
       if (recentResponse.data) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = recentResponse.data as any;
         const articlesArray = Array.isArray(data) ? data : (data.articles || []);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const filtered = articlesArray.filter((a: any) => a.id !== currentPostId);
         setMoreArticles(transformBlogArticles(filtered).slice(0, 3));
       }
 
       if (popularResponse.data) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = popularResponse.data as any;
         const articlesArray = Array.isArray(data) ? data : (data.articles || []);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const filtered = articlesArray.filter((a: any) => a.id !== currentPostId);
         setPopularArticles(transformBlogArticles(filtered).slice(0, 3));
       }

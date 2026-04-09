@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import ButtonDemo from "./ButtonDemo";
+
 import { motion } from "framer-motion";
 import {
   benefitCardVariants,
@@ -157,14 +157,6 @@ export default function BenefitCard() {
         </div>
       </motion.div>
       
-      {/* CTA Button */}
-      <motion.div
-        variants={fadeInUpVariants}
-        transition={{ delay: 0.3 }}
-        className="w-full flex justify-center"
-      >
-        <ButtonDemo />
-      </motion.div>
     </div>
   );
 }

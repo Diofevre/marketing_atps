@@ -24,6 +24,7 @@ export default function BlogSection() {
     const fetchRecentPosts = async () => {
       const response = await blogService.getRecentArticles(3);
       if (response.data) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = response.data as any;
         const articles = Array.isArray(data) ? data : (data.articles || []);
         setPosts(transformBlogArticles(articles));
@@ -35,7 +36,7 @@ export default function BlogSection() {
   }, []);
 
   return (
-    <section className="py-16 max-lg:py-12 max-md:py-8">
+    <section className="py-12 lg:py-[80px]">
       <Container className="flex flex-col mb-[40px]">
         <div className="flex flex-col gap-[40px] max-lg:gap-6 max-md:gap-4">
           <motion.div
@@ -46,12 +47,14 @@ export default function BlogSection() {
             className="flex items-end justify-between max-lg:flex-col max-lg:items-start max-lg:gap-4"
           >
             <div className="flex flex-col items-start gap-[12px] max-lg:w-full">
-              <TitleSection
-                title="Blog"
-                className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-              />
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                  Blog
+                </span>
+              </div>
               <div className="w-[620px] max-lg:w-full">
-                <p className="text-[58px] leading-[60px] font-medium text-[#1b0c25] max-lg:text-4xl max-lg:leading-tight">
+                <p className="text-[30px] lg:text-[40px] font-medium leading-[30px] lg:leading-[40px] text-[#1b0c25] max-lg:text-4xl max-lg:leading-tight">
                   Explore Our Blog And Stay Updated
                 </p>
               </div>
@@ -61,13 +64,13 @@ export default function BlogSection() {
               <Link href="/blog">
                 <Button
                   variant="outline"
-                  className="group w-[120px] h-[45px] text-[15px] leading-[26px] font-medium rounded-[8px] max-lg:w-[120px] max-lg:h-10 bg-white hover:bg-white"
+                  className="group w-[110px] h-[40px] text-[14px] leading-[20px] font-medium rounded-[8px] bg-white hover:bg-white cursor-pointer"
                 >
-                  <span className="flex flex-col items-center h-[26px] overflow-hidden">
-                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                  <span className="flex flex-col items-center h-[20px] overflow-hidden">
+                    <span className="block h-[20px] leading-[20px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
                       Explore All
                     </span>
-                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                    <span className="block h-[20px] leading-[20px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
                       Explore All
                     </span>
                   </span>

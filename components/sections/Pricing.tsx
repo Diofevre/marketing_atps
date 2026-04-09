@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import { Star, Check, Gift } from "lucide-react";
@@ -22,7 +21,7 @@ const DURATIONS = [
   { months: 3, label: "3 months" },
   { months: 6, label: "6 months" },
   { months: 9, label: "9 months" },
-  { months: 12, label: "12 months" },
+  { months: 12, label: "1 year" },
 ];
 
 const PLANS = {
@@ -108,10 +107,8 @@ export default function Pricing() {
     return priceData;
   };
 
-  const maxSavings = PLANS.PREMIUM.prices[12].savings;
-
   return (
-    <div id="pricing" className="py-12 lg:py-[100px]">
+    <div id="pricing" className="py-12 lg:py-[80px]">
       <Container className="flex flex-col gap-8">
         {/* Header Section */}
         <motion.div
@@ -122,7 +119,13 @@ export default function Pricing() {
           className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
         >
           <div className="flex flex-col gap-3">
-            <h1 className="text-4xl lg:text-5xl font-semibold text-[#1b0c25]">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+              <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                Pricing
+              </span>
+            </div>
+            <h1 className="text-[30px] lg:text-[40px] font-medium leading-[30px] lg:leading-[40px] text-[#1b0c25]">
               Choose your plan
             </h1>
             <p className="text-[#1b0c25]/60">
@@ -138,7 +141,7 @@ export default function Pricing() {
                 key={duration.months}
                 onClick={() => setSelectedDuration(duration.months)}
                 aria-pressed={selectedDuration === duration.months}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all cursor-pointer ${
                   selectedDuration === duration.months
                     ? "bg-white text-[#1b0c25] shadow-sm"
                     : "text-[#1b0c25]/60 hover:text-[#1b0c25]"

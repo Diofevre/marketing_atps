@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import TitleSection from "../TitleSection";
+
 import { Container } from "../ui/container";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
@@ -29,9 +29,14 @@ export default function About() {
 
           <Container className="relative z-10">
             <div className="flex flex-col items-center lg:items-start gap-4 sm:gap-5 lg:gap-[40px]">
-              <TitleSection title="About" />
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-white rounded-sm shrink-0" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-white">
+                  About
+                </span>
+              </div>
 
-              <h2 className="flex flex-wrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[57px] text-center lg:text-left leading-snug sm:leading-snug md:leading-tight lg:leading-tight xl:leading-[66px] font-medium text-white">
+              <h2 className="flex flex-wrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[55px] text-center lg:text-left leading-snug sm:leading-snug md:leading-tight lg:leading-tight xl:leading-[66px] font-medium text-white">
                 {words.map((word, i) => {
                   const start = i / words.length;
                   const end = start + 1 / words.length;

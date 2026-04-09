@@ -160,7 +160,7 @@ export default function Hero() {
     <div className="w-full pb-0 px-4">
       <div className="min-h-[800px] lg:h-[1236px] bg-[url('/images/bgHero.png')] bg-cover bg-center rounded-2xl overflow-hidden relative">
         
-        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-16 lg:pt-[160px] h-full">
+        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-28 lg:pt-[160px] h-full">
           <Container className="flex flex-col gap-6 lg:gap-[40px]">
             <div className="flex flex-col gap-4 lg:gap-[24px]">
               <div className="flex flex-col items-start gap-4 lg:gap-[24px]">
@@ -170,7 +170,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-4xl sm:text-5xl lg:text-[60px] leading-tight lg:leading-[60px] text-[#1b0c25] font-medium"
+                    className="text-[30px] lg:text-[40px] leading-[30px] lg:leading-[40px] text-[#1b0c25] font-medium"
                   >
                     {titleWords.map((word, index) => (
                       <motion.span

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -21,9 +22,11 @@ const NAV_LIST = [
   { id: 1, name: "Pricing", link: "/#pricing" },
   { id: 2, name: "Blog", link: "/blog" },
   { id: 3, name: "News", link: "/news" },
+  { id: 4, name: "Entreprise", link: "/entreprise" },
 ];
 
 const Navigation = () => {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -208,7 +211,11 @@ const Navigation = () => {
                     <motion.div key={item.id} variants={navigationLinkVariants}>
                       <Link
                         href={item.link}
-                        className="font-medium text-[#1b0c25] opacity-[0.5] hover:opacity-80 transition-all duration-300 whitespace-nowrap"
+                        className={`font-medium transition-all duration-300 whitespace-nowrap ${
+                          pathname === item.link
+                            ? "text-[#1b0c25] opacity-100"
+                            : "text-[#1b0c25] opacity-[0.5] hover:opacity-80"
+                        }`}
                         style={{
                           fontSize: isScrolled
                             ? isTablet
@@ -228,7 +235,7 @@ const Navigation = () => {
                   <Link href="/contact">
                     <Button
                       variant="outline"
-                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] border-[#1b0c25] text-[#1b0c25] hover:bg-[#1b0c25] hover:text-white transition-all duration-300"
+                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] border-[#1b0c25] text-[#1b0c25] hover:bg-[#1b0c25] hover:text-white transition-all duration-300 cursor-pointer"
                       style={{
                         fontSize: isScrolled
                           ? isTablet
@@ -258,7 +265,7 @@ const Navigation = () => {
                   </Link>
                   <Link href={`${APP_URL}/auth/login`} target="_blank">
                     <Button
-                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.1),inset_0_1px_2px_0_rgba(255,255,255,0.4)] transition-all duration-300"
+                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.1),inset_0_1px_2px_0_rgba(255,255,255,0.4)] transition-all duration-300 cursor-pointer"
                       style={{
                         fontSize: isScrolled
                           ? isTablet
@@ -372,7 +379,11 @@ const Navigation = () => {
                   <motion.div key={item.id} variants={mobileMenuItemVariants}>
                     <Link
                       href={item.link}
-                      className="text-[16px] sm:text-[17px] font-medium text-[#1b0c25] opacity-50 hover:opacity-80 py-[10px] transition-opacity block"
+                      className={`text-[16px] sm:text-[17px] font-medium py-[10px] transition-opacity block ${
+                        pathname === item.link
+                          ? "text-[#1b0c25] opacity-100"
+                          : "text-[#1b0c25] opacity-50 hover:opacity-80"
+                      }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -384,12 +395,12 @@ const Navigation = () => {
               {/* Buttons */}
               <motion.div variants={mobileMenuItemVariants} className="flex gap-3">
                 <Link href="/contact">
-                  <Button variant="outline" className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] border-[#1b0c25] text-[#1b0c25] px-6">
+                  <Button variant="outline" className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] border-[#1b0c25] text-[#1b0c25] px-6 cursor-pointer">
                     Contact
                   </Button>
                 </Link>
                 <Link href={`${APP_URL}/auth/login`} target="_blank">
-                  <Button className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 px-6">
+                  <Button className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 px-6 cursor-pointer">
                     Log In
                   </Button>
                 </Link>

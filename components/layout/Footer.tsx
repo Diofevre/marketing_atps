@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+
 import { ButtonDemo } from "../ButtonDemo";
 import { Separator } from "../ui/separator";
 import { Container } from "../ui/container";
 import Image from "next/image";
-import TitleSection from "../TitleSection";
+
 import { motion } from "framer-motion";
 import {
   footerContainerVariants,
@@ -76,7 +76,7 @@ const Footer = () => {
         <div className="absolute z-[-1px] right-[-86px] top-[590px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(145deg,#efe8f6_0%,#d588fb_60.83%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
 
         {/* Contenu principal */}
-        <Container className="z-10 py-12 lg:py-[100px] flex flex-col items-center justify-center">
+        <Container className="z-10 pt-12 pb-8 lg:pt-[60px] lg:pb-[32px] flex flex-col items-center justify-center">
           <motion.div
             variants={footerContainerVariants}
             initial="hidden"
@@ -87,18 +87,23 @@ const Footer = () => {
             {/* Section CTA */}
             <motion.div
               variants={footerCTAVariants}
-              className="flex flex-col gap-[32px] max-lg:gap-6 max-lg:text-center"
+              className="flex flex-col gap-[32px] max-lg:gap-6"
             >
-              <div className="flex flex-col items-start gap-[12px] justify-start max-lg:items-center">
-                <TitleSection title="Start Your ATPL Journey" />
-                <h1 className="text-[72px] font-medium leading-[76px] text-white max-lg:text-4xl max-lg:leading-tight">
+              <div className="flex flex-col items-start gap-[12px] justify-start">
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 bg-white rounded-sm shrink-0" />
+                  <span className="text-sm font-semibold uppercase tracking-wider text-white">
+                    Start Your ATPL Journey
+                  </span>
+                </div>
+                <h1 className="text-[30px] lg:text-[40px] font-medium leading-[30px] lg:leading-[40px] text-white">
                   Ready to pass your ATPL on the first try?
                 </h1>
               </div>
               <ButtonDemo />
             </motion.div>
 
-            <Separator className="mt-[100px] mb-[100px] max-lg:my-12" />
+            <Separator className="mt-[48px] mb-[48px] max-lg:my-8" />
 
             {/* Section milieu - devient colonne sur mobile */}
             <div className="flex items-start w-full justify-between text-white max-lg:flex-col max-lg:gap-8">
@@ -110,9 +115,9 @@ const Footer = () => {
                 {/* Logo + nom */}
                 <div className="flex flex-col gap-[16px] max-lg:items-center">
                   <div className="flex gap-[12px] max-lg:justify-center items-center">
-                    <div className="h-[40px] w-[40px] rounded-md flex items-center justify-center overflow-hidden">
+                    <div className="h-[40px] w-[40px] rounded-[6px] flex items-center justify-center overflow-hidden">
                       <Image
-                        src="/assets/logo-yellow.png"
+                        src="/assets/icon.svg"
                         alt="MyATPS"
                         width={40}
                         height={40}
@@ -188,7 +193,7 @@ const Footer = () => {
             {/* Footer bottom */}
             <motion.div
               variants={footerBottomVariants}
-              className="border-t border-white w-full mt-[100px] max-lg:mt-12"
+              className="border-t border-white w-full mt-[48px] max-lg:mt-8"
             >
               <div className="flex items-center justify-between w-full mt-[24px] text-white max-lg:flex-col max-lg:gap-4 max-lg:text-center">
                 <p className="text-[15px] leading-[26px] max-lg:text-sm">

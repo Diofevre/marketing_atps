@@ -28,15 +28,19 @@ export default function RelatedNews({
       const response = await newsService.getRelatedNews(currentNewsId, 4);
 
       if (response.data) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = response.data as any;
         const newsArray = Array.isArray(data) ? data : (data.news || []);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
         setRelatedNews(transformNewsItems(filtered).slice(0, 3));
       } else {
         const fallbackResponse = await newsService.getRecentNews(4);
         if (fallbackResponse.data) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const data = fallbackResponse.data as any;
           const newsArray = Array.isArray(data) ? data : (data.news || []);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
           setRelatedNews(transformNewsItems(filtered).slice(0, 3));
         }

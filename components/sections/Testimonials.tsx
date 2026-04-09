@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import TitleSection from "../TitleSection";
+
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -108,7 +108,7 @@ export default function Testimonials() {
   return (
     <div className="px-4" id="testimonials">
       <div className="rounded-[16px] min-h-[800px] lg:h-[932px] bg-[url('/images/testBg.png')] bg-cover bg-center">
-        <Container className="py-12 sm:py-16 lg:py-20 xl:py-[140px] flex flex-col items-center justify-center gap-6 sm:gap-8 lg:gap-[60px]">
+        <Container className="py-12 lg:py-[80px] flex flex-col items-center justify-center gap-6 sm:gap-8 lg:gap-[60px]">
           {/* Header Section */}
           <div className="flex items-center justify-center gap-4 sm:gap-6 lg:gap-[60px] flex-col w-full">
             {/* Title Section */}
@@ -119,13 +119,15 @@ export default function Testimonials() {
               viewport={viewportSettings}
               className="flex items-center justify-center flex-col gap-3 sm:gap-4 lg:gap-[16px] w-full lg:w-[800px] px-4 lg:px-0"
             >
-              <TitleSection
-                title="Wall of Love"
-                className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-              />
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                  Wall of Love
+                </span>
+              </div>
               <div className="w-full">
-                <p className="text-3xl sm:text-4xl lg:text-5xl xl:text-[58px] leading-tight lg:leading-[60px] text-center text-[#1b0c25] font-medium">
-                  What they're Saying
+                <p className="text-[30px] lg:text-[40px] leading-[30px] lg:leading-[40px] text-center text-[#1b0c25] font-medium">
+                  What they&apos;re Saying
                 </p>
               </div>
             </motion.div>

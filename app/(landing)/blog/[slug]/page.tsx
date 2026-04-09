@@ -53,6 +53,7 @@ export default async function BlogDetail({ params }: PageProps) {
   const blog = transformBlogArticle(article);
 
   const relatedResponse = await blogService.getRelatedArticles(article.id, 3);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const relatedData = relatedResponse.data as any;
   const relatedArticles = relatedData?.articles || [];
   const relatedPosts = transformBlogArticles(relatedArticles);

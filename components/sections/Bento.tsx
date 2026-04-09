@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import TitleSection from "../TitleSection";
+
 import { Container } from "../ui/container";
 import { motion } from "framer-motion";
 import {
@@ -14,7 +14,7 @@ import {
 export default function Bento() {
   return (
     <div id="bento">
-      <div className="w-full min-h-[1664px] py-12 lg:py-[200px] flex items-center justify-center">
+      <div className="w-full min-h-[1664px] py-12 lg:py-[80px] flex items-center justify-center">
         <Container>
           <motion.div
             variants={bentoContainerVariants}
@@ -29,12 +29,14 @@ export default function Bento() {
               className="flex items-center flex-col gap-4 lg:gap-[24px] w-full lg:w-[800px]"
             >
               <div className="flex items-center flex-col gap-3 lg:gap-[12px] w-full">
-                <TitleSection
-                  title="Features & Modules"
-                  className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-                />
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+                  <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                    Features & Modules
+                  </span>
+                </div>
                 <div className="w-full px-4 lg:px-0">
-                  <h1 className="text-3xl sm:text-4xl lg:text-[57px] font-medium leading-tight lg:leading-[60px] text-center text-[#1b0c25]">
+                  <h1 className="text-[30px] lg:text-[40px] font-medium leading-[30px] lg:leading-[40px] text-center text-[#1b0c25]">
                     The complete ATPL preparation platform
                   </h1>
                 </div>

@@ -33,8 +33,10 @@ export default function NewsSidebar({
       const response = await newsService.getRecentNews(5);
 
       if (response.data) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = response.data as any;
         const newsArray = Array.isArray(data) ? data : (data.news || []);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
         setMoreInsights(transformNewsItems(filtered).slice(0, 4));
       }

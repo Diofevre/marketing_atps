@@ -1,23 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import TitleSection from "@/components/TitleSection";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -28,7 +16,7 @@ import {
 import Image from "next/image";
 import { Mail, LifeBuoy, CheckCircle2, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { fadeInUpVariants, scaleInVariants, viewportSettings } from "@/lib/motion";
+import { fadeInUpVariants, staggerContainer, viewportSettings } from "@/lib/motion";
 
 const API_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
@@ -44,10 +32,168 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+/* ── Floating Input ─────────────────────────────── */
+function FloatingInput({
+  label,
+  required,
+  type = "text",
+  value,
+  onChange,
+  onBlur,
+  error,
+}: {
+  label: string;
+  required?: boolean;
+  type?: string;
+  value: string;
+  onChange: (v: string) => void;
+  onBlur: () => void;
+  error?: string;
+}) {
+  const [focused, setFocused] = useState(false);
+  const floating = focused || !!value;
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="relative">
+        <label
+          className={`absolute left-3 pointer-events-none transition-all duration-200 ease-out ${
+            floating
+              ? "-top-2 text-[11px] bg-white px-1 text-[#1b0c25]/50 z-10"
+              : "top-3.5 text-sm text-[#1b0c25]/30"
+          }`}
+        >
+          {label}
+          {required && <span className="text-red-400 ml-0.5">*</span>}
+        </label>
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => { setFocused(false); onBlur(); }}
+          className={`w-full border rounded-lg bg-white h-12 px-3 text-sm text-[#1b0c25] outline-none transition-colors ${
+            error
+              ? "border-red-300 focus:border-red-400"
+              : "border-[#1b0c25]/15 focus:border-[#1b0c25]/40"
+          }`}
+        />
+      </div>
+      {error && <p className="text-xs text-red-500 px-1">{error}</p>}
+    </div>
+  );
+}
+
+/* ── Floating Textarea ─────────────────────────── */
+function FloatingTextarea({
+  label,
+  required,
+  value,
+  onChange,
+  onBlur,
+  error,
+}: {
+  label: string;
+  required?: boolean;
+  value: string;
+  onChange: (v: string) => void;
+  onBlur: () => void;
+  error?: string;
+}) {
+  const [focused, setFocused] = useState(false);
+  const floating = focused || !!value;
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="relative">
+        <label
+          className={`absolute left-3 pointer-events-none transition-all duration-200 ease-out ${
+            floating
+              ? "-top-2 text-[11px] bg-white px-1 text-[#1b0c25]/50 z-10"
+              : "top-3.5 text-sm text-[#1b0c25]/30"
+          }`}
+        >
+          {label}
+          {required && <span className="text-red-400 ml-0.5">*</span>}
+        </label>
+        <textarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => { setFocused(false); onBlur(); }}
+          rows={4}
+          className={`w-full border rounded-lg bg-white px-3 pt-4 pb-3 text-sm text-[#1b0c25] outline-none resize-none transition-colors ${
+            error
+              ? "border-red-300 focus:border-red-400"
+              : "border-[#1b0c25]/15 focus:border-[#1b0c25]/40"
+          }`}
+        />
+      </div>
+      {error && <p className="text-xs text-red-500 px-1">{error}</p>}
+    </div>
+  );
+}
+
+/* ── Floating Select ───────────────────────────── */
+function FloatingSelect({
+  label,
+  value,
+  onChange,
+  options,
+  error,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
+  error?: string;
+}) {
+  const floating = !!value;
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="relative">
+        <label
+          className={`absolute pointer-events-none transition-all duration-200 ease-out z-10 ${
+            floating
+              ? "-top-2 left-3 text-[11px] bg-white px-1 text-[#1b0c25]/50"
+              : "top-1/2 left-3 -translate-y-1/2 text-sm text-[#1b0c25]/30"
+          }`}
+        >
+          {label}
+        </label>
+        <Select onValueChange={onChange} value={value}>
+          <SelectTrigger
+            className={`w-full border rounded-lg bg-white h-12 px-3 text-sm text-[#1b0c25] outline-none focus:ring-0 transition-colors ${
+              error ? "border-red-300" : "border-[#1b0c25]/15 focus:border-[#1b0c25]/40"
+            }`}
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((o) => (
+              <SelectItem key={o.value} value={o.value}>
+                {o.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      {error && <p className="text-xs text-red-500 px-1">{error}</p>}
+    </div>
+  );
+}
+
+/* ── Page ──────────────────────────────────────── */
 export default function Contact() {
   const [success, setSuccess] = useState(false);
 
-  const form = useForm<FormValues>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
@@ -67,326 +213,265 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-
       const data = await res.json();
-
       if (!res.ok) {
         toast.error(data.error || "Something went wrong. Please try again.");
         return;
       }
-
-      toast.success("Message sent! Check your inbox for a confirmation.");
+      toast.success("Message sent!");
       setSuccess(true);
-      form.reset();
+      reset();
     } catch {
       toast.error("Network error. Please check your connection and try again.");
     }
   };
 
-  const inputClass =
-    "bg-[#F9F9F9] border-[#1b0c25]/10 focus-visible:ring-brand/20 focus-visible:border-[#1b0c25]/30 h-11 sm:h-12 rounded-[10px] text-sm sm:text-base";
-
   return (
-    <div className="py-[120px] pb-20 max-lg:py-12 relative overflow-hidden">
-      {/* Background Gradients */}
-      <div className="absolute z-0 left-[-200px] top-[-100px] rounded-[600px] w-[500px] h-[400px] bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_31.09%,#fcab83_70.46%,#ff49d4_100%)] blur-[100px] opacity-[0.15] max-lg:hidden" />
-      <div className="absolute z-0 right-[-100px] bottom-[100px] rounded-[600px] w-[500px] h-[400px] bg-[linear-gradient(145deg,#efe8f6_0%,#d588fb_60.83%,#ff49d4_100%)] blur-[100px] opacity-[0.15] max-lg:hidden" />
+    <div className="pt-32 pb-20">
+      <Container className="flex flex-col gap-16 lg:gap-20">
 
-      <Container className="relative z-10 flex flex-col justify-center items-center gap-[60px] max-lg:gap-8">
         {/* Header */}
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col items-center text-center w-full max-w-[800px]"
+          className="flex flex-col gap-3 max-w-xl"
         >
-          <TitleSection title="Contact" />
-          <h1 className="font-medium text-4xl sm:text-5xl lg:text-[60px] lg:leading-[60px] text-[#1b0c25]">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+            <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+              Contact
+            </span>
+          </div>
+          <h1 className="text-[30px] lg:text-[40px] font-medium leading-[30px] lg:leading-[40px] text-[#1b0c25]">
             Get in touch with our team
           </h1>
+          <p className="text-[15px] leading-[26px] text-[#1b0c25]/50 max-w-sm">
+            We typically respond within 24 hours. Fill in the form and we&apos;ll get back to you.
+          </p>
         </motion.div>
 
-        {/* Main Card */}
+        {/* Two-column layout */}
         <motion.div
-          variants={scaleInVariants}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 w-full bg-white rounded-[24px] p-4 sm:p-6 lg:p-10 border border-[#1b0c25]/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+          className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20"
         >
-          {/* Left Column */}
-          <div className="flex flex-col justify-between gap-8 lg:gap-12 lg:min-w-0 lg:flex-1 lg:max-w-[420px]">
+          {/* Left — Info */}
+          <motion.div variants={fadeInUpVariants} className="flex flex-col gap-10">
             <div className="flex flex-col gap-6">
-              <p className="font-medium text-base lg:text-[17px] leading-[28px] text-[#1b0c25]/80">
-                Feel free to reach out - we'd love to connect.
-              </p>
-              <div className="flex flex-wrap gap-6 lg:gap-8">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
-                    <Mail className="text-[#1b0c25]" size={20} />
-                  </div>
-                  <div className="flex flex-col gap-1 min-w-0">
-                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">Email us</p>
-                    <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
-                      contact@myatps.com
-                    </p>
-                  </div>
+              <div className="flex items-start gap-4">
+                <div className="w-9 h-9 rounded-lg bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
+                  <Mail className="text-[#1b0c25]" size={16} />
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
-                    <LifeBuoy className="text-[#1b0c25]" size={20} />
-                  </div>
-                  <div className="flex flex-col gap-1 min-w-0">
-                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">Get support</p>
-                    <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
-                      Chat with us
-                    </p>
-                  </div>
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-[14px] font-medium text-[#1b0c25]">Email</p>
+                  <p className="text-[14px] text-[#1b0c25]/50">contact@myatps.com</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-9 h-9 rounded-lg bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
+                  <LifeBuoy className="text-[#1b0c25]" size={16} />
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <p className="text-[14px] font-medium text-[#1b0c25]">Support</p>
+                  <p className="text-[14px] text-[#1b0c25]/50">Chat with us in-app</p>
                 </div>
               </div>
             </div>
 
             {/* Testimonial */}
-            <div className="flex flex-col gap-6 p-6 bg-[#F9F9F9] rounded-2xl">
-              <blockquote className="text-lg lg:text-[20px] font-medium leading-[28px] text-[#1b0c25]">
-                "MyATPS gave me the confidence to sit my ATPL exams. The AI
-                tutor answered every question I had, and the ATC simulator
-                is simply unmatched."
-              </blockquote>
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col gap-4 border-l-2 border-[#1b0c25]/10 pl-5">
+              <p className="text-[15px] font-medium leading-[26px] text-[#1b0c25]">
+                &ldquo;MyATPS gave me the confidence to sit my ATPL exams. The explanations are simply unmatched.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
                 <Image
                   src="/images/imageCont.png"
                   alt="Thomas L."
-                  height={48}
-                  width={48}
-                  className="rounded-full shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+                  height={36}
+                  width={36}
+                  className="rounded-full shrink-0 grayscale"
                 />
-                <div className="flex flex-col gap-0 min-w-0">
-                  <p className="text-[14px] font-medium text-[#1b0c25] leading-tight">Thomas L.</p>
-                  <p className="text-[13px] font-normal text-[#1b0c25]/60">
-                    Commercial Pilot Student, France
-                  </p>
+                <div>
+                  <p className="text-[13px] font-medium text-[#1b0c25]">Thomas L.</p>
+                  <p className="text-[12px] text-[#1b0c25]/40">Commercial Pilot Student, France</p>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column — Form / Success */}
-          <div className="lg:flex-1 lg:min-w-0">
+          {/* Right — Form */}
+          <motion.div variants={fadeInUpVariants}>
             {success ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex flex-col items-center justify-center gap-6 h-full min-h-[400px] text-center"
+                className="flex flex-col items-center justify-center gap-6 py-20 text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-[#1b0c25]/5 flex items-center justify-center">
-                  <CheckCircle2 className="w-8 h-8 text-[#1b0c25]" />
+                <div className="w-14 h-14 rounded-full bg-[#1b0c25]/5 flex items-center justify-center">
+                  <CheckCircle2 className="w-7 h-7 text-[#1b0c25]" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-2xl font-semibold text-[#1b0c25]">Message sent!</h2>
-                  <p className="text-[15px] text-[#1b0c25]/60 max-w-[320px]">
-                    Thank you for reaching out. We'll get back to you as soon as possible.
-                    Check your inbox for a confirmation email.
+                  <h2 className="text-xl font-semibold text-[#1b0c25]">Message sent!</h2>
+                  <p className="text-[14px] text-[#1b0c25]/50 max-w-[300px]">
+                    Thank you for reaching out. We&apos;ll get back to you as soon as possible.
                   </p>
                 </div>
-                <Button
+                <button
                   onClick={() => setSuccess(false)}
-                  variant="outline"
-                  className="h-11 px-6 rounded-[10px] text-[#1b0c25] border-[#1b0c25]/20 hover:bg-[#1b0c25] hover:text-white"
+                  className="text-sm font-medium text-[#1b0c25] underline underline-offset-4 hover:opacity-60 transition-opacity cursor-pointer"
                 >
                   Send another message
-                </Button>
+                </button>
               </motion.div>
             ) : (
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="flex flex-col gap-4 sm:gap-5"
-                >
-                  {/* Row 1 — First & Last Name */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="firstName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            First Name <span className="text-red-500">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input placeholder="First Name" className={inputClass} {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="lastName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Last Name <span className="text-red-500">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input placeholder="Last Name" className={inputClass} {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
 
-                  {/* Row 2 — Email & Phone */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Email <span className="text-red-500">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="your@email.com"
-                              className={inputClass}
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Phone Number
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type="tel"
-                              placeholder="+1 000 000 0000"
-                              className={inputClass}
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  {/* Row 3 — Profile & Subject */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="profile"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            I am a
-                          </FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger className={`${inputClass} w-full`}>
-                                <SelectValue placeholder="Select your profile" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="student">Student Pilot</SelectItem>
-                              <SelectItem value="school">Flight School / Aviation Academy</SelectItem>
-                              <SelectItem value="instructor">Flight Instructor</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="subject"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                            Subject
-                          </FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger className={`${inputClass} w-full`}>
-                                <SelectValue placeholder="Select a subject" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="general">General Inquiry</SelectItem>
-                              <SelectItem value="support">Technical Support</SelectItem>
-                              <SelectItem value="billing">Subscription & Billing</SelectItem>
-                              <SelectItem value="school">Flight School Partnership (Pro)</SelectItem>
-                              <SelectItem value="demo">Demo Request</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  {/* Message */}
-                  <FormField
-                    control={form.control}
-                    name="message"
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <Controller
+                    control={control}
+                    name="firstName"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
-                          Message <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Tell us how we can help you..."
-                            className="bg-[#F9F9F9] border-[#1b0c25]/10 focus-visible:ring-brand/20 focus-visible:border-[#1b0c25]/30 min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
+                      <FloatingInput
+                        label="First Name"
+                        required
+                        value={field.value}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        error={errors.firstName?.message}
+                      />
                     )}
                   />
+                  <Controller
+                    control={control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FloatingInput
+                        label="Last Name"
+                        required
+                        value={field.value}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        error={errors.lastName?.message}
+                      />
+                    )}
+                  />
+                </div>
 
-                  {/* Submit */}
-                  <div className="flex flex-col items-center gap-4 mt-2">
-                    <Button
-                      type="submit"
-                      disabled={form.formState.isSubmitting}
-                      className="group w-full h-12 text-[16px] font-medium text-white bg-[#1b0c25] hover:bg-[#1b0c25]/90 rounded-[10px] overflow-hidden disabled:opacity-60"
-                    >
-                      {form.formState.isSubmitting ? (
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                      ) : (
-                        <span className="flex flex-col items-center h-[26px] overflow-hidden">
-                          <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                            Submit Message
-                          </span>
-                          <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                            Submit Message
-                          </span>
-                        </span>
-                      )}
-                    </Button>
-                    <p className="text-[13px] font-normal text-[#1b0c25]/50 leading-[20px] text-center max-w-[320px]">
-                      By submitting this form you agree to our friendly Privacy Policy
-                    </p>
-                  </div>
-                </form>
-              </Form>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <Controller
+                    control={control}
+                    name="email"
+                    render={({ field }) => (
+                      <FloatingInput
+                        label="Email"
+                        required
+                        type="email"
+                        value={field.value}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        error={errors.email?.message}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FloatingInput
+                        label="Phone"
+                        type="tel"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                        error={errors.phone?.message}
+                      />
+                    )}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <Controller
+                    control={control}
+                    name="profile"
+                    render={({ field }) => (
+                      <FloatingSelect
+                        label="I am a"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                        options={[
+                          { value: "student", label: "Student Pilot" },
+                          { value: "school", label: "Flight School / Academy" },
+                          { value: "instructor", label: "Flight Instructor" },
+                          { value: "other", label: "Other" },
+                        ]}
+                        error={errors.profile?.message}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FloatingSelect
+                        label="Subject"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                        options={[
+                          { value: "general", label: "General Inquiry" },
+                          { value: "support", label: "Technical Support" },
+                          { value: "billing", label: "Subscription & Billing" },
+                          { value: "school", label: "Flight School Partnership" },
+                          { value: "demo", label: "Demo Request" },
+                          { value: "other", label: "Other" },
+                        ]}
+                        error={errors.subject?.message}
+                      />
+                    )}
+                  />
+                </div>
+
+                <Controller
+                  control={control}
+                  name="message"
+                  render={({ field }) => (
+                    <FloatingTextarea
+                      label="Message"
+                      required
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      error={errors.message?.message}
+                    />
+                  )}
+                />
+
+                <div className="flex flex-col gap-3 pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full h-11 text-[14px] font-medium text-white bg-[#1b0c25] hover:bg-[#1b0c25]/90 rounded-[10px] cursor-pointer disabled:opacity-60 transition-opacity flex items-center justify-center"
+                  >
+                    {isSubmitting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      "Submit Message"
+                    )}
+                  </button>
+                  <p className="text-[12px] text-[#1b0c25]/40 text-center">
+                    By submitting you agree to our{" "}
+                    <a href="/privacy" className="underline underline-offset-2 hover:opacity-60 transition-opacity">
+                      Privacy Policy
+                    </a>
+                  </p>
+                </div>
+              </form>
             )}
-          </div>
+          </motion.div>
         </motion.div>
       </Container>
     </div>

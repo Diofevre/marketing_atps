@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import TitleSection from "../TitleSection";
+
 import { Container } from "../ui/container";
 import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
@@ -49,7 +49,7 @@ export default function Faqs() {
   };
 
   return (
-    <div id="faq" className="py-12 sm:py-16 lg:py-20 xl:py-[100px]">
+    <div id="faq" className="py-12 lg:py-[80px]">
       <Container className="flex flex-col lg:flex-row items-start gap-6 lg:gap-[60px] p-4 sm:p-6 lg:p-8 xl:p-[40px] bg-white rounded-2xl">
         {/* Left Column - Static Content */}
         <motion.div
@@ -62,11 +62,13 @@ export default function Faqs() {
           <div className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-[40px]">
             {/* Title Section */}
             <div className="flex flex-col items-start gap-2 sm:gap-3 lg:gap-[10px] w-full">
-              <TitleSection
-                title="FAQS"
-                className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-              />
-              <p className="text-2xl sm:text-3xl lg:text-[43px] text-[#1b0c25] leading-tight lg:leading-[52px] font-medium">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+                <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                  FAQs
+                </span>
+              </div>
+              <p className="text-[30px] lg:text-[40px] text-[#1b0c25] leading-[30px] lg:leading-[40px] font-medium">
                 Frequently Asked Questions
               </p>
             </div>
@@ -78,7 +80,7 @@ export default function Faqs() {
               </p>
               <p className="text-sm sm:text-base lg:text-[16px] font-medium text-[#1b0c25] leading-relaxed lg:leading-[26px]">
                 Contact us :{" "}
-                <span className="font-normal">We'll be happy to help you.</span>
+                <span className="font-normal">We&apos;ll be happy to help you.</span>
               </p>
               <div className="w-[120px] sm:w-[142px] h-auto">
                 <Image
@@ -135,7 +137,7 @@ export default function Faqs() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="p-3 sm:p-4 lg:p-[20px] pt-0 text-sm sm:text-base lg:text-[16px] text-[#1b0c25]/80 leading-relaxed lg:leading-[26px] border-t border-gray-200">
+                      <div className="p-3 sm:p-4 lg:p-[20px] pt-0 text-sm sm:text-base lg:text-[16px] text-[#1b0c25]/80 leading-relaxed lg:leading-[26px]">
                         {faq.answer}
                       </div>
                     </motion.div>

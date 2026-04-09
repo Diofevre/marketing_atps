@@ -1,7 +1,7 @@
 "use client";
 
 import { ButtonDemoVarient } from "../ButtonDemo";
-import TitleSection from "../TitleSection";
+
 import { Container } from "../ui/container";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -38,7 +38,7 @@ const LIST_WORK = [
 
 export default function Work() {
   return (
-    <div className="py-12 lg:py-[200px]">
+    <div className="py-12 lg:py-[80px]">
       <Container>
         <motion.div
           variants={workContainerVariants}
@@ -54,11 +54,13 @@ export default function Work() {
             >
               <div className="flex flex-col p-10 gap-6 h-full rounded-[16px] bg-white shadow-sm max-lg:p-6">
                 <div className="flex flex-col items-start gap-3">
-                  <TitleSection
-                    title="How it works"
-                    className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
-                  />
-                  <h1 className="font-medium text-5xl lg:text-[59px] leading-tight lg:leading-[60px] text-[#1b0c25]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 bg-[#1b0c25] rounded-sm shrink-0" />
+                    <span className="text-sm font-semibold uppercase tracking-wider text-[#1b0c25]">
+                      How it works
+                    </span>
+                  </div>
+                  <h1 className="font-medium text-[30px] lg:text-[40px] leading-[30px] lg:leading-[40px] text-[#1b0c25]">
                     A Simple 3-Step Process
                   </h1>
                 </div>
