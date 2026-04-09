@@ -1,0 +1,34 @@
+{
+  "effortLevel": "high",
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(rm -fr*)",
+      "Bash(sudo *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const i=JSON.parse(process.env.CLAUDE_TOOL_INPUT||'{}');const f=i.file_path||'';if(f.match(/\\.(ts|tsx|js|jsx|css|json)$/) && f.includes('marketing_atps')){try{require('child_process').execSync('cd /home/cloudarmel/Workspaces/Diofevre/Life/marketing_atps && npx prettier --write '+JSON.stringify(f),{stdio:'ignore'})}catch(e){}}\" 2>/dev/null; exit 0"
+          },
+          {
+            "type": "command",
+            "command": "node -e \"const i=JSON.parse(process.env.CLAUDE_TOOL_INPUT||'{}');const f=i.file_path||'';if(!f.match(/\\.tsx?$/) || !f.includes('marketing_atps'))process.exit(0);const fs=require('fs');const src=fs.existsSync(f)?fs.readFileSync(f,'utf8'):'';const issues=[];if(src.match(/style=\\{\\{/))issues.push('ANTI-PATTERN: inline style={{}} detected — use Tailwind utilities or CSS variables');if(src.match(/console\\.(log|warn|error)\\(/))issues.push('WARNING: console.log/warn/error left in code');if(src.match(/: any[^[]/) && !f.includes('.d.ts'))issues.push('WARNING: TypeScript any type detected — use proper types');if(issues.length){console.error('\\n⚠️  MyATPS Marketing Guard:\\n'+issues.join('\\n')+'\\n')}\" 2>&1; exit 0"
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
