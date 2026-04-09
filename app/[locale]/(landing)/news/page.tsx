@@ -4,6 +4,7 @@ import { FadeInUp, StaggerContainer } from "@/lib/motion";
 import { newsService } from "@/lib/api";
 import { transformNewsItems } from "@/lib/api/transformers";
 import type { Metadata } from "next";
+import type { NewsLocale } from "@/lib/types";
 import { getTranslations } from "next-intl/server";
 
 interface NewsPageProps {
@@ -48,12 +49,17 @@ export default async function NewsPage({ params }: NewsPageProps) {
   const t = await getTranslations({ locale, namespace: "newsPage" });
   // SSR-fetch the first page so search engines see article links in the HTML
   // payload. Filters and pagination remain client-side inside <NewsList />.
+  // Pass `lang={locale}` so the backend swaps in the matching translation
+  // when one exists — readers on /fr/news get French prose, readers on
+  // /news get English. The backend falls back to the canonical columns
+  // for legacy rows that don't yet have a translation for the locale.
   const [listRes, categoriesRes] = await Promise.all([
     newsService.getNews({
       page: 1,
       limit: 12,
       sortBy: "publishedAt",
       sortOrder: "desc",
+      lang: locale as NewsLocale,
     }),
     newsService.getCategories(),
   ]);
