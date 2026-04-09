@@ -169,12 +169,12 @@ export default function RootLayout({
               name: "MyATPS",
               alternateName: "My ATPS",
               url: SITE_URL,
-              // The branded yellow logo is the canonical brand asset used
-              // on the favicon, manifest, Apple touch icon, and OG image —
-              // we reference the same file here so third-party knowledge
-              // graph scrapers (Google, ZoomInfo, Crunchbase, Clearbit...)
-              // resolve a consistent visual identity.
-              logo: `${SITE_URL}/assets/logo-yellow.png`,
+              // Transparent-background multi-color brand mark — the same
+              // asset used everywhere in the site (Navigation, Footer,
+              // favicon, Apple touch icon, PWA manifest, OG card) so every
+              // surface (browser tab, home screen, social previews,
+              // knowledge graph entries) shows a single consistent logo.
+              logo: `${SITE_URL}/assets/logo-myatps.png`,
               description:
                 "Complete ATPL exam preparation platform with 20,000+ questions, research-based explanations, aviation dictionary, live quizzes, and study tools.",
               sameAs: [],

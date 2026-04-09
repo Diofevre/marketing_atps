@@ -27,19 +27,19 @@ export default function manifest(): MetadataRoute.Manifest {
       // surface (browser tab, home screen, social preview, knowledge
       // graph) shows the exact same brand mark.
       {
-        src: "/assets/logo-yellow.png",
+        src: "/assets/logo-myatps.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/assets/logo-yellow.png",
+        src: "/assets/logo-myatps.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/assets/logo-yellow.png",
+        src: "/assets/logo-myatps.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
