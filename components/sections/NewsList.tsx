@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useLocale } from "next-intl";
 import { newsService } from "@/lib/api";
 import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
-import type { NewsQueryParams, PaginationInfo } from "@/lib/types";
+import type { NewsLocale, NewsQueryParams, PaginationInfo } from "@/lib/types";
 import NewsSidebarPanel from "@/components/news/NewsSidebarPanel";
 import NewsFeaturedPost, { NewsFeaturedSkeleton } from "@/components/news/NewsFeaturedPost";
 import NewsGrid from "@/components/news/NewsGrid";
@@ -28,6 +29,11 @@ export default function NewsList({
   initialPagination,
   initialCategories,
 }: NewsListProps = {}) {
+  // Read the current locale so every client-side news fetch hits the backend
+  // with ?lang=<locale>. The backend swaps canonical fields with the matching
+  // translation when one exists, so /fr readers get French prose even on
+  // pagination / filter refetches after the initial SSR payload.
+  const locale = useLocale() as NewsLocale;
   const hasInitialData = initialNews !== undefined;
   const [news, setNews] = useState<TransformedNewsItem[]>(initialNews ?? []);
   const [categories, setCategories] = useState<string[]>(
@@ -53,6 +59,7 @@ export default function NewsList({
       limit: 12,
       sortBy: "publishedAt",
       sortOrder: "desc",
+      lang: locale,
     };
 
     if (selectedCategory !== "All Category") {
@@ -73,7 +80,7 @@ export default function NewsList({
     }
 
     setLoading(false);
-  }, [selectedCategory]);
+  }, [selectedCategory, locale]);
 
   const fetchCategories = useCallback(async () => {
     const response = await newsService.getCategories();
@@ -96,7 +103,7 @@ export default function NewsList({
       return;
     }
     fetchNews({ page: 1 });
-  }, [selectedCategory, fetchNews]);
+  }, [selectedCategory, locale, fetchNews]);
 
   const filteredNews = searchQuery
     ? news.filter((n) => n.title.toLowerCase().includes(searchQuery.toLowerCase()))

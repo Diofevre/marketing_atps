@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Link2 } from "lucide-react";
@@ -10,6 +11,7 @@ import {
   unwrapNewsItems,
   type TransformedNewsItem,
 } from "@/lib/api/transformers";
+import type { NewsLocale } from "@/lib/types";
 import { SidebarSkeleton } from "@/components/ui/skeleton-card";
 
 interface NewsSidebarProps {
@@ -27,6 +29,7 @@ export default function NewsSidebar({
   category,
   tags,
 }: NewsSidebarProps) {
+  const locale = useLocale() as NewsLocale;
   const [moreInsights, setMoreInsights] = useState<TransformedNewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +37,9 @@ export default function NewsSidebar({
     const fetchNews = async () => {
       setLoading(true);
 
-      const response = await newsService.getRecentNews(5);
+      // Pass the current locale so the backend swaps in the matching
+      // translation for the "More insights" sidebar list.
+      const response = await newsService.getRecentNews(5, locale);
 
       if (response.data) {
         const newsArray = unwrapNewsItems(response.data);
@@ -46,7 +51,7 @@ export default function NewsSidebar({
     };
 
     fetchNews();
-  }, [currentNewsId]);
+  }, [currentNewsId, locale]);
 
   if (loading) {
     return <SidebarSkeleton />;

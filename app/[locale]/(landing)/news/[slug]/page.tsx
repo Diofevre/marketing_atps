@@ -8,6 +8,7 @@ import { newsService } from "@/lib/api";
 import { transformNewsItem } from "@/lib/api/transformers";
 import { Container } from "@/components/ui/container";
 import type { Metadata } from "next";
+import type { NewsLocale } from "@/lib/types";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 
@@ -22,7 +23,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const response = await newsService.getNewsBySlug(slug);
+  const response = await newsService.getNewsBySlug(slug, locale as NewsLocale);
 
   if (response.error || !response.data) {
     return {
@@ -41,12 +42,17 @@ export async function generateMetadata({
     description: item.excerpt || "",
     alternates: {
       canonical: itemUrl,
-      // News items are currently monolingual (RSS pipeline writes the
-      // content in French only). We self-reference the current locale
-      // as the only alternate — once the pipeline emits both languages
-      // we can add the cross-locale alternates.
+      // Each news article exists under BOTH locale URLs now that the
+      // backend RSS pipeline emits bilingual content — the slug itself
+      // is shared between en/fr. The backend's `applyLocale` read path
+      // falls back to the canonical language for legacy rows that
+      // don't yet have a translation for the requested locale, so
+      // pointing Googlebot at both URLs is always safe: it will find
+      // real content at each address.
       languages: {
-        [locale]: itemUrl,
+        en: `/news/${item.slug}`,
+        fr: `/fr/news/${item.slug}`,
+        "x-default": `/news/${item.slug}`,
       },
     },
     openGraph: {
@@ -54,6 +60,7 @@ export async function generateMetadata({
       description: item.excerpt || "",
       url: itemUrl,
       locale: locale === "fr" ? "fr_FR" : "en_US",
+      alternateLocale: locale === "fr" ? ["en_US"] : ["fr_FR"],
       images: item.coverImage ? [item.coverImage] : [],
       type: "article",
       publishedTime: item.publishedAt,
@@ -62,8 +69,8 @@ export async function generateMetadata({
 }
 
 export default async function NewsDetail({ params }: PageProps) {
-  const { slug } = await params;
-  const response = await newsService.getNewsBySlug(slug);
+  const { locale, slug } = await params;
+  const response = await newsService.getNewsBySlug(slug, locale as NewsLocale);
 
   if (response.error || !response.data) {
     notFound();

@@ -99,6 +99,12 @@ export interface NewsTagsResponse {
   tags: { name: string; count: number }[];
 }
 
+// Supported news locales. Mirrors NEWS_LOCALES in the backend myatps
+// repo (lib/validation/news.schema.ts). Keep both lists in sync: if a
+// new locale is added backend-side without updating this union, the
+// marketing TS client will silently reject the new lang value.
+export type NewsLocale = 'en' | 'fr';
+
 export interface NewsQueryParams {
   page?: number;
   limit?: number;
@@ -108,6 +114,13 @@ export interface NewsQueryParams {
   search?: string;
   sortBy?: 'createdAt' | 'publishedAt' | 'title';
   sortOrder?: 'asc' | 'desc';
+  // When set, the backend swaps the canonical title/content/excerpt/
+  // atplRelevance fields with the translation for this locale if one
+  // exists. When omitted or unsupported, the backend returns each
+  // item in its own defaultLocale. See backend PR #4 + #6 for the
+  // full spec. Unsupported values are handled gracefully and do NOT
+  // return 400.
+  lang?: NewsLocale;
 }
 
 export interface ApiError {
