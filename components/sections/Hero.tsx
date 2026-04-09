@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { ButtonDemoBlur } from "../ButtonDemo";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
@@ -14,27 +15,6 @@ import {
   heroButtonVariants,
   heroCardVariants,
 } from "@/lib/motion";
-
-const CHAT_MESSAGES = [
-  {
-    id: 1,
-    type: "user",
-    message: "I'm struggling with ILS approach questions — can you help me understand the key concepts?",
-    delay: 0.5,
-  },
-  {
-    id: 2,
-    type: "ai",
-    message: "Absolutely! Our research-backed explanations break it down clearly: the localizer provides lateral guidance, while the glide slope handles vertical guidance — both using radio beams to guide you to the runway threshold.",
-    delay: 2,
-  },
-  {
-    id: 3,
-    type: "user",
-    message: "Great, let me start a quiz on Radio Navigation!",
-    delay: 4,
-  },
-];
 
 function TypingIndicator() {
   return (
@@ -153,8 +133,16 @@ function ChatMessage({ message, type, delay }: { message: string; type: string; 
 }
 
 export default function Hero() {
-  // Split title into words for animation
-  const titleWords = ["Pass", "Your", "ATPL", "on", "the", "First", "Try"];
+  const t = useTranslations("hero");
+  // Split the full localized title into words so each animates in separately.
+  // Using the full localized string (instead of a hardcoded English array)
+  // means the animation works identically in French.
+  const titleWords = t("titleFull").split(" ");
+  const CHAT_MESSAGES = [
+    { id: 1, type: "user", message: t("chatUser1"), delay: 0.5 },
+    { id: 2, type: "ai", message: t("chatAi1"), delay: 2 },
+    { id: 3, type: "user", message: t("chatUser2"), delay: 4 },
+  ];
 
   return (
     <div className="w-full pb-0 px-4">
@@ -199,10 +187,7 @@ export default function Hero() {
                   className="w-full lg:w-[700px]"
                 >
                   <p className="text-base sm:text-lg lg:text-[18px] leading-relaxed lg:leading-[28px] font-normal text-[#1b0c25]">
-                    20,000+ questions with research-based explanations, an
-                    aviation dictionary with audio &amp; 3D models, live quizzes,
-                    and a complete study ecosystem — the only ATPL platform
-                    that gives you everything in one place.
+                    {t("description")}
                   </p>
                 </motion.div>
               </div>
@@ -281,24 +266,24 @@ export default function Hero() {
                       <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c25] hover:bg-transparent">
                         <Image
                           src="/assets/icons/gptIcon.png"
-                          alt="AI Assistant"
+                          alt={t("aiAssistantAlt")}
                           height={16}
                           width={16}
                           className="mr-1"
                         />
-                        Assistant
+                        {t("btnAssistant")}
                         <ChevronDown className="ml-1 text-[#1b0c25] h-3 w-3 sm:h-4 sm:w-4" />
                       </Button>
 
                       <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c25] hover:bg-transparent">
-                        <Globe className="mr-1 h-3 w-3 sm:h-4 sm:w-4" /> Search
+                        <Globe className="mr-1 h-3 w-3 sm:h-4 sm:w-4" /> {t("btnSearch")}
                       </Button>
                     </div>
 
                     {/* Form */}
                     <form className="w-full max-w-[612px] flex flex-col gap-3 sm:gap-4">
                       <Input
-                        placeholder="Search questions, topics, or ask your assistant..."
+                        placeholder={t("searchPlaceholder")}
                         className="w-full border-none bg-transparent shadow-none text-sm sm:text-base lg:text-[16px] placeholder:text-sm sm:placeholder:text-base lg:placeholder:text-[16px] placeholder:text-[#1b0c25]/70"
                       />
 
@@ -308,30 +293,30 @@ export default function Hero() {
                           <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
                             <span className="flex flex-col items-center h-[14px] overflow-hidden">
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Start Quiz
+                                {t("btnStartQuiz")}
                               </span>
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Start Quiz
-                              </span>
-                            </span>
-                          </Button>
-                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Dictionary
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Dictionary
+                                {t("btnStartQuiz")}
                               </span>
                             </span>
                           </Button>
                           <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
                             <span className="flex flex-col items-center h-[14px] overflow-hidden">
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Practice Exam
+                                {t("btnDictionary")}
                               </span>
                               <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Practice Exam
+                                {t("btnDictionary")}
+                              </span>
+                            </span>
+                          </Button>
+                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
+                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
+                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                                {t("btnPracticeExam")}
+                              </span>
+                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                                {t("btnPracticeExam")}
                               </span>
                             </span>
                           </Button>

@@ -68,10 +68,22 @@
     "badge": "Built by pilots, for pilots",
     "title1": "Pass your ATPL",
     "titleHighlight": "on the first try",
+    "titleFull": "Pass Your ATPL on the First Try",
+    "description": "20,000+ questions with research-based explanations, an aviation dictionary with audio & 3D models, live quizzes, and a complete study ecosystem — the only ATPL platform that gives you everything in one place.",
     "subtitle": "20,000+ questions, research-based explanations, aviation dictionary with 3D models, live quizzes, and a complete study ecosystem.",
     "ctaPrimary": "Start learning for free",
     "ctaSecondary": "See how it works",
-    "trustLine": "Trusted by student pilots across Europe"
+    "trustLine": "Trusted by student pilots across Europe",
+    "chatUser1": "I'm struggling with ILS approach questions — can you help me understand the key concepts?",
+    "chatAi1": "Absolutely! Our research-backed explanations break it down clearly: the localizer provides lateral guidance, while the glide slope handles vertical guidance — both using radio beams to guide you to the runway threshold.",
+    "chatUser2": "Great, let me start a quiz on Radio Navigation!",
+    "searchPlaceholder": "Search questions, topics, or ask your assistant…",
+    "btnAssistant": "Assistant",
+    "btnSearch": "Search",
+    "btnStartQuiz": "Start Quiz",
+    "btnDictionary": "Dictionary",
+    "btnPracticeExam": "Practice Exam",
+    "aiAssistantAlt": "AI Assistant"
   },
   "contactPage": {
     "title": "Contact us",

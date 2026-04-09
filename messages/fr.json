@@ -68,10 +68,22 @@
     "badge": "Conçu par des pilotes, pour des pilotes",
     "title1": "Réussissez votre ATPL",
     "titleHighlight": "du premier coup",
+    "titleFull": "Réussissez votre ATPL du premier coup",
+    "description": "Plus de 20 000 questions avec des explications basées sur la recherche, un dictionnaire aéronautique avec audio et modèles 3D, des quiz en direct et un écosystème d'étude complet — la seule plateforme ATPL qui vous offre tout au même endroit.",
     "subtitle": "Plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et un écosystème d'étude complet.",
     "ctaPrimary": "Commencer gratuitement",
     "ctaSecondary": "Voir comment ça marche",
-    "trustLine": "Utilisé par des élèves pilotes dans toute l'Europe"
+    "trustLine": "Utilisé par des élèves pilotes dans toute l'Europe",
+    "chatUser1": "J'ai du mal avec les questions sur l'approche ILS — peux-tu m'aider à comprendre les concepts clés ?",
+    "chatAi1": "Bien sûr ! Nos explications basées sur la recherche détaillent clairement : le localizer fournit le guidage latéral, tandis que le glide slope gère le guidage vertical — les deux utilisent des faisceaux radio pour vous guider jusqu'au seuil de piste.",
+    "chatUser2": "Super, lance-moi un quiz sur la radionavigation !",
+    "searchPlaceholder": "Rechercher des questions, des sujets, ou demander à votre assistant…",
+    "btnAssistant": "Assistant",
+    "btnSearch": "Rechercher",
+    "btnStartQuiz": "Lancer un quiz",
+    "btnDictionary": "Dictionnaire",
+    "btnPracticeExam": "Examen blanc",
+    "aiAssistantAlt": "Assistant IA"
   },
   "contactPage": {
     "title": "Contactez-nous",
