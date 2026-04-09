@@ -12,13 +12,16 @@ import type { Metadata } from "next";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  // Next.js 16 app-router dynamic params are async. Both `locale` (from the
+  // `[locale]` segment in the URL tree) and `slug` (from the `[slug]`
+  // segment here) arrive together.
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const response = await newsService.getNewsBySlug(slug);
 
   if (response.error || !response.data) {
@@ -29,17 +32,28 @@ export async function generateMetadata({
   }
 
   const item = response.data;
+  // Locale-aware URL so canonical matches the rendered page exactly.
+  const pathPrefix = locale === "en" ? "" : `/${locale}`;
+  const itemUrl = `${pathPrefix}/news/${item.slug}`;
 
   return {
     title: item.title,
     description: item.excerpt || "",
     alternates: {
-      canonical: `/news/${item.slug}`,
+      canonical: itemUrl,
+      // News items are currently monolingual (RSS pipeline writes the
+      // content in French only). We self-reference the current locale
+      // as the only alternate — once the pipeline emits both languages
+      // we can add the cross-locale alternates.
+      languages: {
+        [locale]: itemUrl,
+      },
     },
     openGraph: {
       title: item.title,
       description: item.excerpt || "",
-      url: `/news/${item.slug}`,
+      url: itemUrl,
+      locale: locale === "fr" ? "fr_FR" : "en_US",
       images: item.coverImage ? [item.coverImage] : [],
       type: "article",
       publishedTime: item.publishedAt,

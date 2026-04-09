@@ -15,13 +15,16 @@ import type { Metadata } from "next";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  // Next.js 16 app-router dynamic params are async. Both `locale` (from the
+  // `[locale]` segment in the URL tree) and `slug` (from the `[slug]`
+  // segment here) arrive together.
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const response = await blogService.getArticleBySlug(slug);
 
   if (response.error || !response.data) {
@@ -32,18 +35,33 @@ export async function generateMetadata({
   }
 
   const article = response.data;
+  // When the locale is the default (en), the URL has no prefix; for fr,
+  // it's prefixed with `/fr`. Canonical must match the rendered URL
+  // exactly so Google does not treat `/fr/blog/<slug>` and `/blog/<slug>`
+  // as duplicates of each other.
+  const pathPrefix = locale === "en" ? "" : `/${locale}`;
+  const articleUrl = `${pathPrefix}/blog/${article.slug}`;
 
   return {
     title: article.seoTitle || article.title,
     description: article.seoDescription || article.excerpt || "",
     keywords: article.seoKeywords?.join(", "),
     alternates: {
-      canonical: `/blog/${article.slug}`,
+      canonical: articleUrl,
+      // Articles are currently monolingual (backend returns the content
+      // in the authoring language). We still self-reference the current
+      // locale as the only alternate — adding a cross-locale alternate
+      // that 404s would be worse than omitting it. Once the backend
+      // returns per-locale article content we can expand this.
+      languages: {
+        [locale]: articleUrl,
+      },
     },
     openGraph: {
       title: article.seoTitle || article.title,
       description: article.seoDescription || article.excerpt || "",
-      url: `/blog/${article.slug}`,
+      url: articleUrl,
+      locale: locale === "fr" ? "fr_FR" : "en_US",
       images: article.coverImage ? [article.coverImage] : [],
       type: "article",
       publishedTime: article.publishedAt || undefined,

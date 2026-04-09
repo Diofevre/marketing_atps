@@ -249,11 +249,15 @@
     "premiumFeature7": "Assistant d'étude par chat",
     "premiumFeature8": "Favoris illimités"
   },
+  "homePage": {
+    "metaTitle": "MyATPS — La plateforme complète de préparation aux examens ATPL",
+    "metaDescription": "Réussissez vos examens ATPL du premier coup avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et un écosystème d'étude complet conçu par des pilotes, pour des pilotes."
+  },
   "contactPage": {
     "title": "Contactez-nous",
     "description": "Prenez contact — notre équipe répond généralement sous un jour ouvré.",
-    "metaTitle": "Contact",
-    "metaDescription": "Contactez l'équipe MyATPS — nous répondons à chaque message sous un jour ouvré.",
+    "metaTitle": "Contacter MyATPS — Parlez à l'équipe de préparation ATPL",
+    "metaDescription": "Une question sur MyATPS ? Contactez notre équipe pour toute demande de support, de partenariat ou de retour sur notre plateforme de préparation ATPL.",
     "badge": "Contact",
     "heading": "Prenez contact avec notre équipe",
     "intro": "N'hésitez pas à nous écrire — nous serons ravis d'échanger avec vous.",
@@ -309,8 +313,13 @@
     "lastUpdated": "Dernière mise à jour : 6 avril 2026"
   },
   "blogPage": {
-    "metaTitle": "Blog",
-    "metaDescription": "Conseils d'étude ATPL, guides de préparation aux examens, actualités aéronautiques et retours d'instructeurs pilotes."
+    "metaTitle": "Blog — Conseils ATPL, actualités aéronautiques et nouveautés",
+    "metaDescription": "Articles d'experts sur la préparation aux examens ATPL, stratégies d'étude aéronautique et conseils pour réussir vos examens du premier coup.",
+    "ogTitle": "Blog MyATPS — Conseils ATPL et actualités aéronautiques",
+    "ogDescription": "Articles d'experts sur la préparation aux examens ATPL, stratégies d'étude et conseils pour les élèves pilotes.",
+    "badge": "Notre blog",
+    "heading": "Actualités et analyses",
+    "intro": "Découvrez les dernières tendances aéronautiques, les procédures de sécurité et les ressources pour les pilotes en formation."
   },
   "blogSection": {
     "badge": "Blog",
@@ -318,8 +327,13 @@
     "exploreAll": "Tout voir"
   },
   "newsPage": {
-    "metaTitle": "Actualités",
-    "metaDescription": "Dernières mises à jour produit, actualités de l'industrie aéronautique et annonces MyATPS."
+    "metaTitle": "Actualités — Les dernières nouvelles de MyATPS",
+    "metaDescription": "Restez informé des dernières mises à jour de la plateforme MyATPS, des nouvelles fonctionnalités, de l'actualité aéronautique et des changements de réglementation EASA.",
+    "ogTitle": "Actualités MyATPS — Mises à jour et actualité aéronautique",
+    "ogDescription": "Les dernières nouvelles de MyATPS : nouvelles fonctionnalités, actualité aéronautique et évolutions des examens EASA.",
+    "badge": "Nos actualités",
+    "heading": "Actualités et analyses",
+    "intro": "Restez informé des dernières tendances de la formation aéronautique, des réglementations EASA et des évolutions de notre plateforme."
   },
   "notFound": {
     "title": "Page introuvable",
