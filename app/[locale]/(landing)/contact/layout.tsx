@@ -23,6 +23,9 @@ export async function generateMetadata({
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
+      url: `${pathPrefix}/contact`,
+      locale: locale === "fr" ? "fr_FR" : "en_US",
+      alternateLocale: locale === "fr" ? ["en_US"] : ["fr_FR"],
     },
   };
 }

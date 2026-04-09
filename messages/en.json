@@ -249,11 +249,15 @@
     "premiumFeature7": "Study assistant chat",
     "premiumFeature8": "Unlimited bookmarks"
   },
+  "homePage": {
+    "metaTitle": "MyATPS — The Complete ATPL Exam Preparation Platform",
+    "metaDescription": "Pass your ATPL exams on the first try with 20,000+ questions, research-based explanations, an aviation dictionary with 3D models, live quizzes, and a complete study ecosystem built by pilots, for pilots."
+  },
   "contactPage": {
     "title": "Contact us",
     "description": "Get in touch — our team usually replies within one business day.",
-    "metaTitle": "Contact",
-    "metaDescription": "Contact the MyATPS team — we reply to every message within one business day.",
+    "metaTitle": "Contact MyATPS — Get in Touch with the ATPL Preparation Team",
+    "metaDescription": "Have a question about MyATPS? Contact our team for support, partnership inquiries, or feedback about the ATPL preparation platform.",
     "badge": "Contact",
     "heading": "Get in touch with our team",
     "intro": "Feel free to reach out - we'd love to connect.",
@@ -309,8 +313,13 @@
     "lastUpdated": "Last updated: April 6, 2026"
   },
   "blogPage": {
-    "metaTitle": "Blog",
-    "metaDescription": "ATPL study tips, exam preparation guides, aviation news, and insights from pilot instructors."
+    "metaTitle": "Blog — ATPL Study Tips, Aviation Insights & Platform Updates",
+    "metaDescription": "Expert articles on ATPL exam preparation, aviation study strategies, and tips to help student pilots pass their exams on the first try.",
+    "ogTitle": "MyATPS Blog — ATPL Study Tips & Aviation Insights",
+    "ogDescription": "Expert articles on ATPL exam preparation, aviation study strategies, and tips for student pilots.",
+    "badge": "Our Blog",
+    "heading": "Latest News & Insights",
+    "intro": "Discover the latest trends in aviation, safety procedures, and pilot training resources."
   },
   "blogSection": {
     "badge": "Blog",
@@ -318,8 +327,13 @@
     "exploreAll": "Explore All"
   },
   "newsPage": {
-    "metaTitle": "News",
-    "metaDescription": "Latest product updates, aviation industry news, and MyATPS announcements."
+    "metaTitle": "News — Latest Updates from MyATPS",
+    "metaDescription": "Stay up to date with the latest MyATPS platform updates, new features, aviation industry news, and EASA exam regulation changes.",
+    "ogTitle": "MyATPS News — Platform Updates & Aviation News",
+    "ogDescription": "The latest updates from MyATPS: new features, aviation news, and EASA exam changes.",
+    "badge": "Our News",
+    "heading": "News & Insights",
+    "intro": "Stay informed with the latest trends in aviation training, EASA regulations, and platform updates."
   },
   "notFound": {
     "title": "Page not found",
