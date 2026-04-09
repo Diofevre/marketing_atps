@@ -58,15 +58,18 @@
     "a6": "Oui ! Le plan Premium inclut un essai gratuit de 48 heures pour vous permettre d'explorer toutes les fonctionnalités avant de vous engager. Vous pouvez également commencer avec le plan Gratuit pour vous faire une idée de la plateforme avant de passer à Standard ou Premium."
   },
   "nav": {
-    "pricing": "Tarifs",
     "blog": "Blog",
-    "news": "Actualités",
+    "closeMenu": "Fermer le menu",
     "contact": "Contact",
+    "languageEnglish": "Passer en anglais",
+    "languageFrench": "Passer en français",
+    "languageLabel": "Langue",
     "logIn": "Connexion",
-    "signIn": "Se connecter",
-    "signUp": "Commencer",
+    "news": "Actualités",
     "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu"
+    "pricing": "Tarifs",
+    "signIn": "Se connecter",
+    "signUp": "Commencer"
   },
   "footer": {
     "tagline": "Commencez votre parcours ATPL",

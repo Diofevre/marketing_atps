@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata({
   params,
@@ -180,9 +181,9 @@ export default async function PrivacyPage({
                 contact@myatps.com
               </a>{" "}
               or through our{" "}
-              <a href="/contact" className="underline font-medium">
+              <Link href="/contact" className="underline font-medium">
                 contact page
-              </a>
+              </Link>
               .
             </p>
           </section>

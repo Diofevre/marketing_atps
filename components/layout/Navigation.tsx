@@ -6,6 +6,7 @@ import { Container } from "../ui/container";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import LocaleSwitcher from "./LocaleSwitcher";
 import {
   navigationVariants,
   navigationLogoVariants,
@@ -226,6 +227,7 @@ const Navigation = () => {
                   ))}
                 </motion.div>
                 <motion.div variants={navigationButtonVariants} className="flex items-center gap-2">
+                  <LocaleSwitcher variant="desktop" />
                   <Link href="/contact">
                     <Button
                       variant="outline"
@@ -382,9 +384,21 @@ const Navigation = () => {
                 ))}
               </motion.div>
 
+              {/* Language switcher — full width above the action buttons
+                  so the tap target is generous on mobile */}
+              <motion.div
+                variants={mobileMenuItemVariants}
+                className="mb-[16px]"
+              >
+                <LocaleSwitcher variant="mobile" />
+              </motion.div>
+
               {/* Buttons */}
               <motion.div variants={mobileMenuItemVariants} className="flex gap-3">
-                <Link href="/contact">
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   <Button variant="outline" className="text-[15px] sm:text-[16px] font-medium h-[42px] sm:h-[44px] rounded-[10px] border-[#1b0c25] text-[#1b0c25] px-6">
                     {t("contact")}
                   </Button>
