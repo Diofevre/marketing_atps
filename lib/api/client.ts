@@ -41,35 +41,16 @@ function createApiError(message: string, status: number, code?: string): ApiErro
   return { message, status, code };
 }
 
-// User-Agent used for all server-side fetches. The backend sits behind
-// Cloudflare with bot protection enabled, and CF returns a 403 "Just a
-// moment..." challenge HTML for the default Node/undici User-Agent
-// (either empty or "node"). When that happens, apiClient sees a non-JSON
-// response and every SSR-rendered news/blog page renders "No news found"
-// even though the DB has rows.
-//
-// We present ourselves as a legitimate server-to-server client so CF
-// lets the request through. Setting User-Agent is a forbidden header
-// in the browser fetch spec, so this is only applied when running on
-// the server (typeof window === 'undefined').
-const SSR_USER_AGENT =
-  'Mozilla/5.0 (compatible; MyATPS-Marketing-SSR/1.0; +https://myatps.com)';
-
 class ApiClient {
   private getBaseUrl(): string {
     return getApiBaseUrl();
   }
 
   private getHeaders(): HeadersInit {
-    const headers: Record<string, string> = {
+    return {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     };
-    // Only set User-Agent server-side. Browsers block overriding it.
-    if (typeof window === 'undefined') {
-      headers['User-Agent'] = SSR_USER_AGENT;
-    }
-    return headers;
   }
 
   async get<T>(endpoint: string, params: Record<string, unknown> = {}, config: RequestConfig = {}): Promise<ApiResponse<T>> {
