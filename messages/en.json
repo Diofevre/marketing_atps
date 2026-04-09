@@ -58,15 +58,18 @@
     "a6": "Yes! The Premium plan includes a 48-hour free trial so you can explore all features before committing. You can also start with the Free plan to get a feel for the platform before upgrading to Standard or Premium."
   },
   "nav": {
-    "pricing": "Pricing",
     "blog": "Blog",
-    "news": "News",
+    "closeMenu": "Close menu",
     "contact": "Contact",
+    "languageEnglish": "Switch to English",
+    "languageFrench": "Switch to French",
+    "languageLabel": "Language",
     "logIn": "Log In",
-    "signIn": "Sign in",
-    "signUp": "Get started",
+    "news": "News",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "pricing": "Pricing",
+    "signIn": "Sign in",
+    "signUp": "Get started"
   },
   "footer": {
     "tagline": "Start Your ATPL Journey",

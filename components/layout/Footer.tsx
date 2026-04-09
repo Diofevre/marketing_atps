@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { ButtonDemo } from "../ButtonDemo";
 import { Separator } from "../ui/separator";
 import { Container } from "../ui/container";
@@ -175,16 +176,43 @@ const Footer = () => {
                       {item.title}
                     </p>
                     <div className="flex flex-col gap-[8px] items-start lg:items-center">
-                      {item.links.map((link) => (
-                        <motion.a
-                          key={link.name}
-                          variants={footerLinkItemVariants}
-                          href={link.href}
-                          className="text-[15px] font-medium leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-center"
-                        >
-                          {link.name}
-                        </motion.a>
-                      ))}
+                      {item.links.map((link) => {
+                        // External URLs (absolute http/https, e.g. the
+                        // APP_URL auth links) use a plain anchor so they
+                        // open cleanly without going through next-intl.
+                        // Internal URLs (including hash fragments like
+                        // `/#pricing`) go through the locale-aware Link
+                        // so `/fr/#pricing` is preserved when the user
+                        // is browsing in French.
+                        const isExternal = /^https?:\/\//.test(link.href);
+                        if (isExternal) {
+                          return (
+                            <motion.a
+                              key={link.name}
+                              variants={footerLinkItemVariants}
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[15px] font-medium leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-center"
+                            >
+                              {link.name}
+                            </motion.a>
+                          );
+                        }
+                        return (
+                          <motion.div
+                            key={link.name}
+                            variants={footerLinkItemVariants}
+                          >
+                            <Link
+                              href={link.href}
+                              className="text-[15px] font-medium leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-center"
+                            >
+                              {link.name}
+                            </Link>
+                          </motion.div>
+                        );
+                      })}
                     </div>
                   </motion.div>
                 ))}
@@ -200,9 +228,12 @@ const Footer = () => {
                 <p className="text-[15px] leading-[26px] max-lg:text-sm">
                   © 2026 MyATPS. {t("rightsReserved")}
                 </p>
-                <a href="/privacy" className="text-[15px] leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-sm">
+                <Link
+                  href="/privacy"
+                  className="text-[15px] leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-sm"
+                >
                   {t("linkPrivacy")}
-                </a>
+                </Link>
               </div>
             </motion.div>
           </motion.div>

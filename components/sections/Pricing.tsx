@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { Facebook, Linkedin, X } from "lucide-react";
 import { blogService } from "@/lib/api";
 import {
