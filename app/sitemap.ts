@@ -48,6 +48,9 @@ const STATIC_PATHS: Array<{
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/blog", changeFrequency: "daily", priority: 0.8 },
   { path: "/news", changeFrequency: "daily", priority: 0.8 },
+  { path: "/enterprise", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/enterprise/procteo", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/enterprise/demo", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.6 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
 ];
