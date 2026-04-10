@@ -123,6 +123,25 @@ export default function EnterpriseHero() {
                 </Button>
               </Link>
             </motion.div>
+
+            {/* Stats row */}
+            <motion.div
+              variants={heroButtonVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-wrap justify-center gap-8 lg:gap-16 pt-4"
+            >
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <span className="text-2xl lg:text-[32px] font-medium text-white">
+                    {t(`heroStat${i}Value`)}
+                  </span>
+                  <span className="text-[13px] text-white/50 uppercase tracking-wide">
+                    {t(`heroStat${i}Label`)}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </Container>
       </div>

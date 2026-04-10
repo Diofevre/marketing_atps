@@ -23,7 +23,7 @@ export default function EnterprisePlans() {
       id: "school",
       title: t("planSchoolTitle"),
       description: t("planSchoolDescription"),
-      features: Array.from({ length: 5 }, (_, i) =>
+      features: Array.from({ length: 6 }, (_, i) =>
         t(`planSchoolFeature${i + 1}`),
       ),
       cta: t("planSchoolCta"),
@@ -34,7 +34,7 @@ export default function EnterprisePlans() {
       title: t("planAcademyTitle"),
       description: t("planAcademyDescription"),
       badge: t("planAcademyBadge"),
-      features: Array.from({ length: 6 }, (_, i) =>
+      features: Array.from({ length: 8 }, (_, i) =>
         t(`planAcademyFeature${i + 1}`),
       ),
       cta: t("planAcademyCta"),

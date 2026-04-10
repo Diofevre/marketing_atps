@@ -5,6 +5,7 @@ import ProcteoShowcase from "@/components/sections/enterprise/ProcteoShowcase";
 import EnterpriseFeatures from "@/components/sections/enterprise/EnterpriseFeatures";
 import EnterprisePlans from "@/components/sections/enterprise/EnterprisePlans";
 import EnterpriseTestimonials from "@/components/sections/enterprise/EnterpriseTestimonials";
+import EnterpriseCompliance from "@/components/sections/enterprise/EnterpriseCompliance";
 import EnterpriseCTA from "@/components/sections/enterprise/EnterpriseCTA";
 
 export async function generateMetadata({
@@ -41,8 +42,9 @@ export default function EnterprisePage() {
   return (
     <>
       <EnterpriseHero />
-      <ProcteoShowcase />
       <EnterpriseFeatures />
+      <ProcteoShowcase />
+      <EnterpriseCompliance />
       <EnterprisePlans />
       <EnterpriseTestimonials />
       <EnterpriseCTA />
