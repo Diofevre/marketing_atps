@@ -299,34 +299,18 @@ export function useDemoSession() {
       });
     }, 1000);
 
-    // Simulated detection events
-    simRef.current = setInterval(() => {
-      const elapsed = Date.now() - examStartRef.current;
-      const roll = Math.random();
-
-      if (roll < 0.06) {
-        addEvent("face.gaze.off_screen", "demoEvents.gazeOff", "medium", elapsed);
-      } else if (roll < 0.10) {
-        addEvent("face.head_pose.yaw", "demoEvents.headTurn", "medium", elapsed);
-      } else if (roll < 0.12) {
-        addEvent("face.absent", "demoEvents.faceAbsent", "high", elapsed);
-      } else if (roll < 0.13) {
-        addEvent("object.phone", "demoEvents.phoneDetected", "critical", elapsed);
-      }
-    }, 2500);
+    // Real ML detection handled by useProcteoDetection in DemoExam
+    // Events added via addEvent() exposed in return value
   }, []);
 
-  const addEvent = (kind: string, labelKey: string, severity: DetectionEvent["severity"], elapsed: number) => {
+  const addEvent = (event: Omit<DetectionEvent, "id">) => {
     setState((s) => ({
       ...s,
       events: [
         ...s.events,
         {
+          ...event,
           id: `evt-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`,
-          kind,
-          labelKey,
-          severity,
-          elapsedMs: elapsed,
         },
       ],
     }));
@@ -435,6 +419,7 @@ export function useDemoSession() {
     goToIdentityStep,
     goToPermissions,
     goToConsent,
+    addEvent,
     startExam,
     selectAnswer,
     goToQuestion,

@@ -644,7 +644,31 @@
     "consentStart": "I agree — Start the exam"
   },
   "common": {
-    "loading": "Loading…"
+    "getStarted": "Get Started",
+    "demo": "Demo",
+    "bookADemo": "Book a Demo",
+    "featured": "Featured",
+    "readTime": "{minutes} min read",
+    "retry": "Retry",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}",
+    "searchArticle": "Search article...",
+    "browseByCategories": "Browse By Categories",
+    "allCategories": "All Categories",
+    "noPostsFound": "No posts found for this category.",
+    "noNewsFound": "No news found for this category.",
+    "relatedArticles": "Related Articles",
+    "relatedNews": "Related News",
+    "moreArticles": "More articles",
+    "popularArticles": "Popular articles",
+    "moreInsights": "More insights",
+    "postedBy": "Posted by",
+    "author": "Author",
+    "tags": "Tags",
+    "share": "Share:",
+    "source": "Source:",
+    "category": "Category:"
   },
   "blogDetail": {
     "authorLabel": "Author"

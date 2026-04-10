@@ -644,7 +644,31 @@
     "consentStart": "J'accepte — Démarrer l'examen"
   },
   "common": {
-    "loading": "Chargement…"
+    "getStarted": "Commencer",
+    "demo": "Démo",
+    "bookADemo": "Réserver une démo",
+    "featured": "À la une",
+    "readTime": "{minutes} min de lecture",
+    "retry": "Réessayer",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "pageOf": "Page {page} sur {total}",
+    "searchArticle": "Rechercher un article...",
+    "browseByCategories": "Parcourir par catégories",
+    "allCategories": "Toutes les catégories",
+    "noPostsFound": "Aucun article trouvé pour cette catégorie.",
+    "noNewsFound": "Aucune actualité trouvée pour cette catégorie.",
+    "relatedArticles": "Articles connexes",
+    "relatedNews": "Actualités connexes",
+    "moreArticles": "Plus d'articles",
+    "popularArticles": "Articles populaires",
+    "moreInsights": "Plus d'analyses",
+    "postedBy": "Publié par",
+    "author": "Auteur",
+    "tags": "Tags",
+    "share": "Partager :",
+    "source": "Source :",
+    "category": "Catégorie :"
   },
   "blogDetail": {
     "authorLabel": "Auteur"

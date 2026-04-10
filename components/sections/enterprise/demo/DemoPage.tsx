@@ -127,6 +127,7 @@ export default function DemoPage() {
                 answeredCount={session.answeredCount}
                 events={session.events}
                 cameraStream={session.cameraStream}
+                onAddEvent={session.addEvent}
                 onSelectAnswer={session.selectAnswer}
                 onGoToQuestion={session.goToQuestion}
                 onSubmit={session.submitExam}

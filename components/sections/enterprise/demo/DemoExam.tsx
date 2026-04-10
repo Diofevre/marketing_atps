@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useProcteoDetection } from "./useProcteoDetection";
 import {
   ChevronLeft,
   ChevronRight,
@@ -41,6 +42,7 @@ interface DemoExamProps {
   answeredCount: number;
   events: DetectionEvent[];
   cameraStream: MediaStream | null;
+  onAddEvent: (event: Omit<DetectionEvent, "id">) => void;
   onSelectAnswer: (questionId: string, optionIndex: number) => void;
   onGoToQuestion: (index: number) => void;
   onSubmit: () => void;
@@ -54,6 +56,7 @@ export default function DemoExam({
   answeredCount,
   events,
   cameraStream,
+  onAddEvent,
   onSelectAnswer,
   onGoToQuestion,
   onSubmit,
@@ -63,6 +66,13 @@ export default function DemoExam({
   const videoRef = useRef<HTMLVideoElement>(null);
   const q = questions[currentQuestion];
   const selectedAnswer = q ? answers[q.id] : null;
+
+  // Real ML detection in browser (COCO-SSD + Web Speech API)
+  useProcteoDetection({
+    videoElement: videoRef.current,
+    enabled: true,
+    onEvent: onAddEvent,
+  });
 
   useEffect(() => {
     if (videoRef.current && cameraStream) {
