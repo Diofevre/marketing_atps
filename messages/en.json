@@ -605,7 +605,12 @@
     "identityVerifying": "Analyzing face...",
     "identityMatch": "Identity verified — face matches!",
     "identityNoMatch": "Face does not match reference",
-    "identityVerifyBtn": "Verify Identity"
+    "identityVerifyBtn": "Verify Identity",
+    "liteNotice": "This is a lite demo version. The full Procteo platform includes AI-powered face recognition, deep behavioral analysis, and comprehensive offline review.",
+    "emailNotice": "Your email will be used to send you the detailed offline analysis report after the demo.",
+    "offlineNotice": "A detailed AI analysis of your session is being processed. Results will be sent to your email within 30 minutes.",
+    "offlineTitle": "Offline Analysis",
+    "offlineDesc": "Our AI is performing a deep analysis of your recorded session — face tracking, object detection, behavioral patterns. This takes longer but produces a more accurate report."
   },
   "common": {
     "loading": "Loading…"

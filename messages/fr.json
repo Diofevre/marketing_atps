@@ -605,7 +605,12 @@
     "identityVerifying": "Analyse du visage...",
     "identityMatch": "Identité vérifiée — le visage correspond !",
     "identityNoMatch": "Le visage ne correspond pas",
-    "identityVerifyBtn": "Vérifier l'identité"
+    "identityVerifyBtn": "Vérifier l'identité",
+    "liteNotice": "Ceci est une version allégée de la démo. La plateforme Procteo complète inclut la reconnaissance faciale par IA, l'analyse comportementale approfondie et la revue offline complète.",
+    "emailNotice": "Votre email sera utilisé pour vous envoyer le rapport d'analyse offline détaillé après la démo.",
+    "offlineNotice": "Une analyse IA approfondie de votre session est en cours. Les résultats seront envoyés à votre email dans les 30 minutes.",
+    "offlineTitle": "Analyse Offline",
+    "offlineDesc": "Notre IA effectue une analyse approfondie de votre session enregistrée — suivi facial, détection d'objets, patterns comportementaux. C'est plus long mais produit un rapport plus précis."
   },
   "common": {
     "loading": "Chargement…"

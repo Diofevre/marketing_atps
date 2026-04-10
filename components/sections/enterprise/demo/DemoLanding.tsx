@@ -44,6 +44,13 @@ export default function DemoLanding({ email, error, loading, onEmailChange, onSt
         <p className="text-[14px] leading-[22px] text-[#1b0c25]/50">{t("description")}</p>
       </motion.div>
 
+      {/* Lite version notice */}
+      <div className="w-full max-w-[440px] rounded-[12px] bg-amber-50 border border-amber-200/60 px-4 py-3">
+        <p className="text-[12px] leading-[18px] text-amber-700">
+          {t("liteNotice")}
+        </p>
+      </div>
+
       {/* Email + start */}
       <div className="w-full max-w-[380px] flex flex-col gap-3">
         <input
@@ -55,6 +62,9 @@ export default function DemoLanding({ email, error, loading, onEmailChange, onSt
           onKeyDown={(e) => e.key === "Enter" && !loading && onStart()}
           disabled={loading}
         />
+        <p className="text-[11px] text-[#1b0c25]/40 leading-[16px] -mt-1">
+          {t("emailNotice")}
+        </p>
         <Button
           onClick={onStart}
           disabled={!email || loading}

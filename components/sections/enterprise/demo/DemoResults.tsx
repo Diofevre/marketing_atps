@@ -141,6 +141,23 @@ export default function DemoResults({ score, totalQuestions, timeRemaining, even
           </div>
         )}
 
+        {/* Offline analysis notice */}
+        <div className="rounded-[12px] bg-gradient-to-r from-[#d37bff]/5 to-[#80a9fc]/5 border border-[#d37bff]/15 p-4 mb-6">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#d37bff]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <Clock className="w-4 h-4 text-[#d37bff]" />
+            </div>
+            <div>
+              <h4 className="text-[14px] font-medium text-[#1b0c25] mb-1">
+                {t("offlineTitle") ?? "Offline Analysis"}
+              </h4>
+              <p className="text-[12px] leading-[18px] text-[#1b0c25]/50">
+                {t("offlineNotice")}
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Actions */}
         <div className="flex flex-col sm:flex-row justify-center gap-3">
           <Button onClick={onRestart} variant="outline" className="h-11 px-6 rounded-[8px] text-[14px]">
