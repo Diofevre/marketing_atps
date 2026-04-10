@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import DemoPlaceholder from "@/components/sections/enterprise/DemoPlaceholder";
+import DemoPage from "@/components/sections/enterprise/demo/DemoPage";
 
 export async function generateMetadata({
   params,
@@ -32,6 +32,6 @@ export async function generateMetadata({
   };
 }
 
-export default function DemoPage() {
-  return <DemoPlaceholder />;
+export default function EnterpriseDemoPage() {
+  return <DemoPage />;
 }

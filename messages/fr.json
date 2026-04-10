@@ -563,12 +563,137 @@
     "contactDescription": "Contactez notre équipe commerciale pour discuter de l'intégration de Procteo dans votre programme de formation.",
     "contactButton": "Contacter l'équipe commerciale",
     "placeholder": "L'interface de démo sera connectée par l'équipe d'intégration.",
-    "comingSoon": "Démo interactive bientôt disponible"
+    "comingSoon": "Démo interactive bientôt disponible",
+    "queueMessage": "Tous les slots de démo sont actuellement utilisés",
+    "queuePolling": "Vérification des slots disponibles...",
+    "permCamera": "Caméra & Micro",
+    "permScreen": "Partage d'écran",
+    "permCameraTitle": "Accès caméra et microphone",
+    "permCameraDesc": "Procteo a besoin de votre caméra et microphone pour surveiller la session d'examen. Vos données restent privées.",
+    "permCameraPreview": "Aperçu caméra",
+    "permGranted": "Autorisé",
+    "permAllow": "Autoriser caméra et micro",
+    "permScreenTitle": "Partage d'écran (Optionnel)",
+    "permScreenDesc": "Partagez votre écran pour que Procteo puisse détecter les applications non autorisées.",
+    "permAllowScreen": "Partager l'écran",
+    "permSkip": "Passer",
+    "permReady": "Prêt à commencer !",
+    "permReadyDesc": "Toutes les permissions sont accordées. L'examen comporte 10 questions aviation et un timer de 5 minutes. Bonne chance !",
+    "permStart": "Démarrer l'examen",
+    "examTitle": "Examen Démo Procteo",
+    "examPrev": "Précédent",
+    "examNext": "Suivant",
+    "examSubmit": "Soumettre",
+    "examNoEvents": "Surveillance en cours...",
+    "resultsPassed": "Réussi !",
+    "resultsFailed": "Non réussi",
+    "resultsProcteo": "Rapport d'intégrité Procteo",
+    "verdictClear": "Aucun problème",
+    "verdictMinor": "Problèmes mineurs",
+    "verdictSuspicious": "Activité suspecte",
+    "resultsEvents": "événements détectés",
+    "permCameraCheck": "Vous voyez-vous correctement ?",
+    "permCameraCheckDesc": "Assurez-vous que votre visage est clairement visible et bien éclairé.",
+    "permCameraConfirm": "Oui, je me vois",
+    "permScreenWarn": "Sélectionnez \"Écran entier\" pour une surveillance correcte.",
+    "permIdentity": "Tester la vérification d'identité",
+    "identityTitle": "Vérification d'identité (Optionnel)",
+    "identityUpload": "1. Photo de référence",
+    "identityDrop": "Cliquez pour uploader une photo ou pièce d'identité",
+    "identityUploadBtn": "Uploader une photo",
+    "identityFace": "2. Vérification faciale en direct",
+    "identityVerifying": "Analyse du visage...",
+    "identityMatch": "Identité vérifiée — le visage correspond !",
+    "identityNoMatch": "Le visage ne correspond pas",
+    "identityVerifyBtn": "Vérifier l'identité",
+    "liteNotice": "Ceci est une version allégée de la démo. La plateforme Procteo complète inclut la reconnaissance faciale par IA, l'analyse comportementale approfondie et la revue offline complète.",
+    "emailNotice": "Votre email sera utilisé pour vous envoyer le rapport d'analyse offline détaillé après la démo.",
+    "offlineNotice": "Une analyse IA approfondie de votre session est en cours. Les résultats seront envoyés à votre email dans les 30 minutes.",
+    "offlineTitle": "Analyse Offline",
+    "offlineDesc": "Notre IA effectue une analyse approfondie de votre session enregistrée — suivi facial, détection d'objets, patterns comportementaux. C'est plus long mais produit un rapport plus précis."
   },
   "common": {
     "loading": "Chargement…"
   },
   "blogDetail": {
     "authorLabel": "Auteur"
+  },
+  "demoEvents": {
+    "gazeOff": "Regard hors écran",
+    "headTurn": "Tête tournée",
+    "faceAbsent": "Visage non visible",
+    "phoneDetected": "Téléphone détecté"
+  },
+  "demoQuiz": {
+    "q1": {
+      "question": "Quelle est l'altitude minimale de sécurité au-dessus d'une zone congestionnée ?",
+      "a": "500 pieds AGL",
+      "b": "1 000 pieds au-dessus de l'obstacle le plus haut dans un rayon de 600m",
+      "c": "1 500 pieds AGL",
+      "d": "2 000 pieds MSL"
+    },
+    "q2": {
+      "question": "Quel instrument indique le cap de l'aéronef ?",
+      "a": "Altimètre",
+      "b": "Indicateur d'assiette",
+      "c": "Indicateur de cap (Gyroscope directionnel)",
+      "d": "Variomètre"
+    },
+    "q3": {
+      "question": "Que signifie un feu rouge fixe de la tour de contrôle pour un avion au sol ?",
+      "a": "Stop",
+      "b": "Autorisé au décollage",
+      "c": "Dégager la piste",
+      "d": "Retourner au point de départ"
+    },
+    "q4": {
+      "question": "Dans l'alphabet phonétique OACI, quel est le mot pour la lettre 'G' ?",
+      "a": "George",
+      "b": "Gamma",
+      "c": "Genève",
+      "d": "Golf"
+    },
+    "q5": {
+      "question": "Quel est le rôle principal des volets ?",
+      "a": "Augmenter la vitesse de l'avion",
+      "b": "Augmenter la portance à basse vitesse",
+      "c": "Améliorer la stabilité latérale",
+      "d": "Réduire la puissance moteur"
+    },
+    "q6": {
+      "question": "Que signifie 'METAR' ?",
+      "a": "Message d'observation météorologique régulière pour l'aviation",
+      "b": "Mesure de la zone terminale",
+      "c": "Message météorologique du trafic aérien",
+      "d": "Mesure atmosphérique radar"
+    },
+    "q7": {
+      "question": "Dans un circuit d'attente standard, dans quel sens sont les virages ?",
+      "a": "Gauche",
+      "b": "Alternance gauche et droite",
+      "c": "Droite",
+      "d": "Dépend de l'altitude"
+    },
+    "q8": {
+      "question": "Quel est l'effet d'un centre de gravité arrière sur les performances ?",
+      "a": "Vitesse de décrochage augmentée",
+      "b": "Stabilité réduite",
+      "c": "Consommation de carburant augmentée",
+      "d": "Marge de décrochage augmentée"
+    },
+    "q9": {
+      "question": "Qu'affiche un instrument de navigation VOR ?",
+      "a": "Distance à la station",
+      "b": "Vitesse sol",
+      "c": "Altitude au-dessus de la station",
+      "d": "Position radiale par rapport à la station"
+    },
+    "q10": {
+      "question": "Quel est le calage altimétrique standard pour l'altitude de transition ?",
+      "a": "1013,25 hPa (QNE)",
+      "b": "1023,25 hPa",
+      "c": "QNH de l'aéroport le plus proche",
+      "d": "QFE de l'aéroport de départ"
+    }
   }
 }

@@ -563,12 +563,137 @@
     "contactDescription": "Contact our sales team to discuss how Procteo can be integrated into your training program.",
     "contactButton": "Contact Sales",
     "placeholder": "Demo interface will be connected by the integration team.",
-    "comingSoon": "Interactive demo coming soon"
+    "comingSoon": "Interactive demo coming soon",
+    "queueMessage": "All demo slots are currently in use",
+    "queuePolling": "Checking for available slots...",
+    "permCamera": "Camera & Mic",
+    "permScreen": "Screen Share",
+    "permCameraTitle": "Camera & Microphone Access",
+    "permCameraDesc": "Procteo needs your camera and microphone to monitor the exam session. Your data stays private.",
+    "permCameraPreview": "Camera preview",
+    "permGranted": "Granted",
+    "permAllow": "Allow Camera & Microphone",
+    "permScreenTitle": "Screen Sharing (Optional)",
+    "permScreenDesc": "Share your screen so Procteo can detect unauthorized applications during the exam.",
+    "permAllowScreen": "Share Screen",
+    "permSkip": "Skip",
+    "permReady": "Ready to start!",
+    "permReadyDesc": "All permissions are set. The exam has 10 aviation questions and a 5-minute timer. Good luck!",
+    "permStart": "Start Exam",
+    "examTitle": "Procteo Demo Exam",
+    "examPrev": "Previous",
+    "examNext": "Next",
+    "examSubmit": "Submit Exam",
+    "examNoEvents": "Monitoring...",
+    "resultsPassed": "Passed!",
+    "resultsFailed": "Not passed",
+    "resultsProcteo": "Procteo Integrity Report",
+    "verdictClear": "Clear",
+    "verdictMinor": "Minor Issues",
+    "verdictSuspicious": "Suspicious Activity",
+    "resultsEvents": "events detected",
+    "permCameraCheck": "Can you see yourself?",
+    "permCameraCheckDesc": "Make sure your face is clearly visible and well-lit before continuing.",
+    "permCameraConfirm": "Yes, I can see myself",
+    "permScreenWarn": "Please select \"Entire Screen\" for proper monitoring.",
+    "permIdentity": "Test Identity Verification",
+    "identityTitle": "Identity Verification (Optional)",
+    "identityUpload": "1. Reference Photo",
+    "identityDrop": "Click to upload a photo or ID document",
+    "identityUploadBtn": "Upload Photo",
+    "identityFace": "2. Live Face Verification",
+    "identityVerifying": "Analyzing face...",
+    "identityMatch": "Identity verified — face matches!",
+    "identityNoMatch": "Face does not match reference",
+    "identityVerifyBtn": "Verify Identity",
+    "liteNotice": "This is a lite demo version. The full Procteo platform includes AI-powered face recognition, deep behavioral analysis, and comprehensive offline review.",
+    "emailNotice": "Your email will be used to send you the detailed offline analysis report after the demo.",
+    "offlineNotice": "A detailed AI analysis of your session is being processed. Results will be sent to your email within 30 minutes.",
+    "offlineTitle": "Offline Analysis",
+    "offlineDesc": "Our AI is performing a deep analysis of your recorded session — face tracking, object detection, behavioral patterns. This takes longer but produces a more accurate report."
   },
   "common": {
     "loading": "Loading…"
   },
   "blogDetail": {
     "authorLabel": "Author"
+  },
+  "demoEvents": {
+    "gazeOff": "Gaze off screen",
+    "headTurn": "Head turned away",
+    "faceAbsent": "Face not visible",
+    "phoneDetected": "Phone detected"
+  },
+  "demoQuiz": {
+    "q1": {
+      "question": "What is the minimum safe altitude over a congested area?",
+      "a": "500 feet AGL",
+      "b": "1,000 feet above the highest obstacle within 600m",
+      "c": "1,500 feet AGL",
+      "d": "2,000 feet MSL"
+    },
+    "q2": {
+      "question": "Which instrument indicates the aircraft's heading?",
+      "a": "Altimeter",
+      "b": "Attitude Indicator",
+      "c": "Heading Indicator (Directional Gyro)",
+      "d": "Vertical Speed Indicator"
+    },
+    "q3": {
+      "question": "What does a steady red light from the control tower mean to an aircraft on the ground?",
+      "a": "Stop",
+      "b": "Cleared for takeoff",
+      "c": "Taxi clear of the runway",
+      "d": "Return to starting point"
+    },
+    "q4": {
+      "question": "In the ICAO phonetic alphabet, what is the word for the letter 'G'?",
+      "a": "George",
+      "b": "Gamma",
+      "c": "Geneva",
+      "d": "Golf"
+    },
+    "q5": {
+      "question": "What is the primary purpose of wing flaps?",
+      "a": "To increase the aircraft's speed",
+      "b": "To increase lift at lower speeds",
+      "c": "To improve lateral stability",
+      "d": "To reduce engine power"
+    },
+    "q6": {
+      "question": "What does 'METAR' stand for?",
+      "a": "Meteorological Aerodrome Report",
+      "b": "Measured Terminal Area Report",
+      "c": "Meteorological Air Traffic Report",
+      "d": "Measured Atmospheric Radar"
+    },
+    "q7": {
+      "question": "In a standard holding pattern, which direction are the turns?",
+      "a": "Left",
+      "b": "Alternating left and right",
+      "c": "Right",
+      "d": "Depends on altitude"
+    },
+    "q8": {
+      "question": "What is the effect of an aft center of gravity on aircraft performance?",
+      "a": "Increased stall speed",
+      "b": "Decreased stability",
+      "c": "Increased fuel consumption",
+      "d": "Increased stall margin"
+    },
+    "q9": {
+      "question": "What does a VOR navigation instrument display?",
+      "a": "Distance to the station",
+      "b": "Ground speed",
+      "c": "Altitude above the station",
+      "d": "Radial position relative to the station"
+    },
+    "q10": {
+      "question": "What is the standard pressure setting for the transition altitude?",
+      "a": "1013.25 hPa (QNE)",
+      "b": "1023.25 hPa",
+      "c": "QNH of the nearest airport",
+      "d": "QFE of the departure airport"
+    }
   }
 }
