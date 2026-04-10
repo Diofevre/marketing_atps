@@ -25,21 +25,25 @@ const ICON_LINKS = [
     id: 1,
     icon_src: "/assets/logos/facebook.png",
     label: "Facebook",
+    href: "https://www.facebook.com/myatps",
   },
   {
     id: 2,
     icon_src: "/assets/logos/X.png",
     label: "X",
+    href: "https://x.com/myatps",
   },
   {
     id: 3,
     icon_src: "/assets/logos/Insta.png",
     label: "Instagram",
+    href: "https://www.instagram.com/myatps",
   },
   {
     id: 4,
     icon_src: "/assets/logos/LinkdIn.png",
     label: "LinkedIn",
+    href: "https://www.linkedin.com/company/myatps",
   },
 ];
 
@@ -144,8 +148,12 @@ const Footer = () => {
                   className="flex gap-[16px] max-lg:justify-center"
                 >
                   {ICON_LINKS.map((icon) => (
-                    <motion.div
+                    <motion.a
                       key={icon.id}
+                      href={icon.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={icon.label}
                       variants={footerSocialVariants}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -155,9 +163,9 @@ const Footer = () => {
                         alt={icon.label}
                         width={40}
                         height={40}
-                        className="max-lg:w-8 max-lg:h-8 cursor-pointer"
+                        className="max-lg:w-8 max-lg:h-8"
                       />
-                    </motion.div>
+                    </motion.a>
                   ))}
                 </motion.div>
               </motion.div>

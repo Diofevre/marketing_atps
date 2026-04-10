@@ -10,8 +10,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export type DemoStep =
   | "landing"
   | "queued"
+  | "systemcheck"
   | "permissions"
   | "identity"
+  | "consent"
   | "exam"
   | "results";
 
@@ -140,7 +142,7 @@ export function useDemoSession() {
         }));
         startQueuePolling(data.session_id);
       } else {
-        setState((s) => ({ ...s, step: "permissions", sessionId: data.session_id }));
+        setState((s) => ({ ...s, step: "systemcheck", sessionId: data.session_id }));
       }
     } catch {
       setState((s) => ({ ...s, error: "Cannot reach Procteo. Try again later." }));
@@ -163,7 +165,7 @@ export function useDemoSession() {
 
         if (data.status === "active") {
           if (pollRef.current) clearInterval(pollRef.current);
-          setState((s) => ({ ...s, step: "permissions" }));
+          setState((s) => ({ ...s, step: "systemcheck" }));
         } else if (data.status === "queued") {
           setState((s) => ({
             ...s,
@@ -259,6 +261,14 @@ export function useDemoSession() {
 
   const goToIdentityStep = useCallback(() => {
     setState((s) => ({ ...s, step: "identity" }));
+  }, []);
+
+  const goToPermissions = useCallback(() => {
+    setState((s) => ({ ...s, step: "permissions" }));
+  }, []);
+
+  const goToConsent = useCallback(() => {
+    setState((s) => ({ ...s, step: "consent" }));
   }, []);
 
   // ── Start exam ──────────────────────────────────────────
@@ -423,6 +433,8 @@ export function useDemoSession() {
     setIdentityPhoto,
     verifyIdentity,
     goToIdentityStep,
+    goToPermissions,
+    goToConsent,
     startExam,
     selectAnswer,
     goToQuestion,

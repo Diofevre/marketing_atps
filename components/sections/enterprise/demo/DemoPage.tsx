@@ -8,8 +8,10 @@ import { fadeInUpVariants, fadeInUpDelayedVariants } from "@/lib/motion";
 import { useDemoSession } from "./useDemoSession";
 import DemoLanding from "./DemoLanding";
 import DemoQueue from "./DemoQueue";
+import DemoSystemCheck from "./DemoSystemCheck";
 import DemoPermissions from "./DemoPermissions";
 import DemoIdentity from "./DemoIdentity";
+import DemoConsent from "./DemoConsent";
 import DemoExam from "./DemoExam";
 import DemoResults from "./DemoResults";
 import { useState } from "react";
@@ -73,6 +75,13 @@ export default function DemoPage() {
               />
             )}
 
+            {session.step === "systemcheck" && (
+              <DemoSystemCheck
+                key="systemcheck"
+                onComplete={session.goToPermissions}
+              />
+            )}
+
             {session.step === "permissions" && (
               <DemoPermissions
                 key="permissions"
@@ -85,7 +94,7 @@ export default function DemoPage() {
                 onRequestScreen={session.requestScreen}
                 onSkipScreen={session.skipScreen}
                 onGoToIdentity={session.goToIdentityStep}
-                onComplete={session.startExam}
+                onComplete={session.goToConsent}
               />
             )}
 
@@ -97,7 +106,14 @@ export default function DemoPage() {
                 identityMatched={session.identityMatched}
                 onSetPhoto={session.setIdentityPhoto}
                 onVerify={session.verifyIdentity}
-                onComplete={session.startExam}
+                onComplete={session.goToConsent}
+              />
+            )}
+
+            {session.step === "consent" && (
+              <DemoConsent
+                key="consent"
+                onAccept={session.startExam}
               />
             )}
 

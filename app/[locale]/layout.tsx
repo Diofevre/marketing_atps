@@ -139,7 +139,9 @@ export default async function LocaleLayout({
   // FAQ rich results). Localizing the schema lets Google show the right
   // language in the featured snippets.
   const tSchema = await getTranslations({ locale, namespace: "schema" });
-  const tFaq = await getTranslations({ locale, namespace: "faq" });
+  // Use faqSection (same source the visible FAQ component reads) so the
+  // JSON-LD structured data never diverges from what users actually see.
+  const tFaq = await getTranslations({ locale, namespace: "faqSection" });
 
   return (
     <html lang={locale}>
@@ -274,6 +276,11 @@ export default async function LocaleLayout({
                   "@type": "Question",
                   name: tFaq("q5"),
                   acceptedAnswer: { "@type": "Answer", text: tFaq("a5") },
+                },
+                {
+                  "@type": "Question",
+                  name: tFaq("q6"),
+                  acceptedAnswer: { "@type": "Answer", text: tFaq("a6") },
                 },
               ],
             }),
