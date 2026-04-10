@@ -55,6 +55,7 @@ const Footer = () => {
       links: [
         { name: t("linkFeatures"), href: "/#bento" },
         { name: t("linkPricing"), href: "/#pricing" },
+        { name: t("linkEnterprise"), href: "/enterprise" },
         { name: t("linkLogIn"), href: `${APP_URL}/auth/login` },
         { name: t("linkSignUp"), href: `${APP_URL}/auth/signup` },
       ],

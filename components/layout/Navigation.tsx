@@ -22,9 +22,10 @@ import { APP_URL } from "@/lib/constants";
 const Navigation = () => {
   const t = useTranslations("nav");
   const NAV_LIST = [
-    { id: 1, name: t("pricing"), link: "/#pricing" },
-    { id: 2, name: t("blog"), link: "/blog" },
-    { id: 3, name: t("news"), link: "/news" },
+    { id: 1, name: t("enterprise"), link: "/enterprise" },
+    { id: 2, name: t("pricing"), link: "/#pricing" },
+    { id: 3, name: t("blog"), link: "/blog" },
+    { id: 4, name: t("news"), link: "/news" },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
