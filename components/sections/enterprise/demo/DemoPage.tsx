@@ -56,6 +56,7 @@ export default function DemoPage() {
           <AnimatePresence mode="wait">
             {session.step === "landing" && (
               <DemoLanding
+                key="landing"
                 email={session.email}
                 error={session.error}
                 loading={loading}
@@ -66,6 +67,7 @@ export default function DemoPage() {
 
             {session.step === "queued" && (
               <DemoQueue
+                key="queued"
                 position={session.queuePosition}
                 waitSeconds={session.queueWaitSeconds}
               />
@@ -73,6 +75,7 @@ export default function DemoPage() {
 
             {session.step === "permissions" && (
               <DemoPermissions
+                key="permissions"
                 hasCamera={session.hasCamera}
                 hasMicrophone={session.hasMicrophone}
                 hasScreen={session.hasScreen}
@@ -88,6 +91,7 @@ export default function DemoPage() {
 
             {session.step === "identity" && (
               <DemoIdentity
+                key="identity"
                 cameraStream={session.cameraStream}
                 identityPhoto={session.identityPhoto}
                 identityMatched={session.identityMatched}
@@ -99,6 +103,7 @@ export default function DemoPage() {
 
             {session.step === "exam" && (
               <DemoExam
+                key="exam"
                 questions={session.questions}
                 currentQuestion={session.currentQuestion}
                 answers={session.answers}
@@ -114,6 +119,7 @@ export default function DemoPage() {
 
             {session.step === "results" && (
               <DemoResults
+                key="results"
                 score={session.score}
                 totalQuestions={session.totalQuestions}
                 timeRemaining={session.timeRemaining}

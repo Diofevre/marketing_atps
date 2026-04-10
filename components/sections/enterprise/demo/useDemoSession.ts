@@ -80,7 +80,9 @@ export function useDemoSession() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const simRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const verifyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const examStartRef = useRef(0);
+  const examRunningRef = useRef(false);
   // Refs for cleanup — avoids stale closure in endSession
   const sessionIdRef = useRef<string | null>(null);
   const cameraStreamRef = useRef<MediaStream | null>(null);
@@ -173,14 +175,14 @@ export function useDemoSession() {
   // ── Permissions ─────────────────────────────────────────
 
   const requestCamera = useCallback(async () => {
-    // Stop old stream if any (prevents leak on re-request)
-    cameraStreamRef.current?.getTracks().forEach((t) => t.stop());
-
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { width: 640, height: 480 },
         audio: true,
       });
+      // Stop old stream AFTER new one is ready (avoids race condition)
+      cameraStreamRef.current?.getTracks().forEach((t) => t.stop());
+      cameraStreamRef.current = stream;
       setState((s) => ({
         ...s,
         hasCamera: true,
@@ -241,9 +243,9 @@ export function useDemoSession() {
 
   const verifyIdentity = useCallback(() => {
     // Simulated — in production, this would call InsightFace via the API
-    // For the demo, we always "match" after a short delay
+    if (verifyTimeoutRef.current) clearTimeout(verifyTimeoutRef.current);
     setState((s) => ({ ...s, identityMatched: null })); // loading
-    setTimeout(() => {
+    verifyTimeoutRef.current = setTimeout(() => {
       setState((s) => ({ ...s, identityMatched: true }));
     }, 2000);
   }, []);
@@ -255,6 +257,8 @@ export function useDemoSession() {
   // ── Start exam ──────────────────────────────────────────
 
   const startExam = useCallback(() => {
+    if (examRunningRef.current) return; // prevent double start
+    examRunningRef.current = true;
     examStartRef.current = Date.now();
 
     setState((s) => ({
@@ -346,6 +350,8 @@ export function useDemoSession() {
     if (timerRef.current) clearInterval(timerRef.current);
     if (pollRef.current) clearInterval(pollRef.current);
     if (simRef.current) clearInterval(simRef.current);
+    if (verifyTimeoutRef.current) clearTimeout(verifyTimeoutRef.current);
+    examRunningRef.current = false;
     setState({
       step: "landing",
       sessionId: null,
@@ -375,6 +381,7 @@ export function useDemoSession() {
       if (timerRef.current) clearInterval(timerRef.current);
       if (pollRef.current) clearInterval(pollRef.current);
       if (simRef.current) clearInterval(simRef.current);
+      if (verifyTimeoutRef.current) clearTimeout(verifyTimeoutRef.current);
       // endSession uses refs, safe to call here
       cameraStreamRef.current?.getTracks().forEach((t) => t.stop());
       screenStreamRef.current?.getTracks().forEach((t) => t.stop());
