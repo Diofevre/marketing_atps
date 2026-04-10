@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { newsService } from "@/lib/api";
 import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
 import type { NewsLocale, NewsQueryParams, PaginationInfo } from "@/lib/types";
@@ -34,12 +34,14 @@ export default function NewsList({
   // translation when one exists, so /fr readers get French prose even on
   // pagination / filter refetches after the initial SSR payload.
   const locale = useLocale() as NewsLocale;
+  const t = useTranslations("common");
+  const ALL_CAT = t("allCategories");
   const hasInitialData = initialNews !== undefined;
   const [news, setNews] = useState<TransformedNewsItem[]>(initialNews ?? []);
   const [categories, setCategories] = useState<string[]>(
-    initialCategories ?? ["All Category"],
+    initialCategories ?? [ALL_CAT],
   );
-  const [selectedCategory, setSelectedCategory] = useState("All Category");
+  const [selectedCategory, setSelectedCategory] = useState(ALL_CAT);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(!hasInitialData);
   const [error, setError] = useState<string | null>(null);
@@ -62,7 +64,7 @@ export default function NewsList({
       lang: locale,
     };
 
-    if (selectedCategory !== "All Category") {
+    if (selectedCategory !== ALL_CAT) {
       queryParams.category = selectedCategory;
     }
 
@@ -88,7 +90,7 @@ export default function NewsList({
       const names = (response.data.categories || []).map(
         (c: { name: string }) => c.name,
       );
-      setCategories(["All Category", ...names]);
+      setCategories([ALL_CAT, ...names]);
     }
   }, []);
 
@@ -120,14 +122,14 @@ export default function NewsList({
           onClick={() => fetchNews()}
           className="px-6 py-2 bg-[#1b0c25] text-white rounded-full hover:bg-[#1b0c25]/90 transition-colors"
         >
-          Réessayer
+          {t("retry")}
         </button>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-row gap-6 lg:gap-10 items-start">
+    <div className="flex flex-col md:flex-row gap-6 lg:gap-10 items-start">
       <NewsSidebarPanel
         categories={categories}
         selectedCategory={selectedCategory}

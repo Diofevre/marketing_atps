@@ -1,6 +1,6 @@
 import type { BlogArticle, BlogSection, NewsItem } from '@/lib/types';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { enUS, fr } from 'date-fns/locale';
 
 /**
  * Some list endpoints (recent/related/popular/featured) historically return
@@ -32,11 +32,16 @@ export function unwrapNewsItems(
   return payload.news ?? [];
 }
 
-export function formatDisplayDate(dateString: string | null): string {
+const DATE_LOCALES = { en: enUS, fr } as const;
+
+export function formatDisplayDate(
+  dateString: string | null,
+  locale: 'en' | 'fr' = 'en',
+): string {
   if (!dateString) return '';
   try {
     const date = new Date(dateString);
-    return format(date, 'MMM dd, yyyy', { locale: fr });
+    return format(date, 'PPP', { locale: DATE_LOCALES[locale] });
   } catch {
     return dateString;
   }

@@ -34,14 +34,16 @@ export default function BlogList({
   initialPagination,
   initialCategories,
 }: BlogListProps = {}) {
+  const t = useTranslations("common");
+  const ALL_CAT = t("allCategories");
   const hasInitialData = initialPosts !== undefined;
   const [posts, setPosts] = useState<TransformedBlogPost[]>(
     initialPosts ?? [],
   );
   const [categories, setCategories] = useState<string[]>(
-    initialCategories ?? ["All Category"],
+    initialCategories ?? [ALL_CAT],
   );
-  const [selectedCategory, setSelectedCategory] = useState("All Category");
+  const [selectedCategory, setSelectedCategory] = useState(ALL_CAT);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(!hasInitialData);
   const [error, setError] = useState<string | null>(null);
@@ -65,7 +67,7 @@ export default function BlogList({
         status: "published",
       };
 
-      if (selectedCategory !== "All Category") {
+      if (selectedCategory !== ALL_CAT) {
         queryParams.category = selectedCategory;
       }
 
@@ -93,7 +95,7 @@ export default function BlogList({
       const names = (response.data.categories || []).map(
         (c: { name: string }) => c.name,
       );
-      setCategories(["All Category", ...names]);
+      setCategories([ALL_CAT, ...names]);
     }
   }, []);
 
@@ -127,14 +129,14 @@ export default function BlogList({
           onClick={() => fetchPosts()}
           className="px-6 py-2 bg-[#1b0c25] text-white rounded-full hover:bg-[#1b0c25]/90 transition-colors"
         >
-          Réessayer
+          {t("retry")}
         </button>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-row gap-6 lg:gap-10 items-start">
+    <div className="flex flex-col md:flex-row gap-6 lg:gap-10 items-start">
       <BlogSidebarPanel
         categories={categories}
         selectedCategory={selectedCategory}
