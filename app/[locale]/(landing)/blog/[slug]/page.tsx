@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { FadeInUp, ScaleIn, StaggerContainer } from "@/lib/motion";
 import RelatedPosts from "@/components/sections/RelatedPosts";
 import BlogSidebar from "@/components/sections/BlogSidebar";
@@ -70,7 +71,8 @@ export async function generateMetadata({
 }
 
 export default async function BlogDetail({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: "blogDetail" });
   const response = await blogService.getArticleBySlug(slug);
 
   if (response.error || !response.data) {
@@ -192,7 +194,7 @@ export default async function BlogDetail({ params }: PageProps) {
                     <p className="text-sm font-bold text-[#1b0c25]">
                       {blog.author.name}
                     </p>
-                    <p className="text-xs text-gray-500">Author</p>
+                    <p className="text-xs text-gray-500">{t("authorLabel")}</p>
                   </div>
                 </FadeInUp>
               )}
