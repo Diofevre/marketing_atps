@@ -12,6 +12,28 @@ const nextConfig: NextConfig = {
   // duplicate-content dilution. Next.js now 308-redirects the trailing-slash
   // variants to the canonical form, matching per-page `alternates.canonical`.
 
+  // Security headers applied to all responses.
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+    ];
+  },
+
   // Rewrites to proxy blog/news API calls to the main app
   async rewrites() {
     const apiUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
@@ -46,7 +68,27 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'app.myatps.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.myatps.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'myatps.com',
+      },
+      {
+        // Blog/news cover images can come from any CDN via the
+        // backend API. We restrict to known patterns rather than
+        // using a wildcard that would turn next/image into an
+        // open proxy.
+        protocol: 'https',
+        hostname: '*.cloudfront.net',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.r2.cloudflarestorage.com',
       },
     ],
   },

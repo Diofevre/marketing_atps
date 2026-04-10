@@ -10,6 +10,7 @@ import {
   transformBlogArticles,
   unwrapBlogArticles,
 } from "@/lib/api/transformers";
+import { sanitizeContent } from "@/lib/sanitize";
 import { Container } from "@/components/ui/container";
 import type { Metadata } from "next";
 
@@ -236,7 +237,7 @@ export default async function BlogDetail({ params }: PageProps) {
 
                     <div
                       className="text-[#1b0c25]/70 text-[14px] leading-[22px] prose prose-lg max-w-none"
-                      dangerouslySetInnerHTML={{ __html: section.content }}
+                      dangerouslySetInnerHTML={{ __html: sanitizeContent(section.content) }}
                     />
                   </div>
                 ))}
@@ -244,7 +245,7 @@ export default async function BlogDetail({ params }: PageProps) {
             ) : (
               <div className="prose prose-lg max-w-none text-[#1b0c25]/80">
                 {blog.content ? (
-                  <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+                  <div dangerouslySetInnerHTML={{ __html: sanitizeContent(blog.content) }} />
                 ) : (
                   <p>{blog.description}</p>
                 )}

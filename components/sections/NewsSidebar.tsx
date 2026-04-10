@@ -66,14 +66,14 @@ export default function NewsSidebar({
             Source:
           </p>
           {sourceUrl ? (
-            <Link
+            <a
               href={sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-[13px] font-bold text-[#1b0c25] hover:text-[#1b0c25]/70 transition-colors"
             >
               {source} <Link2 className="w-3 h-3" />
-            </Link>
+            </a>
           ) : (
             <span className="text-[13px] font-bold text-[#1b0c25]">
               {source}
