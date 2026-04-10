@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DEMO_QUESTIONS, DEMO_DURATION_SECONDS } from "./demoQuestions";
 
-const PROCTEO_API = "https://procteo-api.myatps.com";
+const PROCTEO_API =
+  process.env.NEXT_PUBLIC_PROCTEO_API || "https://procteo-api.myatps.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export type DemoStep =
@@ -223,8 +224,7 @@ export function useDemoSession() {
       const isFullScreen = settings?.displaySurface === "monitor";
 
       if (!isFullScreen) {
-        // Warn but allow — demo is flexible, prod would reject
-        console.warn("User shared a window/tab instead of full screen");
+        // Allow for demo — prod would reject non-fullscreen shares
       }
 
       setState((s) => ({ ...s, hasScreen: true, screenStream: stream }));
