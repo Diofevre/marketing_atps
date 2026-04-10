@@ -116,9 +116,14 @@ export default function DemoIdentity({
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
 
             {!identityPhoto && (
-              <Button onClick={() => fileInputRef.current?.click()} variant="outline" className="h-9 px-4 text-[12px] rounded-[6px]">
-                <Upload className="w-3.5 h-3.5 mr-1.5" />{t("identityUploadBtn") ?? "Upload Photo"}
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button onClick={() => fileInputRef.current?.click()} variant="outline" className="h-9 px-4 text-[12px] rounded-[6px]">
+                  <Upload className="w-3.5 h-3.5 mr-1.5" />{t("identityUploadBtn") ?? "Upload Photo"}
+                </Button>
+                <Button onClick={captureFromWebcam} variant="outline" className="h-9 px-4 text-[12px] rounded-[6px]">
+                  <Camera className="w-3.5 h-3.5 mr-1.5" />Selfie
+                </Button>
+              </div>
             )}
           </div>
 

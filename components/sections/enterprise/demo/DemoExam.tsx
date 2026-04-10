@@ -14,7 +14,6 @@ import {
   EyeOff,
   AlertTriangle,
   ShieldAlert,
-  Mic,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
 import type { DemoQuestion } from "./demoQuestions";

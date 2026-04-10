@@ -87,6 +87,7 @@ export function useDemoSession() {
   const sessionIdRef = useRef<string | null>(null);
   const cameraStreamRef = useRef<MediaStream | null>(null);
   const screenStreamRef = useRef<MediaStream | null>(null);
+  const mountedRef = useRef(true); // tracks component lifecycle
 
   // Keep refs in sync with state
   useEffect(() => { sessionIdRef.current = state.sessionId; }, [state.sessionId]);
@@ -112,17 +113,21 @@ export function useDemoSession() {
         body: JSON.stringify({ email: state.email }),
       });
 
+      if (!mountedRef.current) return;
+
       if (res.status === 429) {
         setState((s) => ({ ...s, error: "Too many attempts. Try again later." }));
         return;
       }
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
+        if (!mountedRef.current) return;
         setState((s) => ({ ...s, error: data.detail || "Service unavailable" }));
         return;
       }
 
       const data = await res.json();
+      if (!mountedRef.current) return;
 
       if (data.status === "queued") {
         setState((s) => ({
@@ -150,8 +155,10 @@ export function useDemoSession() {
     pollRef.current = setInterval(async () => {
       try {
         const res = await fetch(`${PROCTEO_API}/demo/status/${sid}`);
+        if (!mountedRef.current) return;
         if (!res.ok) return;
         const data = await res.json();
+        if (!mountedRef.current) return;
 
         if (data.status === "active") {
           if (pollRef.current) clearInterval(pollRef.current);
@@ -378,11 +385,11 @@ export function useDemoSession() {
   // Cleanup on unmount — free slot + stop streams
   useEffect(() => {
     return () => {
+      mountedRef.current = false;
       if (timerRef.current) clearInterval(timerRef.current);
       if (pollRef.current) clearInterval(pollRef.current);
       if (simRef.current) clearInterval(simRef.current);
       if (verifyTimeoutRef.current) clearTimeout(verifyTimeoutRef.current);
-      // endSession uses refs, safe to call here
       cameraStreamRef.current?.getTracks().forEach((t) => t.stop());
       screenStreamRef.current?.getTracks().forEach((t) => t.stop());
       if (sessionIdRef.current) {
