@@ -9,6 +9,7 @@ import { useDemoSession } from "./useDemoSession";
 import DemoLanding from "./DemoLanding";
 import DemoQueue from "./DemoQueue";
 import DemoPermissions from "./DemoPermissions";
+import DemoIdentity from "./DemoIdentity";
 import DemoExam from "./DemoExam";
 import DemoResults from "./DemoResults";
 import { useState } from "react";
@@ -77,8 +78,21 @@ export default function DemoPage() {
                 hasScreen={session.hasScreen}
                 cameraStream={session.cameraStream}
                 onRequestCamera={session.requestCamera}
+                onConfirmCameraReady={session.confirmCameraReady}
                 onRequestScreen={session.requestScreen}
                 onSkipScreen={session.skipScreen}
+                onGoToIdentity={session.goToIdentityStep}
+                onComplete={session.startExam}
+              />
+            )}
+
+            {session.step === "identity" && (
+              <DemoIdentity
+                cameraStream={session.cameraStream}
+                identityPhoto={session.identityPhoto}
+                identityMatched={session.identityMatched}
+                onSetPhoto={session.setIdentityPhoto}
+                onVerify={session.verifyIdentity}
                 onComplete={session.startExam}
               />
             )}

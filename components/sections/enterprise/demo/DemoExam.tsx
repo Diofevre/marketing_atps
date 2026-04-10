@@ -129,18 +129,18 @@ export default function DemoExam({
                 <button
                   key={optKey}
                   onClick={() => onSelectAnswer(q.id, idx)}
-                  className={`w-full text-left px-4 py-3 rounded-[10px] border-2 transition-all duration-200 flex items-start gap-3 ${
-                    isSelected
-                      ? "border-[#EECE84] bg-[#EECE84]/20"
-                      : "border-[#1b0c25]/8 hover:border-[#1b0c25]/20 hover:bg-[#1b0c25]/[0.02]"
-                  }`}
+                  className="w-full text-left px-4 py-3 rounded-[10px] border-2 transition-all duration-200 flex items-start gap-3"
+                  style={isSelected
+                    ? { borderColor: "#EECE84", backgroundColor: "rgba(238,206,132,0.2)" }
+                    : { borderColor: "rgba(27,12,37,0.08)" }
+                  }
                 >
                   <span
-                    className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold ${
-                      isSelected
-                        ? "bg-[#EECE84] text-[#1b0c25]"
-                        : "bg-[#1b0c25]/5 text-[#1b0c25]/40"
-                    }`}
+                    className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold"
+                    style={isSelected
+                      ? { backgroundColor: "#EECE84", color: "#1b0c25" }
+                      : { backgroundColor: "rgba(27,12,37,0.05)", color: "rgba(27,12,37,0.4)" }
+                    }
                   >
                     {letter}
                   </span>
@@ -191,7 +191,7 @@ export default function DemoExam({
           <div className="p-3">
             <div className="aspect-video rounded-lg bg-black overflow-hidden relative">
               {cameraStream ? (
-                <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover scale-x-[-1]" />
+                <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <Camera className="w-8 h-8 text-white/20" />
@@ -215,13 +215,14 @@ export default function DemoExam({
                   <button
                     key={qq.id}
                     onClick={() => onGoToQuestion(idx)}
-                    className={`aspect-square rounded-md text-[11px] font-bold transition-all ${
+                    className="aspect-square rounded-md text-[11px] font-bold transition-all"
+                    style={
                       isCurrent
-                        ? "bg-[#d37bff] text-white shadow-sm"
+                        ? { backgroundColor: "#d37bff", color: "white" }
                         : isAnswered
-                          ? "bg-[#EECE84]/30 text-[#1b0c25]/70 border border-[#EECE84]"
-                          : "bg-white text-[#1b0c25]/30 border border-[#1b0c25]/8"
-                    }`}
+                          ? { backgroundColor: "rgba(238,206,132,0.3)", color: "rgba(27,12,37,0.7)", border: "1px solid #EECE84" }
+                          : { backgroundColor: "white", color: "rgba(27,12,37,0.3)", border: "1px solid rgba(27,12,37,0.08)" }
+                    }
                   >
                     {idx + 1}
                   </button>

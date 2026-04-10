@@ -591,7 +591,21 @@
     "verdictClear": "Aucun problème",
     "verdictMinor": "Problèmes mineurs",
     "verdictSuspicious": "Activité suspecte",
-    "resultsEvents": "événements détectés"
+    "resultsEvents": "événements détectés",
+    "permCameraCheck": "Vous voyez-vous correctement ?",
+    "permCameraCheckDesc": "Assurez-vous que votre visage est clairement visible et bien éclairé.",
+    "permCameraConfirm": "Oui, je me vois",
+    "permScreenWarn": "Sélectionnez \"Écran entier\" pour une surveillance correcte.",
+    "permIdentity": "Tester la vérification d'identité",
+    "identityTitle": "Vérification d'identité (Optionnel)",
+    "identityUpload": "1. Photo de référence",
+    "identityDrop": "Cliquez pour uploader une photo ou pièce d'identité",
+    "identityUploadBtn": "Uploader une photo",
+    "identityFace": "2. Vérification faciale en direct",
+    "identityVerifying": "Analyse du visage...",
+    "identityMatch": "Identité vérifiée — le visage correspond !",
+    "identityNoMatch": "Le visage ne correspond pas",
+    "identityVerifyBtn": "Vérifier l'identité"
   },
   "common": {
     "loading": "Chargement…"

@@ -4,11 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { DEMO_QUESTIONS, DEMO_DURATION_SECONDS } from "./demoQuestions";
 
 const PROCTEO_API = "https://procteo-api.myatps.com";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export type DemoStep =
   | "landing"
   | "queued"
   | "permissions"
+  | "identity"
   | "exam"
   | "results";
 
@@ -17,7 +19,7 @@ export interface DetectionEvent {
   kind: string;
   labelKey: string;
   severity: "info" | "medium" | "high" | "critical";
-  timestampMs: number;
+  elapsedMs: number;
 }
 
 export interface DemoSessionState {
@@ -34,10 +36,16 @@ export interface DemoSessionState {
   hasCamera: boolean;
   hasMicrophone: boolean;
   hasScreen: boolean;
+  cameraReady: boolean; // camera stream is active AND user has seen preview
+
+  // Identity
+  wantsIdentity: boolean;
+  identityPhoto: string | null; // base64 data URL of uploaded ID
+  identityMatched: boolean | null; // null = not checked, true/false = result
 
   // Exam
   currentQuestion: number;
-  answers: Record<string, number | null>; // questionId → selected option index
+  answers: Record<string, number | null>;
   timeRemaining: number;
   events: DetectionEvent[];
 
@@ -57,6 +65,10 @@ export function useDemoSession() {
     hasCamera: false,
     hasMicrophone: false,
     hasScreen: false,
+    cameraReady: false,
+    wantsIdentity: false,
+    identityPhoto: null,
+    identityMatched: null,
     currentQuestion: 0,
     answers: {},
     timeRemaining: DEMO_DURATION_SECONDS,
@@ -68,8 +80,16 @@ export function useDemoSession() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const simRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const examStartRef = useRef(0);
+  // Refs for cleanup — avoids stale closure in endSession
+  const sessionIdRef = useRef<string | null>(null);
+  const cameraStreamRef = useRef<MediaStream | null>(null);
+  const screenStreamRef = useRef<MediaStream | null>(null);
 
-  // ── Setters ─────────────────────────────────────────────
+  // Keep refs in sync with state
+  useEffect(() => { sessionIdRef.current = state.sessionId; }, [state.sessionId]);
+  useEffect(() => { cameraStreamRef.current = state.cameraStream; }, [state.cameraStream]);
+  useEffect(() => { screenStreamRef.current = state.screenStream; }, [state.screenStream]);
 
   const setEmail = (email: string) => setState((s) => ({ ...s, email }));
   const setError = (error: string | null) => setState((s) => ({ ...s, error }));
@@ -77,7 +97,7 @@ export function useDemoSession() {
   // ── API: Start demo ─────────────────────────────────────
 
   const startDemo = useCallback(async () => {
-    if (!state.email || !state.email.includes("@")) {
+    if (!EMAIL_RE.test(state.email)) {
       setState((s) => ({ ...s, error: "Please enter a valid email" }));
       return;
     }
@@ -87,7 +107,7 @@ export function useDemoSession() {
       const res = await fetch(`${PROCTEO_API}/demo/start`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: state.email, language: "fr" }),
+        body: JSON.stringify({ email: state.email }),
       });
 
       if (res.status === 429) {
@@ -112,11 +132,7 @@ export function useDemoSession() {
         }));
         startQueuePolling(data.session_id);
       } else {
-        setState((s) => ({
-          ...s,
-          step: "permissions",
-          sessionId: data.session_id,
-        }));
+        setState((s) => ({ ...s, step: "permissions", sessionId: data.session_id }));
       }
     } catch {
       setState((s) => ({ ...s, error: "Cannot reach Procteo. Try again later." }));
@@ -126,6 +142,9 @@ export function useDemoSession() {
   // ── Queue polling ───────────────────────────────────────
 
   const startQueuePolling = (sid: string) => {
+    // Clear any previous polling interval
+    if (pollRef.current) clearInterval(pollRef.current);
+
     pollRef.current = setInterval(async () => {
       try {
         const res = await fetch(`${PROCTEO_API}/demo/status/${sid}`);
@@ -146,7 +165,7 @@ export function useDemoSession() {
           setState((s) => ({ ...s, step: "landing", error: "Session expired" }));
         }
       } catch {
-        // keep polling
+        // keep polling on network error
       }
     }, 5000);
   };
@@ -154,6 +173,9 @@ export function useDemoSession() {
   // ── Permissions ─────────────────────────────────────────
 
   const requestCamera = useCallback(async () => {
+    // Stop old stream if any (prevents leak on re-request)
+    cameraStreamRef.current?.getTracks().forEach((t) => t.stop());
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { width: 640, height: 480 },
@@ -164,6 +186,7 @@ export function useDemoSession() {
         hasCamera: true,
         hasMicrophone: true,
         cameraStream: stream,
+        cameraReady: false, // will be set to true after user sees preview
       }));
       return true;
     } catch {
@@ -172,13 +195,32 @@ export function useDemoSession() {
     }
   }, []);
 
+  const confirmCameraReady = useCallback(() => {
+    setState((s) => ({ ...s, cameraReady: true }));
+  }, []);
+
   const requestScreen = useCallback(async () => {
     try {
-      const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: {
+          displaySurface: "monitor", // prefer full screen over tab/window
+        },
+      });
+
+      // Check if user selected full screen (not just a tab)
+      const track = stream.getVideoTracks()[0];
+      const settings = track?.getSettings();
+      // displaySurface: "monitor" = full screen, "window" = window, "browser" = tab
+      const isFullScreen = settings?.displaySurface === "monitor";
+
+      if (!isFullScreen) {
+        // Warn but allow — demo is flexible, prod would reject
+        console.warn("User shared a window/tab instead of full screen");
+      }
+
       setState((s) => ({ ...s, hasScreen: true, screenStream: stream }));
       return true;
     } catch {
-      // Screen share is optional for demo
       return false;
     }
   }, []);
@@ -187,9 +229,34 @@ export function useDemoSession() {
     setState((s) => ({ ...s, hasScreen: false }));
   }, []);
 
+  // ── Identity verification ───────────────────────────────
+
+  const setWantsIdentity = useCallback((wants: boolean) => {
+    setState((s) => ({ ...s, wantsIdentity: wants }));
+  }, []);
+
+  const setIdentityPhoto = useCallback((photo: string | null) => {
+    setState((s) => ({ ...s, identityPhoto: photo }));
+  }, []);
+
+  const verifyIdentity = useCallback(() => {
+    // Simulated — in production, this would call InsightFace via the API
+    // For the demo, we always "match" after a short delay
+    setState((s) => ({ ...s, identityMatched: null })); // loading
+    setTimeout(() => {
+      setState((s) => ({ ...s, identityMatched: true }));
+    }, 2000);
+  }, []);
+
+  const goToIdentityStep = useCallback(() => {
+    setState((s) => ({ ...s, step: "identity" }));
+  }, []);
+
   // ── Start exam ──────────────────────────────────────────
 
   const startExam = useCallback(() => {
+    examStartRef.current = Date.now();
+
     setState((s) => ({
       ...s,
       step: "exam",
@@ -203,7 +270,6 @@ export function useDemoSession() {
     timerRef.current = setInterval(() => {
       setState((prev) => {
         if (prev.timeRemaining <= 1) {
-          // Auto-submit
           if (timerRef.current) clearInterval(timerRef.current);
           if (simRef.current) clearInterval(simRef.current);
           return { ...prev, timeRemaining: 0, step: "results" };
@@ -214,22 +280,22 @@ export function useDemoSession() {
 
     // Simulated detection events
     simRef.current = setInterval(() => {
+      const elapsed = Date.now() - examStartRef.current;
       const roll = Math.random();
-      const now = DEMO_DURATION_SECONDS * 1000 - Date.now() % (DEMO_DURATION_SECONDS * 1000);
 
       if (roll < 0.06) {
-        addEvent("face.gaze.off_screen", "demoEvents.gazeOff", "medium", now);
+        addEvent("face.gaze.off_screen", "demoEvents.gazeOff", "medium", elapsed);
       } else if (roll < 0.10) {
-        addEvent("face.head_pose.yaw", "demoEvents.headTurn", "medium", now);
+        addEvent("face.head_pose.yaw", "demoEvents.headTurn", "medium", elapsed);
       } else if (roll < 0.12) {
-        addEvent("face.absent", "demoEvents.faceAbsent", "high", now);
+        addEvent("face.absent", "demoEvents.faceAbsent", "high", elapsed);
       } else if (roll < 0.13) {
-        addEvent("object.phone", "demoEvents.phoneDetected", "critical", now);
+        addEvent("object.phone", "demoEvents.phoneDetected", "critical", elapsed);
       }
     }, 2500);
   }, []);
 
-  const addEvent = (kind: string, labelKey: string, severity: DetectionEvent["severity"], ts: number) => {
+  const addEvent = (kind: string, labelKey: string, severity: DetectionEvent["severity"], elapsed: number) => {
     setState((s) => ({
       ...s,
       events: [
@@ -239,7 +305,7 @@ export function useDemoSession() {
           kind,
           labelKey,
           severity,
-          timestampMs: ts,
+          elapsedMs: elapsed,
         },
       ],
     }));
@@ -248,10 +314,7 @@ export function useDemoSession() {
   // ── Exam actions ────────────────────────────────────────
 
   const selectAnswer = useCallback((questionId: string, optionIndex: number) => {
-    setState((s) => ({
-      ...s,
-      answers: { ...s.answers, [questionId]: optionIndex },
-    }));
+    setState((s) => ({ ...s, answers: { ...s.answers, [questionId]: optionIndex } }));
   }, []);
 
   const goToQuestion = useCallback((index: number) => {
@@ -268,16 +331,15 @@ export function useDemoSession() {
 
   // ── End + cleanup ───────────────────────────────────────
 
-  const endSession = useCallback(async () => {
-    // Stop streams
-    state.cameraStream?.getTracks().forEach((t) => t.stop());
-    state.screenStream?.getTracks().forEach((t) => t.stop());
+  const endSession = useCallback(() => {
+    // Use refs to avoid stale closures
+    cameraStreamRef.current?.getTracks().forEach((t) => t.stop());
+    screenStreamRef.current?.getTracks().forEach((t) => t.stop());
 
-    // Notify API
-    if (state.sessionId) {
-      fetch(`${PROCTEO_API}/demo/end/${state.sessionId}`, { method: "POST" }).catch(() => {});
+    if (sessionIdRef.current) {
+      fetch(`${PROCTEO_API}/demo/end/${sessionIdRef.current}`, { method: "POST" }).catch(() => {});
     }
-  }, [state.sessionId, state.cameraStream, state.screenStream]);
+  }, []); // no deps — reads from refs
 
   const restart = useCallback(() => {
     endSession();
@@ -294,6 +356,10 @@ export function useDemoSession() {
       hasCamera: false,
       hasMicrophone: false,
       hasScreen: false,
+      cameraReady: false,
+      wantsIdentity: false,
+      identityPhoto: null,
+      identityMatched: null,
       currentQuestion: 0,
       answers: {},
       timeRemaining: DEMO_DURATION_SECONDS,
@@ -303,20 +369,25 @@ export function useDemoSession() {
     });
   }, [endSession]);
 
-  // Cleanup on unmount
+  // Cleanup on unmount — free slot + stop streams
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
       if (pollRef.current) clearInterval(pollRef.current);
       if (simRef.current) clearInterval(simRef.current);
+      // endSession uses refs, safe to call here
+      cameraStreamRef.current?.getTracks().forEach((t) => t.stop());
+      screenStreamRef.current?.getTracks().forEach((t) => t.stop());
+      if (sessionIdRef.current) {
+        fetch(`${PROCTEO_API}/demo/end/${sessionIdRef.current}`, { method: "POST" }).catch(() => {});
+      }
     };
   }, []);
 
-  // ── Computed values ─────────────────────────────────────
+  // ── Computed ─────────────────────────────────────────────
 
   const score = DEMO_QUESTIONS.reduce((acc, q) => {
-    const answer = state.answers[q.id];
-    return acc + (answer === q.correctIndex ? 1 : 0);
+    return acc + (state.answers[q.id] === q.correctIndex ? 1 : 0);
   }, 0);
 
   const answeredCount = Object.values(state.answers).filter((a) => a !== null && a !== undefined).length;
@@ -327,14 +398,17 @@ export function useDemoSession() {
     answeredCount,
     totalQuestions: DEMO_QUESTIONS.length,
     questions: DEMO_QUESTIONS,
-
-    // Actions
     setEmail,
     setError,
     startDemo,
     requestCamera,
+    confirmCameraReady,
     requestScreen,
     skipScreen,
+    setWantsIdentity,
+    setIdentityPhoto,
+    verifyIdentity,
+    goToIdentityStep,
     startExam,
     selectAnswer,
     goToQuestion,
