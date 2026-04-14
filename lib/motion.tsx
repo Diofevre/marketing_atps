@@ -805,7 +805,7 @@ export function StaggerContainer({
   );
 }
 
-export default {
+const motionExports = {
   heroBadgeVariants,
   heroTitleWordVariants,
   heroDescriptionVariants,
@@ -849,3 +849,5 @@ export default {
   ScaleIn,
   StaggerContainer,
 };
+
+export default motionExports;

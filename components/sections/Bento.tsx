@@ -62,11 +62,11 @@ export default function Bento() {
                 >
                   <div className="w-full aspect-480/354 rounded-xl overflow-hidden">
                     <Image
-                      src="/images/imageAd.png"
+                      src="/images/atps-quizz-advanced.png"
                       alt={t("card1Alt")}
-                      width={480}
-                      height={354}
-                      className="w-full h-full object-cover"
+                      width={1855}
+                      height={964}
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
@@ -113,11 +113,11 @@ export default function Bento() {
                 >
                   <div className="w-full aspect-790/353 rounded-xl overflow-hidden">
                     <Image
-                      src="/images/imageData.png"
+                      src="/images/atps-quizz-share.png"
                       alt={t("card3Alt")}
-                      width={790}
-                      height={353}
-                      className="w-full h-full object-cover"
+                      width={1855}
+                      height={964}
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">
@@ -137,11 +137,11 @@ export default function Bento() {
                 >
                   <div className="w-full aspect-394/355 rounded-xl overflow-hidden">
                     <Image
-                      src="/images/imagePred.png"
+                      src="/images/atps-bibliotheque.png"
                       alt={t("card4Alt")}
-                      width={394}
-                      height={355}
-                      className="w-full h-full object-cover"
+                      width={1372}
+                      height={929}
+                      className="w-full h-full object-cover object-top"
                     />
                   </div>
                   <div className="flex flex-col gap-3 lg:gap-[19px] px-4 sm:px-6 lg:px-[22px] pb-4 sm:pb-6 lg:pb-[22px]">

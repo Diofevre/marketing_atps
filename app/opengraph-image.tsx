@@ -49,7 +49,6 @@ export default async function OpenGraphImage() {
             marginBottom: "36px",
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={logoBase64}
             alt="MyATPS logo"

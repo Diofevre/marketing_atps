@@ -210,26 +210,54 @@ export default function Hero() {
               animate="visible"
               className="flex-1 flex items-end justify-center w-full border border-[#1b0c25]/10 border-b-0 relative rounded-tl-[20px] sm:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[30px] lg:rounded-tr-[40px] rounded-b-none backdrop-blur-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.6)_100%)] overflow-hidden"
             >
-              {/* Decorative Elements - Hidden on mobile/tablet */}
+              {/* Aviation Decorative Elements – large airliner top-right */}
               <motion.div
-                className="hidden lg:block absolute w-[209px] h-[210px] bg-[url('/images/scare1.png')] top-[37.98px] right-[79px]"
-                animate={{ y: [0, -8, 0], rotate: [0, 1, 0] }}
+                className="hidden lg:block absolute top-[24px] right-[60px] drop-shadow-xl"
+                style={{ originX: "50%", originY: "50%" }}
+                animate={{
+                  y: [0, -14, -6, 0],
+                  x: [0, 10, 4, 0],
+                  rotate: [-4, 2, -1, -4],
+                }}
                 transition={{
-                  duration: 4,
+                  duration: 7,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-              />
+              >
+                <Image
+                  src="/images/atps-aviation.png"
+                  alt="Aircraft"
+                  width={230}
+                  height={145}
+                  className="object-contain"
+                />
+              </motion.div>
+
+              {/* Aviation Decorative Elements – business jet bottom-left, mirrored */}
               <motion.div
-                className="hidden lg:block absolute w-[159px] h-[138px] bg-[url('/images/scare2.png')] top-[311.98px] left-[135px]"
-                animate={{ y: [0, 6, 0], x: [0, -4, 0] }}
+                className="hidden lg:block absolute top-[290px] left-[110px] drop-shadow-lg"
+                style={{ originX: "50%", originY: "50%", scaleX: -1 }}
+                animate={{
+                  y: [0, 10, 3, 0],
+                  x: [0, -8, -2, 0],
+                  rotate: [3, -2, 1, 3],
+                }}
                 transition={{
-                  duration: 5,
+                  duration: 8,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: 0.5,
+                  delay: 1.2,
                 }}
-              />
+              >
+                <Image
+                  src="/images/atps-aviation.png"
+                  alt="Aircraft"
+                  width={170}
+                  height={108}
+                  className="object-contain"
+                />
+              </motion.div>
 
               {/* Content Container */}
               <div className="relative z-10 w-full lg:w-[1140px] h-full px-4 sm:px-6 lg:px-[50px] flex items-end justify-center">
@@ -284,7 +312,7 @@ export default function Hero() {
                     <form className="w-full max-w-[612px] flex flex-col gap-3 sm:gap-4">
                       <Input
                         placeholder={t("searchPlaceholder")}
-                        className="w-full border-none bg-transparent shadow-none text-sm sm:text-base lg:text-[16px] placeholder:text-sm sm:placeholder:text-base lg:placeholder:text-[16px] placeholder:text-[#1b0c25]/70"
+                        className="w-full border-none bg-transparent shadow-none focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 text-sm sm:text-base lg:text-[16px] placeholder:text-sm sm:placeholder:text-base lg:placeholder:text-[16px] placeholder:text-[#1b0c25]/70"
                       />
 
                       {/* Action Buttons */}

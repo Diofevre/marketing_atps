@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { fadeInUpVariants, fadeInUpDelayedVariants } from "@/lib/motion";
+import { fadeInUpDelayedVariants } from "@/lib/motion";
 import { Camera, MonitorPlay, Shield, Loader2 } from "lucide-react";
 
 interface DemoLandingProps {

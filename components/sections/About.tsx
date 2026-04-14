@@ -28,7 +28,7 @@ export default function About() {
 
           <Container className="relative z-10">
             <div className="flex flex-col items-center lg:items-start gap-4 sm:gap-5 lg:gap-[40px]">
-              <TitleSection title={t("badge")} />
+              <TitleSection title={t("badge")} variant="light" />
 
               <h2 className="flex flex-wrap text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[57px] text-center lg:text-left leading-snug sm:leading-snug md:leading-tight lg:leading-tight xl:leading-[66px] font-medium text-white">
                 {words.map((word, i) => {

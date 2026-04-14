@@ -86,7 +86,7 @@ export default function BlogList({
 
       setLoading(false);
     },
-    [selectedCategory],
+    [selectedCategory, ALL_CAT],
   );
 
   const fetchCategories = useCallback(async () => {
@@ -97,10 +97,11 @@ export default function BlogList({
       );
       setCategories([ALL_CAT, ...names]);
     }
-  }, []);
+  }, [ALL_CAT]);
 
   useEffect(() => {
     // Categories aren't part of the SSR payload — fetch them client-side once.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!initialCategories) fetchCategories();
   }, [fetchCategories, initialCategories]);
 
@@ -109,6 +110,7 @@ export default function BlogList({
       skipNextFetch.current = false;
       return;
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchPosts({ page: 1 });
   }, [selectedCategory, fetchPosts]);
 

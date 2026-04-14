@@ -82,7 +82,7 @@ export default function NewsList({
     }
 
     setLoading(false);
-  }, [selectedCategory, locale]);
+  }, [selectedCategory, locale, ALL_CAT]);
 
   const fetchCategories = useCallback(async () => {
     const response = await newsService.getCategories();
@@ -92,10 +92,11 @@ export default function NewsList({
       );
       setCategories([ALL_CAT, ...names]);
     }
-  }, []);
+  }, [ALL_CAT]);
 
   useEffect(() => {
     // Categories aren't part of the SSR payload — fetch them client-side once.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!initialCategories) fetchCategories();
   }, [fetchCategories, initialCategories]);
 
@@ -104,6 +105,7 @@ export default function NewsList({
       skipNextFetch.current = false;
       return;
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchNews({ page: 1 });
   }, [selectedCategory, locale, fetchNews]);
 

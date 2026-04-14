@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import { Star, Check, Gift } from "lucide-react";
@@ -117,8 +116,6 @@ export default function Pricing() {
     return priceData;
   };
 
-  const maxSavings = PLANS.PREMIUM.prices[12].savings;
-
   return (
     <div id="pricing" className="py-12 lg:py-[100px]">
       <Container className="flex flex-col gap-8">
@@ -146,7 +143,7 @@ export default function Pricing() {
                 key={duration.months}
                 onClick={() => setSelectedDuration(duration.months)}
                 aria-pressed={selectedDuration === duration.months}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all cursor-pointer ${
                   selectedDuration === duration.months
                     ? "bg-white text-[#1b0c25] shadow-sm"
                     : "text-[#1b0c25]/60 hover:text-[#1b0c25]"

@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ButtonDemo } from "../ButtonDemo";
@@ -58,7 +57,7 @@ const Footer = () => {
       title: t("sectionPlatform"),
       links: [
         { name: t("linkFeatures"), href: "/#bento" },
-        { name: t("linkPricing"), href: "/#pricing" },
+        { name: t("linkPricing"), href: "/pricing" },
         { name: t("linkEnterprise"), href: "/enterprise" },
         { name: t("linkLogIn"), href: `${APP_URL}/auth/login` },
         { name: t("linkSignUp"), href: `${APP_URL}/auth/signup` },
@@ -84,7 +83,7 @@ const Footer = () => {
         <div className="absolute z-[-1px] right-[-86px] top-[590px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(145deg,#efe8f6_0%,#d588fb_60.83%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
 
         {/* Contenu principal */}
-        <Container className="z-10 py-12 lg:py-[100px] flex flex-col items-center justify-center">
+        <Container className="z-10 py-10 lg:py-[60px] flex flex-col items-center justify-center">
           <motion.div
             variants={footerContainerVariants}
             initial="hidden"
@@ -98,7 +97,7 @@ const Footer = () => {
               className="flex flex-col gap-[32px] max-lg:gap-6 max-lg:text-center"
             >
               <div className="flex flex-col items-start gap-[12px] justify-start max-lg:items-center">
-                <TitleSection title={t("tagline")} />
+                <TitleSection title={t("tagline")} variant="light" />
                 {/*
                   h2 (not h1): the Footer is rendered on every page, so using
                   h1 here would duplicate the page's main heading and hurt SEO.
@@ -110,42 +109,39 @@ const Footer = () => {
               <ButtonDemo />
             </motion.div>
 
-            <Separator className="mt-[100px] mb-[100px] max-lg:my-12" />
+            <Separator className="mt-[48px] mb-[48px] max-lg:my-8" />
 
             {/* Section milieu - devient colonne sur mobile */}
-            <div className="flex items-start w-full justify-between text-white max-lg:flex-col max-lg:gap-8">
+            <div className="flex items-start w-full justify-between text-white max-lg:flex-col max-lg:gap-10">
               {/* Partie gauche */}
               <motion.div
                 variants={footerLogoVariants}
-                className="flex flex-col gap-[32px] max-w-[220px] max-lg:max-w-full max-lg:items-center"
+                className="flex flex-col gap-[28px] max-w-[240px] max-lg:max-w-full max-lg:items-center"
               >
                 {/* Logo + nom */}
-                <div className="flex flex-col gap-[16px] max-lg:items-center">
-                  <div className="flex gap-[12px] max-lg:justify-center items-center">
-                    <div className="h-[40px] w-[40px] rounded-md flex items-center justify-center overflow-hidden">
-                      <Image
-                        src="/assets/logo-yellow.png"
-                        alt="MyATPS"
-                        width={40}
-                        height={40}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <p className="font-medium text-[30px] leading-[40px] max-lg:text-2xl">
-                      MyATPS
-                    </p>
+                <div className="flex items-center gap-[12px] max-lg:justify-center">
+                  <div className="rounded-[6px] bg-[#1b0c25] h-[36px] w-[36px] flex items-center justify-center overflow-hidden shrink-0">
+                    <Image
+                      src="/assets/logo-myatps.png"
+                      alt="MyATPS"
+                      width={36}
+                      height={36}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div>
-                    <p className="text-[15px] leading-[25px] font-normal max-lg:text-center">
-                      {t("description")}
-                    </p>
-                  </div>
+                  <p className="font-semibold text-[20px] leading-none">
+                    MyATPS
+                  </p>
                 </div>
+
+                <p className="text-[14px] leading-[22px] font-normal opacity-60 max-lg:text-center">
+                  {t("description")}
+                </p>
 
                 {/* Social icons */}
                 <motion.div
                   variants={footerLinksContainerVariants}
-                  className="flex gap-[16px] max-lg:justify-center"
+                  className="flex gap-[14px] max-lg:justify-center"
                 >
                   {ICON_LINKS.map((icon) => (
                     <motion.a
@@ -161,9 +157,9 @@ const Footer = () => {
                       <Image
                         src={icon.icon_src}
                         alt={icon.label}
-                        width={40}
-                        height={40}
-                        className="max-lg:w-8 max-lg:h-8"
+                        width={32}
+                        height={32}
+                        className="opacity-80 hover:opacity-100 transition-opacity"
                       />
                     </motion.a>
                   ))}
@@ -173,26 +169,19 @@ const Footer = () => {
               {/* Partie droite - colonnes de liens */}
               <motion.div
                 variants={footerLinksVariants}
-                className="flex gap-[60px] max-lg:flex-col max-lg:gap-8"
+                className="flex gap-[48px] lg:gap-[72px] max-lg:flex-col max-lg:gap-8"
               >
                 {LIST_ITEMS.map((item) => (
                   <motion.div
                     key={item.id}
                     variants={footerLinksContainerVariants}
-                    className="flex flex-col gap-[16px] items-start lg:items-center"
+                    className="flex flex-col gap-[14px]"
                   >
-                    <p className="text-[15px] leading-[26px] font-medium">
+                    <p className="text-[13px] leading-none font-semibold uppercase tracking-widest opacity-40">
                       {item.title}
                     </p>
-                    <div className="flex flex-col gap-[8px] items-start lg:items-center">
+                    <div className="flex flex-col gap-[10px]">
                       {item.links.map((link) => {
-                        // External URLs (absolute http/https, e.g. the
-                        // APP_URL auth links) use a plain anchor so they
-                        // open cleanly without going through next-intl.
-                        // Internal URLs (including hash fragments like
-                        // `/#pricing`) go through the locale-aware Link
-                        // so `/fr/#pricing` is preserved when the user
-                        // is browsing in French.
                         const isExternal = /^https?:\/\//.test(link.href);
                         if (isExternal) {
                           return (
@@ -202,7 +191,7 @@ const Footer = () => {
                               href={link.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-[15px] font-medium leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-center"
+                              className="text-[14px] font-medium leading-[22px] opacity-60 hover:opacity-100 transition-opacity"
                             >
                               {link.name}
                             </motion.a>
@@ -215,7 +204,7 @@ const Footer = () => {
                           >
                             <Link
                               href={link.href}
-                              className="text-[15px] font-medium leading-[26px] opacity-[0.6] hover:opacity-100 transition-opacity max-lg:text-center"
+                              className="text-[14px] font-medium leading-[22px] opacity-60 hover:opacity-100 transition-opacity"
                             >
                               {link.name}
                             </Link>
@@ -231,7 +220,7 @@ const Footer = () => {
             {/* Footer bottom */}
             <motion.div
               variants={footerBottomVariants}
-              className="border-t border-white w-full mt-[100px] max-lg:mt-12"
+              className="border-t border-white w-full mt-[48px] max-lg:mt-8"
             >
               <div className="flex items-center justify-between w-full mt-[24px] text-white max-lg:flex-col max-lg:gap-4 max-lg:text-center">
                 <p className="text-[15px] leading-[26px] max-lg:text-sm">

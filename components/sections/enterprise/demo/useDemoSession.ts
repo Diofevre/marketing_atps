@@ -100,6 +100,39 @@ export function useDemoSession() {
   const setEmail = (email: string) => setState((s) => ({ ...s, email }));
   const setError = (error: string | null) => setState((s) => ({ ...s, error }));
 
+  // ── Queue polling ───────────────────────────────────────
+
+  const startQueuePolling = useCallback((sid: string) => {
+    // Clear any previous polling interval
+    if (pollRef.current) clearInterval(pollRef.current);
+
+    pollRef.current = setInterval(async () => {
+      try {
+        const res = await fetch(`${PROCTEO_API}/demo/status/${sid}`);
+        if (!mountedRef.current) return;
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!mountedRef.current) return;
+
+        if (data.status === "active") {
+          if (pollRef.current) clearInterval(pollRef.current);
+          setState((s) => ({ ...s, step: "systemcheck" }));
+        } else if (data.status === "queued") {
+          setState((s) => ({
+            ...s,
+            queuePosition: data.queue_position,
+            queueWaitSeconds: data.estimated_wait_seconds,
+          }));
+        } else if (data.status === "expired") {
+          if (pollRef.current) clearInterval(pollRef.current);
+          setState((s) => ({ ...s, step: "landing", error: "Session expired" }));
+        }
+      } catch {
+        // keep polling on network error
+      }
+    }, 5000);
+  }, []);
+
   // ── API: Start demo ─────────────────────────────────────
 
   const startDemo = useCallback(async () => {
@@ -147,40 +180,7 @@ export function useDemoSession() {
     } catch {
       setState((s) => ({ ...s, error: "Cannot reach Procteo. Try again later." }));
     }
-  }, [state.email]);
-
-  // ── Queue polling ───────────────────────────────────────
-
-  const startQueuePolling = (sid: string) => {
-    // Clear any previous polling interval
-    if (pollRef.current) clearInterval(pollRef.current);
-
-    pollRef.current = setInterval(async () => {
-      try {
-        const res = await fetch(`${PROCTEO_API}/demo/status/${sid}`);
-        if (!mountedRef.current) return;
-        if (!res.ok) return;
-        const data = await res.json();
-        if (!mountedRef.current) return;
-
-        if (data.status === "active") {
-          if (pollRef.current) clearInterval(pollRef.current);
-          setState((s) => ({ ...s, step: "systemcheck" }));
-        } else if (data.status === "queued") {
-          setState((s) => ({
-            ...s,
-            queuePosition: data.queue_position,
-            queueWaitSeconds: data.estimated_wait_seconds,
-          }));
-        } else if (data.status === "expired") {
-          if (pollRef.current) clearInterval(pollRef.current);
-          setState((s) => ({ ...s, step: "landing", error: "Session expired" }));
-        }
-      } catch {
-        // keep polling on network error
-      }
-    }, 5000);
-  };
+  }, [state.email, startQueuePolling]);
 
   // ── Permissions ─────────────────────────────────────────
 
@@ -382,6 +382,7 @@ export function useDemoSession() {
       mountedRef.current = false;
       if (timerRef.current) clearInterval(timerRef.current);
       if (pollRef.current) clearInterval(pollRef.current);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       if (simRef.current) clearInterval(simRef.current);
       if (verifyTimeoutRef.current) clearTimeout(verifyTimeoutRef.current);
       cameraStreamRef.current?.getTracks().forEach((t) => t.stop());

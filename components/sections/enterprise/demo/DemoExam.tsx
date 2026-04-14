@@ -16,7 +16,7 @@ import {
   AlertTriangle,
   ShieldAlert,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { DemoQuestion } from "./demoQuestions";
 import type { DetectionEvent } from "./useDemoSession";
 
@@ -64,12 +64,18 @@ export default function DemoExam({
   const t = useTranslations("enterpriseDemo");
   const tq = useTranslations();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
   const q = questions[currentQuestion];
   const selectedAnswer = q ? answers[q.id] : null;
 
+  // Expose the video DOM element to hooks after mount (never during render)
+  useEffect(() => {
+    setVideoEl(videoRef.current);
+  }, []);
+
   // Real ML detection in browser (COCO-SSD + Web Speech API)
   useProcteoDetection({
-    videoElement: videoRef.current,
+    videoElement: videoEl,
     enabled: true,
     onEvent: onAddEvent,
   });
