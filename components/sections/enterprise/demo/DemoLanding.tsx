@@ -3,8 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { fadeInUpDelayedVariants } from "@/lib/motion";
-import { Camera, MonitorPlay, Shield, Loader2 } from "lucide-react";
+import { Camera, Shield, Clock, BookOpen, Loader2, Info } from "lucide-react";
 
 interface DemoLandingProps {
   email: string;
@@ -17,90 +16,118 @@ interface DemoLandingProps {
 export default function DemoLanding({ email, error, loading, onEmailChange, onStart }: DemoLandingProps) {
   const t = useTranslations("enterpriseDemo");
 
+  const FEATURES = [
+    { icon: Clock, label: "5 min" },
+    { icon: BookOpen, label: "10 questions" },
+    { icon: Camera, label: "AI monitoring" },
+    { icon: Shield, label: t("featureSecurity") },
+  ];
+
   return (
     <motion.div
       key="landing"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="rounded-[20px] border-2 border-dashed border-[#d37bff]/30 bg-gradient-to-br from-[#d37bff]/5 to-[#80a9fc]/5 p-8 lg:p-12 flex flex-col items-center justify-center gap-6"
+      className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white rounded-2xl border border-[#1b0c25]/8 shadow-[0_4px_40px_rgba(0,0,0,0.06)] overflow-hidden"
     >
-      {/* Animated icons */}
-      <div className="flex items-center gap-5">
-        {[Camera, MonitorPlay, Shield].map((Icon, i) => (
-          <motion.div
-            key={i}
-            className="w-14 h-14 rounded-2xl bg-white shadow-sm border border-[#1b0c25]/5 flex items-center justify-center"
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
-          >
-            <Icon className="w-6 h-6 text-[#d37bff]" />
-          </motion.div>
-        ))}
+      {/* Left — Info panel */}
+      <div className="flex flex-col justify-between gap-8 p-8 lg:p-12 bg-[#1b0c25]">
+        {/* Top */}
+        <div className="flex flex-col gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+              <Shield className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-[13px] font-medium text-white/60 uppercase tracking-widest">
+              Procteo™ Demo
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <h2 className="text-2xl lg:text-[30px] font-medium leading-tight text-white">
+              {t("title")}
+            </h2>
+            <p className="text-[14px] leading-[22px] text-white/50">
+              {t("description")}
+            </p>
+          </div>
+
+          {/* Feature list */}
+          <div className="flex flex-col gap-3 mt-2">
+            {FEATURES.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-md bg-white/8 flex items-center justify-center shrink-0">
+                  <Icon className="w-3.5 h-3.5 text-[#d37bff]" />
+                </div>
+                <span className="text-[13px] text-white/70">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom — lite notice */}
+        <div className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/8">
+          <Info className="w-4 h-4 text-white/40 shrink-0 mt-0.5" />
+          <p className="text-[12px] leading-[18px] text-white/40">
+            {t("liteNotice")}
+          </p>
+        </div>
       </div>
 
-      <motion.div variants={fadeInUpDelayedVariants} className="text-center max-w-[440px]">
-        <h3 className="text-[18px] font-medium text-[#1b0c25] mb-2">{t("title")}</h3>
-        <p className="text-[14px] leading-[22px] text-[#1b0c25]/50">{t("description")}</p>
-      </motion.div>
+      {/* Right — Form */}
+      <div className="flex flex-col justify-center gap-8 p-8 lg:p-12">
+        <div className="flex flex-col gap-1">
+          <h3 className="text-[20px] font-medium text-[#1b0c25]">
+            {t("formTitle")}
+          </h3>
+          <p className="text-[14px] text-[#1b0c25]/50">
+            {t("formSubtitle")}
+          </p>
+        </div>
 
-      {/* Lite version notice */}
-      <div className="w-full max-w-[440px] rounded-[12px] bg-amber-50 border border-amber-200/60 px-4 py-3">
-        <p className="text-[12px] leading-[18px] text-amber-700">
-          {t("liteNotice")}
-        </p>
-      </div>
+        <div className="flex flex-col gap-3">
+          <label className="text-[12px] font-medium text-[#1b0c25]/60 uppercase tracking-wider">
+            {t("emailLabel")}
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => onEmailChange(e.target.value)}
+            placeholder="your@email.com"
+            className="w-full h-12 px-4 rounded-xl border border-[#1b0c25]/10 bg-[#f8f8fa] text-[15px] text-[#1b0c25] placeholder:text-[#1b0c25]/25 focus:outline-none focus:ring-2 focus:ring-[#d37bff]/30 focus:border-[#d37bff] transition-all"
+            onKeyDown={(e) => e.key === "Enter" && !loading && onStart()}
+            disabled={loading}
+          />
+          <p className="text-[11px] text-[#1b0c25]/35 leading-[16px]">
+            {t("emailNotice")}
+          </p>
+        </div>
 
-      {/* Email + start */}
-      <div className="w-full max-w-[380px] flex flex-col gap-3">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => onEmailChange(e.target.value)}
-          placeholder="your@email.com"
-          className="w-full h-12 px-4 rounded-[8px] border border-[#1b0c25]/10 bg-white text-[15px] text-[#1b0c25] placeholder:text-[#1b0c25]/30 focus:outline-none focus:ring-2 focus:ring-[#d37bff]/30 focus:border-[#d37bff] transition-all"
-          onKeyDown={(e) => e.key === "Enter" && !loading && onStart()}
-          disabled={loading}
-        />
-        <p className="text-[11px] text-[#1b0c25]/40 leading-[16px] -mt-1">
-          {t("emailNotice")}
-        </p>
         <Button
           onClick={onStart}
           disabled={!email || loading}
-          className="h-12 w-full bg-[#d37bff] hover:bg-[#c060ee] rounded-[8px] text-[15px] font-medium text-white disabled:opacity-40"
+          className="h-12 w-full bg-[#1b0c25] hover:bg-[#1b0c25]/90 rounded-xl text-[14px] font-medium text-white disabled:opacity-30 transition-all"
         >
           {loading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
+            <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
             <>
-              <Camera className="w-5 h-5 mr-2" />
+              <Camera className="w-4 h-4 mr-2" />
               {t("startButton")}
             </>
           )}
         </Button>
-      </div>
 
-      {error && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-[13px] text-red-500 text-center"
-        >
-          {error}
-        </motion.p>
-      )}
-
-      {/* What to expect */}
-      <div className="flex flex-wrap justify-center gap-3 mt-2">
-        {["5 min", "10 questions", "AI monitoring"].map((label) => (
-          <span
-            key={label}
-            className="px-3 py-1 rounded-full bg-[#1b0c25]/5 text-[11px] font-medium text-[#1b0c25]/50 uppercase tracking-wider"
+        {error && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-[13px] text-red-500 text-center -mt-4"
           >
-            {label}
-          </span>
-        ))}
+            {error}
+          </motion.p>
+        )}
       </div>
     </motion.div>
   );

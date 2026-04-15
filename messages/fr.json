@@ -645,7 +645,10 @@
     "consentRule6": "Ne couvrez pas et ne bloquez pas la caméra",
     "consentCheckPrivacy": "Je comprends les conditions de confidentialité et consens à la collecte de données pendant cette session démo.",
     "consentCheckRules": "Je comprends les règles de l'examen et m'engage à respecter les directives d'intégrité académique.",
-    "consentStart": "J'accepte — Démarrer l'examen"
+    "consentStart": "J'accepte — Démarrer l'examen",
+    "formTitle": "Démarrer votre session de démo",
+    "formSubtitle": "Entrez votre email pour recevoir le rapport d'analyse complet.",
+    "featureSecurity": "Chiffré & confidentiel"
   },
   "common": {
     "getStarted": "Commencer",
