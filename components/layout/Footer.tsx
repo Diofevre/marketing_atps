@@ -25,24 +25,28 @@ const ICON_LINKS = [
     icon_src: "/assets/logos/facebook.png",
     label: "Facebook",
     href: "https://www.facebook.com/myatps",
+    bg: "#1877F2",
   },
   {
     id: 2,
     icon_src: "/assets/logos/X.png",
     label: "X",
     href: "https://x.com/myatps",
+    bg: "#000000",
   },
   {
     id: 3,
     icon_src: "/assets/logos/Insta.png",
     label: "Instagram",
     href: "https://www.instagram.com/myatps",
+    bg: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
   },
   {
     id: 4,
     icon_src: "/assets/logos/LinkdIn.png",
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/myatps",
+    bg: "#0A66C2",
   },
 ];
 
@@ -153,13 +157,15 @@ const Footer = () => {
                       variants={footerSocialVariants}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
+                      className="flex items-center justify-center w-9 h-9 rounded-[10px] shrink-0 transition-opacity opacity-90 hover:opacity-100"
+                      style={{ background: icon.bg }}
                     >
                       <Image
                         src={icon.icon_src}
                         alt={icon.label}
-                        width={32}
-                        height={32}
-                        className="opacity-80 hover:opacity-100 transition-opacity"
+                        width={18}
+                        height={18}
+                        className="object-contain"
                       />
                     </motion.a>
                   ))}
