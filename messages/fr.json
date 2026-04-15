@@ -205,8 +205,12 @@
     "card3Feature3": "Analyses de progression par code couleur"
   },
   "pricing": {
+    "badge": "Tarifs",
     "title": "Choisissez votre plan",
-    "subtitle": "Accédez à tous les outils pour réussir votre ATPL du premier coup",
+    "titleBold1": "Choisissez le plan",
+    "titleMuted": "qui vous correspond",
+    "titleBold2": "vraiment.",
+    "subtitle": "Accédez à tous les outils pour réussir votre ATPL du premier coup. Des quiz intelligents, un dictionnaire aéronautique complet et un suivi personnalisé de vos progrès.",
     "durationAriaLabel": "Durée de l'abonnement",
     "duration1": "1 mois",
     "duration2": "2 mois",
