@@ -18,19 +18,19 @@ export default function Work() {
   const LIST_WORK = [
     {
       id: 1,
-      image: "/images/imageCon.png",
+      image: "/images/atps-sign-in.png",
       title: t("step1Title"),
       description: t("step1Description"),
     },
     {
       id: 2,
-      image: "/images/imageAn.png",
+      image: "/images/atps-quiz.png",
       title: t("step2Title"),
       description: t("step2Description"),
     },
     {
       id: 3,
-      image: "/images/imageLet.png",
+      image: "/images/atps-progression.png",
       title: t("step3Title"),
       description: t("step3Description"),
     },
