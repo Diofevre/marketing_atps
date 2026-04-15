@@ -648,7 +648,8 @@
     "consentStart": "I agree — Start the exam",
     "formTitle": "Start your demo session",
     "formSubtitle": "Enter your email to receive the full analysis report.",
-    "featureSecurity": "Encrypted & private"
+    "featureSecurity": "Encrypted & private",
+    "emailLabel": "Email address"
   },
   "common": {
     "getStarted": "Get Started",

@@ -648,7 +648,8 @@
     "consentStart": "J'accepte — Démarrer l'examen",
     "formTitle": "Démarrer votre session de démo",
     "formSubtitle": "Entrez votre email pour recevoir le rapport d'analyse complet.",
-    "featureSecurity": "Chiffré & confidentiel"
+    "featureSecurity": "Chiffré & confidentiel",
+    "emailLabel": "Adresse email"
   },
   "common": {
     "getStarted": "Commencer",
