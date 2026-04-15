@@ -31,7 +31,7 @@ export default function ProductCard() {
       id: 1,
       title: t("card1Title"),
       description: t("card1Description"),
-      image: "/images/atps-quizz-advanced.png",
+      image: "/images/quizz-interface.png",
       feature_list: [
         { id: 1, title: t("card1Feature1"), icon_feature: "/assets/icons/db.png" },
         { id: 2, title: t("card1Feature2"), icon_feature: "/assets/icons/topo.png" },
@@ -42,7 +42,7 @@ export default function ProductCard() {
       id: 2,
       title: t("card2Title"),
       description: t("card2Description"),
-      image: "/images/dash.png",
+      image: "/images/atps-dico.png",
       feature_list: [
         { id: 1, title: t("card2Feature1"), icon_feature: "/assets/icons/trad.png" },
         { id: 2, title: t("card2Feature2"), icon_feature: "/assets/icons/chart.png" },
@@ -53,7 +53,7 @@ export default function ProductCard() {
       id: 3,
       title: t("card3Title"),
       description: t("card3Description"),
-      image: "/images/atps-quizz-share.png",
+      image: "/images/quizz-interface-share.png",
       feature_list: [
         { id: 1, title: t("card3Feature1"), icon_feature: "/assets/icons/union.png" },
         { id: 2, title: t("card3Feature2"), icon_feature: "/assets/icons/check.png" },

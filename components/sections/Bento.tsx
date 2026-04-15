@@ -62,7 +62,7 @@ export default function Bento() {
                 >
                   <div className="w-full aspect-480/354 rounded-xl overflow-hidden">
                     <Image
-                      src="/images/atps-quizz-advanced.png"
+                      src="/images/quizz-interface.png"
                       alt={t("card1Alt")}
                       width={1855}
                       height={964}
@@ -86,7 +86,7 @@ export default function Bento() {
                 >
                   <div className="w-full aspect-703/353 rounded-xl overflow-hidden">
                     <Image
-                      src="/images/imageSm.png"
+                      src="/images/atps-dico.png"
                       alt={t("card2Alt")}
                       width={703}
                       height={353}
@@ -113,7 +113,7 @@ export default function Bento() {
                 >
                   <div className="w-full aspect-790/353 rounded-xl overflow-hidden">
                     <Image
-                      src="/images/atps-quizz-share.png"
+                      src="/images/quizz-interface-share.png"
                       alt={t("card3Alt")}
                       width={1855}
                       height={964}
@@ -137,7 +137,7 @@ export default function Bento() {
                 >
                   <div className="w-full aspect-394/355 rounded-xl overflow-hidden">
                     <Image
-                      src="/images/atps-bibliotheque.png"
+                      src="/images/atps-biblio.png"
                       alt={t("card4Alt")}
                       width={1372}
                       height={929}
