@@ -26,8 +26,8 @@ export default function ProcteoLayers() {
   }));
 
   return (
-    <div className="px-4 py-16 lg:py-[120px]">
-      <Container className="flex flex-col items-center gap-12 lg:gap-[80px]">
+    <div className="px-4 py-16 lg:py-[100px]">
+      <Container className="flex flex-col items-center gap-12 lg:gap-[60px]">
         {/* Header */}
         <motion.div
           variants={fadeInUpVariants}
@@ -37,12 +37,12 @@ export default function ProcteoLayers() {
           className="flex flex-col items-center text-center gap-4 lg:gap-6 max-w-[700px]"
         >
           <TitleSection title={t("howItWorksBadge")} />
-          <h2 className="text-3xl sm:text-4xl lg:text-[48px] leading-tight lg:leading-[52px] text-[#1b0c25] font-medium">
+          <h2 className="text-2xl sm:text-3xl lg:text-[40px] leading-tight lg:leading-[48px] text-[#1b0c25] font-medium">
             {t("howItWorksTitle")}
           </h2>
           <motion.p
             variants={fadeInUpDelayedVariants}
-            className="text-base lg:text-[16px] leading-relaxed lg:leading-[26px] text-[#1b0c25]/60"
+            className="text-[15px] leading-[26px] text-[#1b0c25]/55"
           >
             {t("howItWorksDescription")}
           </motion.p>
@@ -54,27 +54,56 @@ export default function ProcteoLayers() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 w-full"
+          className="relative grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 w-full"
         >
+          {/* Connecting line — desktop only */}
+          <motion.div
+            aria-hidden
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={viewportSettings}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
+            className="hidden lg:block absolute top-[68px] left-[16%] right-[16%] h-px origin-left bg-[linear-gradient(90deg,transparent_0%,#d37bff_15%,#80a9fc_50%,#d37bff_85%,transparent_100%)] opacity-40 pointer-events-none"
+          />
+
           {layers.map((layer) => (
             <motion.div
               key={layer.id}
               variants={workStepVariants}
-              className="relative p-6 lg:p-8 rounded-[20px] border border-[#1b0c25]/8 bg-white"
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 260, damping: 24 }}
+              className="group relative p-6 lg:p-8 rounded-[24px] bg-white border border-[#1b0c25]/6 shadow-[0_1px_0_rgba(255,255,255,0.8)_inset,0_2px_8px_rgba(27,12,37,0.04)] hover:shadow-[0_12px_32px_rgba(27,12,37,0.08)] transition-shadow duration-300 overflow-hidden"
             >
-              {/* Step number */}
-              <div className="absolute top-6 right-6 lg:top-8 lg:right-8 text-[60px] leading-none font-bold text-[#1b0c25]/5">
+              {/* Gradient wash on hover */}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[linear-gradient(148deg,rgba(211,123,255,0.04)_0%,rgba(128,169,252,0.04)_100%)] pointer-events-none"
+              />
+
+              {/* Giant gradient step number */}
+              <span
+                aria-hidden
+                className="absolute top-4 right-5 lg:top-6 lg:right-7 text-[96px] lg:text-[120px] leading-none font-bold tracking-tight bg-[linear-gradient(148deg,#d37bff_0%,#80a9fc_100%)] bg-clip-text text-transparent opacity-[0.08] group-hover:opacity-[0.14] transition-opacity duration-500 pointer-events-none select-none"
+              >
                 {layer.id}
-              </div>
+              </span>
 
               <div className="flex flex-col gap-5 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#d37bff] to-[#80a9fc] flex items-center justify-center">
-                  <layer.Icon className="w-5 h-5 text-white" />
+                {/* Icon with glow */}
+                <div className="relative w-14 h-14">
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 rounded-2xl bg-[linear-gradient(148deg,#d37bff_0%,#80a9fc_100%)] blur-[18px] opacity-40 group-hover:opacity-60 transition-opacity duration-500"
+                  />
+                  <div className="relative w-14 h-14 rounded-2xl bg-[linear-gradient(148deg,#d37bff_0%,#80a9fc_100%)] flex items-center justify-center shadow-[0_4px_12px_rgba(211,123,255,0.35)]">
+                    <layer.Icon className="w-6 h-6 text-white" strokeWidth={2} />
+                  </div>
                 </div>
-                <h3 className="text-[20px] font-medium text-[#1b0c25]">
+
+                <h3 className="text-[20px] lg:text-[22px] font-medium text-[#1b0c25] leading-tight">
                   {layer.title}
                 </h3>
-                <p className="text-[15px] leading-[24px] text-[#1b0c25]/60">
+                <p className="text-[15px] leading-[24px] text-[#1b0c25]/55">
                   {layer.description}
                 </p>
               </div>

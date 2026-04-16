@@ -1,16 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import TitleSection from "@/components/TitleSection";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   fadeInUpVariants,
-  bentoCardVariants,
-  bentoContainerVariants,
+  faqContainerVariants,
+  faqItemVariants,
   viewportSettings,
 } from "@/lib/motion";
 import {
+  Plus,
+  Minus,
   ScanFace,
   Eye,
   Smartphone,
@@ -19,10 +22,18 @@ import {
   BrainCircuit,
 } from "lucide-react";
 
-const CAPABILITY_ICONS = [ScanFace, Eye, Smartphone, AppWindow, AudioLines, BrainCircuit];
+const CAPABILITY_ICONS = [
+  ScanFace,
+  Eye,
+  Smartphone,
+  AppWindow,
+  AudioLines,
+  BrainCircuit,
+];
 
 export default function ProcteoCapabilities() {
   const t = useTranslations("enterpriseProcteo");
+  const [openIndex, setOpenIndex] = useState<number>(0);
 
   const capabilities = Array.from({ length: 6 }, (_, i) => ({
     id: i + 1,
@@ -31,50 +42,91 @@ export default function ProcteoCapabilities() {
     description: t(`feature${i + 1}Description`),
   }));
 
+  const toggle = (index: number) => {
+    setOpenIndex(openIndex === index ? -1 : index);
+  };
+
   return (
-    <div className="px-4 py-16 lg:py-[120px] bg-[#f7f6f7]" id="capabilities">
-      <Container className="flex flex-col items-center gap-12 lg:gap-[80px]">
-        {/* Header */}
+    <div
+      id="capabilities"
+      className="px-4 py-12 sm:py-16 lg:py-20 xl:py-[100px] bg-[#f7f6f7]"
+    >
+      <Container className="flex flex-col lg:flex-row items-start gap-6 lg:gap-[60px]">
+        {/* Left column — sticky */}
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col items-center text-center gap-4 lg:gap-6 max-w-[700px]"
+          className="w-full lg:w-[366px] shrink-0"
         >
-          <TitleSection title={t("featuresBadge")} />
-          <h2 className="text-3xl sm:text-4xl lg:text-[48px] leading-tight lg:leading-[52px] text-[#1b0c25] font-medium">
-            {t("featuresTitle")}
-          </h2>
+          <div className="flex flex-col items-start gap-6 lg:gap-[40px] lg:sticky lg:top-[100px]">
+            <div className="flex flex-col items-start gap-2 lg:gap-[10px]">
+              <TitleSection title={t("featuresBadge")} />
+              <h2 className="text-2xl sm:text-3xl lg:text-[40px] text-[#1b0c25] leading-tight lg:leading-[50px] font-medium">
+                {t("featuresTitle")}
+              </h2>
+            </div>
+            <p className="text-sm sm:text-base lg:text-[16px] leading-relaxed lg:leading-[26px] text-[#1b0c25]/60">
+              {t("featuresDescription")}
+            </p>
+          </div>
         </motion.div>
 
-        {/* Grid */}
+        {/* Right column — accordion */}
         <motion.div
-          variants={bentoContainerVariants}
+          variants={faqContainerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 w-full"
+          className="w-full flex-1"
         >
-          {capabilities.map((cap) => (
-            <motion.div
-              key={cap.id}
-              variants={bentoCardVariants}
-              className="p-6 rounded-[16px] bg-white border border-[#1b0c25]/5 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-300"
-            >
-              <div className="flex flex-col gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#d37bff]/10 flex items-center justify-center">
-                  <cap.Icon className="w-5 h-5 text-[#d37bff]" />
-                </div>
-                <h3 className="text-[16px] font-medium text-[#1b0c25]">
-                  {cap.title}
-                </h3>
-                <p className="text-[14px] leading-[22px] text-[#1b0c25]/60">
-                  {cap.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+          <div className="flex flex-col gap-[10px]">
+            {capabilities.map((cap, index) => (
+              <motion.div
+                key={cap.id}
+                variants={faqItemVariants}
+                className="w-full bg-white rounded-lg overflow-hidden transition-all duration-300 border border-[#1b0c25]/5"
+              >
+                <button
+                  onClick={() => toggle(index)}
+                  className="flex items-center justify-between w-full p-4 lg:p-[20px] text-left hover:bg-[#f7f6f7] transition-colors"
+                >
+                  <div className="flex items-center gap-3 pr-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#1b0c25]/6 flex items-center justify-center shrink-0">
+                      <cap.Icon className="w-4 h-4 text-[#1b0c25]" />
+                    </div>
+                    <p className="text-base lg:text-[17px] text-[#1b0c25] leading-snug font-medium">
+                      {cap.title}
+                    </p>
+                  </div>
+                  <div className="shrink-0">
+                    {openIndex === index ? (
+                      <Minus className="w-5 h-5 text-[#1b0c25]" />
+                    ) : (
+                      <Plus className="w-5 h-5 text-[#1b0c25]" />
+                    )}
+                  </div>
+                </button>
+
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 lg:px-[20px] pb-4 lg:pb-[20px] text-sm lg:text-[15px] text-[#1b0c25]/70 leading-relaxed lg:leading-[26px] border-t border-gray-200 pt-3">
+                        {cap.description}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </Container>
     </div>
