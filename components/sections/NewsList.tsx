@@ -71,8 +71,13 @@ export default function NewsList({
     const response = await newsService.getNews(queryParams);
 
     if (response.error) {
-      setError(response.error.message);
-      setNews([]);
+      // See BlogList.tsx for rationale — NO_API_URL degrades silently to empty state.
+      if (response.error.code === "NO_API_URL") {
+        setNews([]);
+      } else {
+        setError(response.error.message);
+        setNews([]);
+      }
     } else if (response.data) {
       const transformed = transformNewsItems(response.data.news || []);
       setNews(transformed);

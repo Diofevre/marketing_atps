@@ -108,7 +108,10 @@
     "btnStartQuiz": "Lancer un quiz",
     "btnDictionary": "Dictionnaire",
     "btnPracticeExam": "Examen blanc",
-    "aiAssistantAlt": "Assistant IA"
+    "aiAssistantAlt": "Assistant IA",
+    "aircraftAirplaneAlt": "Avion de ligne",
+    "aircraftHelicopterAlt": "Hélicoptère",
+    "aircraftBalloonAlt": "Montgolfière"
   },
   "testimonials": {
     "badge": "Mur d'amour",

@@ -32,7 +32,7 @@ export async function generateMetadata({
 
 export default function PricingPage() {
   return (
-    <div className="pt-16">
+    <div className="pt-20">
       <Pricing />
     </div>
   );

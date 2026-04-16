@@ -108,7 +108,10 @@
     "btnStartQuiz": "Start Quiz",
     "btnDictionary": "Dictionary",
     "btnPracticeExam": "Practice Exam",
-    "aiAssistantAlt": "AI Assistant"
+    "aiAssistantAlt": "AI Assistant",
+    "aircraftAirplaneAlt": "Airliner",
+    "aircraftHelicopterAlt": "Helicopter",
+    "aircraftBalloonAlt": "Hot air balloon"
   },
   "testimonials": {
     "badge": "Wall of Love",

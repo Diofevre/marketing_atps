@@ -67,10 +67,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
     ? ["All Category", ...categoriesRes.data.categories.map((c) => c.name)]
     : undefined;
 
-  if (listRes.error) {
+  if (listRes.error && listRes.error.code !== "NO_API_URL") {
     console.error("[blog/page] blogService.getArticles failed:", listRes.error);
   }
-  if (categoriesRes.error) {
+  if (categoriesRes.error && categoriesRes.error.code !== "NO_API_URL") {
     console.error(
       "[blog/page] blogService.getCategories failed:",
       categoriesRes.error,

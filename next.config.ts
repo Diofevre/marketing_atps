@@ -34,28 +34,18 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Rewrites to proxy blog/news API calls to the main app
+  // Rewrites proxy blog/news API calls to the backend API.
+  // If NEXT_PUBLIC_API_URL is not set, register no rewrites — otherwise requests
+  // to /api/blog/* would loop back to this very server and hang.
   async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) return [];
 
     return [
-      // Match both /api/blog and /api/blog/anything
-      {
-        source: '/api/blog',
-        destination: `${apiUrl}/api/blog`,
-      },
-      {
-        source: '/api/blog/:path*',
-        destination: `${apiUrl}/api/blog/:path*`,
-      },
-      {
-        source: '/api/news',
-        destination: `${apiUrl}/api/news`,
-      },
-      {
-        source: '/api/news/:path*',
-        destination: `${apiUrl}/api/news/:path*`,
-      },
+      { source: '/api/blog', destination: `${apiUrl}/api/blog` },
+      { source: '/api/blog/:path*', destination: `${apiUrl}/api/blog/:path*` },
+      { source: '/api/news', destination: `${apiUrl}/api/news` },
+      { source: '/api/news/:path*', destination: `${apiUrl}/api/news/:path*` },
     ];
   },
 
@@ -79,10 +69,6 @@ const nextConfig: NextConfig = {
         hostname: 'myatps.com',
       },
       {
-        // Blog/news cover images can come from any CDN via the
-        // backend API. We restrict to known patterns rather than
-        // using a wildcard that would turn next/image into an
-        // open proxy.
         protocol: 'https',
         hostname: '*.cloudfront.net',
       },

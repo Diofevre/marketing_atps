@@ -74,8 +74,15 @@ export default function BlogList({
       const response = await blogService.getArticles(queryParams);
 
       if (response.error) {
-        setError(response.error.message);
-        setPosts([]);
+        // When the API URL isn't configured, treat the call as "no posts" instead
+        // of a hard error — this avoids showing a scary red banner on marketing
+        // deployments where the backend hasn't been wired up yet.
+        if (response.error.code === "NO_API_URL") {
+          setPosts([]);
+        } else {
+          setError(response.error.message);
+          setPosts([]);
+        }
       } else if (response.data) {
         const transformed = transformBlogArticles(response.data.articles || []);
         setPosts(transformed);

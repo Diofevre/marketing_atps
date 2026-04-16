@@ -19,12 +19,12 @@ export default function EnterpriseHero() {
 
   return (
     <div className="w-full pb-0 px-4">
-      <div className="min-h-[700px] lg:min-h-[820px] bg-gradient-to-br from-[#1b0c25] via-[#2d1640] to-[#1b0c25] rounded-2xl overflow-hidden relative">
+      <div className="min-h-[700px] lg:min-h-[820px] bg-linear-to-br from-[#1b0c25] via-[#2d1640] to-[#1b0c25] rounded-2xl overflow-hidden relative">
         {/* Gradient orbs */}
         <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_50%,#ff49d4_100%)] blur-[120px] opacity-20" />
         <div className="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] rounded-full bg-[linear-gradient(148deg,#fcab83_0%,#d37bff_50%,#80a9fc_100%)] blur-[120px] opacity-20" />
 
-        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-16 lg:pt-[160px] h-full">
+        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-28 lg:pt-[160px] h-full">
           <Container className="flex flex-col gap-6 lg:gap-[40px]">
             <div className="flex flex-col gap-4 lg:gap-[24px]">
               <div className="flex flex-col items-start gap-4 lg:gap-[24px]">

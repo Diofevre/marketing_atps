@@ -120,26 +120,29 @@ export default function Pricing() {
   return (
     <div id="pricing">
       {/* Header */}
-      <div className="w-full py-16 px-4">
+      <div className="w-full py-12 sm:py-16 lg:py-[120px] px-4">
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col items-center gap-6 text-center max-w-4xl mx-auto"
+          className="flex flex-col items-center gap-4 sm:gap-6 lg:gap-[24px] text-center max-w-4xl mx-auto"
         >
-          {/* Badge */}
-          <TitleSection title={t("badge")} />
-
-          {/* Title */}
-          <h2 className="text-4xl sm:text-5xl lg:text-[50px] font-bold text-[#1b0c25] leading-tight lg:leading-[1.1]">
-            {t("titleBold1")}{" "}
-            <span className="text-[#1b0c25]/30">{t("titleMuted")}</span>{" "}
-            {t("titleBold2")}
-          </h2>
+          {/* Title with badge */}
+          <div className="flex flex-col items-center gap-3 sm:gap-4 lg:gap-[12px] w-full">
+            <TitleSection
+              title={t("badge")}
+              className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
+            />
+            <h2 className="text-3xl sm:text-4xl lg:text-[56px] leading-tight lg:leading-[60px] text-center font-medium text-[#1b0c25]">
+              {t("titleBold1")}{" "}
+              <span className="text-[#1b0c25]/30">{t("titleMuted")}</span>{" "}
+              {t("titleBold2")}
+            </h2>
+          </div>
 
           {/* Subtitle */}
-          <p className="text-[#1b0c25]/50 text-base lg:text-[15px] max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-[17px] leading-relaxed lg:leading-[28px] text-center text-[#1b0c25] max-w-2xl mx-auto">
             {t("subtitle")}
           </p>
 

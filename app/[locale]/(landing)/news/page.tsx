@@ -72,10 +72,10 @@ export default async function NewsPage({ params }: NewsPageProps) {
     ? ["All Category", ...categoriesRes.data.categories.map((c) => c.name)]
     : undefined;
 
-  if (listRes.error) {
+  if (listRes.error && listRes.error.code !== "NO_API_URL") {
     console.error("[news/page] newsService.getNews failed:", listRes.error);
   }
-  if (categoriesRes.error) {
+  if (categoriesRes.error && categoriesRes.error.code !== "NO_API_URL") {
     console.error(
       "[news/page] newsService.getCategories failed:",
       categoriesRes.error,

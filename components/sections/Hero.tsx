@@ -15,6 +15,7 @@ import {
   heroButtonVariants,
   heroCardVariants,
 } from "@/lib/motion";
+import { HotAirBalloon } from "../illustrations/HeroAircrafts";
 
 function TypingIndicator() {
   return (
@@ -172,7 +173,7 @@ export default function Hero() {
     <div className="w-full pb-0 px-4">
       <div className="min-h-[800px] lg:h-[1236px] bg-[url('/images/bgHero.png')] bg-cover bg-center rounded-2xl overflow-hidden relative">
         
-        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-16 lg:pt-[160px] h-full">
+        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-28 lg:pt-[160px] h-full">
           <Container className="flex flex-col gap-6 lg:gap-[40px]">
             <div className="flex flex-col gap-4 lg:gap-[24px]">
               <div className="flex flex-col items-start gap-4 lg:gap-[24px]">
@@ -234,63 +235,57 @@ export default function Hero() {
               animate="visible"
               className="flex-1 flex items-end justify-center w-full border border-[#1b0c25]/10 border-b-0 relative rounded-tl-[20px] sm:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[30px] lg:rounded-tr-[40px] rounded-b-none backdrop-blur-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.6)_100%)] overflow-hidden"
             >
-              {/* Aviation 1 — décollage, top-right */}
+              {/* Hot air balloon — large, pink, top-right (slow float + gentle sway) */}
               <motion.div
-                className="hidden lg:block absolute top-[20px] right-[55px] mix-blend-multiply"
-                style={{ originX: "50%", originY: "80%" }}
+                className="hidden lg:block absolute top-[30px] right-[70px]"
+                style={{ originX: "50%", originY: "20%" }}
                 animate={{
-                  y: [0, -16, -7, 0],
+                  y: [0, -18, -6, 0],
                   x: [0, 6, 2, 0],
-                  rotate: [-3, 3, 0, -3],
+                  rotate: [-2, 2, 0, -2],
                 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Image
-                  src="/images/hero-aviation-1.png"
-                  alt="Airliner takeoff"
-                  width={220}
-                  height={147}
-                  className="object-contain"
+                <HotAirBalloon
+                  variant="pink"
+                  aria-label={t("aircraftBalloonAlt")}
+                  className="w-[175px] h-auto"
                 />
               </motion.div>
 
-              {/* Aviation 2 — approche, left */}
+              {/* Hot air balloon — medium, violet, bottom-left (deeper float, different phase) */}
               <motion.div
-                className="hidden lg:block absolute bottom-[120px] left-[100px] mix-blend-multiply"
-                style={{ originX: "50%", originY: "30%", scaleX: -1 }}
+                className="hidden lg:block absolute bottom-[160px] left-[90px]"
+                style={{ originX: "50%", originY: "20%" }}
                 animate={{
-                  y: [0, 12, 4, 0],
-                  x: [0, -6, -1, 0],
-                  rotate: [2, -2, 0, 2],
+                  y: [0, -14, -4, 0],
+                  x: [0, -5, -2, 0],
+                  rotate: [1.5, -1.5, 0, 1.5],
                 }}
-                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
               >
-                <Image
-                  src="/images/hero-aviation-2.png"
-                  alt="Airliner approach"
-                  width={190}
-                  height={127}
-                  className="object-contain"
+                <HotAirBalloon
+                  variant="violet"
+                  aria-label={t("aircraftBalloonAlt")}
+                  className="w-[145px] h-auto"
                 />
               </motion.div>
 
-              {/* Aviation 3 — survol, top-left discret */}
+              {/* Hot air balloon — small, peach, top-left (quicker drift, subtle) */}
               <motion.div
-                className="hidden lg:block absolute top-[32px] left-[220px] mix-blend-multiply"
-                style={{ originX: "50%", originY: "50%" }}
+                className="hidden lg:block absolute top-[60px] left-[240px]"
+                style={{ originX: "50%", originY: "20%" }}
                 animate={{
-                  y: [0, -8, 0],
-                  x: [0, 10, 0],
-                  rotate: [0, 1.5, 0],
+                  y: [0, -10, -3, 0],
+                  x: [0, 8, 3, 0],
+                  rotate: [-1, 1.2, 0, -1],
                 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+                transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
               >
-                <Image
-                  src="/images/hero-aviation-3.png"
-                  alt="Airliner flyover"
-                  width={160}
-                  height={107}
-                  className="object-contain"
+                <HotAirBalloon
+                  variant="peach"
+                  aria-label={t("aircraftBalloonAlt")}
+                  className="w-[105px] h-auto"
                 />
               </motion.div>
 
