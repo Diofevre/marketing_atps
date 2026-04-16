@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ScanFace, Upload, CheckCircle2, XCircle, ArrowRight, Loader2, Camera } from "lucide-react";
 import { useRef, useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 
 interface DemoIdentityProps {
   cameraStream: MediaStream | null;
@@ -66,10 +67,11 @@ export default function DemoIdentity({
 
   // Watch for verification result
   useEffect(() => {
-    if (identityMatched !== null && step === "verifying") {
-      setStep("result");
+    if (identityMatched !== null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setStep((prev) => (prev === "verifying" ? "result" : prev));
     }
-  }, [identityMatched, step]);
+  }, [identityMatched]);
 
   return (
     <motion.div
@@ -96,7 +98,7 @@ export default function DemoIdentity({
 
             {identityPhoto ? (
               <div className="w-full max-w-[250px] aspect-[3/4] rounded-xl overflow-hidden border-2 border-emerald-300 relative">
-                <img src={identityPhoto} alt="ID" className="w-full h-full object-cover" />
+                <Image src={identityPhoto} alt="ID" fill className="object-cover" unoptimized />
                 <div className="absolute top-2 right-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                 </div>

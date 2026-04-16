@@ -205,8 +205,12 @@
     "card3Feature3": "Analyses de progression par code couleur"
   },
   "pricing": {
+    "badge": "Tarifs",
     "title": "Choisissez votre plan",
-    "subtitle": "Accédez à tous les outils pour réussir votre ATPL du premier coup",
+    "titleBold1": "Choisissez le plan",
+    "titleMuted": "qui vous correspond",
+    "titleBold2": "vraiment.",
+    "subtitle": "Accédez à tous les outils pour réussir votre ATPL du premier coup. Des quiz intelligents, un dictionnaire aéronautique complet et un suivi personnalisé de vos progrès.",
     "durationAriaLabel": "Durée de l'abonnement",
     "duration1": "1 mois",
     "duration2": "2 mois",
@@ -641,7 +645,11 @@
     "consentRule6": "Ne couvrez pas et ne bloquez pas la caméra",
     "consentCheckPrivacy": "Je comprends les conditions de confidentialité et consens à la collecte de données pendant cette session démo.",
     "consentCheckRules": "Je comprends les règles de l'examen et m'engage à respecter les directives d'intégrité académique.",
-    "consentStart": "J'accepte — Démarrer l'examen"
+    "consentStart": "J'accepte — Démarrer l'examen",
+    "formTitle": "Démarrer votre session de démo",
+    "formSubtitle": "Entrez votre email pour recevoir le rapport d'analyse complet.",
+    "featureSecurity": "Chiffré & confidentiel",
+    "emailLabel": "Adresse email"
   },
   "common": {
     "getStarted": "Commencer",

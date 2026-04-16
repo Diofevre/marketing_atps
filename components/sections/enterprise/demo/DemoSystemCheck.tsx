@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Camera, Mic, Monitor, Wifi, Globe, CheckCircle2, XCircle, AlertTriangle, ArrowRight, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface CheckResult {
   id: string;
@@ -29,15 +29,11 @@ export default function DemoSystemCheck({ onComplete }: DemoSystemCheckProps) {
   ]);
   const [running, setRunning] = useState(true);
 
-  useEffect(() => {
-    runChecks();
-  }, []);
-
   const updateCheck = (id: string, status: CheckResult["status"], detail?: string) => {
     setChecks((prev) => prev.map((c) => (c.id === id ? { ...c, status, detail } : c)));
   };
 
-  const runChecks = async () => {
+  const runChecks = useCallback(async () => {
     setRunning(true);
 
     // Browser check
@@ -95,7 +91,12 @@ export default function DemoSystemCheck({ onComplete }: DemoSystemCheckProps) {
     }
 
     setRunning(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    runChecks();
+  }, [runChecks]);
 
   const allPassed = checks.every((c) => c.status === "pass" || c.status === "warn");
   const hasFail = checks.some((c) => c.status === "fail");

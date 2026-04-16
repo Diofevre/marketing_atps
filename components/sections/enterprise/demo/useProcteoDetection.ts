@@ -13,6 +13,47 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { DetectionEvent } from "./useDemoSession";
 
+interface CocoPrediction {
+  class: string;
+  score: number;
+  bbox: [number, number, number, number];
+}
+
+interface CocoModel {
+  detect(canvas: HTMLCanvasElement, maxNumBoxes?: number, minScore?: number): Promise<CocoPrediction[]>;
+}
+
+interface SpeechRecognitionResultEntry {
+  transcript: string;
+}
+
+interface SpeechRecognitionEventLike {
+  results: {
+    length: number;
+    [index: number]: { 0: SpeechRecognitionResultEntry };
+  };
+}
+
+interface SpeechRecognitionLike {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onresult: ((event: SpeechRecognitionEventLike) => void) | null;
+  onend: (() => void) | null;
+  onerror: (() => void) | null;
+  start(): void;
+  stop(): void;
+}
+
+interface SpeechRecognitionConstructor {
+  new(): SpeechRecognitionLike;
+}
+
+type WindowWithSpeech = Window & {
+  SpeechRecognition?: SpeechRecognitionConstructor;
+  webkitSpeechRecognition?: SpeechRecognitionConstructor;
+};
+
 const SUSPICIOUS_CLASSES: Record<string, { labelKey: string; severity: "medium" | "high" | "critical" }> = {
   "cell phone": { labelKey: "demoEvents.phoneDetected", severity: "critical" },
   book: { labelKey: "demoEvents.bookDetected", severity: "high" },
@@ -30,9 +71,9 @@ export function useProcteoDetection({ videoElement, enabled, onEvent }: UseProct
   const [modelsLoaded, setModelsLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const cocoModelRef = useRef<any>(null);
+  const cocoModelRef = useRef<CocoModel | null>(null);
   const detectionIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const speechRecRef = useRef<any>(null);
+  const speechRecRef = useRef<SpeechRecognitionLike | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const examStartRef = useRef(Date.now());
   const cooldownRef = useRef<Map<string, number>>(new Map());
@@ -90,7 +131,7 @@ export function useProcteoDetection({ videoElement, enabled, onEvent }: UseProct
         });
       }
 
-      const persons = predictions.filter((p: any) => p.class === "person" && p.score > 0.5);
+      const persons = predictions.filter((p: CocoPrediction) => p.class === "person" && p.score > 0.5);
       if (persons.length === 0) {
         const lastFired = cooldownRef.current.get("face.absent") || 0;
         if (elapsed - lastFired > 8000) {
@@ -120,15 +161,15 @@ export function useProcteoDetection({ videoElement, enabled, onEvent }: UseProct
   }, [videoElement]);
 
   const startSpeechDetection = useCallback(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) return;
+    const SpeechRecognitionCtor = (window as WindowWithSpeech).SpeechRecognition || (window as WindowWithSpeech).webkitSpeechRecognition;
+    if (!SpeechRecognitionCtor) return;
 
-    const recognition = new SpeechRecognition();
+    const recognition = new SpeechRecognitionCtor();
     recognition.continuous = true;
     recognition.interimResults = false;
     recognition.lang = "fr-FR";
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEventLike) => {
       const elapsed = Date.now() - examStartRef.current;
       const lastFired = cooldownRef.current.get("audio.speech") || 0;
       if (elapsed - lastFired < 5000) return;

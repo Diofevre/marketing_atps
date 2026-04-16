@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
 import { ShieldCheck, ShieldAlert, AlertTriangle, RotateCcw, Trophy, Target, Clock, Eye } from "lucide-react";
-import type { DemoQuestion } from "./demoQuestions";
 import { DEMO_DURATION_SECONDS, DEMO_PASSING_SCORE } from "./demoQuestions";
 import type { DetectionEvent } from "./useDemoSession";
 

@@ -6,7 +6,6 @@ import TitleSection from "@/components/TitleSection";
 import { motion } from "framer-motion";
 import {
   fadeInUpVariants,
-  fadeInUpDelayedVariants,
   bentoCardVariants,
   bentoContainerVariants,
   viewportSettings,

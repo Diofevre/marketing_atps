@@ -96,39 +96,35 @@ export default function Contact() {
   };
 
   const inputClass =
-    "bg-[#F9F9F9] border-[#1b0c25]/10 focus-visible:ring-brand/20 focus-visible:border-[#1b0c25]/30 h-11 sm:h-12 rounded-[10px] text-sm sm:text-base";
+    "bg-white border-[#1b0c25]/12 focus-visible:ring-[#1b0c25]/10 focus-visible:border-[#1b0c25]/30 h-11 sm:h-12 rounded-[10px] text-sm sm:text-base";
 
   return (
-    <div className="py-[120px] pb-20 max-lg:py-12 relative overflow-hidden">
-      {/* Background Gradients */}
-      <div className="absolute z-0 left-[-200px] top-[-100px] rounded-[600px] w-[500px] h-[400px] bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_31.09%,#fcab83_70.46%,#ff49d4_100%)] blur-[100px] opacity-[0.15] max-lg:hidden" />
-      <div className="absolute z-0 right-[-100px] bottom-[100px] rounded-[600px] w-[500px] h-[400px] bg-[linear-gradient(145deg,#efe8f6_0%,#d588fb_60.83%,#ff49d4_100%)] blur-[100px] opacity-[0.15] max-lg:hidden" />
-
-      <Container className="relative z-10 flex flex-col justify-center items-center gap-[60px] max-lg:gap-8">
+    <div className="py-[120px] pb-20 max-lg:py-16">
+      <Container className="flex flex-col justify-center items-center gap-[56px] max-lg:gap-10">
         {/* Header */}
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col items-center text-center w-full max-w-[800px]"
+          className="flex flex-col items-center text-center gap-4 w-full max-w-[640px]"
         >
           <TitleSection title={t("badge")} />
-          <h1 className="font-medium text-4xl sm:text-5xl lg:text-[60px] lg:leading-[60px] text-[#1b0c25]">
+          <h1 className="font-medium text-4xl sm:text-5xl lg:text-[56px] lg:leading-[62px] text-[#1b0c25]">
             {t("heading")}
           </h1>
         </motion.div>
 
-        {/* Main Card */}
+        {/* Main Layout */}
         <motion.div
           variants={scaleInVariants}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 w-full bg-white rounded-[24px] p-4 sm:p-6 lg:p-10 border border-[#1b0c25]/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+          className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16 w-full"
         >
           {/* Left Column */}
-          <div className="flex flex-col justify-between gap-8 lg:gap-12 lg:min-w-0 lg:flex-1 lg:max-w-[420px]">
+          <div className="flex flex-col justify-between gap-8 lg:gap-12 lg:min-w-0 lg:flex-1 lg:max-w-[400px]">
             <div className="flex flex-col gap-6">
               <p className="font-medium text-base lg:text-[17px] leading-[28px] text-[#1b0c25]/80">
                 {t("intro")}
@@ -160,7 +156,7 @@ export default function Contact() {
             </div>
 
             {/* Testimonial */}
-            <div className="flex flex-col gap-6 p-6 bg-[#F9F9F9] rounded-2xl">
+            <div className="flex flex-col gap-5 p-6 bg-[#F9F9F9] rounded-2xl border border-[#1b0c25]/5">
               <blockquote className="text-lg lg:text-[20px] font-medium leading-[28px] text-[#1b0c25]">
                 {t("testimonialQuote")}
               </blockquote>
@@ -181,6 +177,9 @@ export default function Contact() {
               </div>
             </div>
           </div>
+
+          {/* Divider — desktop only */}
+          <div className="hidden lg:block w-px bg-[#1b0c25]/8 self-stretch shrink-0" />
 
           {/* Right Column — Form / Success */}
           <div className="lg:flex-1 lg:min-w-0">
@@ -359,7 +358,7 @@ export default function Contact() {
                         <FormControl>
                           <Textarea
                             placeholder={t("messagePlaceholder")}
-                            className="bg-[#F9F9F9] border-[#1b0c25]/10 focus-visible:ring-brand/20 focus-visible:border-[#1b0c25]/30 min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y"
+                            className="bg-white border-[#1b0c25]/12 focus-visible:ring-[#1b0c25]/10 focus-visible:border-[#1b0c25]/30 min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y"
                             {...field}
                           />
                         </FormControl>
@@ -401,3 +400,4 @@ export default function Contact() {
     </div>
   );
 }
+

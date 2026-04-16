@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import { Star, Check, Gift } from "lucide-react";
+import TitleSection from "../TitleSection";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   fadeInUpVariants,
@@ -117,39 +117,47 @@ export default function Pricing() {
     return priceData;
   };
 
-  const maxSavings = PLANS.PREMIUM.prices[12].savings;
-
   return (
-    <div id="pricing" className="py-12 lg:py-[100px]">
-      <Container className="flex flex-col gap-8">
-        {/* Header Section */}
+    <div id="pricing">
+      {/* Header */}
+      <div className="w-full py-16 px-4">
         <motion.div
           variants={fadeInUpVariants}
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"
+          className="flex flex-col items-center gap-6 text-center max-w-4xl mx-auto"
         >
-          <div className="flex flex-col gap-3">
-            <h2 className="text-4xl lg:text-5xl font-semibold text-[#1b0c25]">
-              {t("title")}
-            </h2>
-            <p className="text-[#1b0c25]/60">
-              {t("subtitle")}
-            </p>
-          </div>
+          {/* Badge */}
+          <TitleSection title={t("badge")} />
+
+          {/* Title */}
+          <h2 className="text-4xl sm:text-5xl lg:text-[50px] font-bold text-[#1b0c25] leading-tight lg:leading-[1.1]">
+            {t("titleBold1")}{" "}
+            <span className="text-[#1b0c25]/30">{t("titleMuted")}</span>{" "}
+            {t("titleBold2")}
+          </h2>
+
+          {/* Subtitle */}
+          <p className="text-[#1b0c25]/50 text-base lg:text-[15px] max-w-2xl leading-relaxed">
+            {t("subtitle")}
+          </p>
 
           {/* Duration Selector */}
-          <div className="flex flex-wrap items-center gap-2 p-1 bg-gray-100 rounded-lg" role="group" aria-label={t("durationAriaLabel")}>
+          <div
+            className="flex flex-wrap items-center justify-center gap-1 p-1 bg-gray-100 rounded-xl mt-2"
+            role="group"
+            aria-label={t("durationAriaLabel")}
+          >
             {DURATIONS.map((duration) => (
               <button
                 key={duration.months}
                 onClick={() => setSelectedDuration(duration.months)}
                 aria-pressed={selectedDuration === duration.months}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                   selectedDuration === duration.months
                     ? "bg-white text-[#1b0c25] shadow-sm"
-                    : "text-[#1b0c25]/60 hover:text-[#1b0c25]"
+                    : "text-[#1b0c25]/50 hover:text-[#1b0c25]"
                 }`}
               >
                 {duration.label}
@@ -157,226 +165,230 @@ export default function Pricing() {
             ))}
           </div>
         </motion.div>
+      </div>
 
-        {/* Pricing Cards */}
-        <motion.div
-          variants={pricingContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportSettings}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {/* Free Plan */}
+      <div className="py-12 lg:py-16 px-4">
+        <Container className="flex flex-col gap-8">
+          {/* Pricing Cards */}
           <motion.div
-            variants={pricingCardVariants}
-            className="flex flex-col p-6 bg-white rounded-2xl border border-gray-200"
+            variants={pricingContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            <div className="flex items-center gap-2 mb-2">
-              <h3 className="text-2xl font-semibold text-[#1b0c25]">
-                {PLANS.FREE.name}
+            {/* Free Plan */}
+            <motion.div
+              variants={pricingCardVariants}
+              className="flex flex-col p-6 bg-white rounded-2xl border border-gray-200"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className="text-2xl font-semibold text-[#1b0c25]">
+                  {PLANS.FREE.name}
+                </h3>
+                <span className="text-sm text-black font-medium">
+                  {PLANS.FREE.badge}
+                </span>
+              </div>
+              <p className="text-sm text-gray-600 mb-6">
+                {PLANS.FREE.description}
+              </p>
+
+              <div className="mb-2">
+                <span className="text-5xl font-semibold text-[#1b0c25]">0€</span>
+                <span className="text-[#1b0c25]/50 ml-1">
+                  {PLANS.FREE.priceLabel}
+                </span>
+              </div>
+              <p className="text-sm text-gray-500 mb-6">
+                {t("freeSubtitle")}
+              </p>
+
+              <Link href={`${APP_URL}/auth/signup`} className="w-full mb-8">
+                <Button
+                  variant="outline"
+                  className="group w-full h-12 text-[#1b0c25] border-[#1b0c25] hover:bg-[#1b0c25] hover:text-white overflow-hidden"
+                >
+                  <span className="flex flex-col items-center h-[26px] overflow-hidden">
+                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                      {PLANS.FREE.buttonText}
+                    </span>
+                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                      {PLANS.FREE.buttonText}
+                    </span>
+                  </span>
+                </Button>
+              </Link>
+
+              <div className="flex flex-col gap-3">
+                {PLANS.FREE.features.map((feature, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    {feature.included ? (
+                      <Check className="w-5 h-5 text-[#1b0c25]" />
+                    ) : (
+                      <div className="w-5 h-5 rounded-full border-2 border-[#1b0c25]/20" />
+                    )}
+                    <span
+                      className={`text-sm ${feature.included ? "text-[#1b0c25]" : "text-[#1b0c25]/60"}`}
+                    >
+                      {feature.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Standard Plan */}
+            <motion.div
+              variants={pricingCardVariants}
+              className="flex flex-col p-6 bg-white rounded-2xl border border-gray-200"
+            >
+              <h3 className="text-2xl font-semibold text-[#1b0c25] mb-2">
+                {PLANS.STANDARD.name}
               </h3>
-              <span className="text-sm text-black font-medium">
-                {PLANS.FREE.badge}
-              </span>
-            </div>
-            <p className="text-sm text-gray-600 mb-6">
-              {PLANS.FREE.description}
-            </p>
+              <p className="text-sm text-gray-600 mb-6">
+                {PLANS.STANDARD.description}
+              </p>
 
-            <div className="mb-2">
-              <span className="text-5xl font-semibold text-[#1b0c25]">0€</span>
-              <span className="text-[#1b0c25]/50 ml-1">
-                {PLANS.FREE.priceLabel}
-              </span>
-            </div>
-            <p className="text-sm text-gray-500 mb-6">
-              {t("freeSubtitle")}
-            </p>
-
-            <Link href={`${APP_URL}/auth/signup`} className="w-full mb-8">
-              <Button
-                variant="outline"
-                className="group w-full h-12 text-[#1b0c25] border-[#1b0c25] hover:bg-[#1b0c25] hover:text-white overflow-hidden"
-              >
-                <span className="flex flex-col items-center h-[26px] overflow-hidden">
-                  <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                    {PLANS.FREE.buttonText}
-                  </span>
-                  <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                    {PLANS.FREE.buttonText}
-                  </span>
+              <div className="mb-2 flex items-baseline gap-1">
+                <div className="h-[48px] overflow-hidden relative min-w-[60px]">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={getPrice(PLANS.STANDARD).total}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -20, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="text-5xl font-semibold text-[#1b0c25] block"
+                    >
+                      {getPrice(PLANS.STANDARD).total}€
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+                <span className="text-[#1b0c25]/50">
+                  {t(selectedDuration === 1 ? "perMonthOne" : "perMonthMany", {
+                    count: selectedDuration,
+                  })}
                 </span>
-              </Button>
-            </Link>
+              </div>
+              <p className="text-sm text-black mb-6">
+                {t("perMonthSavings", {
+                  perMonth: getPrice(PLANS.STANDARD).perMonth.toFixed(2),
+                  savings: getPrice(PLANS.STANDARD).savings,
+                })}
+              </p>
 
-            <div className="flex flex-col gap-3">
-              {PLANS.FREE.features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  {feature.included ? (
+              <Link
+                href={`${APP_URL}/pricing?plan=STANDARD&duration=${selectedDuration}`}
+                target="_blank"
+                className="w-full mb-8"
+              >
+                <Button
+                  variant="outline"
+                  className="group w-full h-12 text-[#1b0c25] border-[#1b0c25] hover:bg-[#1b0c25] hover:text-white overflow-hidden"
+                >
+                  <span className="flex flex-col items-center h-[26px] overflow-hidden">
+                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                      {PLANS.STANDARD.buttonText}
+                    </span>
+                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                      {PLANS.STANDARD.buttonText}
+                    </span>
+                  </span>
+                </Button>
+              </Link>
+
+              <div className="flex flex-col gap-3">
+                {PLANS.STANDARD.features.map((feature, index) => (
+                  <div key={index} className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-[#1b0c25]" />
-                  ) : (
-                    <div className="w-5 h-5 rounded-full border-2 border-[#1b0c25]/20" />
-                  )}
-                  <span
-                    className={`text-sm ${feature.included ? "text-[#1b0c25]" : "text-[#1b0c25]/60"}`}
-                  >
-                    {feature.text}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Standard Plan */}
-          <motion.div
-            variants={pricingCardVariants}
-            className="flex flex-col p-6 bg-white rounded-2xl border border-gray-200"
-          >
-            <h3 className="text-2xl font-semibold text-[#1b0c25] mb-2">
-              {PLANS.STANDARD.name}
-            </h3>
-            <p className="text-sm text-gray-600 mb-6">
-              {PLANS.STANDARD.description}
-            </p>
-
-            <div className="mb-2 flex items-baseline gap-1">
-              <div className="h-[48px] overflow-hidden relative min-w-[60px]">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={getPrice(PLANS.STANDARD).total}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="text-5xl font-semibold text-[#1b0c25] block"
-                  >
-                    {getPrice(PLANS.STANDARD).total}€
-                  </motion.span>
-                </AnimatePresence>
+                    <span className="text-sm text-[#1b0c25]">{feature.text}</span>
+                  </div>
+                ))}
               </div>
-              <span className="text-[#1b0c25]/50">
-                {t(selectedDuration === 1 ? "perMonthOne" : "perMonthMany", {
-                  count: selectedDuration,
-                })}
-              </span>
-            </div>
-            <p className="text-sm text-black mb-6">
-              {t("perMonthSavings", {
-                perMonth: getPrice(PLANS.STANDARD).perMonth.toFixed(2),
-                savings: getPrice(PLANS.STANDARD).savings,
-              })}
-            </p>
+            </motion.div>
 
-            <Link
-              href={`${APP_URL}/pricing?plan=STANDARD&duration=${selectedDuration}`}
-              target="_blank"
-              className="w-full mb-8"
+            {/* Premium Plan */}
+            <motion.div
+              variants={pricingCardVariants}
+              className="flex flex-col p-6 bg-white rounded-2xl border-2 border-black relative"
             >
-              <Button
-                variant="outline"
-                className="group w-full h-12 text-[#1b0c25] border-[#1b0c25] hover:bg-[#1b0c25] hover:text-white overflow-hidden"
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="flex items-center gap-1 px-3 py-1 bg-black text-white text-xs font-medium rounded-full">
+                  <Star className="w-3 h-3" fill="white" />
+                  {t("recommended")}
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-semibold text-[#1b0c25] mb-2 mt-2">
+                {PLANS.PREMIUM.name}
+              </h3>
+              <p className="text-sm text-[#1b0c25]/60 mb-6">
+                {PLANS.PREMIUM.description}
+              </p>
+
+              <div className="mb-2 flex items-baseline gap-1">
+                <div className="h-[48px] overflow-hidden relative min-w-[60px]">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={getPrice(PLANS.PREMIUM).total}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -20, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="text-5xl font-semibold text-[#1b0c25] block"
+                    >
+                      {getPrice(PLANS.PREMIUM).total}€
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+                <span className="text-[#1b0c25]/50">
+                  {t(selectedDuration === 1 ? "perMonthOne" : "perMonthMany", {
+                    count: selectedDuration,
+                  })}
+                </span>
+              </div>
+              <p className="text-sm text-black mb-6">
+                {t("perMonthSavings", {
+                  perMonth: getPrice(PLANS.PREMIUM).perMonth.toFixed(2),
+                  savings: getPrice(PLANS.PREMIUM).savings,
+                })}
+              </p>
+
+              <Link
+                href={`${APP_URL}/pricing?plan=PREMIUM&duration=${selectedDuration}`}
+                target="_blank"
+                className="w-full mb-4"
               >
-                <span className="flex flex-col items-center h-[26px] overflow-hidden">
-                  <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                    {PLANS.STANDARD.buttonText}
+                <Button className="group w-full h-12 bg-black hover:bg-black/90 text-white overflow-hidden">
+                  <span className="flex flex-col items-center h-[26px] overflow-hidden">
+                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                      {PLANS.PREMIUM.buttonText}
+                    </span>
+                    <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                      {PLANS.PREMIUM.buttonText}
+                    </span>
                   </span>
-                  <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                    {PLANS.STANDARD.buttonText}
-                  </span>
-                </span>
-              </Button>
-            </Link>
+                </Button>
+              </Link>
 
-            <div className="flex flex-col gap-3">
-              {PLANS.STANDARD.features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-[#1b0c25]" />
-                  <span className="text-sm text-[#1b0c25]">{feature.text}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Premium Plan */}
-          <motion.div
-            variants={pricingCardVariants}
-            className="flex flex-col p-6 bg-white rounded-2xl border-2 border-black relative"
-          >
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-              <span className="flex items-center gap-1 px-3 py-1 bg-black text-white text-xs font-medium rounded-full">
-                <Star className="w-3 h-3" fill="white" />
-                {t("recommended")}
-              </span>
-            </div>
-
-            <h3 className="text-2xl font-semibold text-[#1b0c25] mb-2 mt-2">
-              {PLANS.PREMIUM.name}
-            </h3>
-            <p className="text-sm text-[#1b0c25]/60 mb-6">
-              {PLANS.PREMIUM.description}
-            </p>
-
-            <div className="mb-2 flex items-baseline gap-1">
-              <div className="h-[48px] overflow-hidden relative min-w-[60px]">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={getPrice(PLANS.PREMIUM).total}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="text-5xl font-semibold text-[#1b0c25] block"
-                  >
-                    {getPrice(PLANS.PREMIUM).total}€
-                  </motion.span>
-                </AnimatePresence>
+              <div className="flex items-center gap-2 mb-6 text-sm text-black">
+                <Gift className="w-4 h-4" />
+                <span>{PLANS.PREMIUM.trial}</span>
               </div>
-              <span className="text-[#1b0c25]/50">
-                {t(selectedDuration === 1 ? "perMonthOne" : "perMonthMany", {
-                  count: selectedDuration,
-                })}
-              </span>
-            </div>
-            <p className="text-sm text-black mb-6">
-              {t("perMonthSavings", {
-                perMonth: getPrice(PLANS.PREMIUM).perMonth.toFixed(2),
-                savings: getPrice(PLANS.PREMIUM).savings,
-              })}
-            </p>
 
-            <Link
-              href={`${APP_URL}/pricing?plan=PREMIUM&duration=${selectedDuration}`}
-              target="_blank"
-              className="w-full mb-4"
-            >
-              <Button className="group w-full h-12 bg-black hover:bg-black/90 text-white overflow-hidden">
-                <span className="flex flex-col items-center h-[26px] overflow-hidden">
-                  <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                    {PLANS.PREMIUM.buttonText}
-                  </span>
-                  <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                    {PLANS.PREMIUM.buttonText}
-                  </span>
-                </span>
-              </Button>
-            </Link>
-
-            <div className="flex items-center gap-2 mb-6 text-sm text-black">
-              <Gift className="w-4 h-4" />
-              <span>{PLANS.PREMIUM.trial}</span>
-            </div>
-
-            <div className="flex flex-col gap-3">
-              {PLANS.PREMIUM.features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-black" />
-                  <span className="text-sm text-[#1b0c25]">{feature.text}</span>
-                </div>
-              ))}
-            </div>
+              <div className="flex flex-col gap-3">
+                {PLANS.PREMIUM.features.map((feature, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-black" />
+                    <span className="text-sm text-[#1b0c25]">{feature.text}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </Container>
+        </Container>
+      </div>
     </div>
   );
 }

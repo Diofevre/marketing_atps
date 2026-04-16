@@ -205,8 +205,12 @@
     "card3Feature3": "Color-Coded Progress Analytics"
   },
   "pricing": {
+    "badge": "Pricing",
     "title": "Choose your plan",
-    "subtitle": "Access to all tools to successfully pass your ATPL on the first try",
+    "titleBold1": "Choose the plan",
+    "titleMuted": "that fits",
+    "titleBold2": "your needs.",
+    "subtitle": "Access all the tools you need to pass your ATPL on the first try. Smart quizzes, a complete aviation dictionary and personalized progress tracking.",
     "durationAriaLabel": "Subscription duration",
     "duration1": "1 month",
     "duration2": "2 months",
@@ -641,7 +645,11 @@
     "consentRule6": "Do not cover or block the camera",
     "consentCheckPrivacy": "I understand the privacy terms and consent to data collection during this demo session.",
     "consentCheckRules": "I understand the exam rules and will follow the academic integrity guidelines.",
-    "consentStart": "I agree — Start the exam"
+    "consentStart": "I agree — Start the exam",
+    "formTitle": "Start your demo session",
+    "formSubtitle": "Enter your email to receive the full analysis report.",
+    "featureSecurity": "Encrypted & private",
+    "emailLabel": "Email address"
   },
   "common": {
     "getStarted": "Get Started",
