@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { blogService } from "@/lib/api";
 import {
   transformBlogArticles,
@@ -13,21 +14,45 @@ import BlogFeaturedPost, {
 } from "@/components/blog/BlogFeaturedPost";
 import BlogGrid from "@/components/blog/BlogGrid";
 
-export default function BlogList() {
-  const [posts, setPosts] = useState<TransformedBlogPost[]>([]);
-  const [categories, setCategories] = useState<string[]>(["All Category"]);
-  const [selectedCategory, setSelectedCategory] = useState("All Category");
+const DEFAULT_PAGINATION: PaginationInfo = {
+  page: 1,
+  limit: 12,
+  total: 0,
+  totalPages: 1,
+  hasNext: false,
+  hasPrev: false,
+};
+
+interface BlogListProps {
+  initialPosts?: TransformedBlogPost[];
+  initialPagination?: PaginationInfo;
+  initialCategories?: string[];
+}
+
+export default function BlogList({
+  initialPosts,
+  initialPagination,
+  initialCategories,
+}: BlogListProps = {}) {
+  const t = useTranslations("common");
+  const ALL_CAT = t("allCategories");
+  const hasInitialData = initialPosts !== undefined;
+  const [posts, setPosts] = useState<TransformedBlogPost[]>(
+    initialPosts ?? [],
+  );
+  const [categories, setCategories] = useState<string[]>(
+    initialCategories ?? [ALL_CAT],
+  );
+  const [selectedCategory, setSelectedCategory] = useState(ALL_CAT);
   const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasInitialData);
   const [error, setError] = useState<string | null>(null);
-  const [pagination, setPagination] = useState<PaginationInfo>({
-    page: 1,
-    limit: 12,
-    total: 0,
-    totalPages: 1,
-    hasNext: false,
-    hasPrev: false,
-  });
+  const [pagination, setPagination] = useState<PaginationInfo>(
+    initialPagination ?? DEFAULT_PAGINATION,
+  );
+  // Skip the auto-fetch on mount when the server already provided initial data,
+  // otherwise we'd refetch and waste a roundtrip on every page load.
+  const skipNextFetch = useRef(hasInitialData);
 
   const fetchPosts = useCallback(
     async (params: BlogQueryParams = {}) => {
@@ -42,7 +67,7 @@ export default function BlogList() {
         status: "published",
       };
 
-      if (selectedCategory !== "All Category") {
+      if (selectedCategory !== ALL_CAT) {
         queryParams.category = selectedCategory;
       }
 
@@ -61,7 +86,7 @@ export default function BlogList() {
 
       setLoading(false);
     },
-    [selectedCategory],
+    [selectedCategory, ALL_CAT],
   );
 
   const fetchCategories = useCallback(async () => {
@@ -70,15 +95,22 @@ export default function BlogList() {
       const names = (response.data.categories || []).map(
         (c: { name: string }) => c.name,
       );
-      setCategories(["All Category", ...names]);
+      setCategories([ALL_CAT, ...names]);
     }
-  }, []);
+  }, [ALL_CAT]);
 
   useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    // Categories aren't part of the SSR payload — fetch them client-side once.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!initialCategories) fetchCategories();
+  }, [fetchCategories, initialCategories]);
 
   useEffect(() => {
+    if (skipNextFetch.current) {
+      skipNextFetch.current = false;
+      return;
+    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchPosts({ page: 1 });
   }, [selectedCategory, fetchPosts]);
 
@@ -97,16 +129,16 @@ export default function BlogList() {
         <p className="text-red-500 text-lg">{error}</p>
         <button
           onClick={() => fetchPosts()}
-          className="px-6 py-2 bg-[#1B0C25] text-white rounded-full hover:bg-[#1B0C25]/90 transition-colors"
+          className="px-6 py-2 bg-[#1b0c25] text-white rounded-full hover:bg-[#1b0c25]/90 transition-colors"
         >
-          Réessayer
+          {t("retry")}
         </button>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-row gap-6 lg:gap-10 items-start">
+    <div className="flex flex-col md:flex-row gap-6 lg:gap-10 items-start">
       <BlogSidebarPanel
         categories={categories}
         selectedCategory={selectedCategory}

@@ -20,10 +20,11 @@ export default function NewsSidebarPanel({
   return (
     <aside className="w-[130px] sm:w-[180px] lg:w-[290px] shrink-0 flex flex-col gap-5 lg:gap-8 sticky top-32">
       <div className="flex flex-col gap-1.5">
-        <label className="text-[10px] lg:text-sm text-gray-500 font-medium">Label</label>
+        <label htmlFor="news-search" className="sr-only">Search</label>
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 lg:h-4 lg:w-4 text-gray-400" />
           <input
+            id="news-search"
             type="text"
             placeholder="Search article..."
             value={searchQuery}
@@ -34,7 +35,7 @@ export default function NewsSidebarPanel({
       </div>
 
       <div className="flex flex-col gap-1 lg:gap-2">
-        <p className="text-[9px] lg:text-xs font-semibold text-[#1B0C25] uppercase tracking-wide mb-0.5">
+        <p className="text-[9px] lg:text-xs font-semibold text-[#1b0c25] uppercase tracking-wide mb-0.5">
           Browse By Categories
         </p>
         <ul className="flex flex-col">
@@ -44,7 +45,7 @@ export default function NewsSidebarPanel({
                 onClick={() => onCategorySelect(cat)}
                 className={`w-full text-left px-2 lg:px-3 py-[3px] lg:py-2 text-[10px] lg:text-sm transition-colors border-l-2 ${
                   selectedCategory === cat
-                    ? "border-[#1B0C25] text-[#1B0C25] font-semibold"
+                    ? "border-[#1b0c25] text-[#1b0c25] font-semibold"
                     : "border-transparent text-gray-500 hover:text-gray-800"
                 }`}
               >

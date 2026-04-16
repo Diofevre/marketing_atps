@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { ButtonDemoVarient } from "../ButtonDemo";
 import TitleSection from "../TitleSection";
 import { Container } from "../ui/container";
@@ -12,29 +13,28 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 
-const LIST_WORK = [
-  {
-    id: 1,
-    image: "/images/imageCon.png",
-    title: "Create Your Account",
-    description:
-      "Sign up in seconds, choose your plan, and access the full platform immediately.",
-  },
-  {
-    id: 2,
-    image: "/images/imageAn.png",
-    title: "Study & Practice",
-    description: "Train with the question bank, quiz modes, ATC simulator, and your AI tutor.",
-  },
-  {
-    id: 3,
-    image: "/images/imageLet.png",
-    title: "Pass Your ATPL",
-    description: "Track your progress, identify weak areas, and walk into your exam with confidence.",
-  },
-];
-
 export default function Work() {
+  const t = useTranslations("work");
+  const LIST_WORK = [
+    {
+      id: 1,
+      image: "/images/atps-sign-in.png",
+      title: t("step1Title"),
+      description: t("step1Description"),
+    },
+    {
+      id: 2,
+      image: "/images/atps-quiz.png",
+      title: t("step2Title"),
+      description: t("step2Description"),
+    },
+    {
+      id: 3,
+      image: "/images/atps-progression.png",
+      title: t("step3Title"),
+      description: t("step3Description"),
+    },
+  ];
   return (
     <div className="py-12 lg:py-[200px]">
       <Container>
@@ -53,18 +53,16 @@ export default function Work() {
               <div className="flex flex-col p-10 gap-6 h-full rounded-[16px] bg-white shadow-sm max-lg:p-6">
                 <div className="flex flex-col items-start gap-3">
                   <TitleSection
-                    title="How it works"
+                    title={t("badge")}
                     className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
                   />
-                  <h1 className="font-medium text-5xl lg:text-[59px] leading-tight lg:leading-[60px] text-[#1b0c25]">
-                    A Simple 3-Step Process
-                  </h1>
+                  <h2 className="font-medium text-5xl lg:text-[59px] leading-tight lg:leading-[60px] text-[#1b0c25]">
+                    {t("heading")}
+                  </h2>
                 </div>
 
                 <p className="font-normal text-base lg:text-[17px] text-[#1b0c25] leading-7">
-                  Get started in minutes with MyATPS's simple 3-step process
-                  — designed to get you studying and pass your ATPL as fast
-                  as possible.
+                  {t("description")}
                 </p>
                 <ButtonDemoVarient />
               </div>
@@ -76,7 +74,7 @@ export default function Work() {
             >
               <Image
                 src="/images/imageAI.png"
-                alt="Work illustration"
+                alt={t("illustrationAlt")}
                 width={448}
                 height={516}
                 className="w-full h-auto object-cover rounded-lg"
@@ -101,9 +99,9 @@ export default function Work() {
                   />
                 </div>
                 <div className="flex flex-col gap-4 px-5 pb-5 w-full">
-                  <h1 className="text-xl lg:text-[23px] font-medium leading-7 text-[#1b0c25]">
+                  <h3 className="text-xl lg:text-[23px] font-medium leading-7 text-[#1b0c25]">
                     {item.title}
-                  </h1>
+                  </h3>
                   <p className="text-sm lg:text-[15px] leading-6 font-normal text-[#1b0c25]">
                     {item.description}
                   </p>

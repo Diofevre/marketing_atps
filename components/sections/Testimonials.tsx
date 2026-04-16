@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
@@ -48,50 +49,39 @@ function AnimatedCounter({ value }: { value: string }) {
   return <motion.span ref={ref}>{displayValue}</motion.span>;
 }
 
-const COUNTER_TEST = [
-  {
-    id: 1,
-    counter: "2000+",
-    title: "Student Pilots",
-  },
-  {
-    id: 2,
-    counter: "50000+",
-    title: "Official ATPL Questions",
-  },
-  {
-    id: 3,
-    counter: "95%",
-    title: "First-Try Pass Rate",
-  },
-];
-
-const TESTIMONIALS_DATA = [
-  {
-    id: 1,
-    text: '"MyATPS completely transformed my ATPL preparation. The AI tutor explained concepts I had struggled with for months, and the quiz interface is unlike anything else out there."',
-    author: "Thomas L.",
-    role: "Commercial Pilot Student, France",
-    image: "/images/saraJ.png",
-  },
-  {
-    id: 2,
-    text: '"The ATC simulator alone is worth it. Practicing radio communications in realistic scenarios gave me confidence I never had before my practical exams."',
-    author: "Lucas M.",
-    role: "ATPL Candidate, Belgium",
-    image: "/images/saraJ.png",
-  },
-  {
-    id: 3,
-    text: '"I passed my ATPL written exams on the first attempt. The question bank is massive, the explanations are clear, and the FlyComputer saved me so much time during calculations."',
-    author: "Camille R.",
-    role: "Airline Transport Pilot, Switzerland",
-    image: "/images/saraJ.png",
-  },
-];
-
 export default function Testimonials() {
+  const t = useTranslations("testimonials");
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const COUNTER_TEST = [
+    { id: 1, counter: t("counter1Value"), title: t("counter1Title") },
+    { id: 2, counter: t("counter2Value"), title: t("counter2Title") },
+    { id: 3, counter: t("counter3Value"), title: t("counter3Title") },
+  ];
+
+  const TESTIMONIALS_DATA = [
+    {
+      id: 1,
+      text: t("t1Text"),
+      author: t("t1Author"),
+      role: t("t1Role"),
+      image: "/images/avatar_thomas.png",
+    },
+    {
+      id: 2,
+      text: t("t2Text"),
+      author: t("t2Author"),
+      role: t("t2Role"),
+      image: "/images/avatar_lucas.png",
+    },
+    {
+      id: 3,
+      text: t("t3Text"),
+      author: t("t3Author"),
+      role: t("t3Role"),
+      image: "/images/avatar_camille.png",
+    },
+  ];
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS_DATA.length);
@@ -120,12 +110,12 @@ export default function Testimonials() {
               className="flex items-center justify-center flex-col gap-3 sm:gap-4 lg:gap-[16px] w-full lg:w-[800px] px-4 lg:px-0"
             >
               <TitleSection
-                title="wall of love"
+                title={t("badge")}
                 className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
               />
               <div className="w-full">
                 <p className="text-3xl sm:text-4xl lg:text-5xl xl:text-[58px] leading-tight lg:leading-[60px] text-center text-[#1b0c25] font-medium">
-                  What they're Saying
+                  {t("heading")}
                 </p>
               </div>
             </motion.div>
@@ -146,6 +136,7 @@ export default function Testimonials() {
                     <div className="hidden sm:block">
                       <Button
                         onClick={handlePrev}
+                        aria-label={t("prevAriaLabel")}
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronLeft className="w-4 h-4 text-black" />
@@ -205,6 +196,7 @@ export default function Testimonials() {
                     <div className="hidden sm:block">
                       <Button
                         onClick={handleNext}
+                        aria-label={t("nextAriaLabel")}
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronRight className="w-4 h-4 text-black" />
@@ -215,12 +207,14 @@ export default function Testimonials() {
                     <div className="flex sm:hidden justify-center gap-4 w-full">
                       <Button
                         onClick={handlePrev}
+                        aria-label={t("prevAriaLabel")}
                         className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronLeft className="w-4 h-4 text-black" />
                       </Button>
                       <Button
                         onClick={handleNext}
+                        aria-label={t("nextAriaLabel")}
                         className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 shadow-sm"
                       >
                         <ChevronRight className="w-4 h-4 text-black" />
@@ -245,9 +239,9 @@ export default function Testimonials() {
                         variants={counterVariants}
                         className="flex-1 min-w-[120px] sm:min-w-[150px] lg:w-[189.33px] flex flex-col gap-1 items-center"
                       >
-                        <h1 className="text-2xl sm:text-3xl lg:text-[41px] font-medium text-[#1b0c25]">
+                        <h3 className="text-2xl sm:text-3xl lg:text-[41px] font-medium text-[#1b0c25]">
                           <AnimatedCounter value={counter.counter} />
-                        </h1>
+                        </h3>
                         <p className="text-xs sm:text-sm lg:text-[15px] leading-relaxed lg:leading-[26px] text-center text-[rgba(28,12,38,0.7)]">
                           {counter.title}
                         </p>
@@ -262,7 +256,7 @@ export default function Testimonials() {
                         src="/images/logo_test.png"
                         fill
                         className="object-contain"
-                        alt="Brand Logos"
+                        alt={t("brandLogosAlt")}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1140px"
                       />
                     </div>

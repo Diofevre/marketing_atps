@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Link2 } from "lucide-react";
 import { newsService } from "@/lib/api";
-import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
+import {
+  transformNewsItems,
+  unwrapNewsItems,
+  type TransformedNewsItem,
+} from "@/lib/api/transformers";
+import type { NewsLocale } from "@/lib/types";
 import { SidebarSkeleton } from "@/components/ui/skeleton-card";
 
 interface NewsSidebarProps {
@@ -23,6 +29,7 @@ export default function NewsSidebar({
   category,
   tags,
 }: NewsSidebarProps) {
+  const locale = useLocale() as NewsLocale;
   const [moreInsights, setMoreInsights] = useState<TransformedNewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,12 +37,13 @@ export default function NewsSidebar({
     const fetchNews = async () => {
       setLoading(true);
 
-      const response = await newsService.getRecentNews(5);
+      // Pass the current locale so the backend swaps in the matching
+      // translation for the "More insights" sidebar list.
+      const response = await newsService.getRecentNews(5, locale);
 
       if (response.data) {
-        const data = response.data as any;
-        const newsArray = Array.isArray(data) ? data : (data.news || []);
-        const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
+        const newsArray = unwrapNewsItems(response.data);
+        const filtered = newsArray.filter((n) => n.id !== currentNewsId);
         setMoreInsights(transformNewsItems(filtered).slice(0, 4));
       }
 
@@ -43,7 +51,7 @@ export default function NewsSidebar({
     };
 
     fetchNews();
-  }, [currentNewsId]);
+  }, [currentNewsId, locale]);
 
   if (loading) {
     return <SidebarSkeleton />;
@@ -58,16 +66,16 @@ export default function NewsSidebar({
             Source:
           </p>
           {sourceUrl ? (
-            <Link
+            <a
               href={sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-[13px] font-bold text-[#1B0C25] hover:text-[#1B0C25]/70 transition-colors"
+              className="flex items-center gap-1 text-[13px] font-bold text-[#1b0c25] hover:text-[#1b0c25]/70 transition-colors"
             >
               {source} <Link2 className="w-3 h-3" />
-            </Link>
+            </a>
           ) : (
-            <span className="text-[13px] font-bold text-[#1B0C25]">
+            <span className="text-[13px] font-bold text-[#1b0c25]">
               {source}
             </span>
           )}
@@ -80,7 +88,7 @@ export default function NewsSidebar({
           <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500">
             Category:
           </p>
-          <span className="text-[13px] font-normal text-[#1B0C25]">
+          <span className="text-[13px] font-normal text-[#1b0c25]">
             {category}
           </span>
         </div>
@@ -119,7 +127,7 @@ export default function NewsSidebar({
                 className="group flex gap-3 items-center"
               >
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-[13px] font-bold text-[#1B0C25] leading-tight group-hover:text-[#1B0C25]/70 transition-colors line-clamp-2">
+                  <h4 className="text-[13px] font-bold text-[#1b0c25] leading-tight group-hover:text-[#1b0c25]/70 transition-colors line-clamp-2">
                     {item.title}
                   </h4>
                   <p className="text-[12px] text-gray-400 mt-1 truncate">

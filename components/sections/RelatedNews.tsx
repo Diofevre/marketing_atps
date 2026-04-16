@@ -1,13 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { scaleInVariants, viewportSettings } from "@/lib/motion";
 import TitleSection from "../TitleSection";
 import { newsService } from "@/lib/api";
-import { transformNewsItems, type TransformedNewsItem } from "@/lib/api/transformers";
+import {
+  transformNewsItems,
+  unwrapNewsItems,
+  type TransformedNewsItem,
+} from "@/lib/api/transformers";
+import type { NewsLocale } from "@/lib/types";
 
 interface RelatedNewsProps {
   currentNewsId: string;
@@ -18,6 +24,7 @@ export default function RelatedNews({
   currentNewsId,
   category,
 }: RelatedNewsProps) {
+  const locale = useLocale() as NewsLocale;
   const [relatedNews, setRelatedNews] = useState<TransformedNewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,19 +32,19 @@ export default function RelatedNews({
     const fetchRelatedNews = async () => {
       setLoading(true);
 
-      const response = await newsService.getRelatedNews(currentNewsId, 4);
+      // Pass the current locale so related/fallback lists render in the
+      // same language as the article the user is currently reading.
+      const response = await newsService.getRelatedNews(currentNewsId, 4, locale);
 
       if (response.data) {
-        const data = response.data as any;
-        const newsArray = Array.isArray(data) ? data : (data.news || []);
-        const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
+        const newsArray = unwrapNewsItems(response.data);
+        const filtered = newsArray.filter((n) => n.id !== currentNewsId);
         setRelatedNews(transformNewsItems(filtered).slice(0, 3));
       } else {
-        const fallbackResponse = await newsService.getRecentNews(4);
+        const fallbackResponse = await newsService.getRecentNews(4, locale);
         if (fallbackResponse.data) {
-          const data = fallbackResponse.data as any;
-          const newsArray = Array.isArray(data) ? data : (data.news || []);
-          const filtered = newsArray.filter((n: any) => n.id !== currentNewsId);
+          const newsArray = unwrapNewsItems(fallbackResponse.data);
+          const filtered = newsArray.filter((n) => n.id !== currentNewsId);
           setRelatedNews(transformNewsItems(filtered).slice(0, 3));
         }
       }
@@ -46,7 +53,7 @@ export default function RelatedNews({
     };
 
     fetchRelatedNews();
-  }, [currentNewsId, category]);
+  }, [currentNewsId, category, locale]);
 
   if (loading) {
     return (

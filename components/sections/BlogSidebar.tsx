@@ -1,11 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { Facebook, Linkedin, X } from "lucide-react";
 import { blogService } from "@/lib/api";
-import { transformBlogArticles, type TransformedBlogPost } from "@/lib/api/transformers";
+import {
+  transformBlogArticles,
+  unwrapBlogArticles,
+  type TransformedBlogPost,
+} from "@/lib/api/transformers";
 import { SidebarSkeleton } from "@/components/ui/skeleton-card";
 
 interface BlogSidebarProps {
@@ -41,16 +45,14 @@ export default function BlogSidebar({
       ]);
 
       if (recentResponse.data) {
-        const data = recentResponse.data as any;
-        const articlesArray = Array.isArray(data) ? data : (data.articles || []);
-        const filtered = articlesArray.filter((a: any) => a.id !== currentPostId);
+        const articlesArray = unwrapBlogArticles(recentResponse.data);
+        const filtered = articlesArray.filter((a) => a.id !== currentPostId);
         setMoreArticles(transformBlogArticles(filtered).slice(0, 3));
       }
 
       if (popularResponse.data) {
-        const data = popularResponse.data as any;
-        const articlesArray = Array.isArray(data) ? data : (data.articles || []);
-        const filtered = articlesArray.filter((a: any) => a.id !== currentPostId);
+        const articlesArray = unwrapBlogArticles(popularResponse.data);
+        const filtered = articlesArray.filter((a) => a.id !== currentPostId);
         setPopularArticles(transformBlogArticles(filtered).slice(0, 3));
       }
 
@@ -98,7 +100,7 @@ export default function BlogSidebar({
             )}
           </div>
           <div className="min-w-0">
-            <p className="text-[#1B0C25] text-sm font-bold truncate">
+            <p className="text-[#1b0c25] text-sm font-bold truncate">
               {author?.name || "Anonymous"}
             </p>
             <p className="text-black/55 text-xs truncate">Author</p>
@@ -139,7 +141,7 @@ export default function BlogSidebar({
                 className="group flex gap-3 items-center"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="text-[#1B0C25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1B0C25]/70 transition-colors">
+                  <p className="text-[#1b0c25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1b0c25]/70 transition-colors">
                     {post.description}
                   </p>
                   <p className="text-black/55 text-xs mt-1 truncate">
@@ -174,7 +176,7 @@ export default function BlogSidebar({
                 className="group flex gap-3 items-center"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="text-[#1B0C25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1B0C25]/70 transition-colors">
+                  <p className="text-[#1b0c25] text-[13px] leading-relaxed font-bold line-clamp-2 group-hover:text-[#1b0c25]/70 transition-colors">
                     {post.description}
                   </p>
                   <p className="text-black/55 text-xs mt-1 truncate">

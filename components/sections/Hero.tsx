@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { ButtonDemoBlur } from "../ButtonDemo";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
@@ -14,27 +15,6 @@ import {
   heroButtonVariants,
   heroCardVariants,
 } from "@/lib/motion";
-
-const CHAT_MESSAGES = [
-  {
-    id: 1,
-    type: "user",
-    message: "Can you explain the principle of instrument landing systems (ILS) for my ATPL exam?",
-    delay: 0.5,
-  },
-  {
-    id: 2,
-    type: "ai",
-    message: "Of course! An ILS uses two radio beams — the localizer for lateral guidance and the glide slope for vertical guidance — to guide the aircraft precisely to the runway threshold.",
-    delay: 2,
-  },
-  {
-    id: 3,
-    type: "user",
-    message: "Perfect, can you give me a practice question on this?",
-    delay: 4,
-  },
-];
 
 function TypingIndicator() {
   return (
@@ -152,16 +132,45 @@ function ChatMessage({ message, type, delay }: { message: string; type: string; 
   );
 }
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.myatps.com";
+
 export default function Hero() {
-  // Split title into words for animation
-  const titleWords = ["The", "Complete", "ATPL", "Training", "Platform"];
+  const t = useTranslations("hero");
+  const [query, setQuery] = useState("");
+
+  const goToApp = useCallback((path: string, q?: string) => {
+    const url = new URL(path, APP_URL);
+    if (q) url.searchParams.set("q", q);
+    window.open(url.toString(), "_blank", "noopener,noreferrer");
+  }, []);
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    goToApp("/", query.trim());
+  }, [goToApp, query]);
+
+  // Split the full localized title into words so each animates in separately.
+  // Using the full localized string (instead of a hardcoded English array)
+  // means the animation works identically in French.
+  const titleWords = t("titleFull").split(" ");
+
+  const TYPING_SPEED_MS = 20; // ms per character
+  const chatAi1Text = t("chatAi1");
+  // Message 2 (AI) becomes visible at delay+1s, then types at TYPING_SPEED_MS/char
+  const ai1VisibleAt = 2 + 1; // delay=2 → visible at 3s
+  const ai1TypeDuration = (chatAi1Text.length * TYPING_SPEED_MS) / 1000;
+  // Message 3 starts only after message 2 finishes typing + small buffer
+  const msg3Delay = ai1VisibleAt + ai1TypeDuration + 0.4;
+
+  const CHAT_MESSAGES = [
+    { id: 1, type: "user", message: t("chatUser1"), delay: 0.5 },
+    { id: 2, type: "ai", message: chatAi1Text, delay: 2 },
+    { id: 3, type: "user", message: t("chatUser2"), delay: msg3Delay },
+  ];
 
   return (
     <div className="w-full pb-0 px-4">
-      <div className="min-h-[800px] lg:h-[1236px] bg-[#1B0C25] rounded-2xl overflow-hidden relative">
-        {/* Gradients - comme dans le Footer */}
-        <div className="absolute z-0 left-[-246px] top-[-186px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_31.09%,#fcab83_70.46%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
-        <div className="absolute z-0 right-[-86px] bottom-[100px] rounded-[603px] w-[658px] h-[548px] bg-[linear-gradient(145deg,#efe8f6_0%,#d588fb_60.83%,#ff49d4_100%)] blur-[80px] opacity-[0.4] max-lg:hidden" />
+      <div className="min-h-[800px] lg:h-[1236px] bg-[url('/images/bgHero.png')] bg-cover bg-center rounded-2xl overflow-hidden relative">
         
         <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-16 lg:pt-[160px] h-full">
           <Container className="flex flex-col gap-6 lg:gap-[40px]">
@@ -173,7 +182,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-4xl sm:text-5xl lg:text-[60px] leading-tight lg:leading-[60px] text-white font-medium"
+                    className="text-4xl sm:text-5xl lg:text-[60px] leading-tight lg:leading-[60px] text-[#1b0c25] font-medium"
                   >
                     {titleWords.map((word, index) => (
                       <motion.span
@@ -201,10 +210,8 @@ export default function Hero() {
                   animate="visible"
                   className="w-full lg:w-[700px]"
                 >
-                  <p className="text-base sm:text-lg lg:text-[18px] leading-relaxed lg:leading-[28px] font-normal text-white/90">
-                    MyATPS helps you prepare for your ATPL exams with an
-                    AI-powered quiz interface, an ATC simulator, and a built-in
-                    AI tutor — all in one platform.
+                  <p className="text-base sm:text-lg lg:text-[18px] leading-relaxed lg:leading-[28px] font-normal text-[#1b0c25]">
+                    {t("description")}
                   </p>
                 </motion.div>
               </div>
@@ -225,28 +232,67 @@ export default function Hero() {
               variants={heroCardVariants}
               initial="hidden"
               animate="visible"
-              className="flex-1 flex items-end justify-center w-full border border-white/20 border-b-0 relative rounded-tl-[20px] sm:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[30px] lg:rounded-tr-[40px] rounded-b-none backdrop-blur-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.15)_100%)] overflow-hidden"
+              className="flex-1 flex items-end justify-center w-full border border-[#1b0c25]/10 border-b-0 relative rounded-tl-[20px] sm:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[30px] lg:rounded-tr-[40px] rounded-b-none backdrop-blur-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.6)_100%)] overflow-hidden"
             >
-              {/* Decorative Elements - Hidden on mobile/tablet */}
+              {/* Aviation 1 — décollage, top-right */}
               <motion.div
-                className="hidden lg:block absolute w-[209px] h-[210px] bg-[url('/images/scare1.png')] top-[37.98px] right-[79px]"
-                animate={{ y: [0, -8, 0], rotate: [0, 1, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
+                className="hidden lg:block absolute top-[20px] right-[55px] mix-blend-multiply"
+                style={{ originX: "50%", originY: "80%" }}
+                animate={{
+                  y: [0, -16, -7, 0],
+                  x: [0, 6, 2, 0],
+                  rotate: [-3, 3, 0, -3],
                 }}
-              />
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Image
+                  src="/images/hero-aviation-1.png"
+                  alt="Airliner takeoff"
+                  width={220}
+                  height={147}
+                  className="object-contain"
+                />
+              </motion.div>
+
+              {/* Aviation 2 — approche, left */}
               <motion.div
-                className="hidden lg:block absolute w-[159px] h-[138px] bg-[url('/images/scare2.png')] top-[311.98px] left-[135px]"
-                animate={{ y: [0, 6, 0], x: [0, -4, 0] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.5,
+                className="hidden lg:block absolute bottom-[120px] left-[100px] mix-blend-multiply"
+                style={{ originX: "50%", originY: "30%", scaleX: -1 }}
+                animate={{
+                  y: [0, 12, 4, 0],
+                  x: [0, -6, -1, 0],
+                  rotate: [2, -2, 0, 2],
                 }}
-              />
+                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              >
+                <Image
+                  src="/images/hero-aviation-2.png"
+                  alt="Airliner approach"
+                  width={190}
+                  height={127}
+                  className="object-contain"
+                />
+              </motion.div>
+
+              {/* Aviation 3 — survol, top-left discret */}
+              <motion.div
+                className="hidden lg:block absolute top-[32px] left-[220px] mix-blend-multiply"
+                style={{ originX: "50%", originY: "50%" }}
+                animate={{
+                  y: [0, -8, 0],
+                  x: [0, 10, 0],
+                  rotate: [0, 1.5, 0],
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+              >
+                <Image
+                  src="/images/hero-aviation-3.png"
+                  alt="Airliner flyover"
+                  width={160}
+                  height={107}
+                  className="object-contain"
+                />
+              </motion.div>
 
               {/* Content Container */}
               <div className="relative z-10 w-full lg:w-[1140px] h-full px-4 sm:px-6 lg:px-[50px] flex items-end justify-center">
@@ -265,7 +311,7 @@ export default function Hero() {
                 {/* Main Content */}
                 <div className="relative z-10 flex flex-col items-center gap-4 sm:gap-6 lg:gap-[30px] px-4 sm:px-8 lg:px-[300px] w-full pb-0">
                   {/* Chat Card */}
-                  <div className="w-full sm:w-[540px] lg:w-[640px] min-h-[200px] sm:min-h-[250px] lg:min-h-[310px] rounded-2xl p-4 sm:p-5 lg:p-6 backdrop-blur-[10px] bg-white/10 border border-white/20 flex flex-col gap-4 justify-end">
+                  <div className="w-full sm:w-[540px] lg:w-[640px] min-h-[200px] sm:min-h-[250px] lg:min-h-[310px] rounded-2xl p-4 sm:p-5 lg:p-6 backdrop-blur-[10px] bg-white/50 border border-[#1b0c25]/10 flex flex-col gap-4 justify-end">
                     {CHAT_MESSAGES.map((msg) => (
                       <ChatMessage
                         key={msg.id}
@@ -277,83 +323,55 @@ export default function Hero() {
                   </div>
 
                   {/* Bottom Form Card */}
-                  <div className="w-full sm:w-[540px] lg:w-[640px] px-3 sm:px-4 lg:px-[14px] pt-3 sm:pt-4 lg:pt-[14px] pb-6 sm:pb-8 lg:pb-10 flex flex-col gap-3 sm:gap-4 lg:gap-[14px] border border-white/30 border-b-0 rounded-t-xl lg:rounded-t-[13px] rounded-b-none backdrop-blur-[25px] bg-white/90 shadow-[0_0_40px_rgba(195,79,150,0.4)]">
-                    {/* Button Group */}
-                    <div className="flex flex-wrap gap-2 sm:gap-[8px]">
-                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c26] hover:bg-transparent">
-                        <Image
-                          src="/assets/icons/gptIcon.png"
-                          alt="Hero Button"
-                          height={16}
-                          width={16}
-                          className="mr-1"
-                        />
-                        GPT 4.5
-                        <ChevronDown className="ml-1 text-[#1b0c27] h-3 w-3 sm:h-4 sm:w-4" />
-                      </Button>
-
-                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c26] hover:bg-transparent">
-                        <Globe className="mr-1 h-3 w-3 sm:h-4 sm:w-4" /> Search
-                      </Button>
+                  <form
+                    onSubmit={handleSubmit}
+                    className="w-full sm:w-[540px] lg:w-[640px] border border-[#1b0c25]/10 border-b-0 rounded-t-xl lg:rounded-t-[13px] rounded-b-none backdrop-blur-[25px] bg-white/90 shadow-[0_0_40px_rgba(195,79,150,0.15)] overflow-hidden"
+                  >
+                    {/* Input Row */}
+                    <div className="flex items-center gap-3 px-4 lg:px-5 pt-4 lg:pt-5 pb-3">
+                      <Sparkles className="shrink-0 w-4 h-4 text-[#c34f96]/60" />
+                      <Input
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder={t("searchPlaceholder")}
+                        className="flex-1 border-none bg-transparent shadow-none focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 text-sm lg:text-[15px] placeholder:text-[#1b0c25]/50 p-0 h-auto"
+                      />
                     </div>
 
-                    {/* Form */}
-                    <form className="w-full max-w-[612px] flex flex-col gap-3 sm:gap-4">
-                      <Input
-                        placeholder="Ask anything about aviation or ATPL..."
-                        className="w-full border-none bg-transparent shadow-none text-sm sm:text-base lg:text-[16px] placeholder:text-sm sm:placeholder:text-base lg:placeholder:text-[16px] placeholder:text-[#1b0c25]/70"
-                      />
+                    {/* Divider */}
+                    <div className="mx-4 lg:mx-5 h-px bg-[#1b0c25]/6" />
 
-                      {/* Action Buttons */}
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-3 sm:gap-4">
-                        <div className="flex flex-wrap gap-2 sm:gap-[8px] items-center">
-                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Start Quiz
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Start Quiz
-                              </span>
-                            </span>
-                          </Button>
-                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                ATC Simulator
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                ATC Simulator
-                              </span>
-                            </span>
-                          </Button>
-                          <Button className="group text-[#1b0c26] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Practice Exam
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                Practice Exam
-                              </span>
-                            </span>
-                          </Button>
+                    {/* Bottom Bar */}
+                    <div className="flex items-center justify-between px-4 lg:px-5 py-3">
+                      {/* Left pills */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f8f0fc] border border-[#f0e0f8] text-[#1b0c25] text-[11px] font-medium">
+                          <Image
+                            src="/assets/icons/gptIcon.png"
+                            alt={t("aiAssistantAlt")}
+                            height={12}
+                            width={12}
+                          />
+                          {t("btnAssistant")}
+                          <ChevronDown className="w-3 h-3 text-[#1b0c25]/50" />
                         </div>
-
-                        {/* Submit Button */}
-                        <div className="self-end sm:self-auto">
-                          <Button className="bg-transparent hover:bg-transparent p-0">
-                            <Image
-                              src="/images/buttonS.png"
-                              alt="Button S"
-                              width={28}
-                              height={28}
-                              className="sm:w-8 sm:h-8"
-                            />
-                          </Button>
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f8f0fc] border border-[#f0e0f8] text-[#1b0c25] text-[11px] font-medium">
+                          <Globe className="w-3 h-3 text-[#1b0c25]/60" />
+                          {t("btnSearch")}
                         </div>
                       </div>
-                    </form>
-                  </div>
+
+                      {/* Submit */}
+                      <Button type="submit" className="bg-transparent hover:bg-transparent p-0 h-auto">
+                        <Image
+                          src="/images/buttonS.png"
+                          alt="Submit"
+                          width={32}
+                          height={32}
+                        />
+                      </Button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </motion.div>

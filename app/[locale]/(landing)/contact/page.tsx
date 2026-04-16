@@ -1,0 +1,403 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { toast } from "sonner";
+import TitleSection from "@/components/TitleSection";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Image from "next/image";
+import { Mail, LifeBuoy, CheckCircle2, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeInUpVariants, scaleInVariants, viewportSettings } from "@/lib/motion";
+
+const API_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+export default function Contact() {
+  const t = useTranslations("contactPage");
+  const [success, setSuccess] = useState(false);
+
+  // Validation messages come from the translations bundle so they match
+  // the current locale. Wrapped in `useMemo` so the schema isn't recreated
+  // on every render (react-hook-form would otherwise re-validate in a loop).
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        firstName: z.string().min(1, t("firstNameRequired")),
+        lastName: z.string().min(1, t("lastNameRequired")),
+        email: z
+          .string()
+          .min(1, t("emailRequired"))
+          .email(t("emailInvalid")),
+        phone: z.string().optional(),
+        profile: z.string().optional(),
+        subject: z.string().optional(),
+        message: z.string().min(10, t("messageTooShort")),
+      }),
+    [t],
+  );
+
+  type FormValues = z.infer<typeof formSchema>;
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      profile: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (values: FormValues) => {
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.error || t("toastError"));
+        return;
+      }
+
+      toast.success(t("toastSuccess"));
+      setSuccess(true);
+      form.reset();
+    } catch {
+      toast.error(t("toastNetworkError"));
+    }
+  };
+
+  const inputClass =
+    "bg-white border-[#1b0c25]/12 focus-visible:ring-[#1b0c25]/10 focus-visible:border-[#1b0c25]/30 h-11 sm:h-12 rounded-[10px] text-sm sm:text-base";
+
+  return (
+    <div className="py-[120px] pb-20 max-lg:py-16">
+      <Container className="flex flex-col justify-center items-center gap-[56px] max-lg:gap-10">
+        {/* Header */}
+        <motion.div
+          variants={fadeInUpVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="flex flex-col items-center text-center gap-4 w-full max-w-[640px]"
+        >
+          <TitleSection title={t("badge")} />
+          <h1 className="font-medium text-4xl sm:text-5xl lg:text-[56px] lg:leading-[62px] text-[#1b0c25]">
+            {t("heading")}
+          </h1>
+        </motion.div>
+
+        {/* Main Layout */}
+        <motion.div
+          variants={scaleInVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16 w-full"
+        >
+          {/* Left Column */}
+          <div className="flex flex-col justify-between gap-8 lg:gap-12 lg:min-w-0 lg:flex-1 lg:max-w-[400px]">
+            <div className="flex flex-col gap-6">
+              <p className="font-medium text-base lg:text-[17px] leading-[28px] text-[#1b0c25]/80">
+                {t("intro")}
+              </p>
+              <div className="flex flex-wrap gap-6 lg:gap-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
+                    <Mail className="text-[#1b0c25]" size={20} />
+                  </div>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">{t("emailUs")}</p>
+                    <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
+                      {t("emailAddress")}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#1b0c25]/5 flex items-center justify-center shrink-0">
+                    <LifeBuoy className="text-[#1b0c25]" size={20} />
+                  </div>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <p className="font-medium text-[15px] leading-[26px] text-[#1b0c25]">{t("getSupport")}</p>
+                    <p className="font-normal text-[15px] leading-[26px] text-[#1b0c25]/60">
+                      {t("chatWithUs")}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial */}
+            <div className="flex flex-col gap-5 p-6 bg-[#F9F9F9] rounded-2xl border border-[#1b0c25]/5">
+              <blockquote className="text-lg lg:text-[20px] font-medium leading-[28px] text-[#1b0c25]">
+                {t("testimonialQuote")}
+              </blockquote>
+              <div className="flex items-center gap-4">
+                <Image
+                  src="/images/imageCont.png"
+                  alt={t("testimonialAuthor")}
+                  height={48}
+                  width={48}
+                  className="rounded-full shrink-0 grayscale hover:grayscale-0 transition-all duration-300"
+                />
+                <div className="flex flex-col gap-0 min-w-0">
+                  <p className="text-[14px] font-medium text-[#1b0c25] leading-tight">{t("testimonialAuthor")}</p>
+                  <p className="text-[13px] font-normal text-[#1b0c25]/60">
+                    {t("testimonialRole")}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider — desktop only */}
+          <div className="hidden lg:block w-px bg-[#1b0c25]/8 self-stretch shrink-0" />
+
+          {/* Right Column — Form / Success */}
+          <div className="lg:flex-1 lg:min-w-0">
+            {success ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex flex-col items-center justify-center gap-6 h-full min-h-[400px] text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-[#1b0c25]/5 flex items-center justify-center">
+                  <CheckCircle2 className="w-8 h-8 text-[#1b0c25]" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-2xl font-semibold text-[#1b0c25]">{t("successTitle")}</h2>
+                  <p className="text-[15px] text-[#1b0c25]/60 max-w-[320px]">
+                    {t("successBody")}
+                  </p>
+                </div>
+                <Button
+                  onClick={() => setSuccess(false)}
+                  variant="outline"
+                  className="h-11 px-6 rounded-[10px] text-[#1b0c25] border-[#1b0c25]/20 hover:bg-[#1b0c25] hover:text-white"
+                >
+                  {t("successCta")}
+                </Button>
+              </motion.div>
+            ) : (
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="flex flex-col gap-4 sm:gap-5"
+                >
+                  {/* Row 1 — First & Last Name */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="firstName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
+                            {t("firstNameLabel")} <span className="text-red-500">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder={t("firstNamePlaceholder")} className={inputClass} {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="lastName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
+                            {t("lastNameLabel")} <span className="text-red-500">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input placeholder={t("lastNamePlaceholder")} className={inputClass} {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* Row 2 — Email & Phone */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
+                            {t("emailLabel")} <span className="text-red-500">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder={t("emailPlaceholder")}
+                              className={inputClass}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
+                            {t("phoneLabel")}
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="tel"
+                              placeholder={t("phonePlaceholder")}
+                              className={inputClass}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* Row 3 — Profile & Subject */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="profile"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
+                            {t("profileLabel")}
+                          </FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger className={`${inputClass} w-full`}>
+                                <SelectValue placeholder={t("profilePlaceholder")} />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="student">{t("profileStudent")}</SelectItem>
+                              <SelectItem value="school">{t("profileSchool")}</SelectItem>
+                              <SelectItem value="instructor">{t("profileInstructor")}</SelectItem>
+                              <SelectItem value="other">{t("profileOther")}</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="subject"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
+                            {t("subjectLabel")}
+                          </FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger className={`${inputClass} w-full`}>
+                                <SelectValue placeholder={t("subjectPlaceholder")} />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="general">{t("subjectGeneral")}</SelectItem>
+                              <SelectItem value="support">{t("subjectSupport")}</SelectItem>
+                              <SelectItem value="billing">{t("subjectBilling")}</SelectItem>
+                              <SelectItem value="school">{t("subjectSchool")}</SelectItem>
+                              <SelectItem value="demo">{t("subjectDemo")}</SelectItem>
+                              <SelectItem value="other">{t("subjectOther")}</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* Message */}
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm sm:text-[15px] font-medium text-[#1b0c25]">
+                          {t("messageLabel")} <span className="text-red-500">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder={t("messagePlaceholder")}
+                            className="bg-white border-[#1b0c25]/12 focus-visible:ring-[#1b0c25]/10 focus-visible:border-[#1b0c25]/30 min-h-[120px] rounded-[10px] text-sm sm:text-base resize-y"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Submit */}
+                  <div className="flex flex-col items-center gap-4 mt-2">
+                    <Button
+                      type="submit"
+                      disabled={form.formState.isSubmitting}
+                      className="group w-full h-12 text-[16px] font-medium text-white bg-[#1b0c25] hover:bg-[#1b0c25]/90 rounded-[10px] overflow-hidden disabled:opacity-60"
+                    >
+                      {form.formState.isSubmitting ? (
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                      ) : (
+                        <span className="flex flex-col items-center h-[26px] overflow-hidden">
+                          <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                            {t("submitButton")}
+                          </span>
+                          <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
+                            {t("submitButton")}
+                          </span>
+                        </span>
+                      )}
+                    </Button>
+                    <p className="text-[13px] font-normal text-[#1b0c25]/50 leading-[20px] text-center max-w-[320px]">
+                      {t("privacyNotice")}
+                    </p>
+                  </div>
+                </form>
+              </Form>
+            )}
+          </div>
+        </motion.div>
+      </Container>
+    </div>
+  );
+}
+

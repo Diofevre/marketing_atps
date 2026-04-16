@@ -1,89 +1,66 @@
 "use client";
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
-const FEATURE_LIST_CONTAINER = [
-  {
-    id: 1,
-    title: "Advanced Quiz Interface with AI Tutor",
-    description:
-      "Train with three quiz modes — STUDY, TEST, and EXAM — backed by an integrated AI tutor that explains every question in context, with a built-in FlyComputer E6B for in-quiz calculations.",
-    image: "/images/data.png",
-    feature_list: [
-      {
-        id: 1,
-        title: "3 Quiz Modes: STUDY, TEST & EXAM",
-        icon_feature: "/assets/icons/db.png",
-      },
-      {
-        id: 2,
-        title: "AI Tutor Chatbot (RAG-powered)",
-        icon_feature: "/assets/icons/topo.png",
-      },
-      {
-        id: 3,
-        title: "FlyComputer E6B Integrated",
-        icon_feature: "/assets/icons/swith.png",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Realistic ATC Simulator with AI Evaluation",
-    description:
-      "Practice real air traffic control radio communications across multiple scenarios — departure, en-route, approach — and get instant AI feedback on your phraseology and procedures.",
-    image: "/images/dash.png",
-    feature_list: [
-      {
-        id: 1,
-        title: "Realistic Scenario Library",
-        icon_feature: "/assets/icons/trad.png",
-      },
-      {
-        id: 2,
-        title: "AI Evaluation & Instant Feedback",
-        icon_feature: "/assets/icons/chart.png",
-      },
-      {
-        id: 3,
-        title: "Radio Phraseology Training",
-        icon_feature: "/assets/icons/tvpro.png",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Complete Question Bank & Course Library",
-    description:
-      "Access thousands of official ATPL questions organized by subject and chapter, alongside video courses, PDF manuals, an aeronautical dictionary, and detailed progress tracking.",
-    image: "/images/feature3.png",
-    feature_list: [
-      {
-        id: 1,
-        title: "50,000+ Official ATPL Questions",
-        icon_feature: "/assets/icons/union.png",
-      },
-      {
-        id: 2,
-        title: "Video & Text Courses",
-        icon_feature: "/assets/icons/check.png",
-      },
-      {
-        id: 3,
-        title: "Advanced Progress Tracking",
-        icon_feature: "/assets/icons/hands.png",
-      },
-    ],
-  },
-];
+interface Feature {
+  id: number;
+  title: string;
+  icon_feature: string;
+}
+
+interface FeatureItem {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  feature_list: Feature[];
+}
 
 export default function ProductCard() {
+  const t = useTranslations("productOverview");
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
   });
+
+  const FEATURE_LIST_CONTAINER: FeatureItem[] = [
+    {
+      id: 1,
+      title: t("card1Title"),
+      description: t("card1Description"),
+      image: "/images/quizz-interface.png",
+      feature_list: [
+        { id: 1, title: t("card1Feature1"), icon_feature: "/assets/icons/db.png" },
+        { id: 2, title: t("card1Feature2"), icon_feature: "/assets/icons/topo.png" },
+        { id: 3, title: t("card1Feature3"), icon_feature: "/assets/icons/swith.png" },
+      ],
+    },
+    {
+      id: 2,
+      title: t("card2Title"),
+      description: t("card2Description"),
+      image: "/images/atps-dico.png",
+      feature_list: [
+        { id: 1, title: t("card2Feature1"), icon_feature: "/assets/icons/trad.png" },
+        { id: 2, title: t("card2Feature2"), icon_feature: "/assets/icons/chart.png" },
+        { id: 3, title: t("card2Feature3"), icon_feature: "/assets/icons/tvpro.png" },
+      ],
+    },
+    {
+      id: 3,
+      title: t("card3Title"),
+      description: t("card3Description"),
+      image: "/images/quizz-interface-share.png",
+      feature_list: [
+        { id: 1, title: t("card3Feature1"), icon_feature: "/assets/icons/union.png" },
+        { id: 2, title: t("card3Feature2"), icon_feature: "/assets/icons/check.png" },
+        { id: 3, title: t("card3Feature3"), icon_feature: "/assets/icons/hands.png" },
+      ],
+    },
+  ];
 
   return (
     <div ref={container} className="relative w-full">
@@ -112,16 +89,16 @@ function Card({
   targetScale,
   progress,
 }: {
-  item: any;
+  item: FeatureItem;
   index: number;
   range: [number, number];
   targetScale: number;
-  progress: any;
+  progress: MotionValue<number>;
 }) {
   const container = useRef(null);
   const scale = useTransform(progress, range, [1, targetScale]);
 
-  // Déterminer si l'ordre doit être inversé (pour la card 2)
+  // Reverse layout for card 2
   const isReversed = item.id === 2;
 
   return (
@@ -157,7 +134,7 @@ function Card({
 
           {/* Feature List */}
           <div className="flex flex-col gap-2 sm:gap-3 lg:gap-[16px]">
-            {item.feature_list.map((feature: any) => (
+            {item.feature_list.map((feature: Feature) => (
               <div
                 key={feature.id}
                 className="flex gap-2 sm:gap-3 lg:gap-[16px] items-start sm:items-center"
@@ -186,13 +163,12 @@ function Card({
 
         {/* Image Section */}
         <div className="w-full lg:w-1/2 h-auto flex justify-center items-center px-0">
-          <div className="relative w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[528px] aspect-[528/494]">
+          <div className="relative w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[528px] aspect-[528/340] rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.08)] border border-black/5">
             <Image
               src={item.image}
               alt={item.title}
-              width={528}
-              height={494}
-              className="object-cover"
+              fill
+              className="object-cover object-top"
               priority={index === 0}
             />
           </div>

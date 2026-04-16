@@ -426,77 +426,40 @@ export const benefitContainerVariants: Variants = {
 export const navigationVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: -20,
+    y: -60,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    },
-  },
-};
-
-// Navigation logo animation
-export const navigationLogoVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.8,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    },
-  },
-};
-
-// Navigation link animation
-export const navigationLinkVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    x: -10,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
       duration: 0.4,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+      ease: [0.32, 0.72, 0, 1] as [number, number, number, number],
     },
   },
 };
 
-// Navigation button animation
+// Navigation logo animation — suit le parent
+export const navigationLogoVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0 } },
+};
+
+// Navigation link animation — suit le parent
+export const navigationLinkVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0 } },
+};
+
+// Navigation button animation — suit le parent
 export const navigationButtonVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.9,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      delay: 0.2,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    },
-  },
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0 } },
 };
 
-// Navigation container stagger for links
+// Navigation container — pas de stagger, tout apparaît ensemble
 export const navigationContainerVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
+  visible: { opacity: 1, transition: { duration: 0 } },
 };
 
 // Mobile menu animation
@@ -805,7 +768,7 @@ export function StaggerContainer({
   );
 }
 
-export default {
+const motionExports = {
   heroBadgeVariants,
   heroTitleWordVariants,
   heroDescriptionVariants,
@@ -849,3 +812,5 @@ export default {
   ScaleIn,
   StaggerContainer,
 };
+
+export default motionExports;

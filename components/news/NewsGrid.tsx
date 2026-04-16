@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import type { TransformedNewsItem } from "@/lib/api/transformers";
 import type { PaginationInfo } from "@/lib/types";
 import NewsCard from "./NewsCard";
@@ -37,6 +38,7 @@ export default function NewsGrid({
   pagination,
   onPageChange,
 }: NewsGridProps) {
+  const t = useTranslations("common");
   if (loading && items.length === 0) {
     return <GridSkeleton />;
   }
@@ -53,7 +55,7 @@ export default function NewsGrid({
 
       {items.length === 0 && !loading && (
         <div className="text-center py-20 text-gray-500">
-          No news found for this category.
+          {t("noNewsFound")}
         </div>
       )}
 
@@ -62,19 +64,19 @@ export default function NewsGrid({
           <button
             onClick={() => onPageChange(pagination.page - 1)}
             disabled={!pagination.hasPrev || loading}
-            className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus-visible:ring-2 focus-visible:ring-[#1b0c25]/40"
           >
-            Previous
+            {t("previous")}
           </button>
-          <span className="text-sm text-gray-600">
-            Page {pagination.page} of {pagination.totalPages}
+          <span className="text-sm text-gray-600" aria-live="polite">
+            {t("pageOf", { page: pagination.page, total: pagination.totalPages })}
           </span>
           <button
             onClick={() => onPageChange(pagination.page + 1)}
             disabled={!pagination.hasNext || loading}
-            className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors focus-visible:ring-2 focus-visible:ring-[#1b0c25]/40"
           >
-            Next
+            {t("next")}
           </button>
         </div>
       )}

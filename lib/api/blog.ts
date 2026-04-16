@@ -7,6 +7,7 @@ import type {
   BlogQueryParams,
   ApiResponse,
 } from '@/lib/types';
+import type { BlogArticleListPayload } from './transformers';
 
 const BLOG_ENDPOINT = '/api/blog';
 
@@ -40,16 +41,16 @@ export const blogService = {
     return apiClient.get<BlogTagsResponse>(`${BLOG_ENDPOINT}/tags`);
   },
 
-  async getRecentArticles(limit: number = 5): Promise<ApiResponse<BlogArticle[]>> {
-    return apiClient.get<BlogArticle[]>(`${BLOG_ENDPOINT}/recent`, { limit });
+  async getRecentArticles(limit: number = 5): Promise<ApiResponse<BlogArticleListPayload>> {
+    return apiClient.get<BlogArticleListPayload>(`${BLOG_ENDPOINT}/recent`, { limit });
   },
 
-  async getPopularArticles(limit: number = 5): Promise<ApiResponse<BlogArticle[]>> {
-    return apiClient.get<BlogArticle[]>(`${BLOG_ENDPOINT}/popular`, { limit });
+  async getPopularArticles(limit: number = 5): Promise<ApiResponse<BlogArticleListPayload>> {
+    return apiClient.get<BlogArticleListPayload>(`${BLOG_ENDPOINT}/popular`, { limit });
   },
 
-  async getRelatedArticles(articleId: string, limit: number = 3): Promise<ApiResponse<BlogArticle[]>> {
-    return apiClient.get<BlogArticle[]>(`${BLOG_ENDPOINT}/${articleId}/related`, { limit });
+  async getRelatedArticles(articleId: string, limit: number = 3): Promise<ApiResponse<BlogArticleListPayload>> {
+    return apiClient.get<BlogArticleListPayload>(`${BLOG_ENDPOINT}/${articleId}/related`, { limit });
   },
 
   async incrementViewCount(articleId: string): Promise<ApiResponse<{ viewCount: number }>> {

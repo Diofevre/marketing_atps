@@ -1,12 +1,47 @@
 import type { BlogArticle, BlogSection, NewsItem } from '@/lib/types';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { enUS, fr } from 'date-fns/locale';
 
-export function formatDisplayDate(dateString: string | null): string {
+/**
+ * Some list endpoints (recent/related/popular/featured) historically return
+ * either a bare array or a wrapped object depending on the backend version.
+ * These helpers normalize both shapes into a plain array so call sites never
+ * have to resort to `as any` casts.
+ */
+export type BlogArticleListPayload =
+  | BlogArticle[]
+  | { articles: BlogArticle[] };
+
+export type NewsItemListPayload =
+  | NewsItem[]
+  | { news: NewsItem[] };
+
+export function unwrapBlogArticles(
+  payload: BlogArticleListPayload | null | undefined,
+): BlogArticle[] {
+  if (!payload) return [];
+  if (Array.isArray(payload)) return payload;
+  return payload.articles ?? [];
+}
+
+export function unwrapNewsItems(
+  payload: NewsItemListPayload | null | undefined,
+): NewsItem[] {
+  if (!payload) return [];
+  if (Array.isArray(payload)) return payload;
+  return payload.news ?? [];
+}
+
+const DATE_LOCALES = { en: enUS, fr } as const;
+
+export function formatDisplayDate(
+  dateString: string | null,
+  locale: 'en' | 'fr' = 'en',
+): string {
   if (!dateString) return '';
   try {
     const date = new Date(dateString);
-    return format(date, 'MMM dd, yyyy', { locale: fr });
+    return format(date, 'PPP', { locale: DATE_LOCALES[locale] });
   } catch {
     return dateString;
   }

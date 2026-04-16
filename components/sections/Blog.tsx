@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import TitleSection from "../TitleSection";
 import { Button } from "../ui/button";
@@ -14,25 +15,37 @@ import {
   viewportSettings,
 } from "@/lib/motion";
 import { blogService } from "@/lib/api";
-import { transformBlogArticles, type TransformedBlogPost } from "@/lib/api/transformers";
+import {
+  transformBlogArticles,
+  unwrapBlogArticles,
+  type TransformedBlogPost,
+} from "@/lib/api/transformers";
 
-export default function BlogSection() {
-  const [posts, setPosts] = useState<TransformedBlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+interface BlogSectionProps {
+  initialPosts?: TransformedBlogPost[];
+}
+
+export default function BlogSection({ initialPosts }: BlogSectionProps = {}) {
+  const t = useTranslations("blogSection");
+  const hasInitial = initialPosts !== undefined;
+  const [posts, setPosts] = useState<TransformedBlogPost[]>(initialPosts ?? []);
+  const [loading, setLoading] = useState(!hasInitial);
 
   useEffect(() => {
+    // If the server already prerendered recent posts, don't refetch on mount.
+    if (hasInitial) return;
+
     const fetchRecentPosts = async () => {
       const response = await blogService.getRecentArticles(3);
       if (response.data) {
-        const data = response.data as any;
-        const articles = Array.isArray(data) ? data : (data.articles || []);
+        const articles = unwrapBlogArticles(response.data);
         setPosts(transformBlogArticles(articles));
       }
       setLoading(false);
     };
 
     fetchRecentPosts();
-  }, []);
+  }, [hasInitial]);
 
   return (
     <section className="py-16 max-lg:py-12 max-md:py-8">
@@ -47,12 +60,12 @@ export default function BlogSection() {
           >
             <div className="flex flex-col items-start gap-[12px] max-lg:w-full">
               <TitleSection
-                title="Blog"
+                title={t("badge")}
                 className="shadow-[0_33px_13px_0_rgba(0,0,0,0.01),0_19px_11px_0_rgba(0,0,0,0.04),0_8px_8px_0_rgba(0,0,0,0.06),0_2px_5px_0_rgba(0,0,0,0.07)]"
               />
               <div className="w-[620px] max-lg:w-full">
-                <p className="text-[58px] leading-[60px] font-medium max-lg:text-4xl max-lg:leading-tight">
-                  Explore Our Blog And Stay Updated
+                <p className="text-[58px] leading-[60px] font-medium text-[#1b0c25] max-lg:text-4xl max-lg:leading-tight">
+                  {t("heading")}
                 </p>
               </div>
             </div>
@@ -65,10 +78,10 @@ export default function BlogSection() {
                 >
                   <span className="flex flex-col items-center h-[26px] overflow-hidden">
                     <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                      Explore All
+                      {t("exploreAll")}
                     </span>
                     <span className="block h-[26px] leading-[26px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                      Explore All
+                      {t("exploreAll")}
                     </span>
                   </span>
                 </Button>

@@ -4,11 +4,27 @@ import type {
   NewsListResponse,
   NewsCategoriesResponse,
   NewsTagsResponse,
+  NewsLocale,
   NewsQueryParams,
   ApiResponse,
 } from '@/lib/types';
+import type { NewsItemListPayload } from './transformers';
 
 const NEWS_ENDPOINT = '/api/news';
+
+/**
+ * Every news-returning endpoint accepts an optional `lang` locale so the
+ * backend swaps in the matching translation (when one exists) before
+ * serializing the row. The helpers below all funnel through a single
+ * `buildQuery` so the lang param is wired the same way everywhere and
+ * the undefined case never sends `?lang=undefined` on the wire.
+ */
+function buildQuery(
+  extra: Record<string, unknown> = {},
+  lang?: NewsLocale,
+): Record<string, unknown> {
+  return lang ? { ...extra, lang } : extra;
+}
 
 export const newsService = {
   async getNews(params: NewsQueryParams = {}): Promise<ApiResponse<NewsListResponse>> {
@@ -21,15 +37,22 @@ export const newsService = {
       search: params.search,
       sortBy: params.sortBy || 'publishedAt',
       sortOrder: params.sortOrder || 'desc',
+      ...(params.lang ? { lang: params.lang } : {}),
     });
   },
 
-  async getNewsBySlug(slug: string): Promise<ApiResponse<NewsItem>> {
-    return apiClient.get<NewsItem>(`${NEWS_ENDPOINT}/slug/${slug}`);
+  async getNewsBySlug(slug: string, lang?: NewsLocale): Promise<ApiResponse<NewsItem>> {
+    return apiClient.get<NewsItem>(
+      `${NEWS_ENDPOINT}/slug/${slug}`,
+      buildQuery({}, lang),
+    );
   },
 
-  async getNewsById(id: string): Promise<ApiResponse<NewsItem>> {
-    return apiClient.get<NewsItem>(`${NEWS_ENDPOINT}/${id}`);
+  async getNewsById(id: string, lang?: NewsLocale): Promise<ApiResponse<NewsItem>> {
+    return apiClient.get<NewsItem>(
+      `${NEWS_ENDPOINT}/${id}`,
+      buildQuery({}, lang),
+    );
   },
 
   async getCategories(): Promise<ApiResponse<NewsCategoriesResponse>> {
@@ -40,24 +63,36 @@ export const newsService = {
     return apiClient.get<NewsTagsResponse>(`${NEWS_ENDPOINT}/tags`);
   },
 
-  async getRecentNews(limit: number = 5): Promise<ApiResponse<NewsItem[]>> {
-    return apiClient.get<NewsItem[]>(`${NEWS_ENDPOINT}/recent`, { limit });
+  async getRecentNews(limit: number = 5, lang?: NewsLocale): Promise<ApiResponse<NewsItemListPayload>> {
+    return apiClient.get<NewsItemListPayload>(
+      `${NEWS_ENDPOINT}/recent`,
+      buildQuery({ limit }, lang),
+    );
   },
 
-  async getFeaturedNews(limit: number = 5): Promise<ApiResponse<NewsItem[]>> {
-    return apiClient.get<NewsItem[]>(`${NEWS_ENDPOINT}/featured`, { limit });
+  async getFeaturedNews(limit: number = 5, lang?: NewsLocale): Promise<ApiResponse<NewsItemListPayload>> {
+    return apiClient.get<NewsItemListPayload>(
+      `${NEWS_ENDPOINT}/featured`,
+      buildQuery({ limit }, lang),
+    );
   },
 
-  async getRelatedNews(newsId: string, limit: number = 3): Promise<ApiResponse<NewsItem[]>> {
-    return apiClient.get<NewsItem[]>(`${NEWS_ENDPOINT}/${newsId}/related`, { limit });
+  async getRelatedNews(newsId: string, limit: number = 3, lang?: NewsLocale): Promise<ApiResponse<NewsItemListPayload>> {
+    return apiClient.get<NewsItemListPayload>(
+      `${NEWS_ENDPOINT}/${newsId}/related`,
+      buildQuery({ limit }, lang),
+    );
   },
 
   async getNewsByCategory(category: string, params: Omit<NewsQueryParams, 'category'> = {}): Promise<ApiResponse<NewsListResponse>> {
     return this.getNews({ ...params, category });
   },
 
-  async search(query: string, limit: number = 10): Promise<ApiResponse<NewsListResponse>> {
-    return apiClient.get<NewsListResponse>(NEWS_ENDPOINT, { search: query, limit });
+  async search(query: string, limit: number = 10, lang?: NewsLocale): Promise<ApiResponse<NewsListResponse>> {
+    return apiClient.get<NewsListResponse>(
+      NEWS_ENDPOINT,
+      buildQuery({ search: query, limit }, lang),
+    );
   },
 };
 
