@@ -2,13 +2,10 @@ import type { ApiError, ApiResponse } from '@/lib/types';
 
 // Backend blog/news API base URL.
 // - In the browser: empty → hit same-origin /api/* which Next.js rewrites (see next.config.ts).
-// - On the server (SSR): use NEXT_PUBLIC_API_URL. We intentionally do NOT fall back to
-//   NEXT_PUBLIC_APP_URL or localhost:3000, since NEXT_PUBLIC_APP_URL points at the product
-//   app (redirect target for Hero buttons) and `localhost:3000` is this very marketing
-//   site — using either as the API origin creates a proxy loop that hangs every request.
+// - On the server (SSR): use NEXT_PUBLIC_APP_URL (backend origin configured on Vercel).
 function getApiBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return process.env.NEXT_PUBLIC_API_URL || '';
+    return process.env.NEXT_PUBLIC_APP_URL || '';
   }
   return '';
 }
@@ -65,10 +62,10 @@ class ApiClient {
     // - Client-side: prevents hitting /api/blog on the marketing server (no such route → 404).
     // NEXT_PUBLIC_* is inlined at build time so the check works in both environments.
     const isBlogOrNewsEndpoint = endpoint.startsWith('/api/blog') || endpoint.startsWith('/api/news');
-    if (isBlogOrNewsEndpoint && !process.env.NEXT_PUBLIC_API_URL) {
+    if (isBlogOrNewsEndpoint && !process.env.NEXT_PUBLIC_APP_URL) {
       return {
         data: null,
-        error: createApiError('NEXT_PUBLIC_API_URL not set — blog/news API disabled', 503, 'NO_API_URL'),
+        error: createApiError('NEXT_PUBLIC_APP_URL not set — blog/news API disabled', 503, 'NO_API_URL'),
       };
     }
 

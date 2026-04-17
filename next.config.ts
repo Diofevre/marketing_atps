@@ -35,10 +35,10 @@ const nextConfig: NextConfig = {
   },
 
   // Rewrites proxy blog/news API calls to the backend API.
-  // If NEXT_PUBLIC_API_URL is not set, register no rewrites — otherwise requests
+  // If NEXT_PUBLIC_APP_URL is not set, register no rewrites — otherwise requests
   // to /api/blog/* would loop back to this very server and hang.
   async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_APP_URL;
     if (!apiUrl) return [];
 
     return [
