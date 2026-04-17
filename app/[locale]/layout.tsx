@@ -312,6 +312,31 @@ export default async function LocaleLayout({
                   name: tFaq("q6"),
                   acceptedAnswer: { "@type": "Answer", text: tFaq("a6") },
                 },
+                {
+                  "@type": "Question",
+                  name: tFaq("q7"),
+                  acceptedAnswer: { "@type": "Answer", text: tFaq("a7") },
+                },
+                {
+                  "@type": "Question",
+                  name: tFaq("q8"),
+                  acceptedAnswer: { "@type": "Answer", text: tFaq("a8") },
+                },
+                {
+                  "@type": "Question",
+                  name: tFaq("q9"),
+                  acceptedAnswer: { "@type": "Answer", text: tFaq("a9") },
+                },
+                {
+                  "@type": "Question",
+                  name: tFaq("q10"),
+                  acceptedAnswer: { "@type": "Answer", text: tFaq("a10") },
+                },
+                {
+                  "@type": "Question",
+                  name: tFaq("q11"),
+                  acceptedAnswer: { "@type": "Answer", text: tFaq("a11") },
+                },
               ],
             }),
           }}

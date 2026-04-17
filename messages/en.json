@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "titleDefault": "MyATPS — The Complete ATPL Exam Preparation Platform",
+    "titleDefault": "MyATPS — ATPL Prep Built by Student Pilots. €10/month, No Commitment",
     "titleTemplate": "%s | MyATPS",
-    "description": "Pass your ATPL exams on the first try with 20,000+ questions, research-based explanations, a 3D aviation dictionary and live quizzes. Free plan with no credit card; Premium at €10/month, no commitment — among the lowest prices in the ATPL market.",
+    "description": "The ATPL preparation platform built by student pilots, for student pilots. 20,000+ explained questions, 3D dictionary, live quizzes and AI assistant. Free plan with no credit card; Premium at €10/month with no commitment — among the lowest prices in the EASA market.",
     "ogDescription": "20,000+ questions, research-based explanations, 3D aviation dictionary and live quizzes. Free plan + Premium at €10/month with no commitment — among the lowest prices in the ATPL market.",
     "twitterDescription": "20,000+ questions, research-based explanations, 3D aviation dictionary and live quizzes. Free plan + Premium at €10/month, no commitment.",
     "ogLocale": "en_US"
@@ -53,7 +53,17 @@
     "q5": "Can I study with friends or share quizzes?",
     "a5": "Absolutely! MyATPS lets you share study sessions with specific users or make them public. You can also launch live Kahoot-style quizzes where participants join with a simple code — no account needed. It's perfect for instructors running group sessions or students organizing study groups.",
     "q6": "Can I use MyATPS for free?",
-    "a6": "Yes. The Free plan gives you access to the question bank (discovery version), the STUDY quiz mode, the aviation dictionary and the community forum. No credit card required, no time limit. Upgrade to Premium at €10/month when you're ready to unlock the full question bank and all quiz modes — or stay on Free as long as you like."
+    "a6": "Yes. The Free plan gives you access to the question bank (discovery version), the STUDY quiz mode, the aviation dictionary and the community forum. No credit card required, no time limit. Upgrade to Premium at €10/month when you're ready to unlock the full question bank and all quiz modes — or stay on Free as long as you like.",
+    "q7": "Can I use MyATPS alongside my flight school curriculum?",
+    "a7": "Yes — it's the most common use case. MyATPS covers the 14 official EASA ATPL subjects, aligned with the syllabus your school uses. Many of our users keep it open during class to re-read an annex, or in the evening to consolidate what they covered in lecture. It's not a replacement for your school — it's the study companion your school doesn't have the time to build.",
+    "q8": "Which ATPL subjects are covered?",
+    "a8": "All 14 mandatory EASA subjects for the ATPL license: Air Law, Airframe & Systems, Instrumentation, Mass & Balance, Performance, Flight Planning & Monitoring, Human Performance & Limitations, Meteorology, General Navigation, Radio Navigation, Operational Procedures, Principles of Flight, Communications VFR, Communications IFR. Each subject has thousands of questions with detailed explanations and linked terms in the aviation dictionary.",
+    "q9": "How is MyATPS different from a printed question bank?",
+    "a9": "A book gives you questions and answers. MyATPS gives you explanations that actually teach the concept, instant subject search, a built-in 3D dictionary, three quiz modes (STUDY to learn, TEST to assess, EXAM to simulate real conditions), and an AI assistant when you're stuck. A book is passive; MyATPS is adaptive — and costs less than a single textbook across your full preparation.",
+    "q10": "How long do I need to subscribe to prepare for my ATPL?",
+    "a10": "Most student pilots prepare the 14 exams over 6 to 12 months at their own pace. Since Premium is €10/month with no commitment, you only pay for the months you actually use the platform — and you cancel the month you sit your final exam. In intensive flight school programs, 3 to 4 months can be enough.",
+    "q11": "Does MyATPS guarantee first-attempt success?",
+    "a11": "No one can honestly guarantee that — your success depends on your own work. What we do guarantee: every tool is here (20,000+ EASA-aligned questions, explanations written by student pilots, progress analytics that honestly flag your weak areas). Users who pass on the first attempt average 30 questions per day and consistently read the explanations. The tools are ours, the discipline is yours."
   },
   "nav": {
     "blog": "Blog",
@@ -72,7 +82,7 @@
   },
   "footer": {
     "tagline": "Start Your ATPL Journey",
-    "description": "The complete ATPL exam preparation platform, built by pilots for pilots. Pass your exams on the first try with research-based content and a modern study experience.",
+    "description": "The ATPL preparation platform built by student pilots, for student pilots. €10/month with no commitment, permanent free plan — among the lowest prices on the market.",
     "sectionPlatform": "Platform",
     "sectionResources": "Resources",
     "sectionCompany": "Company",
@@ -88,15 +98,15 @@
     "rightsReserved": "All rights reserved."
   },
   "hero": {
-    "badge": "Built by pilots, for pilots",
+    "badge": "Built by student pilots, for student pilots",
     "title1": "Pass your ATPL",
     "titleHighlight": "on the first try",
     "titleFull": "Pass Your ATPL on the First Try",
-    "description": "20,000+ questions with research-based explanations, an aviation dictionary with audio & 3D models, live quizzes, and a complete study ecosystem — the only ATPL platform that gives you everything in one place.",
-    "subtitle": "20,000+ questions, research-based explanations, aviation dictionary with 3D models, live quizzes, and a complete study ecosystem.",
+    "description": "Built by student pilots who were tired of paying €30+/month with lock-in contracts for generic explanations. MyATPS bundles everything we wished we'd had: 20,000+ explained questions, audio + 3D aviation dictionary, live quizzes with your study group, and an AI assistant — starting at €10/month, no commitment.",
+    "subtitle": "20,000+ questions, 3D dictionary, live quizzes and AI assistant. From €10/month, no commitment.",
     "ctaPrimary": "Start learning for free",
     "ctaSecondary": "See how it works",
-    "trustLine": "Trusted by student pilots across Europe",
+    "trustLine": "Student-pilot-built platform, used across Europe",
     "chatUser1": "I'm struggling with ILS approach questions — can you help me understand the key concepts?",
     "chatAi1": "Absolutely! Our research-backed explanations break it down clearly: the localizer provides lateral guidance, while the glide slope handles vertical guidance — both using radio beams to guide you to the runway threshold.",
     "chatUser2": "Great, let me start a quiz on Radio Navigation!",
@@ -164,7 +174,7 @@
   },
   "about": {
     "badge": "About",
-    "paragraph": "MyATPS is built for future pilots preparing for their ATPL exams. With 20,000+ questions, research-based explanations, an aviation dictionary with audio and 3D models, a complete resource library, and powerful sharing tools, it gives you everything you need to pass on the first try."
+    "paragraph": "MyATPS was born out of frustration from student pilots in ATPL training. Existing platforms charged €30 to €35 per month with lock-in contracts, and explanations too often read like copy-pasted EASA syllabus. We built what we wished we'd had: a complete platform — 20,000+ explained questions, an aviation dictionary with audio & 3D models, live quizzes, a resource library and an AI assistant — at €10/month with no commitment, plus a permanent free plan for every student pilot. Built by students, for students."
   },
   "keyBenefits": {
     "badge": "Key Benefits",
@@ -236,8 +246,8 @@
     "comparisonNote": "Most ATPL platforms charge €20–€35 per month, often with 6 to 12-month commitments. MyATPS stays at €10/month, with no commitment — cancel in one click from your account."
   },
   "homePage": {
-    "metaTitle": "MyATPS — The Complete ATPL Exam Preparation Platform",
-    "metaDescription": "Pass your ATPL exams on the first try with 20,000+ questions, research-based explanations, an aviation dictionary with 3D models, live quizzes, and a complete study ecosystem built by pilots, for pilots."
+    "metaTitle": "MyATPS — The ATPL Platform Built by Student Pilots",
+    "metaDescription": "Built by student pilots in ATPL training, for student pilots. 20,000+ explained questions, 3D aviation dictionary, live quizzes with your study group, AI assistant. €10/month with no commitment, permanent free plan."
   },
   "contactPage": {
     "title": "Contact us",

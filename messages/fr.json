@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "titleDefault": "MyATPS — La plateforme complète de préparation aux examens ATPL",
+    "titleDefault": "MyATPS — Préparation ATPL conçue par des élèves pilotes. 10€/mois, sans engagement",
     "titleTemplate": "%s | MyATPS",
-    "description": "Réussissez vos examens ATPL du premier coup avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D et des quiz en direct. Plan gratuit sans carte bancaire ; Premium à 10€/mois, sans engagement — parmi les tarifs les plus bas du marché ATPL.",
+    "description": "La plateforme de préparation ATPL conçue par des élèves pilotes, pour des élèves pilotes. 20 000+ questions expliquées, dictionnaire 3D, quiz en direct et assistant IA. Plan gratuit sans carte bancaire ; Premium à 10€/mois sans engagement — parmi les tarifs les plus bas du marché EASA.",
     "ogDescription": "Plus de 20 000 questions, explications basées sur la recherche, dictionnaire 3D et quiz en direct. Plan gratuit + Premium à 10€/mois sans engagement — parmi les tarifs les plus bas du marché ATPL.",
     "twitterDescription": "Plus de 20 000 questions, explications basées sur la recherche, dictionnaire 3D et quiz en direct. Plan gratuit + Premium à 10€/mois sans engagement.",
     "ogLocale": "fr_FR"
@@ -53,7 +53,17 @@
     "q5": "Puis-je étudier avec des amis ou partager des quiz ?",
     "a5": "Absolument ! MyATPS vous permet de partager vos sessions d'étude avec des utilisateurs spécifiques ou de les rendre publiques. Vous pouvez aussi lancer des quiz en direct style Kahoot où les participants rejoignent avec un simple code — aucun compte requis. C'est parfait pour les instructeurs qui animent des sessions de groupe ou les étudiants qui organisent des groupes d'étude.",
     "q6": "Puis-je utiliser MyATPS gratuitement ?",
-    "a6": "Oui. Le plan Gratuit donne accès à la banque de questions (version découverte), au mode quiz STUDY, au dictionnaire aéronautique et au forum communautaire. Aucune carte bancaire n'est requise, aucune limite de durée. Passez Premium à 10€/mois quand vous êtes prêt à débloquer la banque complète et tous les modes quiz — ou restez gratuit aussi longtemps que vous le souhaitez."
+    "a6": "Oui. Le plan Gratuit donne accès à la banque de questions (version découverte), au mode quiz STUDY, au dictionnaire aéronautique et au forum communautaire. Aucune carte bancaire n'est requise, aucune limite de durée. Passez Premium à 10€/mois quand vous êtes prêt à débloquer la banque complète et tous les modes quiz — ou restez gratuit aussi longtemps que vous le souhaitez.",
+    "q7": "Puis-je utiliser MyATPS en parallèle de ma formation en école de pilotage ?",
+    "a7": "Oui, c'est même le cas d'usage le plus courant. MyATPS couvre les 14 matières officielles EASA de l'ATPL, alignées sur le syllabus utilisé par votre école. Beaucoup de nos utilisateurs l'ouvrent pendant leurs cours pour relire une annexe, ou le soir pour consolider ce qu'ils ont vu en classe. Ce n'est pas un remplacement de votre école — c'est le compagnon d'étude que votre école n'a pas le temps de construire.",
+    "q8": "Quelles matières ATPL sont couvertes ?",
+    "a8": "Les 14 matières EASA obligatoires pour la licence ATPL : Air Law, Airframe & Systems, Instrumentation, Mass & Balance, Performance, Flight Planning & Monitoring, Human Performance & Limitations, Meteorology, General Navigation, Radio Navigation, Operational Procedures, Principles of Flight, Communications VFR, Communications IFR. Chaque matière dispose de milliers de questions avec explications détaillées et termes liés dans le dictionnaire aéronautique.",
+    "q9": "En quoi MyATPS est-il différent d'une banque de questions imprimée ?",
+    "a9": "Un livre vous donne des questions et des réponses. MyATPS vous donne des explications écrites pour faire comprendre le concept, une recherche instantanée par matière, un dictionnaire 3D intégré, trois modes de quiz (STUDY pour apprendre, TEST pour s'évaluer, EXAM pour simuler les conditions réelles) et un assistant IA quand vous êtes bloqué. Un livre est passif, MyATPS est adaptatif — et coûte moins cher qu'un seul manuel sur toute la durée de votre préparation.",
+    "q10": "Combien de temps faut-il s'abonner pour préparer son ATPL ?",
+    "a10": "La plupart des élèves pilotes préparent les 14 examens en 6 à 12 mois selon leur rythme. Comme Premium est à 10€/mois sans engagement, vous payez uniquement les mois où vous utilisez la plateforme — et vous annulez le mois où vous passez votre dernier examen. En formation intensive d'école, 3 à 4 mois peuvent suffire.",
+    "q11": "MyATPS garantit-il de réussir du premier coup ?",
+    "a11": "Personne ne peut honnêtement garantir cela — votre réussite dépend de votre travail. Ce que nous garantissons : tous les outils sont là (20 000+ questions alignées EASA, explications pensées par des élèves pilotes, analyses de progression qui identifient honnêtement vos zones faibles). Les utilisateurs qui réussissent du premier coup font en moyenne 30 questions par jour et utilisent systématiquement les explications. Les outils sont à nous, la discipline est à vous."
   },
   "nav": {
     "blog": "Blog",
@@ -72,7 +82,7 @@
   },
   "footer": {
     "tagline": "Commencez votre parcours ATPL",
-    "description": "La plateforme complète de préparation aux examens ATPL, conçue par des pilotes pour des pilotes. Réussissez vos examens du premier coup avec du contenu basé sur la recherche et une expérience d'étude moderne.",
+    "description": "La plateforme de préparation ATPL conçue par des élèves pilotes, pour des élèves pilotes. 10€/mois sans engagement, plan gratuit permanent — parmi les tarifs les plus bas du marché.",
     "sectionPlatform": "Plateforme",
     "sectionResources": "Ressources",
     "sectionCompany": "Entreprise",
@@ -88,15 +98,15 @@
     "rightsReserved": "Tous droits réservés."
   },
   "hero": {
-    "badge": "Conçu par des pilotes, pour des pilotes",
+    "badge": "Conçu par des élèves pilotes, pour des élèves pilotes",
     "title1": "Réussissez votre ATPL",
     "titleHighlight": "du premier coup",
     "titleFull": "Réussissez votre ATPL du premier coup",
-    "description": "Plus de 20 000 questions avec des explications basées sur la recherche, un dictionnaire aéronautique avec audio et modèles 3D, des quiz en direct et un écosystème d'étude complet — la seule plateforme ATPL qui vous offre tout au même endroit.",
-    "subtitle": "Plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et un écosystème d'étude complet.",
+    "description": "Créé par des élèves pilotes qui en avaient assez de payer 30€+/mois avec engagement pour des explications génériques. MyATPS rassemble tout ce que nous aurions voulu avoir : 20 000+ questions expliquées, dictionnaire aéronautique avec audio et 3D, quiz en direct avec votre groupe d'étude, assistant IA — à partir de 10€/mois, sans engagement.",
+    "subtitle": "20 000+ questions, dictionnaire 3D, quiz en direct et assistant IA. À partir de 10€/mois, sans engagement.",
     "ctaPrimary": "Commencer gratuitement",
     "ctaSecondary": "Voir comment ça marche",
-    "trustLine": "Utilisé par des élèves pilotes dans toute l'Europe",
+    "trustLine": "Plateforme d'élèves pilotes, utilisée dans toute l'Europe",
     "chatUser1": "J'ai du mal avec les questions sur l'approche ILS — peux-tu m'aider à comprendre les concepts clés ?",
     "chatAi1": "Bien sûr ! Nos explications basées sur la recherche détaillent clairement : le localizer fournit le guidage latéral, tandis que le glide slope gère le guidage vertical — les deux utilisent des faisceaux radio pour vous guider jusqu'au seuil de piste.",
     "chatUser2": "Super, lance-moi un quiz sur la radionavigation !",
@@ -164,7 +174,7 @@
   },
   "about": {
     "badge": "À propos",
-    "paragraph": "MyATPS est conçu pour les futurs pilotes qui préparent leurs examens ATPL. Avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec audio et modèles 3D, une bibliothèque de ressources complète et des outils de partage puissants, il vous offre tout ce dont vous avez besoin pour réussir du premier coup."
+    "paragraph": "MyATPS est né de la frustration d'élèves pilotes en formation ATPL. Les plateformes existantes facturaient 30€ à 35€ par mois avec engagement, et les explications ressemblaient trop souvent à du texte recopié du syllabus EASA. Nous avons construit ce que nous aurions voulu avoir : une plateforme complète — 20 000+ questions expliquées, dictionnaire aéronautique avec 3D et audio, quiz en direct, bibliothèque et assistant IA — accessible à 10€/mois, sans engagement, avec un plan gratuit permanent pour tous les élèves. Conçu par des élèves, pour des élèves."
   },
   "keyBenefits": {
     "badge": "Avantages clés",
@@ -236,8 +246,8 @@
     "comparisonNote": "La plupart des plateformes ATPL facturent entre 20€ et 35€ par mois, souvent avec engagement sur 6 à 12 mois. MyATPS reste à 10€/mois, sans engagement — annulable en un clic depuis votre compte."
   },
   "homePage": {
-    "metaTitle": "MyATPS — La plateforme complète de préparation aux examens ATPL",
-    "metaDescription": "Réussissez vos examens ATPL du premier coup avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et un écosystème d'étude complet conçu par des pilotes, pour des pilotes."
+    "metaTitle": "MyATPS — La plateforme ATPL conçue par des élèves pilotes",
+    "metaDescription": "Conçue par des élèves pilotes en formation ATPL, pour des élèves pilotes. 20 000+ questions expliquées, dictionnaire aéronautique 3D, quiz en direct avec votre groupe d'étude, assistant IA. 10€/mois sans engagement, plan gratuit permanent."
   },
   "contactPage": {
     "title": "Contactez-nous",

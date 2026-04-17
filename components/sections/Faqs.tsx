@@ -20,6 +20,11 @@ export default function Faqs() {
     { question: t("q4"), answer: t("a4") },
     { question: t("q5"), answer: t("a5") },
     { question: t("q6"), answer: t("a6") },
+    { question: t("q7"), answer: t("a7") },
+    { question: t("q8"), answer: t("a8") },
+    { question: t("q9"), answer: t("a9") },
+    { question: t("q10"), answer: t("a10") },
+    { question: t("q11"), answer: t("a11") },
   ];
 
   const toggleFaq = (index: number) => {
