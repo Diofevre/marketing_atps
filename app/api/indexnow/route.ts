@@ -42,8 +42,12 @@ const INDEXNOW_ENDPOINTS = [
 
 const STATIC_URLS = [
   `${SITE_URL}`,
+  `${SITE_URL}/pricing`,
   `${SITE_URL}/blog`,
   `${SITE_URL}/news`,
+  `${SITE_URL}/enterprise`,
+  `${SITE_URL}/enterprise/procteo`,
+  `${SITE_URL}/enterprise/demo`,
   `${SITE_URL}/contact`,
   `${SITE_URL}/privacy`,
 ];

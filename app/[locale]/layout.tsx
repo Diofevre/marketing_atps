@@ -79,6 +79,22 @@ export async function generateMetadata({
       "ATPL practice",
       "ATPL mock exam",
       "aviation training platform",
+      "cheap ATPL",
+      "affordable ATPL",
+      "ATPL €10/month",
+      "ATPL 10 euros",
+      "cheapest ATPL question bank",
+      "ATPL subscription",
+      "ATPL monthly subscription",
+      "ATPL no commitment",
+      "free ATPL question bank",
+      "free ATPL training",
+      "ATPL gratuit",
+      "ATPL pas cher",
+      "ATPL sans engagement",
+      "banque de questions ATPL gratuite",
+      "abonnement ATPL mensuel",
+      "préparation ATPL abordable",
     ],
     authors: [{ name: "MyATPS" }],
     creator: "MyATPS",
@@ -135,6 +151,11 @@ export default async function LocaleLayout({
   // Enable static rendering for this locale
   setRequestLocale(locale as Locale);
 
+  // Locale-aware URL prefix for JSON-LD offer URLs so the structured-data
+  // links match the canonical page for each locale (same convention as
+  // generateMetadata above).
+  const pathPrefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+
   // Load translations for the JSON-LD schema strings (SoftwareApplication +
   // FAQ rich results). Localizing the schema lets Google show the right
   // language in the featured snippets.
@@ -163,20 +184,29 @@ export default async function LocaleLayout({
                   priceCurrency: "EUR",
                   name: tSchema("offerFreeName"),
                   description: tSchema("offerFreeDescription"),
+                  availability: "https://schema.org/InStock",
+                  url: `${SITE_URL}${pathPrefix}/pricing`,
                 },
                 {
                   "@type": "Offer",
-                  price: "29",
-                  priceCurrency: "EUR",
-                  name: tSchema("offerStandardName"),
-                  description: tSchema("offerStandardDescription"),
-                },
-                {
-                  "@type": "Offer",
-                  price: "39",
+                  price: "10",
                   priceCurrency: "EUR",
                   name: tSchema("offerPremiumName"),
                   description: tSchema("offerPremiumDescription"),
+                  availability: "https://schema.org/InStock",
+                  url: `${SITE_URL}${pathPrefix}/pricing`,
+                  priceSpecification: {
+                    "@type": "UnitPriceSpecification",
+                    price: "10",
+                    priceCurrency: "EUR",
+                    billingDuration: "P1M",
+                    billingIncrement: 1,
+                    referenceQuantity: {
+                      "@type": "QuantitativeValue",
+                      value: 1,
+                      unitCode: "MON",
+                    },
+                  },
                 },
               ],
               aggregateRating: {

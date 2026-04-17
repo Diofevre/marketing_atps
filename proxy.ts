@@ -25,9 +25,6 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/appointment": "/contact",
   "/job-thank-you": "/",
   "/jobs": "/",
-  // Pricing is rendered as a section on the home page, not a standalone route.
-  // Keep redirecting so old indexed /pricing URLs still land on useful content.
-  "/pricing": "/",
 };
 
 // next-intl middleware handles:
