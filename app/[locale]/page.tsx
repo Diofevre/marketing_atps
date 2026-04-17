@@ -66,7 +66,7 @@ export default async function HomePage() {
   // SSR-fetch the 3 most recent blog articles so the home page HTML contains
   // crawlable `/blog/<slug>` links for search engines.
   const recentRes = await blogService.getRecentArticles(3);
-  if (recentRes.error) {
+  if (recentRes.error && recentRes.error.code !== "NO_API_URL") {
     console.error(
       "[home] blogService.getRecentArticles failed:",
       recentRes.error,

@@ -74,8 +74,15 @@ export default function BlogList({
       const response = await blogService.getArticles(queryParams);
 
       if (response.error) {
-        setError(response.error.message);
-        setPosts([]);
+        // When the API URL isn't configured, treat the call as "no posts" instead
+        // of a hard error — this avoids showing a scary red banner on marketing
+        // deployments where the backend hasn't been wired up yet.
+        if (response.error.code === "NO_API_URL") {
+          setPosts([]);
+        } else {
+          setError(response.error.message);
+          setPosts([]);
+        }
       } else if (response.data) {
         const transformed = transformBlogArticles(response.data.articles || []);
         setPosts(transformed);
@@ -86,7 +93,7 @@ export default function BlogList({
 
       setLoading(false);
     },
-    [selectedCategory],
+    [selectedCategory, ALL_CAT],
   );
 
   const fetchCategories = useCallback(async () => {
@@ -97,10 +104,11 @@ export default function BlogList({
       );
       setCategories([ALL_CAT, ...names]);
     }
-  }, []);
+  }, [ALL_CAT]);
 
   useEffect(() => {
     // Categories aren't part of the SSR payload — fetch them client-side once.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!initialCategories) fetchCategories();
   }, [fetchCategories, initialCategories]);
 
@@ -109,6 +117,7 @@ export default function BlogList({
       skipNextFetch.current = false;
       return;
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchPosts({ page: 1 });
   }, [selectedCategory, fetchPosts]);
 

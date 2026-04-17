@@ -47,6 +47,7 @@ export const dynamic = "force-dynamic";
 export default async function NewsPage({ params }: NewsPageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "newsPage" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
   // SSR-fetch the first page so search engines see article links in the HTML
   // payload. Filters and pagination remain client-side inside <NewsList />.
   // Pass `lang={locale}` so the backend swaps in the matching translation
@@ -69,13 +70,13 @@ export default async function NewsPage({ params }: NewsPageProps) {
     : [];
   const initialPagination = listRes.data?.pagination;
   const initialCategories = categoriesRes.data
-    ? ["All Category", ...categoriesRes.data.categories.map((c) => c.name)]
+    ? [tCommon("allCategories"), ...categoriesRes.data.categories.map((c) => c.name)]
     : undefined;
 
-  if (listRes.error) {
+  if (listRes.error && listRes.error.code !== "NO_API_URL") {
     console.error("[news/page] newsService.getNews failed:", listRes.error);
   }
-  if (categoriesRes.error) {
+  if (categoriesRes.error && categoriesRes.error.code !== "NO_API_URL") {
     console.error(
       "[news/page] newsService.getCategories failed:",
       categoriesRes.error,

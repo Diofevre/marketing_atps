@@ -1,13 +1,16 @@
 import type { ApiError, ApiResponse } from '@/lib/types';
 
+// Backend blog/news API base URL.
+// - In the browser: empty → hit same-origin /api/* which Next.js rewrites (see next.config.ts).
+// - On the server (SSR): use NEXT_PUBLIC_APP_URL (backend origin configured on Vercel).
 function getApiBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    return process.env.NEXT_PUBLIC_APP_URL || '';
   }
   return '';
 }
 
-const API_TIMEOUT = Number(process.env.NEXT_PUBLIC_API_TIMEOUT) || 10000;
+const API_TIMEOUT = Number(process.env.NEXT_PUBLIC_API_TIMEOUT) || 8000;
 
 interface RequestConfig extends RequestInit {
   timeout?: number;
@@ -54,6 +57,18 @@ class ApiClient {
   }
 
   async get<T>(endpoint: string, params: Record<string, unknown> = {}, config: RequestConfig = {}): Promise<ApiResponse<T>> {
+    // Refuse to fire blog/news requests at all when the API base URL is not configured.
+    // - Server-side: prevents a Next.js rewrite proxy loop into this same origin.
+    // - Client-side: prevents hitting /api/blog on the marketing server (no such route → 404).
+    // NEXT_PUBLIC_* is inlined at build time so the check works in both environments.
+    const isBlogOrNewsEndpoint = endpoint.startsWith('/api/blog') || endpoint.startsWith('/api/news');
+    if (isBlogOrNewsEndpoint && !process.env.NEXT_PUBLIC_APP_URL) {
+      return {
+        data: null,
+        error: createApiError('NEXT_PUBLIC_APP_URL not set — blog/news API disabled', 503, 'NO_API_URL'),
+      };
+    }
+
     const url = `${this.getBaseUrl()}${endpoint}${buildQueryString(params)}`;
 
     try {

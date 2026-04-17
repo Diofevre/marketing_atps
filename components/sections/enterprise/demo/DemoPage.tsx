@@ -28,7 +28,10 @@ export default function DemoPage() {
   };
 
   return (
-    <div className="w-full px-4 pt-[100px] lg:pt-[140px] pb-16 lg:pb-[120px]">
+    <div className="w-full px-4 pt-[100px] lg:pt-[140px] pb-16 lg:pb-[120px] relative overflow-hidden">
+      {/* Ambient orbs */}
+      <div className="pointer-events-none absolute top-[-80px] left-[-80px] w-[500px] h-[500px] rounded-full bg-[linear-gradient(148deg,#80a9fc_0%,#d37bff_50%,#ff49d4_100%)] blur-[140px] opacity-15" />
+      <div className="pointer-events-none absolute bottom-[-80px] right-[-80px] w-[500px] h-[500px] rounded-full bg-[linear-gradient(148deg,#fcab83_0%,#d37bff_50%,#80a9fc_100%)] blur-[140px] opacity-15" />
       <Container className="flex flex-col items-center gap-10 lg:gap-[60px]">
         {/* Header — hidden during exam */}
         {session.step !== "exam" && (

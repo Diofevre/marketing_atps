@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 import { Container } from "../ui/container";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import LocaleSwitcher from "./LocaleSwitcher";
@@ -21,11 +21,17 @@ import { APP_URL } from "@/lib/constants";
 
 const Navigation = () => {
   const t = useTranslations("nav");
+  const pathname = usePathname();
+
+  const isActive = (link: string) => {
+    return pathname === link || pathname.startsWith(link + "/");
+  };
+
   const NAV_LIST = [
-    { id: 1, name: t("enterprise"), link: "/enterprise" },
-    { id: 2, name: t("pricing"), link: "/pricing" },
-    { id: 3, name: t("blog"), link: "/blog" },
-    { id: 4, name: t("news"), link: "/news" },
+    { id: 1, name: t("pricing"), link: "/pricing" },
+    { id: 2, name: t("blog"), link: "/blog" },
+    { id: 3, name: t("news"), link: "/news" },
+    { id: 4, name: t("enterprise"), link: "/enterprise" },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -148,15 +154,15 @@ const Navigation = () => {
                   gap: logoSize.gap,
                 }}
               >
-                <div
-                  className="rounded-[6px] flex items-center justify-center transition-all duration-300 shrink-0 overflow-hidden"
+                <div 
+                  className="rounded-[6px] p-1.5 bg-[#1b0c25] flex items-center justify-center transition-all duration-300 shrink-0 overflow-hidden"
                   style={{
                     height: logoSize.box,
                     width: logoSize.box,
                   }}
                 >
                   <Image
-                    src="/assets/logo-navy.png"
+                    src="/assets/logo-myatps.png"
                     alt="MyATPS"
                     width={32}
                     height={32}
@@ -207,25 +213,30 @@ const Navigation = () => {
                         : "16px",
                   }}
                 >
-                  {NAV_LIST.map((item) => (
-                    <motion.div key={item.id} variants={navigationLinkVariants}>
-                      <Link
-                        href={item.link}
-                        className="font-medium text-[#1b0c25] opacity-[0.5] hover:opacity-80 transition-all duration-300 whitespace-nowrap"
-                        style={{
-                          fontSize: isScrolled
-                            ? isTablet
-                              ? "11px"
-                              : "12px"
-                            : isTablet
-                              ? "12px"
-                              : "14px",
-                        }}
-                      >
-                        {item.name}
-                      </Link>
-                    </motion.div>
-                  ))}
+                  {NAV_LIST.map((item) => {
+                    const active = isActive(item.link);
+                    return (
+                      <motion.div key={item.id} variants={navigationLinkVariants}>
+                        <Link
+                          href={item.link}
+                          className={`font-medium text-[#1b0c25] transition-all duration-300 whitespace-nowrap ${
+                            active ? "opacity-100" : "opacity-[0.5] hover:opacity-80"
+                          }`}
+                          style={{
+                            fontSize: isScrolled
+                              ? isTablet
+                                ? "11px"
+                                : "12px"
+                              : isTablet
+                                ? "12px"
+                                : "14px",
+                          }}
+                        >
+                          {item.name}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </motion.div>
                 <motion.div variants={navigationButtonVariants} className="flex items-center gap-2">
                   <LocaleSwitcher variant="desktop" />
@@ -372,17 +383,22 @@ const Navigation = () => {
                 animate="visible"
                 className="flex flex-col gap-[4px] mb-[28px]"
               >
-                {NAV_LIST.map((item) => (
-                  <motion.div key={item.id} variants={mobileMenuItemVariants}>
-                    <Link
-                      href={item.link}
-                      className="text-[16px] sm:text-[17px] font-medium text-[#1b0c25] opacity-50 hover:opacity-80 py-[10px] transition-opacity block"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
+                {NAV_LIST.map((item) => {
+                  const active = isActive(item.link);
+                  return (
+                    <motion.div key={item.id} variants={mobileMenuItemVariants}>
+                      <Link
+                        href={item.link}
+                        className={`text-[16px] sm:text-[17px] font-medium text-[#1b0c25] py-[10px] transition-all duration-300 block ${
+                          active ? "opacity-100" : "opacity-50 hover:opacity-80"
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
 
               {/* Language switcher — full width above the action buttons

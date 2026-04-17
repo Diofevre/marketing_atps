@@ -1,19 +1,22 @@
-import React from "react";
-
 export default function TitleSection({
   title,
-  className,
+  variant = "dark",
 }: {
   title: string;
   className?: string;
+  variant?: "dark" | "light";
 }) {
+  const isLight = variant === "light";
   return (
-    <div>
-      <p
-        className={`px-[14px] py-[6px] text-[13px] rounded-full border border-[#d37bff] bg-white text-[#1b0c25] font-medium uppercase ${className}`}
+    <div className="flex items-center gap-2">
+      <span
+        className={`w-3 h-3 rounded-sm shrink-0 ${isLight ? "bg-white" : "bg-[#1b0c25]"}`}
+      />
+      <span
+        className={`text-sm font-semibold uppercase tracking-wider ${isLight ? "text-white" : "text-[#1b0c25]"}`}
       >
         {title}
-      </p>
+      </span>
     </div>
   );
 }

@@ -1,9 +1,5 @@
 import { NextResponse } from "next/server";
 import { blogService, newsService } from "@/lib/api";
-import {
-  unwrapBlogArticles,
-  unwrapNewsItems,
-} from "@/lib/api/transformers";
 
 /**
  * IndexNow endpoint — pings IndexNow (Bing, Yandex, Seznam, Naver, Yep…)

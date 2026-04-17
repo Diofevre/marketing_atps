@@ -106,7 +106,10 @@
     "btnStartQuiz": "Lancer un quiz",
     "btnDictionary": "Dictionnaire",
     "btnPracticeExam": "Examen blanc",
-    "aiAssistantAlt": "Assistant IA"
+    "aiAssistantAlt": "Assistant IA",
+    "aircraftAirplaneAlt": "Avion de ligne",
+    "aircraftHelicopterAlt": "Hélicoptère",
+    "aircraftBalloonAlt": "Montgolfière"
   },
   "testimonials": {
     "badge": "Mur d'amour",
@@ -235,33 +238,6 @@
   "homePage": {
     "metaTitle": "MyATPS — La plateforme complète de préparation aux examens ATPL",
     "metaDescription": "Réussissez vos examens ATPL du premier coup avec plus de 20 000 questions, des explications basées sur la recherche, un dictionnaire aéronautique avec modèles 3D, des quiz en direct et un écosystème d'étude complet conçu par des pilotes, pour des pilotes."
-  },
-  "pricingPage": {
-    "metaTitle": "Tarifs MyATPS — Plan gratuit et Premium à 10€/mois sans engagement",
-    "metaDescription": "Parmi les tarifs les plus bas du marché ATPL. Plan Gratuit sans carte bancaire, Premium à 10€/mois sans engagement — résiliable en un clic. Tous les outils pour réussir vos 14 examens ATPL.",
-    "heroEyebrow": "Tarifs",
-    "heroTitle": "Une préparation ATPL accessible à tous les élèves pilotes",
-    "heroSubtitle": "Un plan Gratuit sans carte bancaire. Un plan Premium à 10€/mois sans engagement. Annulation en un clic, aucune surprise.",
-    "breadcrumbHome": "Accueil",
-    "breadcrumbPricing": "Tarifs",
-    "whyTitle": "Pourquoi 10€/mois ?",
-    "whyBody1": "Un abonnement mensuel bas et sans engagement est le seul modèle qui respecte le rythme d'un élève pilote. Une préparation ATPL dure en général 6 à 12 mois ; vous payez ce que vous utilisez, pas plus, et vous arrêtez le mois où vous passez votre dernier examen.",
-    "whyBody2": "Nous ne facturons pas de frais cachés, pas de frais de résiliation, pas de palier intermédiaire. Un seul plan payant, un seul prix, 10€/mois, pour l'ensemble de la plateforme.",
-    "whyBody3": "Le plan Gratuit, lui, existe pour lever la barrière d'entrée : un élève en cours de sélection ou une école qui évalue le produit doit pouvoir l'essayer sans carte bancaire et sans limite de temps.",
-    "compareTitle": "Comment nous nous situons sur le marché",
-    "compareIntro": "La plupart des plateformes de préparation ATPL EASA se positionnent dans les gammes suivantes :",
-    "compareRow1Label": "Prix mensuel typique du marché",
-    "compareRow1Value": "20 € à 35 € / mois",
-    "compareRow2Label": "Engagement typique",
-    "compareRow2Value": "6 à 12 mois",
-    "compareRow3Label": "Plan gratuit sans carte",
-    "compareRow3Value": "Rare — souvent un essai limité à 3–7 jours",
-    "compareRow4Label": "MyATPS",
-    "compareRow4Value": "10 €/mois, sans engagement, + plan Gratuit permanent sans carte bancaire",
-    "compareNote": "Les tarifs des concurrents sont ceux publiquement affichés sur leurs sites au moment de la rédaction. Nous mettons cette page à jour régulièrement.",
-    "finalCtaTitle": "Prêt·e à commencer ?",
-    "finalCtaSubtitle": "Créez votre compte gratuit en moins d'une minute. Aucune carte bancaire, aucune surprise.",
-    "finalCtaButton": "Commencer gratuitement"
   },
   "contactPage": {
     "title": "Contactez-nous",
@@ -508,9 +484,15 @@
     "metaDescription": "Procteo garantit l'intégrité des examens grâce à la reconnaissance faciale, l'analyse comportementale et la détection multi-couches. Conçu pour les écoles de pilotage et académies.",
     "heroBadge": "PROCTEO",
     "heroTitle": "Intégrité des examens par IA, conçue pour l'aviation",
-    "heroDescription": "Procteo combine reconnaissance faciale, analyse comportementale et détection multi-couches pour garantir des examens justes et sécurisés — de la vérification d'identité à l'analyse post-examen.",
+    "heroDescription": "Procteo combine reconnaissance faciale continue, analyse comportementale et détection multi-couches pour garantir des examens justes et sécurisés — de la vérification d'identité initiale au monitoring en temps réel jusqu'à l'analyse forensique post-examen. Conçu pour les écoles de pilotage et académies qui ne peuvent pas tolérer la moindre faille d'intégrité.",
     "heroCtaPrimary": "Essayer la démo",
     "heroCtaSecondary": "En savoir plus",
+    "heroStat1Value": "99,8 %",
+    "heroStat1Label": "Précision de détection",
+    "heroStat2Value": "3",
+    "heroStat2Label": "Couches de protection",
+    "heroStat3Value": "<1s",
+    "heroStat3Label": "Alertes temps réel",
     "howItWorksBadge": "COMMENT ÇA MARCHE",
     "howItWorksTitle": "Trois couches de protection",
     "howItWorksDescription": "Procteo opère sur trois niveaux simultanément pour une sécurité d'examen complète.",
@@ -522,6 +504,7 @@
     "layer3Description": "Après l'examen, l'IA effectue une revue approfondie de l'enregistrement complet, corrélant les événements et signalant les patterns que l'analyse en temps réel pourrait manquer.",
     "featuresBadge": "CAPACITÉS",
     "featuresTitle": "Ce que Procteo détecte",
+    "featuresDescription": "Chaque signal travaille de concert pour offrir aux surveillants une vue complète de l'intégrité de l'examen — de la vérification d'identité initiale à l'analyse post-session.",
     "feature1Title": "Vérification d'identité",
     "feature1Description": "La correspondance faciale continue garantit que le candidat inscrit est bien celui qui passe l'examen.",
     "feature2Title": "Suivi du regard",
@@ -545,7 +528,8 @@
     "configStrictDescription": "Surveillance multi-couches complète avec analyse hors-ligne approfondie. Requis pour les examens ATPL officiels et les certifications.",
     "ctaTitle": "Voyez Procteo en action",
     "ctaDescription": "Essayez notre démo interactive pour découvrir comment Procteo surveille l'intégrité des examens.",
-    "ctaButton": "Lancer la démo interactive"
+    "ctaButton": "Lancer la démo interactive",
+    "ctaContact": "Ou contactez-nous à"
   },
   "enterpriseDemo": {
     "metaTitle": "Démo Procteo — Essayez la surveillance d'examen par IA",
@@ -646,7 +630,11 @@
     "consentRule6": "Ne couvrez pas et ne bloquez pas la caméra",
     "consentCheckPrivacy": "Je comprends les conditions de confidentialité et consens à la collecte de données pendant cette session démo.",
     "consentCheckRules": "Je comprends les règles de l'examen et m'engage à respecter les directives d'intégrité académique.",
-    "consentStart": "J'accepte — Démarrer l'examen"
+    "consentStart": "J'accepte — Démarrer l'examen",
+    "formTitle": "Démarrer votre session de démo",
+    "formSubtitle": "Entrez votre email pour recevoir le rapport d'analyse complet.",
+    "featureSecurity": "Chiffré & confidentiel",
+    "emailLabel": "Adresse email"
   },
   "common": {
     "getStarted": "Commencer",
@@ -755,5 +743,32 @@
       "c": "QNH de l'aéroport le plus proche",
       "d": "QFE de l'aéroport de départ"
     }
+  },
+  "pricingPage": {
+    "metaTitle": "Tarifs MyATPS — Plan gratuit et Premium à 10€/mois sans engagement",
+    "metaDescription": "Parmi les tarifs les plus bas du marché ATPL. Plan Gratuit sans carte bancaire, Premium à 10€/mois sans engagement — résiliable en un clic. Tous les outils pour réussir vos 14 examens ATPL.",
+    "heroEyebrow": "Tarifs",
+    "heroTitle": "Une préparation ATPL accessible à tous les élèves pilotes",
+    "heroSubtitle": "Un plan Gratuit sans carte bancaire. Un plan Premium à 10€/mois sans engagement. Annulation en un clic, aucune surprise.",
+    "breadcrumbHome": "Accueil",
+    "breadcrumbPricing": "Tarifs",
+    "whyTitle": "Pourquoi 10€/mois ?",
+    "whyBody1": "Un abonnement mensuel bas et sans engagement est le seul modèle qui respecte le rythme d'un élève pilote. Une préparation ATPL dure en général 6 à 12 mois ; vous payez ce que vous utilisez, pas plus, et vous arrêtez le mois où vous passez votre dernier examen.",
+    "whyBody2": "Nous ne facturons pas de frais cachés, pas de frais de résiliation, pas de palier intermédiaire. Un seul plan payant, un seul prix, 10€/mois, pour l'ensemble de la plateforme.",
+    "whyBody3": "Le plan Gratuit, lui, existe pour lever la barrière d'entrée : un élève en cours de sélection ou une école qui évalue le produit doit pouvoir l'essayer sans carte bancaire et sans limite de temps.",
+    "compareTitle": "Comment nous nous situons sur le marché",
+    "compareIntro": "La plupart des plateformes de préparation ATPL EASA se positionnent dans les gammes suivantes :",
+    "compareRow1Label": "Prix mensuel typique du marché",
+    "compareRow1Value": "20 € à 35 € / mois",
+    "compareRow2Label": "Engagement typique",
+    "compareRow2Value": "6 à 12 mois",
+    "compareRow3Label": "Plan gratuit sans carte",
+    "compareRow3Value": "Rare — souvent un essai limité à 3–7 jours",
+    "compareRow4Label": "MyATPS",
+    "compareRow4Value": "10 €/mois, sans engagement, + plan Gratuit permanent sans carte bancaire",
+    "compareNote": "Les tarifs des concurrents sont ceux publiquement affichés sur leurs sites au moment de la rédaction. Nous mettons cette page à jour régulièrement.",
+    "finalCtaTitle": "Prêt·e à commencer ?",
+    "finalCtaSubtitle": "Créez votre compte gratuit en moins d'une minute. Aucune carte bancaire, aucune surprise.",
+    "finalCtaButton": "Commencer gratuitement"
   }
 }

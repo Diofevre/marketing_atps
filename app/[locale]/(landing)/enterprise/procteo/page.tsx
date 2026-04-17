@@ -4,6 +4,7 @@ import ProcteoHero from "@/components/sections/enterprise/ProcteoHero";
 import ProcteoLayers from "@/components/sections/enterprise/ProcteoLayers";
 import ProcteoCapabilities from "@/components/sections/enterprise/ProcteoCapabilities";
 import ProcteoConfig from "@/components/sections/enterprise/ProcteoConfig";
+import ProcteoCTA from "@/components/sections/enterprise/ProcteoCTA";
 
 export async function generateMetadata({
   params,
@@ -42,6 +43,7 @@ export default function ProcteoPage() {
       <ProcteoLayers />
       <ProcteoCapabilities />
       <ProcteoConfig />
+      <ProcteoCTA />
     </>
   );
 }

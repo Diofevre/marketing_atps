@@ -106,7 +106,10 @@
     "btnStartQuiz": "Start Quiz",
     "btnDictionary": "Dictionary",
     "btnPracticeExam": "Practice Exam",
-    "aiAssistantAlt": "AI Assistant"
+    "aiAssistantAlt": "AI Assistant",
+    "aircraftAirplaneAlt": "Airliner",
+    "aircraftHelicopterAlt": "Helicopter",
+    "aircraftBalloonAlt": "Hot air balloon"
   },
   "testimonials": {
     "badge": "Wall of Love",
@@ -235,33 +238,6 @@
   "homePage": {
     "metaTitle": "MyATPS — The Complete ATPL Exam Preparation Platform",
     "metaDescription": "Pass your ATPL exams on the first try with 20,000+ questions, research-based explanations, an aviation dictionary with 3D models, live quizzes, and a complete study ecosystem built by pilots, for pilots."
-  },
-  "pricingPage": {
-    "metaTitle": "MyATPS Pricing — Free plan and Premium at €10/month with no commitment",
-    "metaDescription": "Among the lowest prices in the ATPL market. Free plan with no credit card, Premium at €10/month with no commitment — one-click cancellation. Every tool you need to pass your 14 ATPL exams.",
-    "heroEyebrow": "Pricing",
-    "heroTitle": "ATPL preparation accessible to every student pilot",
-    "heroSubtitle": "A Free plan with no credit card. A Premium plan at €10/month with no commitment. One-click cancellation, no surprises.",
-    "breadcrumbHome": "Home",
-    "breadcrumbPricing": "Pricing",
-    "whyTitle": "Why €10/month?",
-    "whyBody1": "A low, no-commitment monthly subscription is the only model that fits the rhythm of a student pilot. ATPL preparation usually lasts 6 to 12 months; you pay for what you use, nothing more, and you stop the month you sit your last exam.",
-    "whyBody2": "No hidden fees, no cancellation fees, no upsell tiers. One paid plan, one price, €10/month, for the full platform.",
-    "whyBody3": "The Free plan exists to remove the barrier to entry: a student going through selection or a school evaluating the product should be able to try it without a credit card and without a time limit.",
-    "compareTitle": "How we compare on the market",
-    "compareIntro": "Most EASA ATPL preparation platforms sit in the following ranges:",
-    "compareRow1Label": "Typical monthly market price",
-    "compareRow1Value": "€20 to €35 / month",
-    "compareRow2Label": "Typical commitment",
-    "compareRow2Value": "6 to 12 months",
-    "compareRow3Label": "Free plan without a credit card",
-    "compareRow3Value": "Rare — usually a limited 3–7 day trial",
-    "compareRow4Label": "MyATPS",
-    "compareRow4Value": "€10/month, no commitment, + permanent Free plan with no credit card",
-    "compareNote": "Competitor pricing reflects the figures publicly listed on their sites at the time of writing. We refresh this page regularly.",
-    "finalCtaTitle": "Ready to get started?",
-    "finalCtaSubtitle": "Create your free account in under a minute. No credit card, no surprises.",
-    "finalCtaButton": "Start for free"
   },
   "contactPage": {
     "title": "Contact us",
@@ -508,9 +484,15 @@
     "metaDescription": "Procteo ensures exam integrity with facial recognition, behavioral analysis, and multi-layer fraud detection. Built for flight schools and aviation academies.",
     "heroBadge": "PROCTEO",
     "heroTitle": "AI-powered exam integrity, built for aviation",
-    "heroDescription": "Procteo combines facial recognition, behavioral analysis, and multi-layer detection to ensure fair and secure examinations — from identity verification to post-exam analysis.",
+    "heroDescription": "Procteo combines continuous facial recognition, behavioral analysis, and multi-layer fraud detection to ensure fair and secure examinations — from initial identity verification through live session monitoring to post-exam forensic review. Built for flight schools and aviation academies that can't afford integrity failures.",
     "heroCtaPrimary": "Try the Demo",
     "heroCtaSecondary": "Learn More",
+    "heroStat1Value": "99.8%",
+    "heroStat1Label": "Detection accuracy",
+    "heroStat2Value": "3",
+    "heroStat2Label": "Protection layers",
+    "heroStat3Value": "<1s",
+    "heroStat3Label": "Real-time alerts",
     "howItWorksBadge": "HOW IT WORKS",
     "howItWorksTitle": "Three layers of protection",
     "howItWorksDescription": "Procteo operates on three levels simultaneously for comprehensive exam security.",
@@ -522,6 +504,7 @@
     "layer3Description": "After the exam, AI performs a thorough review of the full recording, correlating events and flagging patterns that real-time analysis might miss.",
     "featuresBadge": "CAPABILITIES",
     "featuresTitle": "What Procteo detects",
+    "featuresDescription": "Every signal works together to give proctors a complete picture of exam integrity — from initial identity checks to post-session forensic review.",
     "feature1Title": "Identity Verification",
     "feature1Description": "Continuous face matching ensures the registered candidate is the one taking the exam.",
     "feature2Title": "Gaze Tracking",
@@ -545,7 +528,8 @@
     "configStrictDescription": "Full multi-layer monitoring with offline deep analysis. Required for official ATPL mock exams and certifications.",
     "ctaTitle": "See Procteo in action",
     "ctaDescription": "Try our interactive demo to experience how Procteo monitors exam integrity.",
-    "ctaButton": "Launch Interactive Demo"
+    "ctaButton": "Launch Interactive Demo",
+    "ctaContact": "Or reach out at"
   },
   "enterpriseDemo": {
     "metaTitle": "Procteo Demo — Try AI Exam Proctoring",
@@ -646,7 +630,11 @@
     "consentRule6": "Do not cover or block the camera",
     "consentCheckPrivacy": "I understand the privacy terms and consent to data collection during this demo session.",
     "consentCheckRules": "I understand the exam rules and will follow the academic integrity guidelines.",
-    "consentStart": "I agree — Start the exam"
+    "consentStart": "I agree — Start the exam",
+    "formTitle": "Start your demo session",
+    "formSubtitle": "Enter your email to receive the full analysis report.",
+    "featureSecurity": "Encrypted & private",
+    "emailLabel": "Email address"
   },
   "common": {
     "getStarted": "Get Started",
@@ -755,5 +743,32 @@
       "c": "QNH of the nearest airport",
       "d": "QFE of the departure airport"
     }
+  },
+  "pricingPage": {
+    "metaTitle": "MyATPS Pricing — Free plan and Premium at €10/month with no commitment",
+    "metaDescription": "Among the lowest prices in the ATPL market. Free plan with no credit card, Premium at €10/month with no commitment — one-click cancellation. Every tool you need to pass your 14 ATPL exams.",
+    "heroEyebrow": "Pricing",
+    "heroTitle": "ATPL preparation accessible to every student pilot",
+    "heroSubtitle": "A Free plan with no credit card. A Premium plan at €10/month with no commitment. One-click cancellation, no surprises.",
+    "breadcrumbHome": "Home",
+    "breadcrumbPricing": "Pricing",
+    "whyTitle": "Why €10/month?",
+    "whyBody1": "A low, no-commitment monthly subscription is the only model that fits the rhythm of a student pilot. ATPL preparation usually lasts 6 to 12 months; you pay for what you use, nothing more, and you stop the month you sit your last exam.",
+    "whyBody2": "No hidden fees, no cancellation fees, no upsell tiers. One paid plan, one price, €10/month, for the full platform.",
+    "whyBody3": "The Free plan exists to remove the barrier to entry: a student going through selection or a school evaluating the product should be able to try it without a credit card and without a time limit.",
+    "compareTitle": "How we compare on the market",
+    "compareIntro": "Most EASA ATPL preparation platforms sit in the following ranges:",
+    "compareRow1Label": "Typical monthly market price",
+    "compareRow1Value": "€20 to €35 / month",
+    "compareRow2Label": "Typical commitment",
+    "compareRow2Value": "6 to 12 months",
+    "compareRow3Label": "Free plan without a credit card",
+    "compareRow3Value": "Rare — usually a limited 3–7 day trial",
+    "compareRow4Label": "MyATPS",
+    "compareRow4Value": "€10/month, no commitment, + permanent Free plan with no credit card",
+    "compareNote": "Competitor pricing reflects the figures publicly listed on their sites at the time of writing. We refresh this page regularly.",
+    "finalCtaTitle": "Ready to get started?",
+    "finalCtaSubtitle": "Create your free account in under a minute. No credit card, no surprises.",
+    "finalCtaButton": "Start for free"
   }
 }

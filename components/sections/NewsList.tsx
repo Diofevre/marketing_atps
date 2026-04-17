@@ -71,8 +71,13 @@ export default function NewsList({
     const response = await newsService.getNews(queryParams);
 
     if (response.error) {
-      setError(response.error.message);
-      setNews([]);
+      // See BlogList.tsx for rationale — NO_API_URL degrades silently to empty state.
+      if (response.error.code === "NO_API_URL") {
+        setNews([]);
+      } else {
+        setError(response.error.message);
+        setNews([]);
+      }
     } else if (response.data) {
       const transformed = transformNewsItems(response.data.news || []);
       setNews(transformed);
@@ -82,7 +87,7 @@ export default function NewsList({
     }
 
     setLoading(false);
-  }, [selectedCategory, locale]);
+  }, [selectedCategory, locale, ALL_CAT]);
 
   const fetchCategories = useCallback(async () => {
     const response = await newsService.getCategories();
@@ -92,10 +97,11 @@ export default function NewsList({
       );
       setCategories([ALL_CAT, ...names]);
     }
-  }, []);
+  }, [ALL_CAT]);
 
   useEffect(() => {
     // Categories aren't part of the SSR payload — fetch them client-side once.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!initialCategories) fetchCategories();
   }, [fetchCategories, initialCategories]);
 
@@ -104,6 +110,7 @@ export default function NewsList({
       skipNextFetch.current = false;
       return;
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchNews({ page: 1 });
   }, [selectedCategory, locale, fetchNews]);
 

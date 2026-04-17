@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Link } from "@/i18n/navigation";
 import { FadeInUp } from "@/lib/motion";
 import RelatedNews from "@/components/sections/RelatedNews";
 import NewsSidebar from "@/components/sections/NewsSidebar";
@@ -130,12 +129,10 @@ export default async function NewsDetail({ params }: PageProps) {
     <div>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(newsJsonLd) }}
       />
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <div className="w-full bg-[#121212] relative min-h-[400px] flex items-end pb-12 pt-32">

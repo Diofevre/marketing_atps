@@ -174,6 +174,7 @@ export default function DemoPlaceholder() {
   const startActiveSession = () => {
     setState("active");
     setEvents([]);
+    // eslint-disable-next-line react-hooks/purity
     startTimeRef.current = Date.now();
     setElapsedMs(0);
 

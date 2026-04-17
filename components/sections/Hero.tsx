@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { ButtonDemoBlur } from "../ButtonDemo";
 import { Button } from "../ui/button";
@@ -15,6 +15,7 @@ import {
   heroButtonVariants,
   heroCardVariants,
 } from "@/lib/motion";
+import { HotAirBalloon } from "../illustrations/HeroAircrafts";
 
 function TypingIndicator() {
   return (
@@ -132,23 +133,47 @@ function ChatMessage({ message, type, delay }: { message: string; type: string; 
   );
 }
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.myatps.com";
+
 export default function Hero() {
   const t = useTranslations("hero");
+  const [query, setQuery] = useState("");
+
+  const goToApp = useCallback((path: string, q?: string) => {
+    const url = new URL(path, APP_URL);
+    if (q) url.searchParams.set("q", q);
+    window.open(url.toString(), "_blank", "noopener,noreferrer");
+  }, []);
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    goToApp("/", query.trim());
+  }, [goToApp, query]);
+
   // Split the full localized title into words so each animates in separately.
   // Using the full localized string (instead of a hardcoded English array)
   // means the animation works identically in French.
   const titleWords = t("titleFull").split(" ");
+
+  const TYPING_SPEED_MS = 20; // ms per character
+  const chatAi1Text = t("chatAi1");
+  // Message 2 (AI) becomes visible at delay+1s, then types at TYPING_SPEED_MS/char
+  const ai1VisibleAt = 2 + 1; // delay=2 → visible at 3s
+  const ai1TypeDuration = (chatAi1Text.length * TYPING_SPEED_MS) / 1000;
+  // Message 3 starts only after message 2 finishes typing + small buffer
+  const msg3Delay = ai1VisibleAt + ai1TypeDuration + 0.4;
+
   const CHAT_MESSAGES = [
     { id: 1, type: "user", message: t("chatUser1"), delay: 0.5 },
-    { id: 2, type: "ai", message: t("chatAi1"), delay: 2 },
-    { id: 3, type: "user", message: t("chatUser2"), delay: 4 },
+    { id: 2, type: "ai", message: chatAi1Text, delay: 2 },
+    { id: 3, type: "user", message: t("chatUser2"), delay: msg3Delay },
   ];
 
   return (
     <div className="w-full pb-0 px-4">
       <div className="min-h-[800px] lg:h-[1236px] bg-[url('/images/bgHero.png')] bg-cover bg-center rounded-2xl overflow-hidden relative">
         
-        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-16 lg:pt-[160px] h-full">
+        <div className="relative z-10 flex flex-col gap-8 lg:gap-[60px] px-4 sm:px-6 lg:px-0 pt-28 lg:pt-[160px] h-full">
           <Container className="flex flex-col gap-6 lg:gap-[40px]">
             <div className="flex flex-col gap-4 lg:gap-[24px]">
               <div className="flex flex-col items-start gap-4 lg:gap-[24px]">
@@ -210,26 +235,59 @@ export default function Hero() {
               animate="visible"
               className="flex-1 flex items-end justify-center w-full border border-[#1b0c25]/10 border-b-0 relative rounded-tl-[20px] sm:rounded-tl-[30px] lg:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[30px] lg:rounded-tr-[40px] rounded-b-none backdrop-blur-[10px] bg-[linear-gradient(180deg,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.6)_100%)] overflow-hidden"
             >
-              {/* Decorative Elements - Hidden on mobile/tablet */}
+              {/* Hot air balloon — large, pink, top-right (slow float + gentle sway) */}
               <motion.div
-                className="hidden lg:block absolute w-[209px] h-[210px] bg-[url('/images/scare1.png')] top-[37.98px] right-[79px]"
-                animate={{ y: [0, -8, 0], rotate: [0, 1, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
+                className="hidden lg:block absolute top-[30px] right-[70px]"
+                style={{ originX: "50%", originY: "20%" }}
+                animate={{
+                  y: [0, -18, -6, 0],
+                  x: [0, 6, 2, 0],
+                  rotate: [-2, 2, 0, -2],
                 }}
-              />
+                transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <HotAirBalloon
+                  variant="pink"
+                  aria-label={t("aircraftBalloonAlt")}
+                  className="w-[175px] h-auto"
+                />
+              </motion.div>
+
+              {/* Hot air balloon — medium, violet, bottom-left (deeper float, different phase) */}
               <motion.div
-                className="hidden lg:block absolute w-[159px] h-[138px] bg-[url('/images/scare2.png')] top-[311.98px] left-[135px]"
-                animate={{ y: [0, 6, 0], x: [0, -4, 0] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.5,
+                className="hidden lg:block absolute bottom-[160px] left-[90px]"
+                style={{ originX: "50%", originY: "20%" }}
+                animate={{
+                  y: [0, -14, -4, 0],
+                  x: [0, -5, -2, 0],
+                  rotate: [1.5, -1.5, 0, 1.5],
                 }}
-              />
+                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
+              >
+                <HotAirBalloon
+                  variant="violet"
+                  aria-label={t("aircraftBalloonAlt")}
+                  className="w-[145px] h-auto"
+                />
+              </motion.div>
+
+              {/* Hot air balloon — small, peach, top-left (quicker drift, subtle) */}
+              <motion.div
+                className="hidden lg:block absolute top-[60px] left-[240px]"
+                style={{ originX: "50%", originY: "20%" }}
+                animate={{
+                  y: [0, -10, -3, 0],
+                  x: [0, 8, 3, 0],
+                  rotate: [-1, 1.2, 0, -1],
+                }}
+                transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+              >
+                <HotAirBalloon
+                  variant="peach"
+                  aria-label={t("aircraftBalloonAlt")}
+                  className="w-[105px] h-auto"
+                />
+              </motion.div>
 
               {/* Content Container */}
               <div className="relative z-10 w-full lg:w-[1140px] h-full px-4 sm:px-6 lg:px-[50px] flex items-end justify-center">
@@ -260,83 +318,55 @@ export default function Hero() {
                   </div>
 
                   {/* Bottom Form Card */}
-                  <div className="w-full sm:w-[540px] lg:w-[640px] px-3 sm:px-4 lg:px-[14px] pt-3 sm:pt-4 lg:pt-[14px] pb-6 sm:pb-8 lg:pb-10 flex flex-col gap-3 sm:gap-4 lg:gap-[14px] border border-[#1b0c25]/10 border-b-0 rounded-t-xl lg:rounded-t-[13px] rounded-b-none backdrop-blur-[25px] bg-white/90 shadow-[0_0_40px_rgba(195,79,150,0.15)]">
-                    {/* Button Group */}
-                    <div className="flex flex-wrap gap-2 sm:gap-[8px]">
-                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c25] hover:bg-transparent">
-                        <Image
-                          src="/assets/icons/gptIcon.png"
-                          alt={t("aiAssistantAlt")}
-                          height={16}
-                          width={16}
-                          className="mr-1"
-                        />
-                        {t("btnAssistant")}
-                        <ChevronDown className="ml-1 text-[#1b0c25] h-3 w-3 sm:h-4 sm:w-4" />
-                      </Button>
-
-                      <Button className="text-[11px] sm:text-[12px] font-medium leading-[14px] rounded-[19px] px-3 sm:px-4 py-2 h-auto sm:h-[34px] bg-white backdrop-blur-[6px] border border-[#f2e8fa] text-[#1b0c25] hover:bg-transparent">
-                        <Globe className="mr-1 h-3 w-3 sm:h-4 sm:w-4" /> {t("btnSearch")}
-                      </Button>
+                  <form
+                    onSubmit={handleSubmit}
+                    className="w-full sm:w-[540px] lg:w-[640px] border border-[#1b0c25]/10 border-b-0 rounded-t-xl lg:rounded-t-[13px] rounded-b-none backdrop-blur-[25px] bg-white/90 shadow-[0_0_40px_rgba(195,79,150,0.15)] overflow-hidden"
+                  >
+                    {/* Input Row */}
+                    <div className="flex items-center gap-3 px-4 lg:px-5 pt-4 lg:pt-5 pb-3">
+                      <Sparkles className="shrink-0 w-4 h-4 text-[#c34f96]/60" />
+                      <Input
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder={t("searchPlaceholder")}
+                        className="flex-1 border-none bg-transparent shadow-none focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 text-sm lg:text-[15px] placeholder:text-[#1b0c25]/50 p-0 h-auto"
+                      />
                     </div>
 
-                    {/* Form */}
-                    <form className="w-full max-w-[612px] flex flex-col gap-3 sm:gap-4">
-                      <Input
-                        placeholder={t("searchPlaceholder")}
-                        className="w-full border-none bg-transparent shadow-none text-sm sm:text-base lg:text-[16px] placeholder:text-sm sm:placeholder:text-base lg:placeholder:text-[16px] placeholder:text-[#1b0c25]/70"
-                      />
+                    {/* Divider */}
+                    <div className="mx-4 lg:mx-5 h-px bg-[#1b0c25]/6" />
 
-                      {/* Action Buttons */}
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-3 sm:gap-4">
-                        <div className="flex flex-wrap gap-2 sm:gap-[8px] items-center">
-                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                {t("btnStartQuiz")}
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                {t("btnStartQuiz")}
-                              </span>
-                            </span>
-                          </Button>
-                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                {t("btnDictionary")}
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                {t("btnDictionary")}
-                              </span>
-                            </span>
-                          </Button>
-                          <Button className="group text-[#1b0c25] text-[11px] sm:text-[12px] leading-[14px] font-medium px-3 sm:px-4 py-1.5 sm:py-2 h-auto sm:h-[30px] rounded-[83px] bg-white hover:bg-white shadow-sm border border-[#f3e9fa] whitespace-nowrap">
-                            <span className="flex flex-col items-center h-[14px] overflow-hidden">
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                {t("btnPracticeExam")}
-                              </span>
-                              <span className="block h-[14px] leading-[14px] transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
-                                {t("btnPracticeExam")}
-                              </span>
-                            </span>
-                          </Button>
+                    {/* Bottom Bar */}
+                    <div className="flex items-center justify-between px-4 lg:px-5 py-3">
+                      {/* Left pills */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f8f0fc] border border-[#f0e0f8] text-[#1b0c25] text-[11px] font-medium">
+                          <Image
+                            src="/assets/icons/gptIcon.png"
+                            alt={t("aiAssistantAlt")}
+                            height={12}
+                            width={12}
+                          />
+                          {t("btnAssistant")}
+                          <ChevronDown className="w-3 h-3 text-[#1b0c25]/50" />
                         </div>
-
-                        {/* Submit Button */}
-                        <div className="self-end sm:self-auto">
-                          <Button className="bg-transparent hover:bg-transparent p-0">
-                            <Image
-                              src="/images/buttonS.png"
-                              alt="Button S"
-                              width={28}
-                              height={28}
-                              className="sm:w-8 sm:h-8"
-                            />
-                          </Button>
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f8f0fc] border border-[#f0e0f8] text-[#1b0c25] text-[11px] font-medium">
+                          <Globe className="w-3 h-3 text-[#1b0c25]/60" />
+                          {t("btnSearch")}
                         </div>
                       </div>
-                    </form>
-                  </div>
+
+                      {/* Submit */}
+                      <Button type="submit" className="bg-transparent hover:bg-transparent p-0 h-auto">
+                        <Image
+                          src="/images/buttonS.png"
+                          alt="Submit"
+                          width={32}
+                          height={32}
+                        />
+                      </Button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </motion.div>

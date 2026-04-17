@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Shield, Video, Mic, Monitor, Clock, Eye, Lock, ArrowRight, AlertTriangle } from "lucide-react";
+import { Shield, Video, Mic, Monitor, Eye, Lock, ArrowRight, AlertTriangle } from "lucide-react";
 import { useState } from "react";
 
 interface DemoConsentProps {
