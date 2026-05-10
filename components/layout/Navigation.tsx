@@ -129,13 +129,19 @@ const Navigation = () => {
       <Container className="h-full flex items-center justify-center">
         <motion.div
           variants={navigationVariants}
-          className="flex items-center justify-center transition-all duration-300 rounded-[14px] backdrop-blur-[3px]"
+          className="flex items-center justify-center transition-all duration-300 rounded-[14px]"
           style={{
             width: getNavWidth(),
             height: getNavHeight(),
             padding: getNavPadding(),
-            background: "rgba(255, 255, 255, 0.95)",
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.06)",
+            background: isScrolled
+              ? "rgba(255, 255, 255, 0.95)"
+              : "transparent",
+            backdropFilter: isScrolled ? "blur(3px)" : "none",
+            WebkitBackdropFilter: isScrolled ? "blur(3px)" : "none",
+            boxShadow: isScrolled
+              ? "0px 2px 8px rgba(0, 0, 0, 0.06)"
+              : "none",
             border: "none",
           }}
         >
@@ -146,16 +152,16 @@ const Navigation = () => {
             }}
           >
             {/* Logo */}
-            <Link href='/'>
+            <Link href='/' className="cursor-pointer">
               <motion.div
                 variants={navigationLogoVariants}
-                className="flex items-center transition-all duration-300 shrink-0"
+                className="flex items-center transition-all duration-300 shrink-0 cursor-pointer"
                 style={{
                   gap: logoSize.gap,
                 }}
               >
-                <div 
-                  className="rounded-[6px] p-1.5 bg-[#1b0c25] flex items-center justify-center transition-all duration-300 shrink-0 overflow-hidden"
+                <div
+                  className="rounded-[6px] p-1.5 bg-black flex items-center justify-center transition-all duration-300 shrink-0 overflow-hidden"
                   style={{
                     height: logoSize.box,
                     width: logoSize.box,
@@ -170,7 +176,7 @@ const Navigation = () => {
                   />
                 </div>
                 <p
-                  className="font-medium text-[#1b0c25] transition-all duration-300 whitespace-nowrap"
+                  className="font-medium text-black transition-all duration-300 whitespace-nowrap"
                   style={{
                     fontSize: logoSize.text,
                     lineHeight: logoSize.text,
@@ -219,8 +225,8 @@ const Navigation = () => {
                       <motion.div key={item.id} variants={navigationLinkVariants}>
                         <Link
                           href={item.link}
-                          className={`font-medium text-[#1b0c25] transition-all duration-300 whitespace-nowrap ${
-                            active ? "opacity-100" : "opacity-[0.5] hover:opacity-80"
+                          className={`font-medium text-black transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                            active ? "opacity-100" : "opacity-[0.65] hover:opacity-100"
                           }`}
                           style={{
                             fontSize: isScrolled
@@ -240,10 +246,14 @@ const Navigation = () => {
                 </motion.div>
                 <motion.div variants={navigationButtonVariants} className="flex items-center gap-2">
                   <LocaleSwitcher variant="desktop" />
-                  <Link href="/contact">
+                  <Link href="/contact" className="cursor-pointer">
                     <Button
                       variant="outline"
-                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] border-[#1b0c25] text-[#1b0c25] hover:bg-[#1b0c25] hover:text-white transition-all duration-300"
+                      className={`group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] transition-all duration-300 cursor-pointer ${
+                        isScrolled
+                          ? "border-[#1b0c25] text-[#1b0c25] hover:bg-[#1b0c25] hover:text-white"
+                          : "bg-black hover:bg-black/90 border-black text-white"
+                      }`}
                       style={{
                         fontSize: isScrolled
                           ? isTablet
@@ -271,9 +281,13 @@ const Navigation = () => {
                       {t("contact")}
                     </Button>
                   </Link>
-                  <Link href={`${APP_URL}/auth/login`} target="_blank">
+                  <Link href={`${APP_URL}/auth/login`} target="_blank" className="cursor-pointer">
                     <Button
-                      className="group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] bg-[#1b0c25] hover:bg-[#1b0c25]/90 shadow-[0_1px_2px_0_rgba(0,0,0,0.1),inset_0_1px_2px_0_rgba(255,255,255,0.4)] transition-all duration-300"
+                      className={`group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] transition-all duration-300 cursor-pointer ${
+                        isScrolled
+                          ? "bg-[#1b0c25] hover:bg-[#1b0c25]/90 text-white shadow-[0_1px_2px_0_rgba(0,0,0,0.1),inset_0_1px_2px_0_rgba(255,255,255,0.4)]"
+                          : "bg-white hover:bg-white/95 text-[#1b0c25] shadow-[0_4px_14px_rgba(0,0,0,0.18)]"
+                      }`}
                       style={{
                         fontSize: isScrolled
                           ? isTablet
@@ -308,14 +322,14 @@ const Navigation = () => {
             {/* Mobile/Tablet Hamburger - Visible uniquement sur mobile et tablette */}
             {(isMobile || isTablet) && (
               <button
-                className="flex items-center justify-center w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] gap-[5px] focus:outline-none"
+                className="flex items-center justify-center w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] gap-[5px] focus:outline-none cursor-pointer"
                 onClick={() => setIsMenuOpen(true)}
                 aria-label={t("openMenu")}
               >
                 <div className="flex flex-col justify-center items-center gap-[5px]">
-                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1b0c25] rounded-full block transition-all duration-300" />
-                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1b0c25] rounded-full block transition-all duration-300" />
-                  <span className="w-[20px] sm:w-[22px] h-[2px] bg-[#1b0c25] rounded-full block transition-all duration-300" />
+                  <span className={`w-[20px] sm:w-[22px] h-[2px] rounded-full block transition-all duration-300 ${isScrolled ? "bg-[#1b0c25]" : "bg-white"}`} />
+                  <span className={`w-[20px] sm:w-[22px] h-[2px] rounded-full block transition-all duration-300 ${isScrolled ? "bg-[#1b0c25]" : "bg-white"}`} />
+                  <span className={`w-[20px] sm:w-[22px] h-[2px] rounded-full block transition-all duration-300 ${isScrolled ? "bg-[#1b0c25]" : "bg-white"}`} />
                 </div>
               </button>
             )}

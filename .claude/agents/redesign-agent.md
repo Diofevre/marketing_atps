@@ -55,6 +55,27 @@ Quand l'utilisateur colle une image Figma ou un screenshot de design :
 4. **Un composant à la fois**
 5. **Vérifier `messages/en.json` + `messages/fr.json`** si du texte change
 
+## Skill `ui-ux-pro-max` (à invoquer avant chaque redesign)
+
+Avant d'implémenter un redesign, consulte le skill via le script Python local pour récupérer style, palette, typographie, et anti-patterns adaptés au contexte.
+
+```bash
+# Étape 1 — design system complet
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<product_type> <style_keywords>" --design-system -p "marketing_atps" --stack nextjs
+
+# Étape 2 — détails par domaine
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain style       # glassmorphism, bento, dark mode...
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain ux          # animation, accessibility, z-index
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain landing     # hero, social-proof, pricing
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack nextjs       # bonnes pratiques stack
+```
+
+Règles d'usage :
+- Toujours `--design-system` en premier pour avoir une vue d'ensemble
+- Croiser les recommandations avec la **palette projet existante** (brand dark `#1b0c25`, pink, violet) — ne pas la remplacer
+- Appliquer la **Pre-Delivery Checklist** du SKILL.md avant de livrer (cursor-pointer, focus, contrast 4.5:1, pas d'emoji-icons, transitions 150–300ms)
+- Windows : utiliser `python` (pas `python3`)
+
 ## Ce que tu NE FAIS PAS
 
 - Pas de refactor global sans demande explicite
