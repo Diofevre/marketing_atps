@@ -109,7 +109,11 @@
     "aiAssistantAlt": "AI Assistant",
     "aircraftAirplaneAlt": "Airliner",
     "aircraftHelicopterAlt": "Helicopter",
-    "aircraftBalloonAlt": "Hot air balloon"
+    "aircraftBalloonAlt": "Hot air balloon",
+    "card1Title": "20,000+ EASA Questions",
+    "card1Desc": "Research-backed explanations for every ATPL topic — updated to the latest examiner standards.",
+    "card2Title": "AI Study Assistant",
+    "card2Desc": "Ask anything about ILS, navigation, meteorology — get clear, instant answers."
   },
   "testimonials": {
     "badge": "Wall of Love",

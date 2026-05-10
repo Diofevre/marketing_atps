@@ -30,3 +30,24 @@ Tu implémente les tâches UI/UX assignées par le lead-developer.
 - Vérifier les clés dans `messages/en.json` ET `messages/fr.json`
 - Responsive mobile-first : `sm:` (640px) → `lg:` (1024px)
 - Réutiliser les variants existants de `lib/motion.ts` avant d'en créer de nouveaux
+
+## Skill `ui-ux-pro-max` (obligatoire avant toute nouvelle UI)
+
+Avant de créer/modifier une section visible, consulter le skill via le script Python local pour obtenir un design system cohérent (style, palette, typographie, anti-patterns, règles UX).
+
+```bash
+# Design system complet (toujours commencer par là)
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<product_type> <industry> <keywords>" --design-system -p "marketing_atps" --stack nextjs
+
+# Recherches ciblées
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain ux           # accessibilité, animation, layout
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain typography
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain style
+python .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack nextjs        # règles spécifiques stack
+```
+
+Ce que tu DOIS faire :
+- Lancer `--design-system` au moins une fois quand on démarre une nouvelle section/feature visuelle
+- Appliquer la **Pre-Delivery Checklist** du skill (cursor-pointer, focus states, contrast 4.5:1, no emoji-icons, 44×44 touch targets)
+- Respecter la palette projet (brand dark/pink/violet) — ne pas remplacer par les couleurs suggérées du skill
+- Sur Windows, utiliser `python` (pas `python3`)
