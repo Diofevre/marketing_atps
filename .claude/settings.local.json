@@ -36,7 +36,11 @@
       "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets3.lottiefiles.com/packages/lf20_3vbOcw.json\" -w \"URL_D: HTTP %{http_code} size=%{size_download}\\\\n\" -o /tmp/d.json)",
       "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets10.lottiefiles.com/private_files/lf30_y9czxcb9.json\" -w \"URL_E: HTTP %{http_code} size=%{size_download}\\\\n\" -o /tmp/e.json)",
       "Skill(update-config)",
-      "Bash(python *)"
+      "Bash(python *)",
+      "Bash(git rm *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git switch *)"
     ],
     "defaultMode": "bypassPermissions"
   }
