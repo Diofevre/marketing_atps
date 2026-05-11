@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo *)",
+      "PowerShell(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "PowerShell(npm *)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(uipro init *)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py --help)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"saas marketing landing dark glassmorphism\" --design-system -p \"marketing_atps\" --stack nextjs)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"aviation pilots flight training cockpit aerospace\" --design-system -p \"marketing_atps\" --stack nextjs -f markdown)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"aviation pilot training\" --domain product -n 5)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"aerospace technical professional dark\" --domain style -n 5)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"aviation aerospace flight\" --domain color -n 5)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} in %{time_total}s\\\\n\" http://localhost:3000/en)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} in %{time_total}s\\\\n\" http://localhost:3000/fr)",
+      "Bash(curl -s http://localhost:3000/fr)",
+      "Bash(taskkill //PID 21020 //F)",
+      "Bash(taskkill /PID 21020 /F)",
+      "WebSearch",
+      "WebFetch(domain:lottiefiles.com)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" -o /tmp/test.json \"https://assets10.lottiefiles.com/packages/lf20_2znxgjyt.json\" -w \"URL1: HTTP %{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" -o /tmp/test.json \"https://assets1.lottiefiles.com/packages/lf20_M9p23l.json\" -w \"URL2: HTTP %{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" -o /tmp/test.json \"https://assets10.lottiefiles.com/packages/lf20_5fszbaag.json\" -w \"URL3: HTTP %{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets10.lottiefiles.com/packages/lf20_2znxgjyt.json\")",
+      "Bash(python -c \"import json, sys; d=json.load\\(sys.stdin\\); print\\('NAME:', d.get\\('nm'\\)\\); print\\('FR:', d.get\\('fr'\\)\\); print\\('IP/OP:', d.get\\('ip'\\), d.get\\('op'\\)\\); print\\('W/H:', d.get\\('w'\\), d.get\\('h'\\)\\); print\\('LAYERS:', len\\(d.get\\('layers',[]\\)\\)\\); print\\('LAYER NAMES:', [l.get\\('nm','?'\\) for l in d.get\\('layers',[]\\)][:10]\\)\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets1.lottiefiles.com/packages/lf20_M9p23l.json\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://lottie.host/4f4ee78e-1c08-4f15-9087-4e8f01f51d54/Vc8tSFIBIc.json\" -w \"URL_A: HTTP %{http_code} size=%{size_download}\\\\n\" -o /tmp/a.json)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets3.lottiefiles.com/packages/lf20_kf6arrqu.json\" -w \"URL_B: HTTP %{http_code} size=%{size_download}\\\\n\" -o /tmp/b.json)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets9.lottiefiles.com/packages/lf20_jbrw3hcz.json\" -w \"URL_C: HTTP %{http_code} size=%{size_download}\\\\n\" -o /tmp/c.json)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets3.lottiefiles.com/packages/lf20_3vbOcw.json\" -w \"URL_D: HTTP %{http_code} size=%{size_download}\\\\n\" -o /tmp/d.json)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://assets10.lottiefiles.com/private_files/lf30_y9czxcb9.json\" -w \"URL_E: HTTP %{http_code} size=%{size_download}\\\\n\" -o /tmp/e.json)",
+      "Skill(update-config)",
+      "Bash(python *)"
+    ],
+    "defaultMode": "bypassPermissions"
+  }
+}
