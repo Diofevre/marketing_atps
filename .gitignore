@@ -40,3 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# python (skill scripts)
+__pycache__/
+*.pyc
+*.pyo
+
+# claude local settings
+.claude/settings.local.json

@@ -252,7 +252,7 @@ const Navigation = () => {
                       className={`group font-medium rounded-[8px] p-[6px] backdrop-blur-[6px] transition-all duration-300 cursor-pointer ${
                         isScrolled
                           ? "border-[#1b0c25] text-[#1b0c25] hover:bg-[#1b0c25] hover:text-white"
-                          : "bg-black hover:bg-black/90 border-black text-white"
+                          : "bg-black border-black text-white hover:bg-black/90 hover:text-white"
                       }`}
                       style={{
                         fontSize: isScrolled
