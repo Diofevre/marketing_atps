@@ -151,6 +151,14 @@ export default async function AtplQuestionsHub({
           <div className="space-y-4 text-[#1b0c25]/80 leading-relaxed">
             <p>{t("hubBody1")}</p>
             <p>{t("hubBody2")}</p>
+            <p>
+              <Link
+                href="/atpl-exam-guide"
+                className="font-medium text-[#c34f96] hover:underline"
+              >
+                {t("guideLink")}
+              </Link>
+            </p>
           </div>
         </Container>
       </section>

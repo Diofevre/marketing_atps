@@ -49,6 +49,7 @@ const STATIC_PATHS: Array<{
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/pricing", changeFrequency: "weekly", priority: 0.9 },
   { path: "/atpl-questions", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/atpl-exam-guide", changeFrequency: "monthly", priority: 0.8 },
   { path: "/blog", changeFrequency: "daily", priority: 0.8 },
   { path: "/news", changeFrequency: "daily", priority: 0.8 },
   { path: "/enterprise", changeFrequency: "monthly", priority: 0.9 },
