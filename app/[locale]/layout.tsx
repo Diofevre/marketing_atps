@@ -211,12 +211,6 @@ export default async function LocaleLayout({
                   },
                 },
               ],
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.9",
-                ratingCount: "2000",
-                bestRating: "5",
-              },
               featureList: [
                 tSchema("featureQuestions"),
                 tSchema("featureExplanations"),
