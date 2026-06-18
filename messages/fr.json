@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "titleDefault": "MyATPS — Préparation ATPL conçue par des élèves pilotes. 10€/mois, sans engagement",
+    "titleDefault": "Banque de questions ATPL gratuite — 20 000+ questions EASA | MyATPS",
     "titleTemplate": "%s | MyATPS",
-    "description": "La plateforme de préparation ATPL conçue par des élèves pilotes, pour des élèves pilotes. 20 000+ questions expliquées, dictionnaire 3D, quiz en direct et assistant IA. Plan gratuit sans carte bancaire ; Premium à 10€/mois sans engagement — parmi les tarifs les plus bas du marché EASA.",
-    "ogDescription": "Plus de 20 000 questions, explications basées sur la recherche, dictionnaire 3D et quiz en direct. Plan gratuit + Premium à 10€/mois sans engagement — parmi les tarifs les plus bas du marché ATPL.",
-    "twitterDescription": "Plus de 20 000 questions, explications basées sur la recherche, dictionnaire 3D et quiz en direct. Plan gratuit + Premium à 10€/mois sans engagement.",
+    "description": "Banque de questions ATPL gratuite : 20 000+ questions expliquées, dictionnaire 3D, quiz en direct et assistant IA — sans carte bancaire. Premium optionnel à 10€/mois sans engagement, parmi les tarifs les plus bas du marché EASA.",
+    "ogDescription": "Banque de questions ATPL gratuite — 20 000+ questions expliquées, dictionnaire 3D et quiz en direct. Premium optionnel à 10€/mois sans engagement, parmi les tarifs les plus bas du marché ATPL.",
+    "twitterDescription": "Banque de questions ATPL gratuite : 20 000+ questions expliquées, dictionnaire 3D et quiz en direct. Premium à 10€/mois sans engagement.",
     "ogLocale": "fr_FR"
   },
   "schema": {
