@@ -238,7 +238,15 @@ export default async function LocaleLayout({
               url: SITE_URL,
               logo: `${SITE_URL}/assets/logo-myatps.png`,
               description: tSchema("description"),
-              sameAs: [],
+              // sameAs links MyATPS's official social profiles to the brand
+              // entity so Google can associate them (knowledge panel / brand
+              // SERP). Keep in sync with the footer social links.
+              sameAs: [
+                "https://www.linkedin.com/company/myatps",
+                "https://x.com/myatps",
+                "https://www.instagram.com/myatps",
+                "https://www.facebook.com/myatps",
+              ],
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: tSchema("contactType"),
