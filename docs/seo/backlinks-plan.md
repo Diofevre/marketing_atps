@@ -97,6 +97,35 @@ Créer les comptes et soumettre (Product Hunt, G2, Crunchbase…) demande un ema
 validation propriétaire. Je fournis les textes ; tu soumets. Dis-moi si tu veux
 que je priorise une liste « top 5 à faire ce week-end ».
 
+## Rythme & volume (velocity) — ce qui se fait flaguer ou non
+
+**Ce n'est pas le nombre qui compte, c'est le naturel.** Google ne pénalise pas
+« 50 » vs « 800 » liens en soi. Il détecte les **patterns anormaux** :
+- **Pic soudain** : un site qui passe de ~0 à 800 liens en une semaine = signal artificiel. Les mêmes 800 liens gagnés sur 12 mois = parfaitement normal.
+- **Basse qualité / footprint** : beaucoup de liens depuis des domaines spammy, même IP, même template, ou créés par un outil automatique.
+- **Sur-optimisation de l'ancre** : 800 liens avec exactement « banque de questions ATPL gratuite » comme texte → suspect. Il faut **varier l'ancre** (marque « MyATPS », URL nue, phrases naturelles « cette banque de questions », « voir ici »).
+- **Non-pertinence** : liens depuis des sites sans rapport avec l'aviation/l'éducation.
+
+**Donc :**
+- 50 liens **de qualité, étalés sur des semaines** = aucun risque, c'est l'objectif.
+- 800 liens **de mauvaise qualité d'un coup** = drapeau rouge.
+- 800 liens **réellement gagnés sur le temps** = excellent, mais à ton échelle irréaliste à court terme.
+
+**Réalité du terrain** : le plafond de *bonnes* sources gratuites (annuaires + profils +
+communautés) tourne autour de **30 à 60 liens** légitimes. Au-delà, on tombe
+forcément dans le low-quality (la zone toxique). Donc viser 800 te pousserait
+mécaniquement vers le spam — inutile et risqué.
+
+### Cadence recommandée pour MyATPS
+- **1 à 3 liens de qualité par jour**, OU **10–20 par mois**. C'est largement suffisant et 100 % sûr.
+- « **Un backlink par jour** » est une très bonne règle : régulier, naturel, jamais de pic.
+- Ordre : Tier 1 (annuaires/profils) d'abord, puis Tier 2 (communautés) au fil de ta participation réelle, puis Tier 3 (écoles/articles) en continu.
+- Varie les **ancres** et les **pages cibles** (home, /atpl-questions, pages matières, /atpl-exam-guide) — ne pointe pas tout vers la home.
+
+### Si un jour de mauvais liens apparaissent
+Google fournit l'outil **Disavow** (Search Console) pour désavouer des liens
+toxiques. À ne pas utiliser à la légère, mais c'est le filet de sécurité.
+
 ## Mesure
 Une fois les liens posés, suivre dans GSC (Liens > Liens externes) + l'évolution
 des positions sur `/atpl-questions/*`. Compter ~4-8 semaines pour l'effet.
