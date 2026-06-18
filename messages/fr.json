@@ -247,7 +247,7 @@
     "comparisonNote": "La plupart des plateformes ATPL facturent entre 20€ et 35€ par mois, souvent avec engagement sur 6 à 12 mois. MyATPS reste à 10€/mois, sans engagement — annulable en un clic depuis votre compte."
   },
   "atplQuestions": {
-    "hubMetaTitle": "Questions ATPL gratuites par matière — Les 14 matières EASA | MyATPS",
+    "hubMetaTitle": "Questions ATPL gratuites par matière — Les 14 matières EASA",
     "hubMetaDescription": "Entraînez-vous gratuitement aux questions ATPL sur les 14 matières EASA — Droit aérien, Météorologie, Navigation, Performances et plus. Des milliers de questions type examen avec explications. Gratuit pour commencer, sans carte bancaire.",
     "breadcrumbHome": "Accueil",
     "breadcrumbHub": "Questions ATPL",
@@ -261,7 +261,7 @@
     "ctaTitle": "Prêt à démarrer votre prépa ATPL ?",
     "ctaSubtitle": "Créez un compte gratuit — sans carte bancaire, sans engagement.",
     "ctaButton": "Commencer gratuitement",
-    "subjectMetaTitle": "{name} ATPL : questions gratuites — matière EASA {code} | MyATPS",
+    "subjectMetaTitle": "{name} ATPL : questions gratuites — matière EASA {code}",
     "subjectCourseName": "{name} — préparation à l'examen ATPL",
     "subjectEyebrow": "Banque de questions ATPL · Matière {code}",
     "subjectH1": "{name} — questions ATPL gratuites",

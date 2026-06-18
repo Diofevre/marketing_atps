@@ -247,7 +247,7 @@
     "comparisonNote": "Most ATPL platforms charge €20–€35 per month, often with 6 to 12-month commitments. MyATPS stays at €10/month, with no commitment — cancel in one click from your account."
   },
   "atplQuestions": {
-    "hubMetaTitle": "Free ATPL Questions by Subject — All 14 EASA Subjects | MyATPS",
+    "hubMetaTitle": "Free ATPL Questions by Subject — All 14 EASA Subjects",
     "hubMetaDescription": "Practise free ATPL questions across all 14 EASA subjects — Air Law, Meteorology, Navigation, Performance and more. Thousands of exam-style questions with research-based explanations. Free to start, no credit card.",
     "breadcrumbHome": "Home",
     "breadcrumbHub": "ATPL Questions",
@@ -261,7 +261,7 @@
     "ctaTitle": "Ready to start your ATPL prep?",
     "ctaSubtitle": "Create a free account — no credit card, no commitment.",
     "ctaButton": "Start free",
-    "subjectMetaTitle": "Free {name} ATPL Questions — EASA Subject {code} | MyATPS",
+    "subjectMetaTitle": "Free {name} ATPL Questions — EASA Subject {code}",
     "subjectCourseName": "{name} — ATPL exam preparation",
     "subjectEyebrow": "ATPL question bank · Subject {code}",
     "subjectH1": "Free {name} ATPL questions",
