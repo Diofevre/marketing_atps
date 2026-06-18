@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { blogService, newsService } from "@/lib/api";
 import { routing } from "@/i18n/routing";
+import { ATPL_SUBJECTS } from "@/lib/atpl-subjects";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 
@@ -47,6 +48,7 @@ const STATIC_PATHS: Array<{
 }> = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/pricing", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/atpl-questions", changeFrequency: "weekly", priority: 0.9 },
   { path: "/blog", changeFrequency: "daily", priority: 0.8 },
   { path: "/news", changeFrequency: "daily", priority: 0.8 },
   { path: "/enterprise", changeFrequency: "monthly", priority: 0.9 },
@@ -145,10 +147,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     localizedEntry(entry.path, entry.changeFrequency, entry.priority),
   );
 
+  // One entry per ATPL subject landing page (/atpl-questions/<slug>).
+  const subjectEntries = ATPL_SUBJECTS.map((s) =>
+    localizedEntry(`/atpl-questions/${s.slug}`, "monthly", 0.8),
+  );
+
   const [blogEntries, newsEntries] = await Promise.all([
     fetchAllBlogEntries(),
     fetchAllNewsEntries(),
   ]);
 
-  return [...staticEntries, ...blogEntries, ...newsEntries];
+  return [...staticEntries, ...subjectEntries, ...blogEntries, ...newsEntries];
 }

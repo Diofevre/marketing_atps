@@ -62,12 +62,6 @@ export default async function PricingPage({
     description: tSchema("offerPremiumDescription"),
     brand: { "@type": "Brand", name: "MyATPS" },
     url: `${SITE_URL}${pathPrefix}/pricing`,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      ratingCount: "2000",
-      bestRating: "5",
-    },
     offers: {
       "@type": "Offer",
       price: "10",
