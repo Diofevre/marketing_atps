@@ -246,6 +246,7 @@ export default async function LocaleLayout({
                 "https://x.com/myatps",
                 "https://www.instagram.com/myatps",
                 "https://www.facebook.com/myatps",
+                "https://www.threads.com/@myatps",
               ],
               contactPoint: {
                 "@type": "ContactPoint",
