@@ -1,70 +1,73 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { ChevronRight, Check, ArrowRight } from "lucide-react";
+import { ChevronRight, Check, ArrowRight, ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { APP_URL, SITE_URL } from "@/lib/constants";
 import { routing } from "@/i18n/routing";
-import { ATPL_SUBJECTS, getSubject, type Locale } from "@/lib/atpl-subjects";
-import { getSubtopics } from "@/lib/atpl-subtopics";
+import { getSubject, type Locale } from "@/lib/atpl-subjects";
+import { getSubtopic, getSubtopics, allSubtopicPairs } from "@/lib/atpl-subtopics";
 
-// Pre-render every locale × subject combination at build time.
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    ATPL_SUBJECTS.map((s) => ({ locale, subject: s.slug })),
+    allSubtopicPairs().map(({ subject, topic }) => ({ locale, subject, topic })),
   );
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string; subject: string }>;
+  params: Promise<{ locale: string; subject: string; topic: string }>;
 }): Promise<Metadata> {
-  const { locale, subject } = await params;
+  const { locale, subject, topic } = await params;
   const s = getSubject(subject);
-  if (!s) return {};
+  const st = getSubtopic(subject, topic);
+  if (!s || !st) return {};
 
   const loc = (locale === "fr" ? "fr" : "en") as Locale;
   const t = await getTranslations({ locale, namespace: "atplQuestions" });
   const pathPrefix = locale === "en" ? "" : `/${locale}`;
-  const name = s[loc].name;
+  const name = st[loc].name;
 
   return {
     title: t("subjectMetaTitle", { name, code: s.code }),
-    description: s[loc].tagline,
+    description: st[loc].tagline,
     alternates: {
-      canonical: `${pathPrefix}/atpl-questions/${s.slug}`,
+      canonical: `${pathPrefix}/atpl-questions/${s.slug}/${st.slug}`,
       languages: {
-        en: `/atpl-questions/${s.slug}`,
-        fr: `/fr/atpl-questions/${s.slug}`,
-        "x-default": `/atpl-questions/${s.slug}`,
+        en: `/atpl-questions/${s.slug}/${st.slug}`,
+        fr: `/fr/atpl-questions/${s.slug}/${st.slug}`,
+        "x-default": `/atpl-questions/${s.slug}/${st.slug}`,
       },
     },
     openGraph: {
       title: t("subjectMetaTitle", { name, code: s.code }),
-      description: s[loc].tagline,
-      url: `${pathPrefix}/atpl-questions/${s.slug}`,
+      description: st[loc].tagline,
+      url: `${pathPrefix}/atpl-questions/${s.slug}/${st.slug}`,
       locale: locale === "fr" ? "fr_FR" : "en_US",
       alternateLocale: locale === "fr" ? ["en_US"] : ["fr_FR"],
     },
   };
 }
 
-export default async function SubjectPage({
+export default async function SubtopicPage({
   params,
 }: {
-  params: Promise<{ locale: string; subject: string }>;
+  params: Promise<{ locale: string; subject: string; topic: string }>;
 }) {
-  const { locale, subject } = await params;
+  const { locale, subject, topic } = await params;
   const s = getSubject(subject);
-  if (!s) notFound();
+  const st = getSubtopic(subject, topic);
+  if (!s || !st) notFound();
 
   const loc = (locale === "fr" ? "fr" : "en") as Locale;
   const t = await getTranslations({ locale, namespace: "atplQuestions" });
   const pathPrefix = locale === "en" ? "" : `/${locale}`;
-  const copy = s[loc];
+  const copy = st[loc];
+  const subjectName = s[loc].name;
+  const siblings = getSubtopics(subject).filter((x) => x.slug !== st.slug);
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -85,25 +88,29 @@ export default async function SubjectPage({
       {
         "@type": "ListItem",
         position: 3,
-        name: copy.name,
+        name: subjectName,
         item: `${SITE_URL}${pathPrefix}/atpl-questions/${s.slug}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: copy.name,
+        item: `${SITE_URL}${pathPrefix}/atpl-questions/${s.slug}/${st.slug}`,
       },
     ],
   };
 
-  // Course markup: signals to Google this is structured educational content
-  // for the named subject, provided by MyATPS (an EducationalOrganization).
   const courseLd = {
     "@context": "https://schema.org",
     "@type": "Course",
-    name: t("subjectCourseName", { name: copy.name }),
+    name: t("subjectCourseName", { name: `${copy.name} (${subjectName})` }),
     description: copy.overview,
     provider: {
       "@type": "EducationalOrganization",
       name: "MyATPS",
       url: SITE_URL,
     },
-    url: `${SITE_URL}${pathPrefix}/atpl-questions/${s.slug}`,
+    url: `${SITE_URL}${pathPrefix}/atpl-questions/${s.slug}/${st.slug}`,
   };
 
   const faqLd = {
@@ -115,9 +122,6 @@ export default async function SubjectPage({
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   };
-
-  const related = ATPL_SUBJECTS.filter((x) => x.slug !== s.slug).slice(0, 6);
-  const subtopics = getSubtopics(s.slug);
 
   return (
     <>
@@ -134,12 +138,11 @@ export default async function SubjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
 
-      {/* Hero */}
       <section className="pt-16 lg:pt-24 pb-4">
         <Container className="max-w-3xl">
           <nav
             aria-label={copy.name}
-            className="flex items-center gap-2 text-sm text-[#1b0c25]/60 mb-6"
+            className="flex flex-wrap items-center gap-2 text-sm text-[#1b0c25]/60 mb-6"
           >
             <Link href="/" className="hover:text-[#1b0c25]">
               {t("breadcrumbHome")}
@@ -147,6 +150,13 @@ export default async function SubjectPage({
             <ChevronRight className="w-3.5 h-3.5" />
             <Link href="/atpl-questions" className="hover:text-[#1b0c25]">
               {t("breadcrumbHub")}
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5" />
+            <Link
+              href={`/atpl-questions/${s.slug}`}
+              className="hover:text-[#1b0c25]"
+            >
+              {subjectName}
             </Link>
             <ChevronRight className="w-3.5 h-3.5" />
             <span className="text-[#1b0c25]">{copy.name}</span>
@@ -162,20 +172,16 @@ export default async function SubjectPage({
             {copy.tagline}
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <div className="mt-7">
             <Link href={`${APP_URL}/auth/signup`}>
               <Button className="h-11 px-6 bg-black hover:bg-black/90 text-white">
                 {t("subjectCta", { name: copy.name })}
               </Button>
             </Link>
-            <span className="text-sm font-medium text-[#c34f96]">
-              {t("approxQuestions", { count: s.approxQuestions })}
-            </span>
           </div>
         </Container>
       </section>
 
-      {/* Overview */}
       <section className="py-10 lg:py-14">
         <Container className="max-w-3xl">
           <h2 className="text-2xl lg:text-3xl font-semibold text-[#1b0c25] mb-4">
@@ -185,24 +191,22 @@ export default async function SubjectPage({
         </Container>
       </section>
 
-      {/* Topics */}
       <section className="py-10 lg:py-14 bg-white">
         <Container className="max-w-3xl">
           <h2 className="text-2xl lg:text-3xl font-semibold text-[#1b0c25] mb-6">
             {t("topicsHeading")}
           </h2>
           <ul className="grid gap-3 sm:grid-cols-2">
-            {copy.topics.map((topic) => (
-              <li key={topic} className="flex items-start gap-2.5">
+            {copy.topics.map((topicItem) => (
+              <li key={topicItem} className="flex items-start gap-2.5">
                 <Check className="mt-0.5 w-4 h-4 shrink-0 text-[#c34f96]" />
-                <span className="text-[#1b0c25]/80">{topic}</span>
+                <span className="text-[#1b0c25]/80">{topicItem}</span>
               </li>
             ))}
           </ul>
         </Container>
       </section>
 
-      {/* Study tip */}
       <section className="py-10 lg:py-14">
         <Container className="max-w-3xl">
           <div className="rounded-2xl border border-[#1b0c25]/10 bg-[#F7F6F7] p-6 lg:p-8">
@@ -214,51 +218,7 @@ export default async function SubjectPage({
         </Container>
       </section>
 
-      {/* How MyATPS helps */}
       <section className="py-10 lg:py-14 bg-white">
-        <Container className="max-w-3xl">
-          <h2 className="text-2xl lg:text-3xl font-semibold text-[#1b0c25] mb-4">
-            {t("howHeading", { name: copy.name })}
-          </h2>
-          <p className="text-[#1b0c25]/80 leading-relaxed">
-            {t("howBody", { name: copy.name })}
-          </p>
-        </Container>
-      </section>
-
-      {/* Sub-topics (only for subjects that have them) */}
-      {subtopics.length > 0 && (
-        <section className="py-10 lg:py-14">
-          <Container className="max-w-3xl">
-            <h2 className="text-2xl lg:text-3xl font-semibold text-[#1b0c25] mb-2">
-              {t("subtopicsHeading")}
-            </h2>
-            <p className="text-[#1b0c25]/70 mb-6">
-              {t("subtopicsIntro", { name: copy.name })}
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {subtopics.map((sub) => (
-                <Link
-                  key={sub.slug}
-                  href={`/atpl-questions/${s.slug}/${sub.slug}`}
-                  className="group flex flex-col gap-1 rounded-xl border border-[#1b0c25]/10 bg-white px-4 py-3 transition-colors hover:border-[#c34f96]/40"
-                >
-                  <span className="flex items-center justify-between text-[#1b0c25] font-medium">
-                    {sub[loc].name}
-                    <ArrowRight className="w-4 h-4 text-[#1b0c25]/30 transition-transform group-hover:translate-x-0.5 group-hover:text-[#c34f96]" />
-                  </span>
-                  <span className="text-sm text-[#1b0c25]/60 leading-snug">
-                    {sub[loc].tagline}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* FAQ */}
-      <section className="py-10 lg:py-14">
         <Container className="max-w-3xl">
           <h2 className="text-2xl lg:text-3xl font-semibold text-[#1b0c25] mb-6">
             {t("faqHeading")}
@@ -277,30 +237,36 @@ export default async function SubjectPage({
         </Container>
       </section>
 
-      {/* Related subjects (internal linking) */}
+      {/* Sibling sub-topics + back to subject (internal linking) */}
       <section className="py-10 lg:py-14 bg-white">
         <Container className="max-w-5xl">
           <h2 className="text-2xl lg:text-3xl font-semibold text-[#1b0c25] mb-6">
-            {t("relatedHeading")}
+            {t("moreInSubject", { name: subjectName })}
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((r) => (
+            {siblings.map((sib) => (
               <Link
-                key={r.slug}
-                href={`/atpl-questions/${r.slug}`}
+                key={sib.slug}
+                href={`/atpl-questions/${s.slug}/${sib.slug}`}
                 className="group flex items-center justify-between rounded-xl border border-[#1b0c25]/10 bg-white px-4 py-3 transition-colors hover:border-[#c34f96]/40"
               >
                 <span className="text-[#1b0c25] font-medium">
-                  {r[loc].name}
+                  {sib[loc].name}
                 </span>
                 <ArrowRight className="w-4 h-4 text-[#1b0c25]/30 transition-transform group-hover:translate-x-0.5 group-hover:text-[#c34f96]" />
               </Link>
             ))}
           </div>
+          <Link
+            href={`/atpl-questions/${s.slug}`}
+            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#c34f96] hover:underline"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            {t("backToSubject", { name: subjectName })}
+          </Link>
         </Container>
       </section>
 
-      {/* Final CTA */}
       <section className="py-16 lg:py-24">
         <Container className="max-w-2xl text-center">
           <h2 className="text-3xl lg:text-4xl font-semibold text-[#1b0c25] mb-4">

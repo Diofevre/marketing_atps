@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { blogService, newsService } from "@/lib/api";
 import { routing } from "@/i18n/routing";
 import { ATPL_SUBJECTS } from "@/lib/atpl-subjects";
+import { allSubtopicPairs } from "@/lib/atpl-subtopics";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://myatps.com";
 
@@ -153,10 +154,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     localizedEntry(`/atpl-questions/${s.slug}`, "monthly", 0.8),
   );
 
+  // One entry per ATPL sub-topic page (/atpl-questions/<subject>/<topic>).
+  const subtopicEntries = allSubtopicPairs().map(({ subject, topic }) =>
+    localizedEntry(`/atpl-questions/${subject}/${topic}`, "monthly", 0.7),
+  );
+
   const [blogEntries, newsEntries] = await Promise.all([
     fetchAllBlogEntries(),
     fetchAllNewsEntries(),
   ]);
 
-  return [...staticEntries, ...subjectEntries, ...blogEntries, ...newsEntries];
+  return [
+    ...staticEntries,
+    ...subjectEntries,
+    ...subtopicEntries,
+    ...blogEntries,
+    ...newsEntries,
+  ];
 }

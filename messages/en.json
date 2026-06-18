@@ -274,7 +274,11 @@
     "faqHeading": "Frequently asked questions",
     "relatedHeading": "Other ATPL subjects",
     "subjectFinalCtaTitle": "Start practising {name} today",
-    "guideLink": "Read the complete ATPL exam guide →"
+    "guideLink": "Read the complete ATPL exam guide →",
+    "subtopicsHeading": "Practise by topic",
+    "subtopicsIntro": "Go deeper on a specific area of {name}:",
+    "moreInSubject": "More in {name}",
+    "backToSubject": "Back to all {name} questions"
   },
   "examGuide": {
     "metaTitle": "ATPL Theory Exams: The Complete Guide to All 14 EASA Subjects",

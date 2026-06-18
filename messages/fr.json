@@ -274,7 +274,11 @@
     "faqHeading": "Questions fréquentes",
     "relatedHeading": "Autres matières ATPL",
     "subjectFinalCtaTitle": "Commencez {name} dès aujourd'hui",
-    "guideLink": "Lire le guide complet des examens ATPL →"
+    "guideLink": "Lire le guide complet des examens ATPL →",
+    "subtopicsHeading": "S'entraîner par thème",
+    "subtopicsIntro": "Approfondir un domaine précis de {name} :",
+    "moreInSubject": "Plus en {name}",
+    "backToSubject": "Revenir à toutes les questions {name}"
   },
   "examGuide": {
     "metaTitle": "Examens théoriques ATPL : le guide complet des 14 matières EASA",
