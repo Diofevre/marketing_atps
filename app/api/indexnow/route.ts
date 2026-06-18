@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { blogService, newsService } from "@/lib/api";
+import { ATPL_SUBJECTS } from "@/lib/atpl-subjects";
+import { allSubtopicPairs } from "@/lib/atpl-subtopics";
 
 /**
  * IndexNow endpoint — pings IndexNow (Bing, Yandex, Seznam, Naver, Yep…)
@@ -46,6 +48,20 @@ const STATIC_URLS = [
   `${SITE_URL}/enterprise/demo`,
   `${SITE_URL}/contact`,
   `${SITE_URL}/privacy`,
+];
+
+// ATPL SEO pages (hub, exam guide, 14 subjects, sub-topics). Derived from the
+// same data modules the sitemap uses so the two never drift apart. EN root URLs
+// (matches the existing STATIC_URLS convention; locale variants are covered by
+// sitemap hreflang).
+const ATPL_SEO_URLS = [
+  `${SITE_URL}/atpl-questions`,
+  `${SITE_URL}/atpl-quiz`,
+  `${SITE_URL}/atpl-exam-guide`,
+  ...ATPL_SUBJECTS.map((s) => `${SITE_URL}/atpl-questions/${s.slug}`),
+  ...allSubtopicPairs().map(
+    ({ subject, topic }) => `${SITE_URL}/atpl-questions/${subject}/${topic}`,
+  ),
 ];
 
 async function collectDynamicUrls(): Promise<string[]> {
@@ -170,7 +186,7 @@ export async function GET(request: Request) {
   }
 
   const dynamicUrls = await collectDynamicUrls();
-  const allUrls = [...STATIC_URLS, ...dynamicUrls];
+  const allUrls = [...STATIC_URLS, ...ATPL_SEO_URLS, ...dynamicUrls];
 
   // IndexNow allows up to 10,000 URLs per batch. We're nowhere near that
   // but chunk anyway so a future 5,000-article sitemap still works.
